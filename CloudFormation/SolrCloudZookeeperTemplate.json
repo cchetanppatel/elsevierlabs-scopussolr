@@ -1,0 +1,152 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  
+  "Description" : "Template to start up a set of SolrCloud Zookeepers",
+  
+  "Parameters" : {
+      
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "Default" : "ats",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },
+    
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "m1.small",
+      "AllowedValues" : [ "m1.small" ],
+      "ConstraintDescription" : "must be a valid EC2 instance type in the AWSInstanceType2AMI Mappings."
+    },
+     
+    "ZooKeeperConfigURL" : {
+      "Description" : "Zookeeper Config File URL.",
+      "Type" : "String",
+      "Default" : ""
+    },
+    
+    "NodeCount" : {
+      "Description" : "Number of EC2 instances for the cluster.",
+      "Type" : "Number",
+      "MinValue" : "1",
+      "Default" : "1"
+    }
+  },
+  
+"Mappings" : {
+    "AWSInstanceType2AMI" : {
+      "t1.micro" : { "AMI" : "ami-0b0a8362"},
+      "m1.small" : { "AMI" : "ami-0b0a8362"},
+      "m1.medium" : { "AMI" : "ami-0b0a8362"},
+      "m1.large" : { "AMI" : "ami-0b0a8362"},
+      "m1.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "c1.medium" : { "AMI" : "ami-0b0a8362"},
+      "c1.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.2xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.4xlarge" : { "AMI" : "ami-0b0a8362"}
+    }
+  },
+
+ "Resources": {
+        
+        "ServerGroup" : {
+            "Type" : "AWS::AutoScaling::AutoScalingGroup",
+            "Properties" : {
+                "AvailabilityZones" : [ "us-east-1b"],
+                "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
+                 "Tags" : [
+          					{ "Key" : "Name", "Value" :  "scopus-zookeeper", "PropagateAtLaunch" : true }
+        		],
+                "MinSize" : { "Ref" : "NodeCount" },
+                "MaxSize" : { "Ref" : "NodeCount" }
+            }
+        },
+        
+        "Ec2Instance": {
+            "Type": "AWS::AutoScaling::LaunchConfiguration",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "BlockDeviceMappings" : [ {"DeviceName" : "/dev/sdk", "VirtualName" : "ephemeral0"} ],
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Set up the ephemeral drives and mount them", "\n",
+                "#mkfs.ext3 -t ext3 /dev/sdk", "\n",
+                "#mkfs.ext3 -t ext3 /dev/sdl", "\n",
+                "mkdir -p /usr/local/var/data/disk1", "\n",
+                "#mkdir -p /usr/local/var/data/disk2", "\n",
+                "mount -o rw,user /dev/sdk /usr/local/var/data/disk1", "\n",
+                "#mount -o rw,user /dev/sdl /usr/local/var/data/disk2", "\n",
+                "# Download and install Zookeeper", "\n",
+                "mkdir -p /zookeeper" , "\n",
+                "cd /zookeeper", "\n",
+                "wget http://apache.mirrors.timporter.net/zookeeper/current/zookeeper-3.4.5.tar.gz", "\n",
+				"tar zxfv zookeeper-3.4.5.tgz", "\n",
+				"cd zookeeper-3.4.5/ ", "\n",
+				"cp conf/zoo_sample.cfg conf/zoo.cfg", "\n",
+				"# Setup zookeeper data directories", "\n",
+				"mkdir -p /usr/local/var/data/disk1/zookeeper", "\n"
+                ]]}}
+            }
+        },
+ 		
+        "InstanceSecurityGroup" : {
+"Type" : "AWS::EC2::SecurityGroup",
+"Properties" : {
+"GroupDescription" : "Enable SSH access on the inbound port",
+             "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "0.0.0.0/0"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "8080",
+                    "ToPort" : "8080",
+                    "CidrIp" : "0.0.0.0/0"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "9200",
+                    "ToPort" : "9299",
+                    "CidrIp" : "0.0.0.0/0"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "9300",
+                    "ToPort" : "9399",
+                    "CidrIp" : "0.0.0.0/0"
+                }]
+           }
+        }
+    
+ },
+
+
+  "Outputs" : {
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance" }
+    }
+  }
+  
+}
