@@ -1,9 +1,12 @@
 package com.elsevier.s3;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 
 import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
@@ -37,6 +40,12 @@ public class SimpleStorageService {
 	public static void main(String[] args)  {
 
 		//getMetadata(Variables.S3_HTML_OUTLINE_BUCKET_NAME, "B9780000002082001464");
+		try {
+			System.out.println(IOUtils.toString(SimpleStorageService.getObject("affiliation-xml","101940415")));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

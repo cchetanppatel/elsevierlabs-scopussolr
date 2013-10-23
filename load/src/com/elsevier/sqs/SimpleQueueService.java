@@ -61,10 +61,10 @@ public class SimpleQueueService {
         	//createQueue(Variables.SQS_PROBLEM_QUEUE_NAME);
         	
         	// Process problem queue
-        	processProblemQueue();
+        	//processProblemQueue();
         	
         	// Populate queue
-        	//populateQueue();
+        	populateQueue();
         	
 
         } catch (AmazonServiceException ase) {
@@ -260,16 +260,17 @@ public class SimpleQueueService {
 	private static void populateQueue() {
 		
 		String msg = "{" +
-			           "\"bucket\": \"sdxcr-xml\"," +
+			           "\"bucket\": \"affiliation-xml\"," +
 			           "\"entries\": [{" +
-			           "\"key\": \"S0140673605678762\"," +
-			           "\"prefix\": \"1-s2.0\"," +
-			           "\"action\": \"u\"," +
-			           "\"epoch\": 1355094000000," +
-			           "\"version\": \"2010-03-28T14:34:00\"" +
+			           "\"key\": \"101940415\"," +
+			           //"\"key\": \"100242197\"," +
+			           "\"prefix\": \"10-s2.0\"," +
+			           "\"action\": \"a\"," +
+			           "\"epoch\": 13," +
+			           "\"version\": \"2008-02-07T02:28:34.797307-05:00\"" +
 			           "}]" +
 			          "}";
-		
+				
 		sqsClient.sendMessage(new SendMessageRequest(getQueueUrl(Variables.SQS_QUEUE_NAME), msg));
 		
 	}

@@ -40,6 +40,10 @@ public class Variables {
 
 	}	
 	
+	// SOLR
+	public static final String SOLR_ENDPOINT = "";
+	public static final String SOLR_COLLECTION = "affiliation";
+	
 	// SQS Endpoint
 	public static final String SQS_ENDPOINT = prop.getProperty("SQS_ENDPOINT","https://sqs.us-east-1.amazonaws.com");
 	
@@ -55,18 +59,17 @@ public class Variables {
 	// SQS queue name
 	public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-affiliation-bulkload");
 	public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_affiliation-bulkload-problems");
-
 	
 	// S3 bucket name
 	public static final String S3_XML_BUCKET_NAME = prop.getProperty("S3_XML_BUCKET_NAME","affiliation-xml");;
 	
 	// DynamoDB table name	
-	public static final String  DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-affiliation");
-	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_READ_CAPACITY = 10L;
-	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_WRITE_CAPACITY = 10L;
+	public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-affiliation");
+	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_READ_CAPACITY = 5L;
+	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_WRITE_CAPACITY = 5L;
 	
 	// SNS topic name
-	public static final String SNS_TOPIC_NAME = prop.getProperty("SNS_TOPIC_NAME","arn:aws:sns:us-east-1:545957204479:scopus-solr");
+	public static final String SNS_TOPIC_NAME = prop.getProperty("SNS_TOPIC_NAME","arn:aws:sns:us-east-1:545957204479:solr-scopus");
 	
 	// SQS Delay (30 seconds)
 	public static final Integer SQS_DELAY =  Integer.valueOf(prop.getProperty("SQS_DELAY","30"));

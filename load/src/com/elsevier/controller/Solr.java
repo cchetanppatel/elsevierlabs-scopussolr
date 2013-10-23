@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
@@ -15,9 +17,10 @@ import com.elsevier.common.Variables;
 import com.elsevier.dynamo.DynamoDB;
 import com.elsevier.s3.SimpleStorageService;
 import com.elsevier.sns.SimpleNotificationService;
+import com.elsevier.solr.Document;
 import com.elsevier.sqs.MessageEntryJson;
 import com.elsevier.sqs.SimpleQueueService;
-import com.elsevier.transform.HothouseTransform;
+import com.elsevier.transform.AffiliationTransform;
 
 
 
@@ -108,7 +111,7 @@ public class Solr {
 						SimpleQueueService.deleteMessage(Variables.SQS_QUEUE_NAME, message);
 						continue;
 					}
-					
+					 
 					// Check the action (add,update,delete)
 					if (json.getAction().compareTo("d") == 0) {
 						
@@ -116,7 +119,7 @@ public class Solr {
 						// Currently, we catch all exceptions in Document.delete.
 						// TODO - think about moving messages to the problem queue
 						
-						//Document.delete(Variables.ELASTIC_SEARCH_INDEX, Variables.ELASTIC_SEARCH_TYPE, contentKey, epoch);
+						//Document.delete(Variables.SOLR_COLLECTION, contentKey, epoch);
 											
 					} else {
 
@@ -134,16 +137,34 @@ public class Solr {
 					
 						// Parse to extract the bits we need
 						is = FileUtils.openInputStream(new File(filename));
-						HothouseTransform sdt = new HothouseTransform();
+						AffiliationTransform sdt = new AffiliationTransform();
 						HashMap<String, Object> fieldValues =  sdt.transform(is);
-						
-						// Dump the field/values
-						//for (String key : fieldValues.keySet()) {
-						//    System.out.println(key + "=" + fieldValues.get(key));
-						//}
-						
+								
+						//Debug ... output the keys/values to see if we did it right
+						for (String key:fieldValues.keySet()) {
+							
+							Object val = fieldValues.get(key);
+							if (val instanceof String) {
+								System.out.println("key="+ key +" val=" + (String)val);
+							} else if (val instanceof ArrayList<?>){
+								System.out.println("key=" + key);
+								ArrayList<String> vals = (ArrayList<String>)val;
+								Iterator<String> it = vals.iterator();
+								System.out.println("  [");
+								while (it.hasNext()) {
+									System.out.print("    " + it.next());
+									if (it.hasNext()) {
+										System.out.println(",");
+									} else {
+										System.out.println();
+									}
+								}
+								System.out.println("  ]");
+							}
+							
+						}
 						// Populate the ElasticSearch index
-						//Document.load(Variables.ELASTIC_SEARCH_INDEX, Variables.ELASTIC_SEARCH_TYPE, fieldValues, contentKey, epoch);							
+						//Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
 						
 					}
 					
