@@ -24,7 +24,7 @@ import com.elsevier.transform.AffiliationTransform;
 
 
 
-public class Solr {
+public class SolrAffiliation {
 
 	// Format for the timestamp 
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");

@@ -38,75 +38,224 @@ public class AuthorTransform {
 	private static int DEFAULT_JSON_FIELD_STRINGBUILDER_SIZE = 1024;
 	
 	// Basic field mappings	
-	private static String[] affilArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]"
+	private static String[] afdispcityArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/address/city",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/address/city-group"
+	};
+	
+	private static String[] afdispctryArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/address/country"
+	};
+		
+	private static String[] afdispnameArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/afdispname"
 	};
 	
 	private static String[] affilcityArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/address",
-	};
-		
-	private static String[] affilctrytArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/address/country"
-	};
-	
-	private static String[] affilnameArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/preferred-name",
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/name-variant"
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/address/city",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/address/city-group",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/address/city",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/address/city-group"
 	};
 	
-	private static String[] afidMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/@affiliation-id"
+	private static String[] affilctryArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/address/country",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/address/country",
 	};
 	
-	private static String[] certscoreArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/certainty-scores/certainty-score/orig-id",
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/certainty-scores/certainty-score/score"
+	private static String[] affilcurrArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']"
 	};
 	
-	private static String[] datecompletedtxtArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile/date-revised/@timestamp"
+	private static String[] affilhistArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']"
 	};
 
+	private static String[] affilnameArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc/name-variant",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc/name-variant",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/preferred-name",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/preferred-name"	
+	};
+	
+	private static String[] affilnamevarArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc/name-variant",       
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc/name-variant"
+	};
+	
+	private static String[] affilparafidArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[type='parent']",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']"
+	};
+	
+	private static String[] affilprefnameArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/preferred-name",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/preferred-name"
+	};
+	
+	private static String[] affilsortnameArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']/sort-name"
+	};
+	
+	private static String[] afhistcityArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/address/city",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/address/city-group"
+	};
+	
+	private static String[] afhistctryArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/address/country"
+	};
+	
+	private static String[] afhistdispnameArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']/afdispname"
+	};
+	
+	private static String[] afhistidArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']"
+	};
+
+	private static String[] afidArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc[@type='parent']"
+	};	
+
+	private static String[] afnameidArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc/afnameid",
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc/afnameid"
+	};	
+	
+	private static String[] aliasArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/alias"
+	};	
+	
+	private static String[] aliascurstatusArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/alias"
+	};	
+	
+	private static String[] aliasauthoridArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/alias/aliased-id"
+	};	
+	
+	private static String[] aliastimestampArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/alias/aliased-id"
+	};	
+	
+	private static String[] aliasstatusArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/alias/aliased-id"
+	};	
+	
+	private static String[] authfirstMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/given-name//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/initials//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/given-name//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/initials//text()"
+	};	
+	
+	private static String[] authidMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/@id"
+	};	
+	
+	private static String[] authlastMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/surname//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/surname//text()"
+	};	
+	
+	private static String[] authnameMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/initials//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/surname//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/given-name//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/initials//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/surname//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/given-name//text()"
+	};	
+	
+	private static String[] datecompletedtxtArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/date-revised"
+	};	
+	
 	private static String[] eidMappings = new String[] {
 		"/xocs:doc/xocs:meta/xocs:eid//text()"
-	};
+	};	
+	
+	private static String[] issnArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/journal-history/journal/issn"
+	};	
 	
 	private static String[] loaddateMappings = new String[] {
 		"/xocs:doc/xocs:meta/xocs:timestamp//text()"
-	};
+	};	
 	
 	private static String[] namevarArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/name-variant"
-	};
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant"
+	};	
 	
-	private static String[] parafidMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile/@parent"
-	};
+	private static String[] namevarfirstArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/given-name"
+	};	
+	
+	private static String[] namevariniArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/initials"
+	};	
+	
+	private static String[] namevarlastArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/name-variant/surname"
+	};	
+	
+	private static String[] preffirstMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/given-name//text()"
+	};	
+	
+	private static String[] preffirstsortMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/given-name//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/initials//text()"
+	};	
+	
+	private static String[] prefiniMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/initials//text()"
+	};	
+	
+	private static String[] preflastMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/surname//text()"
+	};	
 	
 	private static String[] prefnameMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/preferred-name//text()"
-	};
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/initials//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/surname//text()",
+		"/xocs:doc/xocs:author-profile/author-profile/preferred-name/given-name//text()"
+	};	
 	
-	private static String[] prefparnameMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile/parent-preferred-name//text()"
-	};
+	private static String[] pubrangefirstMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/publication-range/@start"
+	};	
 	
-	private static String[] qualityMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile/quality//text()"
-	};
-	
-	private static String[] sortnameMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/sort-name//text()"
-	};
+	private static String[] pubrangelastMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/publication-range/@end"
+	};	
+
+	private static String[] srctitleArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/journal-history/journal/sourcetitle"
+	};	
 	
 	private static String[] statusMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile/status//text()"
-	};
-
+		"/xocs:doc/xocs:author-profile/author-profile/status//text()"
+	};	
+	
+	private static String[] subjabbrArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/classificationgroup/classifications[@type='SUBJABBR']/search-classification"
+	};	
+	
+	private static String[] subjclusArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/classificationgroup/classifications[@type='SUBJABBR']/search-classification/code"
+	};	
+	
+	private static String[] subjmainArrayMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/classificationgroup/classifications[@type='ASJC']/classification"
+	};	
+	
+	private static String[] suppressMappings = new String[] {
+		"/xocs:doc/xocs:author-profile/author-profile/@suppress"
+	};	
 	
 
-	
 	/**
 	 * Transform the record.  The inputstream contains the ScienceDirect record that will be transformed.
 	 * The returned HashMap object will contain fields (and their values) that will be used to
@@ -133,41 +282,99 @@ public class AuthorTransform {
 			
 			// Begin applying rules ...
 
-			//
-			// First generate the atomic fields
-			//
+			createArray("afdispcity",afdispcityArrayMappings, "(.//text())");
 			
-			createArray("affil", affilArrayMappings, "(./preferred-name//text() | ./name-variant//text() | ./address/city-group//text() | ./address/city//text() | ./address/country//text())");
+			createArray("afdispctry",afdispctryArrayMappings, "(.//text())");
 			
-			createArray("affilcity", affilcityArrayMappings, "(./city-group//text() | ./city//text())");
+			createArray("afdispname",afdispnameArrayMappings, "(.//text())");
+
+			createArray("affilcity",affilcityArrayMappings, "(.//text())");
 			
-			createArray("affilctry", affilctrytArrayMappings, "(.//text())");
+			createArray("affilctry",affilctryArrayMappings, "(.//text())");
 			
-			createArray("affilname", affilnameArrayMappings, "(.//text())");
+			createArray("affilcurr",affilcurrArrayMappings, "(./address/city//text() | ./address/city-group//text() | ./address/country//text() | ./afdispname//text())");
 			
-			createSingleField("afid", afidMappings);
+			createArray("affilhist",affilhistArrayMappings, "(./address/city//text() | ./address/city-group//text() | ./address/country//text() | ./afdispname//text())");
+
+			createArray("affilname",affilnameArrayMappings, "(.//text())");
 			
-			createArray("certScore", certscoreArrayMappings, "(.//text())");
-		
-			createArray("datecompleted", datecompletedtxtArrayMappings, "(.//text())");
-	
+			createArray("affilnamevar",affilnamevarArrayMappings, "(.//text())");
+			
+			createArray("affilparafid",affilparafidArrayMappings, "(@id)");
+			
+			createArray("affilprefname",affilprefnameArrayMappings, "(.//text())");
+			
+			createArray("affilsortname",affilsortnameArrayMappings, "(.//text())");
+			
+			createArray("afhistcity",afhistcityArrayMappings, "(.//text())");
+			
+			createArray("afhistctry",afhistctryArrayMappings, "(.//text())");
+			
+			createArray("afhistdispname",afhistdispnameArrayMappings, "(.//text())");
+			
+			createArray("afid",afidArrayMappings, "(@id)");
+			
+			createArray("afnameid",afnameidArrayMappings, "(.//text())");
+			
+			createArray("alias",aliasArrayMappings, "(.//text())");
+			
+			createArray("aliascurstatus",aliascurstatusArrayMappings, "(.//text())");
+			
+			createArray("aliasauthorid",aliasauthoridArrayMappings, "(.//text())");
+			
+			createArray("aliastimestamp",aliastimestampArrayMappings, "(@timestamp)");
+			
+			createArray("aliasstatus",aliasstatusArrayMappings, "(@status)");
+			
+			createSingleField("authfirst", authfirstMappings);
+			
+			createSingleField("authid", authidMappings);
+			
+			createSingleField("authlast", authlastMappings);
+			
+			createSingleField("authname", authnameMappings);
+			
+			createArray("datecompletedtxt",datecompletedtxtArrayMappings, "(@timestamp)");
+			
 			createSingleField("eid", eidMappings);
+			
+			createArray("issn",issnArrayMappings, "(.//text())");
 			
 			createSingleField("loaddate", loaddateMappings);
 			
-			createArray("namevar", namevarArrayMappings, "(.//text())");
+			createArray("namevar",namevarArrayMappings, "(./initials//text() | ./surname//text() | ./given-name//text())");
 			
-			createSingleField("parafid", parafidMappings);
-
+			createArray("namevarfirst",namevarfirstArrayMappings, "(.//text())");
+			
+			createArray("namevarini",namevariniArrayMappings, "(.//text())");
+			
+			createArray("namevarlast",namevarlastArrayMappings, "(.//text())");
+			
+			createSingleField("preffirst", preffirstMappings);
+			
+			createSingleField("preffirstsort", preffirstsortMappings);
+			
+			createSingleField("prefini", prefiniMappings);
+			
+			createSingleField("preflast", preflastMappings);
+			
 			createSingleField("prefname", prefnameMappings);
 			
-			createSingleField("prefparname", prefparnameMappings);
-
-			createSingleField("quality", qualityMappings);
-
-			createSingleField("sortname", sortnameMappings);
+			createSingleField("pubrangefirst", pubrangefirstMappings);
+			
+			createSingleField("pubrangelast", pubrangelastMappings);
+			
+			createArray("srctitle",srctitleArrayMappings, "(.//text())");
 			
 			createSingleField("status", statusMappings);
+			
+			createArray("subjabbr",subjabbrArrayMappings, "(.//text())");
+			
+			createArray("subjclus",subjclusArrayMappings, "(.//text())");
+			
+			createArray("subjmain",subjmainArrayMappings, "(.//text())");
+			
+			createSingleField("suppress", suppressMappings);	
 			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();

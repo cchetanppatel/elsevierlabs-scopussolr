@@ -259,6 +259,8 @@ public class SimpleQueueService {
 	
 	private static void populateQueue() {
 		
+		// Affiliation records
+		/*
 		String msg = "{" +
 			           "\"bucket\": \"affiliation-xml\"," +
 			           "\"entries\": [{" +
@@ -266,11 +268,22 @@ public class SimpleQueueService {
 			           //"\"key\": \"100242197\"," +
 			           "\"prefix\": \"10-s2.0\"," +
 			           "\"action\": \"a\"," +
-			           "\"epoch\": 13," +
+			           "\"epoch\": 14," +
 			           "\"version\": \"2008-02-07T02:28:34.797307-05:00\"" +
 			           "}]" +
 			          "}";
-				
+		*/
+		String msg = "{" +
+        				"\"bucket\": \"author-xml\"," +
+        				"\"entries\": [{" +
+        				"\"key\": \"10038761700\"," +
+        				"\"prefix\": \"9-s2.0\"," +
+        				"\"action\": \"a\"," +
+        				"\"epoch\": 8," +
+        				"\"version\": \"2008-02-07T02:28:34.797307-05:00\"" +
+        				"}]" +
+        			  "}";
+		
 		sqsClient.sendMessage(new SendMessageRequest(getQueueUrl(Variables.SQS_QUEUE_NAME), msg));
 		
 	}
