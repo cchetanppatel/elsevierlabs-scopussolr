@@ -102,38 +102,48 @@
 -->
  
 <field name="_version_" type="long" indexed="true" stored="true"/>
-<field name="affil" type="affil-std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
-<field name="affilcity" type="affil-std_stopwords" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
-<field name="affilctry" type="affil-std_stopwords" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
-<field name="affilname" type="affil-std_stopwords" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="affil" type="affil_std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="affilcity" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="affilcity-f" type="affil_facet" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="affilctry" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="affilctry-f" type="affil_facet" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="affilname" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 <field name="afid" type="long" multiValued="false" indexed="true" stored="true" termVectors="false" termPositions="false" termOffsets="false"/>
-<field name="certscore" type="affil-std" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="certscore" type="affil_std" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="certscore-f" type="affil_facet" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
-<field name="datecompletedtxt" type="affil-std" multiValued="true" indexed="true" stored="false" termVectors="false" termPositions="false" termOffsets="false"/>
+<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="false" termVectors="false" termPositions="false" termOffsets="false"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 <field name="loaddate" type="long"  multiValued="false" indexed="true" stored="true"/>
 <field name="loadunit" type="keyword_lc" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
-<field name="namevar" type="affil-std" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="namevar" type="affil_std" multiValued="true" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 <field name="parafid" type="long" multiValued="false" indexed="true" stored="true"/>
-<field name="prefname" type="affil-std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
-<field name="prefparname" type="affil-std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="prefname" type="affil_std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="prefparname" type="affil_std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 <field name="quality" type="keyword_lc" multiValued="false" indexed="true" stored="false" termVectors="false" termPositions="false" termOffsets="false"/>
-<field name="sortname" type="affil-std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="sortname" type="affil_std" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 <field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="false" termVectors="false" termPositions="false" termOffsets="false"/>
 <field name="toplevel" type="keyword_lc" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 <field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
 
 </fields>
 <uniqueKey>afid</uniqueKey>
+<defaultSearchField>affil</defaultSearchField>
+<solrQueryParser defaultOperator="AND"/>
+<copyField source="affilcity" dest="affilcity-f"/>
+<copyField source="affilctry" dest="affilctry-f"/>
+<copyField source="certscore" dest="certscore-f"/>
 
 <types>
 
 <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
 <fieldType name="integer" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
-
+<fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+<!--  boolean type: "true" or "false"  -->
+<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
 
  <!-- 
-  affil-std analyzer:
+  affil_std analyzer:
   
   Analyzer applies standard tokenizer to the text and applies ascii character folding, lower casing,
   synonym expansion, stop word removal to the submitted text.
@@ -141,15 +151,8 @@
   This analyzer is typcially used on textual data that will be searched without any special considerations
   (e.g. punctuation sensitivity, no stemming, etc.).
  -->
- <fieldType name="affil-std" class="solr.TextField">
-  <analyzer type="index">
-   <tokenizer class="solr.ClassicTokenizerFactory"/>
-   <filter class="solr.ClassicFilterFactory"/>
-   <filter class="solr.ASCIIFoldingFilterFactory"/>
-   <filter class="solr.LowerCaseFilterFactory"/>
-   <filter class="solr.SynonymFilterFactory" synonyms="syn.txt" ignoreCase="true" expand="false"/>
-  </analyzer>
-  <analyzer type="query">
+ <fieldType name="affil_std" class="solr.TextField">
+  <analyzer>
    <tokenizer class="solr.ClassicTokenizerFactory"/>
    <filter class="solr.ClassicFilterFactory"/>
    <filter class="solr.ASCIIFoldingFilterFactory"/>
@@ -159,20 +162,12 @@
  </fieldType>
  
  <!-- 
-  affil-std_stopwords analyzer:
+  affil_std_stopwords analyzer:
   
-  Identical to the affil-std analyzer with the exception that it enforces stop word processing.
+  Identical to the affil_std analyzer with the exception that it enforces stop word processing.
  -->
- <fieldType name="affil-std_stopwords" class="solr.TextField">
-  <analyzer type="index">
-   <tokenizer class="solr.ClassicTokenizerFactory"/>
-   <filter class="solr.ClassicFilterFactory"/>
-   <filter class="solr.ASCIIFoldingFilterFactory"/>
-   <filter class="solr.LowerCaseFilterFactory"/>
-   <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
-   <filter class="solr.SynonymFilterFactory" synonyms="syn.txt" ignoreCase="true" expand="false"/>
-  </analyzer>
-  <analyzer type="query">
+ <fieldType name="affil_std_stopwords" class="solr.TextField">
+  <analyzer>
    <tokenizer class="solr.ClassicTokenizerFactory"/>
    <filter class="solr.ClassicFilterFactory"/>
    <filter class="solr.ASCIIFoldingFilterFactory"/>
@@ -181,6 +176,23 @@
    <filter class="solr.SynonymFilterFactory" synonyms="syn.txt" ignoreCase="true" expand="false"/>
   </analyzer>
  </fieldType>
+ 
+  <!-- 
+  affil_facet analyzer:
+  
+  Analyzer applies simpler keywording tokenizer only to the content and removes leading/trailing whitespace in the field data.
+  
+  This analyzer is typically used on fields that will have facets generated from them.  They do minimal 
+  cleansing of the input data.
+  
+ -->
+ <fieldType name="affil_facet" class="solr.TextField">
+  <analyzer>
+   <tokenizer class="solr.KeywordTokenizerFactory"/>
+   <filter class="solr.TrimFilterFactory"/>
+  </analyzer>
+ </fieldType>
+ 
  
 <!-- 
  keyword_lc analyzer:
@@ -191,20 +203,12 @@
  This analyzer is typcially used on fields that are atomic values or case insensitive keys to other entities.
 -->
 <fieldType name="keyword_lc" class="solr.TextField">
-<analyzer type="index">
- <tokenizer class="solr.KeywordTokenizerFactory"/>
- <filter class="solr.LowerCaseFilterFactory"/>
- <filter class="solr.TrimFilterFactory"/>
-</analyzer>
-<analyzer type="query">
+<analyzer>
  <tokenizer class="solr.KeywordTokenizerFactory"/>
  <filter class="solr.LowerCaseFilterFactory"/>
  <filter class="solr.TrimFilterFactory"/>
 </analyzer>
 </fieldType>
 
-<fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
-<!--  boolean type: "true" or "false"  -->
-<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
 </types>
 </schema>
