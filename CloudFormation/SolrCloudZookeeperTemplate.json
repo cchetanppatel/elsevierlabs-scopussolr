@@ -22,11 +22,23 @@
       "AllowedValues" : [ "m1.small" ],
       "ConstraintDescription" : "must be a valid EC2 instance type in the AWSInstanceType2AMI Mappings."
     },
-     
-    "ZooKeeperConfigURL" : {
+    
+    "EphemeralMntPoint" : {
+      "Description" : "Where to mount the first ephemeral drive.",
+      "Type" : "String",
+      "Default" : "/mnt/data"
+    },
+         
+    "ZKConfigURL" : {
       "Description" : "Zookeeper Config File URL.",
       "Type" : "String",
-      "Default" : ""
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/zookeeper/zoo.cfg?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1418631313&Signature=bX3gS3tNgeBEm6aAchXhX/qH0Ss%3D"
+    },
+    
+    "ZKDataDir" : {
+      "Description" : "Zookeeper Data directory.",
+      "Type" : "String",
+      "Default" : "data"
     },
     
     "NodeCount" : {
@@ -89,19 +101,16 @@
                 "rm /etc/localtime", "\n",
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
                 "# Set up the ephemeral drives and mount them", "\n",
-                "#mkfs.ext3 -t ext3 /dev/sdk", "\n",
-                "#mkfs.ext3 -t ext3 /dev/sdl", "\n",
-                "mkdir -p /usr/local/var/data/disk1", "\n",
-                "#mkdir -p /usr/local/var/data/disk2", "\n",
-                "mount -o rw,user /dev/sdk /usr/local/var/data/disk1", "\n",
-                "#mount -o rw,user /dev/sdl /usr/local/var/data/disk2", "\n",
+                "mkdir -p ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "mount -o rw,user /dev/sdk ", { "Ref" : "EphemeralMntPoint" }, "\n",
                 "# Download and install Zookeeper", "\n",
-                "mkdir -p /zookeeper" , "\n",
-                "cd /zookeeper", "\n",
+                "cd ", { "Ref" : "EphemeralMntPoint" }, "\n",,
+                "mkdir -p zookeeper" , "\n",
+                "cd zookeeper", "\n",
                 "wget http://apache.mirrors.timporter.net/zookeeper/current/zookeeper-3.4.5.tar.gz", "\n",
 				"tar zxfv zookeeper-3.4.5.tgz", "\n",
 				"cd zookeeper-3.4.5/ ", "\n",
-				"cp conf/zoo_sample.cfg conf/zoo.cfg", "\n",
+				"curl -o conf/zoo.cfg '", { "Ref" : "ZKConfigURL"}, "'", "\n",
 				"# Setup zookeeper data directories", "\n",
 				"mkdir -p /usr/local/var/data/disk1/zookeeper", "\n"
                 ]]}}
@@ -120,20 +129,14 @@
                 },
                 {
                     "IpProtocol" : "tcp",
-                    "FromPort" : "8080",
-                    "ToPort" : "8080",
+                    "FromPort" : "2181",
+                    "ToPort" : "2181",
                     "CidrIp" : "0.0.0.0/0"
                 },
                 {
                     "IpProtocol" : "tcp",
-                    "FromPort" : "9200",
-                    "ToPort" : "9299",
-                    "CidrIp" : "0.0.0.0/0"
-                },
-                {
-                    "IpProtocol" : "tcp",
-                    "FromPort" : "9300",
-                    "ToPort" : "9399",
+                    "FromPort" : "2888",
+                    "ToPort" : "3888",
                     "CidrIp" : "0.0.0.0/0"
                 }]
            }
