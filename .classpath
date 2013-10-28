@@ -7,5 +7,15 @@
 	<classpathentry kind="lib" path="load/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="load/lib/jackson-core-lgpl-1.9.4.jar"/>
 	<classpathentry kind="lib" path="load/lib/jackson-mapper-lgpl-1.9.4.jar"/>
+	<classpathentry kind="lib" path="load/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="load/lib/httpclient-4.2.jar"/>
+	<classpathentry kind="lib" path="load/lib/httpcore-4.2.jar"/>
+	<classpathentry kind="lib" path="load/lib/solr-core-4.4.0.jar"/>
+	<classpathentry kind="lib" path="load/lib/solr-solrj-4.4.0.jar"/>
+	<classpathentry kind="lib" path="load/lib/httpmime-4.2.3.jar"/>
+	<classpathentry kind="lib" path="load/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="load/lib/slf4j-api-1.6.6.jar"/>
+	<classpathentry kind="lib" path="load/lib/slf4j-log4j12-1.6.6.jar"/>
+	<classpathentry kind="lib" path="load/lib/noggit-0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

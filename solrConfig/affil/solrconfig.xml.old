@@ -366,8 +366,9 @@
          have some sort of hard autoCommit to limit the log size.
       -->
      <autoCommit> 
-       <maxTime>${solr.autoCommit.maxTime:15000}</maxTime> 
-       <openSearcher>false</openSearcher> 
+       <maxDocs>10000</maxDocs>
+       <maxTime>${solr.autoCommit.maxTime:300000}</maxTime> 
+       <openSearcher>true</openSearcher> 
      </autoCommit>
 
     <!-- softAutoCommit is like autoCommit except it causes a
@@ -468,7 +469,11 @@
          be based on the last SolrCore to be initialized.
          
       -->
+<!--
     <maxBooleanClauses>1024</maxBooleanClauses>
+-->
+    <maxBooleanClauses>4096</maxBooleanClauses>
+
 
 
     <!-- Solr Internal Query Caches
@@ -502,10 +507,11 @@
            autowarmCount - the number of entries to prepopulate from
                and old cache.  
       -->
+	  <!-- all cache value is modified by Jae Joo. It was 512,1024 -->
     <filterCache class="solr.FastLRUCache"
-                 size="512"
-                 initialSize="512"
-                 autowarmCount="0"/>
+                 size="50000"
+                 initialSize="50000"
+                 autowarmCount="50000"/>
 
     <!-- Query Result Cache
          
@@ -513,9 +519,9 @@
          (DocList) based on a query, a sort, and the range of documents requested.  
       -->
     <queryResultCache class="solr.LRUCache"
-                     size="512"
-                     initialSize="512"
-                     autowarmCount="0"/>
+                     size="50000"
+                     initialSize="50000"
+                     autowarmCount="50000"/>
    
     <!-- Document Cache
 
@@ -524,9 +530,9 @@
          this cache will not be autowarmed.  
       -->
     <documentCache class="solr.LRUCache"
-                   size="512"
-                   initialSize="512"
-                   autowarmCount="0"/>
+                   size="50000"
+                   initialSize="50000"
+                   autowarmCount="50000"/>
     
     <!-- Field Value Cache
          
@@ -534,12 +540,12 @@
          by document id.  The fieldValueCache is created by default
          even if not configured here.
       -->
-    <!--
+<!--
        <fieldValueCache class="solr.FastLRUCache"
-                        size="512"
-                        autowarmCount="128"
-                        showItems="32" />
-      -->
+                        size="50000"
+                        autowarmCount="50000"
+                        showItems="50000" />
+-->
 
     <!-- Custom Cache
 
@@ -561,7 +567,7 @@
       -->
 
 
-    <!-- Lazy Field Loading
+    <!-- Lazy Fields Loading
 
          If true, stored fields that are not requested will be loaded
          lazily.  This can result in a significant speed improvement
@@ -597,7 +603,10 @@
         then documents 0 through 49 will be collected and cached.  Any further
         requests in that range can be satisfied via the cache.  
      -->
-   <queryResultWindowSize>20</queryResultWindowSize>
+	 <!--
+	 <queryResultWindowSize>20</queryResultWindowSize>
+	 -->
+   <queryResultWindowSize>100</queryResultWindowSize>
 
    <!-- Maximum number of documents to cache for any entry in the
         queryResultCache. 
@@ -633,10 +642,96 @@
     </listener>
     <listener event="firstSearcher" class="solr.QuerySenderListener">
       <arr name="queries">
-        <lst>
-          <str name="q">static firstSearcher warming in solrconfig.xml</str>
-        </lst>
+<!-- -pubdatestart,+srctitle,-volumelist,-issuelist,+sortorder -->
+	<lst> 
+		<str name="q">*:*</str> <str name="sort">pubdatestart desc, srctitle asc, volfirst desc, pgfirst desc, sortorder asc</str> 
+	</lst>
+	<lst> 
+		<str name="q">*:*</str> <str name="sort">pubdatestart desc, srctitle asc, volfirst desc, pgfirst desc, sortorder asc</str> 
+		<str name="fq">srctype:(nonserial serial) AND contenttypetxt:(JL BS HB RW BK)</str>
+	</lst>
+	<lst> 
+		<str name="q">*:*</str> <str name="sort">sortorder asc</str> 
+	</lst>
+	<lst> 
+		<str name="q">*:*</str> <str name="sort">pubdatestart desc</str> 
+	</lst>
+	<lst> 
+		<str name="q">contenttypetxt:JL</str> <str name="sort">sortorder asc</str> 
+	</lst>
+	<lst> 
+		<str name="q">contenttypetxt:BK</str> <str name="sort">sortorder asc</str> 
+	</lst>
+	<lst> 
+		<str name="q">contenttypetxt:BS</str> <str name="sort">sortorder asc</str> 
+	</lst>
+	<lst> 
+		<str name="q">contenttypetxt:RW</str> <str name="sort">sortorder asc</str> 
+	</lst>
+	<lst> 
+		<str name="q">contenttypetxt:HB</str> <str name="sort">sortorder asc</str> 
+	</lst>
+	<lst> 
+		<str name="q">*:*</str> <str name="fq">srctype:(nonserial serial)</str> 
+	</lst>
+	<lst> 
+		<str name="q">*:*</str> <str name="fq">contenttypetxt:(JL BS HB RW BK)</str> 
+	</lst>
+		<lst> 
+		<str name="q">*:*</str> <str name="fq">srctype:(nonserial serial) AND contenttypetxt:(JL BS HB RW BK)</str> 
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="start">0</str> <str name="rows">0</str> <str name="facet">true</str> <str name="facet.field">srctitle-f</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="start">0</str> <str name="rows">0</str> <str name="facet">true</str> <str name="facet.field">keywords-f</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="start">0</str> <str name="rows">00</str> <str name="facet">true</str> <str name="facet.field">pubyr-f</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="start">0</str> <str name="rows">00</str> <str name="facet">true</str> <str name="facet.field">contenttypetxt-f</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="start">0</str> <str name="rows">00</str> <str name="facet">true</str> <str name="facet.field">contenttypetxt-f</str>
+		<str name="facet.field">contenttypetxt-f</str> <str name="facet.field">pubyr-f</str> <str name="facet.field">keywords-f</str> <str name="facet.field">srctitle-f</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="start">0</str> <str name="rows">00</str> <str name="facet">true</str> <str name="facet.field">contenttypetxt-f</str>
+		<str name="facet.field">contenttypetxt-f</str> <str name="facet.field">pubyr-f</str> <str name="facet.field">keywords-f</str> <str name="facet.field">srctitle-f</str>
+		<str name="sort">sortorder asc</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="fq">contenttypetxt-f:jl</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="fq">contenttypetxt-f:bk</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="fq">contenttypetxt-f:bs</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="fq">contenttypetxt-f:rw</str>
+	</lst>
+	<lst>
+		<str name="q">*:*</str> <str name="fq">contenttypetxt-f:hb</str>
+	</lst>
+	
+<!-- I know it is urgly, but it would be ok to pub rfeally long query in here until we find how to connect the external script from here -->
+<!-- This is for alllist -->
+<lst>
+<str name="q">*:*</str> <str name="fq">
+((((cid:(270107 270117 270188 270206 270226 270245 270276 270311 270338 270375 270387 270397 270400 270416 270422 270425 270434 270504 270576 270601 270625 270677 270679 270695 270713 270722 270746 270775 270786 270849 270903 270963 270970 270985 270994 271009 272734 272742 272758 272768 276906 278540 280624 281257 281735 281774 281944 282044 282105 282176 282329 282333 282354 282363 282385 282388 282502 282505 282516 282518 282525 282595 282606 282652 282654 282661 282663 282671 282673 282675 282680 282930 282950 282953 282955 282961 282974 282976 282978 282983 283013 283023 283026 283030 283035 283046 283137 283168 283181 283254 283264 283309 283326 283339 283381 283446 286283 286341 286343 286554 286684 286725 286734 286745 286748 286907 287004 287007 287010 287018 287092 287115 287129 287140 287156 287249 287281 287283 287285 287323 287534 287539 287654 287665 287673 287687 287968 [270137 TO 270139] [270235 TO 270236] [270463 TO 270466] [270472 TO 270479] [270481 TO 270487] [270493 TO 270502] [270507 TO 270513] [270515 TO 270516] [270532 TO 270545] [270547 TO 270550] [270557 TO 270561] [270564 TO 270565] [270567 TO 270568] [270582 TO 270590] [270592 TO 270595] [270598 TO 270599] [270603 TO 270607] [270609 TO 270610] [270612 TO 270623] [270627 TO 270628] [270635 TO 270637] [270640 TO 270644] [270646 TO 270647] [270651 TO 270652] [270671 TO 270672] [270681 TO 270686] [270689 TO 270693] [270697 TO 270699] [270702 TO 270708] [270710 TO 270711] [270823 TO 270824] [270833 TO 270835] [270885 TO 270886] [271012 TO 271014] [271017 TO 271110] [271112 TO 272290] [272292 TO 272732] [272776 TO 272828] [272830 TO 272913] [272917 TO 273049] [273052 TO 273076] [273078 TO 273203] [273206 TO 273224] [273226 TO 273248] [273250 TO 273440] [273442 TO 273468] [273470 TO 273526] [273528 TO 276899] [276901 TO 276904] [276910 TO 277338] [277340 TO 277410] [277412 TO 277413] [277415 TO 277418] [277420 TO 277805] [277807 TO 277823] [277826 TO 278538] [278542 TO 279966] [279968 TO 279975] [279977 TO 280069] [280071 TO 280281] [280293 TO 280296] [280298 TO 280342] [280344 TO 280373] [280375 TO 280382] [280384 TO 280397] [280408 TO 280469] [280471 TO 280493] [280495 TO 280498] [280500 TO 280511] [280513 TO 280514] [280516 TO 280533] [280535 TO 280545] [280547 TO 280555] [280557 TO 280606] [280608 TO 280613] [280615 TO 280622] [280626 TO 280665] [280667 TO 280693] [280695 TO 280706] [280708 TO 280720] [280722 TO 280819] [280821 TO 280841] [280843 TO 280864] [280867 TO 280914] [280916 TO 280940] [280942 TO 280951] [280956 TO 280975] [280977 TO 280996] [280998 TO 280999] [281014 TO 281089] [281279 TO 281303] [281409 TO 281410] [281412 TO 281419] [281421 TO 281436] [281438 TO 281443] [281445 TO 281458] [281460 TO 281479] [281481 TO 281486] [281499 TO 281678] [281680 TO 281681] [281830 TO 281848] [281951 TO 281952] [281956 TO 281982] [281984 TO 282015] [282017 TO 282042] [282046 TO 282052] [282054 TO 282057] [282059 TO 282093] [282095 TO 282098] [282101 TO 282103] [282107 TO 282110] [282112 TO 282123] [282127 TO 282141] [282145 TO 282150] [282153 TO 282168] [282170 TO 282174] [282178 TO 282180] [282182 TO 282196] [282199 TO 282257] [282259 TO 282275] [282277 TO 282281] [282283 TO 282298] [282300 TO 282327] [282413 TO 282470] [282474 TO 282479] [282481 TO 282482] [282484 TO 282485] [282487 TO 282500] [282507 TO 282514] [282520 TO 282523] [282608 TO 282609] [282621 TO 282647] [282656 TO 282658] [282667 TO 282669] [282677 TO 282678] [282715 TO 282718] [282793 TO 282802] [282807 TO 282897] [282903 TO 282913] [282915 TO 282917] [282919 TO 282923] [282937 TO 282938] [282964 TO 282966] [282992 TO 282997] [283016 TO 283017] [283019 TO 283020] [283040 TO 283042] [283049 TO 283051] [283055 TO 283124] [283126 TO 283130] [283133 TO 283135] [283141 TO 283154] [283156 TO 283166] [283170 TO 283173] [283275 TO 283276] [283336 TO 283337] [283343 TO 283350] [283352 TO 283360] [283362 TO 283365] [283367 TO 283371] [283373 TO 283377] [283401 TO 283423] [283426 TO 283430] [283432 TO 283433] [283448 TO 283450] [283461 TO 283462] [283464 TO 283492] [283494 TO 283501] [283503 TO 283531] [283533 TO 283534] [283536 TO 283540] [283564 TO 283575] [283577 TO 283616] [283618 TO 283692] [283694 TO 283719] [283721 TO 283729] [283731 TO 283740] [283742 TO 283843] [283845 TO 284118] [284120 TO 284333] [284335 TO 284843] [284845 TO 285002] [285004 TO 285305] [285307 TO 286004] [286006 TO 286038] [286040 TO 286230] [286232 TO 286243] [286245 TO 286267] [286269 TO 286271] [286273 TO 286281] [286287 TO 286294] [286296 TO 286326] [286328 TO 286335] [286337 TO 286339] [286348 TO 286353] [286356 TO 286497] [286499 TO 286509] [286535 TO 286552] [286556 TO 286572] [286574 TO 286576] [286578 TO 286653] [286655 TO 286682] [286687 TO 286692] [286727 TO 286732] [286737 TO 286741] [286750 TO 286756] [286758 TO 286761] [286763 TO 286765] [286768 TO 286769] [286771 TO 286781] [286783 TO 286790] [286792 TO 286797] [286799 TO 286809] [286811 TO 286812] [286815 TO 286818] [286820 TO 286828] [286830 TO 286833] [286835 TO 286877] [286879 TO 286880] [286882 TO 286883] [286885 TO 286886] [286888 TO 286890] [286892 TO 286898] [286900 TO 286903] [286909 TO 286922] [286924 TO 286925] [286927 TO 286935] [286938 TO 286942] [286944 TO 286945] [286999 TO 287002] [287039 TO 287050] [287053 TO 287055] [287058 TO 287062] [287064 TO 287067] [287069 TO 287070] [287072 TO 287080] [287082 TO 287083] [287085 TO 287090] [287094 TO 287096] [287098 TO 287100] [287102 TO 287105] [287107 TO 287108] [287111 TO 287112] [287119 TO 287120] [287122 TO 287123] [287137 TO 287138] [287143 TO 287144] [287158 TO 287159] [287277 TO 287279] [287302 TO 287321] [287325 TO 287368] [287370 TO 287391] [287393 TO 287417] [287419 TO 287486] [287489 TO 287514] [287536 TO 287537] [287553 TO 287568] [287570 TO 287577] [287579 TO 287628] [287630 TO 287643] [287657 TO 287658] [287711 TO 287712] [287974 TO 287975] [287977 TO 287978]) AND contenttypetxt:(HB JL BS RW BK))) OR (srctype:(nonserial serial) AND contenttypetxt:(BS JL HB RW BK))) AND NOT(cids:(287577 270508 286274 272768 270137 278540 270138 270139 272742 277826 271013 270985 278795 270695 272758 278670 272734 282082 272718 276906 276904 276903 276902 276901 286278 270994 286279)))</str>
+</lst>
+<lst>
+<str name="q">*:*</str> <str name="fq">
+((((cid:(270107 270117 270188 270206 270226 270245 270276 270311 270338 270375 270387 270397 270400 270416 270422 270425 270434 270504 270576 270601 270625 270677 270679 270695 270713 270722 270746 270775 270786 270849 270903 270963 270970 270985 270994 271009 272734 272742 272758 272768 276906 278540 280624 281257 281735 281774 281944 282044 282105 282176 282329 282333 282354 282363 282385 282388 282502 282505 282516 282518 282525 282595 282606 282652 282654 282661 282663 282671 282673 282675 282680 282930 282950 282953 282955 282961 282974 282976 282978 282983 283013 283023 283026 283030 283035 283046 283137 283168 283181 283254 283264 283309 283326 283339 283381 283446 286283 286341 286343 286554 286684 286725 286734 286745 286748 286907 287004 287007 287010 287018 287092 287115 287129 287140 287156 287249 287281 287283 287285 287323 287534 287539 287654 287665 287673 287687 287968 [270137 TO 270139] [270235 TO 270236] [270463 TO 270466] [270472 TO 270479] [270481 TO 270487] [270493 TO 270502] [270507 TO 270513] [270515 TO 270516] [270532 TO 270545] [270547 TO 270550] [270557 TO 270561] [270564 TO 270565] [270567 TO 270568] [270582 TO 270590] [270592 TO 270595] [270598 TO 270599] [270603 TO 270607] [270609 TO 270610] [270612 TO 270623] [270627 TO 270628] [270635 TO 270637] [270640 TO 270644] [270646 TO 270647] [270651 TO 270652] [270671 TO 270672] [270681 TO 270686] [270689 TO 270693] [270697 TO 270699] [270702 TO 270708] [270710 TO 270711] [270823 TO 270824] [270833 TO 270835] [270885 TO 270886] [271012 TO 271014] [271017 TO 271110] [271112 TO 272290] [272292 TO 272732] [272776 TO 272828] [272830 TO 272913] [272917 TO 273049] [273052 TO 273076] [273078 TO 273203] [273206 TO 273224] [273226 TO 273248] [273250 TO 273440] [273442 TO 273468] [273470 TO 273526] [273528 TO 276899] [276901 TO 276904] [276910 TO 277338] [277340 TO 277410] [277412 TO 277413] [277415 TO 277418] [277420 TO 277805] [277807 TO 277823] [277826 TO 278538] [278542 TO 279966] [279968 TO 279975] [279977 TO 280069] [280071 TO 280281] [280293 TO 280296] [280298 TO 280342] [280344 TO 280373] [280375 TO 280382] [280384 TO 280397] [280408 TO 280469] [280471 TO 280493] [280495 TO 280498] [280500 TO 280511] [280513 TO 280514] [280516 TO 280533] [280535 TO 280545] [280547 TO 280555] [280557 TO 280606] [280608 TO 280613] [280615 TO 280622] [280626 TO 280665] [280667 TO 280693] [280695 TO 280706] [280708 TO 280720] [280722 TO 280819] [280821 TO 280841] [280843 TO 280864] [280867 TO 280914] [280916 TO 280940] [280942 TO 280951] [280956 TO 280975] [280977 TO 280996] [280998 TO 280999] [281014 TO 281089] [281279 TO 281303] [281409 TO 281410] [281412 TO 281419] [281421 TO 281436] [281438 TO 281443] [281445 TO 281458] [281460 TO 281479] [281481 TO 281486] [281499 TO 281678] [281680 TO 281681] [281830 TO 281848] [281951 TO 281952] [281956 TO 281982] [281984 TO 282015] [282017 TO 282042] [282046 TO 282052] [282054 TO 282057] [282059 TO 282093] [282095 TO 282098] [282101 TO 282103] [282107 TO 282110] [282112 TO 282123] [282127 TO 282141] [282145 TO 282150] [282153 TO 282168] [282170 TO 282174] [282178 TO 282180] [282182 TO 282196] [282199 TO 282257] [282259 TO 282275] [282277 TO 282281] [282283 TO 282298] [282300 TO 282327] [282413 TO 282470] [282474 TO 282479] [282481 TO 282482] [282484 TO 282485] [282487 TO 282500] [282507 TO 282514] [282520 TO 282523] [282608 TO 282609] [282621 TO 282647] [282656 TO 282658] [282667 TO 282669] [282677 TO 282678] [282715 TO 282718] [282793 TO 282802] [282807 TO 282897] [282903 TO 282913] [282915 TO 282917] [282919 TO 282923] [282937 TO 282938] [282964 TO 282966] [282992 TO 282997] [283016 TO 283017] [283019 TO 283020] [283040 TO 283042] [283049 TO 283051] [283055 TO 283124] [283126 TO 283130] [283133 TO 283135] [283141 TO 283154] [283156 TO 283166] [283170 TO 283173] [283275 TO 283276] [283336 TO 283337] [283343 TO 283350] [283352 TO 283360] [283362 TO 283365] [283367 TO 283371] [283373 TO 283377] [283401 TO 283423] [283426 TO 283430] [283432 TO 283433] [283448 TO 283450] [283461 TO 283462] [283464 TO 283492] [283494 TO 283501] [283503 TO 283531] [283533 TO 283534] [283536 TO 283540] [283564 TO 283575] [283577 TO 283616] [283618 TO 283692] [283694 TO 283719] [283721 TO 283729] [283731 TO 283740] [283742 TO 283843] [283845 TO 284118] [284120 TO 284333] [284335 TO 284843] [284845 TO 285002] [285004 TO 285305] [285307 TO 286004] [286006 TO 286038] [286040 TO 286230] [286232 TO 286243] [286245 TO 286267] [286269 TO 286271] [286273 TO 286281] [286287 TO 286294] [286296 TO 286326] [286328 TO 286335] [286337 TO 286339] [286348 TO 286353] [286356 TO 286497] [286499 TO 286509] [286535 TO 286552] [286556 TO 286572] [286574 TO 286576] [286578 TO 286653] [286655 TO 286682] [286687 TO 286692] [286727 TO 286732] [286737 TO 286741] [286750 TO 286756] [286758 TO 286761] [286763 TO 286765] [286768 TO 286769] [286771 TO 286781] [286783 TO 286790] [286792 TO 286797] [286799 TO 286809] [286811 TO 286812] [286815 TO 286818] [286820 TO 286828] [286830 TO 286833] [286835 TO 286877] [286879 TO 286880] [286882 TO 286883] [286885 TO 286886] [286888 TO 286890] [286892 TO 286898] [286900 TO 286903] [286909 TO 286922] [286924 TO 286925] [286927 TO 286935] [286938 TO 286942] [286944 TO 286945] [286999 TO 287002] [287039 TO 287050] [287053 TO 287055] [287058 TO 287062] [287064 TO 287067] [287069 TO 287070] [287072 TO 287080] [287082 TO 287083] [287085 TO 287090] [287094 TO 287096] [287098 TO 287100] [287102 TO 287105] [287107 TO 287108] [287111 TO 287112] [287119 TO 287120] [287122 TO 287123] [287137 TO 287138] [287143 TO 287144] [287158 TO 287159] [287277 TO 287279] [287302 TO 287321] [287325 TO 287368] [287370 TO 287391] [287393 TO 287417] [287419 TO 287486] [287489 TO 287514] [287536 TO 287537] [287553 TO 287568] [287570 TO 287577] [287579 TO 287628] [287630 TO 287643] [287657 TO 287658] [287711 TO 287712] [287974 TO 287975] [287977 TO 287978]) AND contenttypetxt:(HB JL BS RW BK))) OR (srctype:(nonserial serial) AND contenttypetxt:(BS JL HB RW BK))) AND NOT(cids:(287577 270508 286274 272768 270137 278540 270138 270139 272742 277826 271013 270985 278795 270695 272758 278670 272734 282082 272718 276906 276904 276903 276902 276901 286278 270994 286279)))</str>
+<str name="sort">pubdatestart desc</str>
+</lst>
+
       </arr>
+
+
     </listener>
 
     <!-- Use Cold Searcher
@@ -646,7 +741,7 @@
          warming searcher and use it.  If "false" then all requests
          will block until the first searcher is done warming.
       -->
-    <useColdSearcher>false</useColdSearcher>
+    <useColdSearcher>true</useColdSearcher>
 
     <!-- Max Warming Searchers
          
@@ -807,7 +902,16 @@
      <lst name="defaults">
        <str name="echoParams">explicit</str>
        <int name="rows">10</int>
-       <str name="df">affil</str>
+       <str name="df">all</str>
+       <str name="mlt.fl">abs</str>
+       <int name="mlt.count">10</int>
+       <int name="mlt.maxntp">0</int>
+       <int name="mlt.maxqt">10</int>
+       <int name="mlt.mintf">1</int>
+       <int name="mlt.mindf">1</int>
+       <int name="mlt.minwl">5</int>
+       <str name="wt">json</str>
+       <str name="fl">altitemtitle,articletitle,auth,authfull,authkeywords,sectiontitle,copyright,doi,edition,eid,markers,nonengabst,pg,pgfirst,pglast,pii,primabst,absattachment,pubdatetxt,pubtype,pubyr,sortorder,specialabst,teaserabst,srctitle,satsrctitles,satsrcinfo,srctype,stereochemabst,subheadings,vol,volissue,aiptxt,cid,cids,articletitlenorm,authfirstinitialnorm,authfirstsurnamenorm,contentsubtype,contenttypetxt,docsubtype,doctype,fundingbodyid,hubeid,indextype,issn,isbns,issnnorm,isbnsnorm,itemstage,itemweight,piinorm,pubdateend,pubdatestart,sponsoredaccessdate,sponsoredaccessdelay,sponsoredaccesstype,srctitlenorm,webpdf</str>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -869,7 +973,7 @@
        <str name="echoParams">explicit</str>
        <str name="wt">json</str>
        <str name="indent">true</str>
-       <str name="df">affil</str>
+       <str name="df">all</str>
      </lst>
   </requestHandler>
 
@@ -908,49 +1012,31 @@
        <!-- Query settings -->
        <str name="defType">edismax</str>
        <str name="qf">
-          affil^0.5 
+          all^0.5
        </str>
-       <str name="df">affil</str>
+       <str name="df">all</str>
        <str name="mm">100%</str>
        <str name="q.alt">*:*</str>
        <str name="rows">10</str>
        <str name="fl">*,score</str>
 
        <str name="mlt.qf">
-         affil^0.5 
+         auth^2 all^1.0 srctitle^10.0  
        </str>
-       <str name="mlt.fl">affil</str>
-       <int name="mlt.count">3</int>
+       <str name="mlt.fl">all,srctitle,auth</str>
+       <int name="mlt.count">10</int>
 
        <!-- Faceting defaults -->
        <str name="facet">on</str>
-       <str name="facet.field">cat</str>
-       <str name="facet.field">manu_exact</str>
-       <str name="facet.field">content_type</str>
-       <str name="facet.field">author_s</str>
-       <str name="facet.query">ipod</str>
-       <str name="facet.query">GB</str>
-       <str name="facet.mincount">1</str>
-       <str name="facet.pivot">cat,inStock</str>
-       <str name="facet.range.other">after</str>
-       <str name="facet.range">price</str>
-       <int name="f.price.facet.range.start">0</int>
-       <int name="f.price.facet.range.end">600</int>
-       <int name="f.price.facet.range.gap">50</int>
-       <str name="facet.range">popularity</str>
-       <int name="f.popularity.facet.range.start">0</int>
-       <int name="f.popularity.facet.range.end">10</int>
-       <int name="f.popularity.facet.range.gap">3</int>
-       <str name="facet.range">manufacturedate_dt</str>
-       <str name="f.manufacturedate_dt.facet.range.start">NOW/YEAR-10YEARS</str>
-       <str name="f.manufacturedate_dt.facet.range.end">NOW</str>
-       <str name="f.manufacturedate_dt.facet.range.gap">+1YEAR</str>
-       <str name="f.manufacturedate_dt.facet.range.other">before</str>
-       <str name="f.manufacturedate_dt.facet.range.other">after</str>
+       <str name="facet.field">keywords-f</str>
+       <str name="facet.field">contenttypetxt-f</str>
+       <str name="facet.field">pubyr-f</str>
+       <str name="facet.field">srctitle-f</str>
+       <str name="facet.mincount">5</str>
 
        <!-- Highlighting defaults -->
-       <str name="hl">on</str>
-       <str name="hl.fl">content features title name</str>
+       <str name="hl">off</str>
+       <str name="hl.fl">auth all</str>
        <str name="hl.encoder">html</str>
        <str name="hl.simple.pre">&lt;b&gt;</str>
        <str name="hl.simple.post">&lt;/b&gt;</str>
@@ -964,7 +1050,7 @@
        <str name="f.content.hl.maxAlternateFieldLength">750</str>
 
        <!-- Spell checking defaults -->
-       <str name="spellcheck">on</str>
+       <str name="spellcheck">off</str>
        <str name="spellcheck.extendedResults">false</str>       
        <str name="spellcheck.count">5</str>
        <str name="spellcheck.alternativeTermCount">2</str>
@@ -1087,7 +1173,7 @@
        </docs>
 
     Note: Each document must contain a field which serves as the
-    unique key. This key is used in the returned response to associate
+     key. This key is used in the returned response to associate
     an analysis breakdown to the analyzed document.
 
     Like the FieldAnalysisRequestHandler, this handler also supports
@@ -1173,14 +1259,17 @@
        sections below, depending on whether this solr instance should be
        the "master" or a "slave".  If this instance is a "slave" you will 
        also need to fill in the masterUrl to point to a real machine.
-    -->
-    <!--
+
+       The solrconfig_slave.xml local file will be copied to the slave
+       as solrconfig.xml.  It should have the proper slave replication settings!
+
        <lst name="master">
          <str name="replicateAfter">commit</str>
          <str name="replicateAfter">startup</str>
-         <str name="confFiles">schema.xml,stopwords.txt</str>
+         <str name="confFiles">solrconfig_slave.xml:solrconfig.xml,schema.xml,stopwords.txt,synonyms.txt</str>
        </lst>
     -->
+
     <!--
        <lst name="slave">
          <str name="masterUrl">http://your-master-hostname:8983/solr</str>
@@ -1241,37 +1330,42 @@
      -->
   <searchComponent name="spellcheck" class="solr.SpellCheckComponent">
 
-    <str name="queryAnalyzerFieldType">text_general</str>
+    <str name="queryAnalyzerFieldType">hothouse_phrase</str>
 
     <!-- Multiple "Spell Checkers" can be declared and used by this
          component
       -->
 
+  </searchComponent>
+
     <!-- a spellchecker built from a field of the main index -->
+<!-- kag remove spellchecker
     <lst name="spellchecker">
       <str name="name">default</str>
-      <str name="field">affil</str>
+      <str name="field">all-ep</str>
+      <str name="classname">solr.IndexBasedSpellChecker</str>
+      <str name="spellcheckIndexDir">./spellchecker</str>
+      <str name="buildOnCommit">true</str>
+      <float name="thresholdTokenFrequency">.01</float>
+-->
+<!--
       <str name="classname">solr.DirectSolrSpellChecker</str>
-      <!-- the spellcheck distance measure used, the default is the internal levenshtein -->
       <str name="distanceMeasure">internal</str>
-      <!-- minimum accuracy needed to be considered a valid spellcheck suggestion -->
       <float name="accuracy">0.5</float>
-      <!-- the maximum #edits we consider when enumerating terms: can be 1 or 2 -->
       <int name="maxEdits">2</int>
-      <!-- the minimum shared prefix when enumerating terms -->
       <int name="minPrefix">1</int>
-      <!-- maximum number of inspections per result. -->
       <int name="maxInspections">5</int>
-      <!-- minimum length of a query term to be considered for correction -->
       <int name="minQueryLength">4</int>
-      <!-- maximum threshold of documents a query term can appear to be considered for correction -->
       <float name="maxQueryFrequency">0.01</float>
+-->
       <!-- uncomment this to require suggestions to occur in 1% of the documents
       	<float name="thresholdTokenFrequency">.01</float>
       -->
+<!--
     </lst>
-    
+-->    
     <!-- a spellchecker that can break or combine words.  See "/spell" handler below for usage -->
+<!--
     <lst name="spellchecker">
       <str name="name">wordbreak</str>
       <str name="classname">solr.WordBreakSolrSpellChecker</str>      
@@ -1280,7 +1374,7 @@
       <str name="breakWords">true</str>
       <int name="maxChanges">10</int>
     </lst>
-
+-->
     <!-- a spellchecker that uses a different distance measure -->
     <!--
        <lst name="spellchecker">
@@ -1318,8 +1412,9 @@
          <str name="spellcheckIndexDir">spellcheckerFile</str>
        </lst>
       -->
+<!--
   </searchComponent>
-
+-->
   <!-- A request handler for demonstrating the spellcheck component.  
 
        NOTE: This is purely as an example.  The whole purpose of the
@@ -1333,16 +1428,20 @@
        See http://wiki.apache.org/solr/SpellCheckComponent for details
        on the request parameters.
     -->
+
+<!--
   <requestHandler name="/spell" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
-      <str name="df">affil</str>
+      <str name="df">all-ep</str>
+-->
       <!-- Solr will use suggestions from both the 'default' spellchecker
            and from the 'wordbreak' spellchecker and combine them.
            collations (re-written queries) can include a combination of
            corrections from both spellcheckers -->
+<!--
       <str name="spellcheck.dictionary">default</str>
       <str name="spellcheck.dictionary">wordbreak</str>
-      <str name="spellcheck">on</str>
+      <str name="spellcheck">off</str>
       <str name="spellcheck.extendedResults">true</str>       
       <str name="spellcheck.count">10</str>
       <str name="spellcheck.alternativeTermCount">5</str>
@@ -1356,11 +1455,14 @@
       <str>spellcheck</str>
     </arr>
   </requestHandler>
+-->
 
   <!-- Term Vector Component
 
        http://wiki.apache.org/solr/TermVectorComponent
     -->
+
+
   <searchComponent name="tvComponent" class="solr.TermVectorComponent"/>
 
   <!-- A request handler for demonstrating the term vector component
@@ -1372,7 +1474,7 @@
     -->
   <requestHandler name="/tvrh" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
-      <str name="df">affil</str>
+      <str name="df">all</str>
       <bool name="tv">true</bool>
     </lst>
     <arr name="last-components">
@@ -1380,113 +1482,6 @@
     </arr>
   </requestHandler>
 
-  <!-- Clustering Component
-
-       http://wiki.apache.org/solr/ClusteringComponent
-
-       You'll need to set the solr.clustering.enabled system property
-       when running solr to run with clustering enabled:
-
-            java -Dsolr.clustering.enabled=true -jar start.jar
-
-    -->
-  <searchComponent name="clustering"
-                   enable="${solr.clustering.enabled:false}"
-                   class="solr.clustering.ClusteringComponent" >
-    <!-- Declare an engine -->
-    <lst name="engine">
-      <!-- The name, only one can be named "default" -->
-      <str name="name">default</str>
-
-      <!-- Class name of Carrot2 clustering algorithm.
-
-           Currently available algorithms are:
-           
-           * org.carrot2.clustering.lingo.LingoClusteringAlgorithm
-           * org.carrot2.clustering.stc.STCClusteringAlgorithm
-           * org.carrot2.clustering.kmeans.BisectingKMeansClusteringAlgorithm
-           
-           See http://project.carrot2.org/algorithms.html for the
-           algorithm's characteristics.
-        -->
-      <str name="carrot.algorithm">org.carrot2.clustering.lingo.LingoClusteringAlgorithm</str>
-
-      <!-- Overriding values for Carrot2 default algorithm attributes.
-
-           For a description of all available attributes, see:
-           http://download.carrot2.org/stable/manual/#chapter.components.
-           Use attribute key as name attribute of str elements
-           below. These can be further overridden for individual
-           requests by specifying attribute key as request parameter
-           name and attribute value as parameter value.
-        -->
-      <str name="LingoClusteringAlgorithm.desiredClusterCountBase">20</str>
-
-      <!-- Location of Carrot2 lexical resources.
-
-           A directory from which to load Carrot2-specific stop words
-           and stop labels. Absolute or relative to Solr config directory.
-           If a specific resource (e.g. stopwords.en) is present in the
-           specified dir, it will completely override the corresponding
-           default one that ships with Carrot2.
-
-           For an overview of Carrot2 lexical resources, see:
-           http://download.carrot2.org/head/manual/#chapter.lexical-resources
-        -->
-      <str name="carrot.lexicalResourcesDir">clustering/carrot2</str>
-
-      <!-- The language to assume for the documents.
-
-           For a list of allowed values, see:
-           http://download.carrot2.org/stable/manual/#section.attribute.lingo.MultilingualClustering.defaultLanguage
-       -->
-      <str name="MultilingualClustering.defaultLanguage">ENGLISH</str>
-    </lst>
-    <lst name="engine">
-      <str name="name">stc</str>
-      <str name="carrot.algorithm">org.carrot2.clustering.stc.STCClusteringAlgorithm</str>
-    </lst>
-  </searchComponent>
-
-  <!-- A request handler for demonstrating the clustering component
-
-       This is purely as an example.
-
-       In reality you will likely want to add the component to your 
-       already specified request handlers. 
-    -->
-  <requestHandler name="/clustering"
-                  startup="lazy"
-                  enable="${solr.clustering.enabled:false}"
-                  class="solr.SearchHandler">
-    <lst name="defaults">
-      <bool name="clustering">true</bool>
-      <str name="clustering.engine">default</str>
-      <bool name="clustering.results">true</bool>
-      <!-- The title field -->
-      <str name="carrot.title">name</str>
-      <str name="carrot.url">id</str>
-      <!-- The field to cluster on -->
-       <str name="carrot.snippet">features</str>
-       <!-- produce summaries -->
-       <bool name="carrot.produceSummary">true</bool>
-       <!-- the maximum number of labels per cluster -->
-       <!--<int name="carrot.numDescriptions">5</int>-->
-       <!-- produce sub clusters -->
-       <bool name="carrot.outputSubClusters">false</bool>
-       
-       <str name="defType">edismax</str>
-       <str name="qf">
-         affil^0.5 
-       </str>
-       <str name="q.alt">*:*</str>
-       <str name="rows">10</str>
-       <str name="fl">*,score</str>
-    </lst>     
-    <arr name="last-components">
-      <str>clustering</str>
-    </arr>
-  </requestHandler>
   
   <!-- Terms Component
 
@@ -1527,7 +1522,7 @@
   <requestHandler name="/elevate" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
       <str name="echoParams">explicit</str>
-      <str name="df">affil</str>
+      <str name="df">text</str>
     </lst>
     <arr name="last-components">
       <str>elevator</str>
@@ -1685,7 +1680,7 @@
     <!--
      <updateRequestProcessorChain name="langid">
        <processor class="org.apache.solr.update.processor.TikaLanguageIdentifierUpdateProcessorFactory">
-         <str name="langid.fl">affil</str>
+         <str name="langid.fl">text,title,subject,description</str>
          <str name="langid.langField">language_s</str>
          <str name="langid.fallback">en</str>
        </processor>

@@ -11,9 +11,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.apache.solr.common.SolrInputDocument;
 
 public class Document {
 
+	private static HttpSolrServer solrServer = null;
+	
+	
+	/**
+	 * Initialization
+	 */
+	public static void init() {
+		// Set up to talk to the configured Solr instance
+		solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
+		System.out.println("SolrServer Base URL: " + solrServer.getBaseURL());
+
+	}
+	
+	
+	
 	/**
 	 * Add the document to the ElasticSearch index. 
 	 * 
@@ -25,13 +44,13 @@ public class Document {
 	 */
 	public static void add(String index, HashMap<String,Object> map, String id, long epoch) throws Exception {
 
-		try {
+		HttpSolrServer solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
+		System.out.println("SolrServer Base URL: " + solrServer.getBaseURL());
+		
+		SolrInputDocument solrDoc = new SolrInputDocument();
+		
 
-			// Use the jsonBuilder helper instead of the automatic Map to Json
-			XContentBuilder builder = jsonBuilder();
-			
-			// Start the outer object (the root)
-			builder.startObject();
+			solrDoc.addField("afid", id);
 			
 			// Get all of the keys in the Map
 			Set<String> keySet = map.keySet();
@@ -48,40 +67,15 @@ public class Document {
 				if (obj instanceof String) {
 					
 					// If a string, just construct the field/value
-					builder.field(key, (String)obj);
+					solrDoc.addField(key, obj);
 					
 				} else if (obj instanceof ArrayList){
-					
-					// If an ArrayList, construct an Array of values
-					builder.startArray(key);
 					Iterator<String> it2 = ((ArrayList) obj).iterator();
 					while(it2.hasNext()) {
-						builder.value(it2.next());
+						solrDoc.addField(key, it2.next());
 					}
-					builder.endArray();
 				
-				} else if (obj instanceof NestedObjectHelper){
-					NestedObjectHelper nestedObjs = (NestedObjectHelper) obj;
-					Iterator<Integer> nestedObjIter = nestedObjs.getObjectKeys().iterator();
-					
-					Iterator<String> fieldIter = null;
-					Map<String, String> workFields = null;
-					// If an Map, then create a nested document based on the key value pairs
-					builder.startArray(key);
-					while (nestedObjIter.hasNext()) {
-						Integer workKey = nestedObjIter.next();
-						builder.startObject();
-						workFields = nestedObjs.getObjectFields(workKey);
-						fieldIter = workFields.keySet().iterator();
-						while(fieldIter.hasNext()) {
-							String fieldKey = fieldIter.next();
-							builder.field(fieldKey, workFields.get(fieldKey));
-						}
-						builder.endObject();
-					}
-					builder.endArray();
-					
-				} else {
+				}  else {
 					
 					// Shouldn't happen ... the class should either be String or ArrayList
 					System.out.println("--> Unknown class is " + obj.getClass().getName());
@@ -89,46 +83,16 @@ public class Document {
 				}
 				
 			}	        
-			
-			// Close the outer object (the root)
-		    builder.endObject();
+					    
+			UpdateResponse response = solrServer.add(solrDoc, 1000);
 		    
-			IndexResponse response = client.prepareIndex(index, type, id)
-    		.setSource(builder)
-    		.setVersion(epoch)
-    		.setVersionType(VersionType.EXTERNAL)
-    		.execute()
-    		.actionGet();
-			
-/* 
- * Prior approach used the automatic Map to Json conversion
- * 
-			IndexResponse response = client.prepareIndex(index, type, id)
-        		.setSource(map)
-        		.setVersion(epoch)
-        		.setVersionType(VersionType.EXTERNAL)
-        		.execute()
-        		.actionGet();
-*/		
-			
-			// Index name
-
-			String _index = response.getIndex();
-			// Type name
-			String _type = response.getType();
-			// Document ID (generated or not)
-			String _id = response.getId();
-			// Version (if it's the first time you index this document, you will get: 1)
-			long _version = response.getVersion();
+			int status = response.getStatus();
 		
-			System.out.println("** ADDED index= '" + _index + "' type= '" + _type + "' id= '" + _id + "' version= '" + _version + "'");
-		
-		} catch (Exception ex) {
-			
-			System.out.println("** Version Conflict for ADD index= '" + index + "' type= '" + type + "' id= '" + id + "' version= '" + epoch + "'");
-			ex.printStackTrace();
-			throw(ex);
-		}
+			if (status == 0) {
+				System.out.println("** ADDED id= '" + id + "'");
+			} else {
+				System.out.println("Error adding doc. id='"  + id + "'");
+			}
 		
 	}
 	
@@ -143,32 +107,18 @@ public class Document {
 	 */	
 	public static void delete(String index, String id, long epoch) throws Exception {
 		
-		try {
-			
-			DeleteResponse response = client.prepareDelete(index, type, id)
-		    	.setVersion(epoch)
-		    	.setVersionType(VersionType.EXTERNAL)
-		    	.execute()
-		    	.actionGet();
+		UpdateResponse response = solrServer.deleteById(id);
 		
-			// Index name
-			String _index = response.getIndex();
-			// Type name
-			String _type = response.getType();
-			// Document ID (generated or not)
-			String _id = response.getId();
-			// Version (if it's the first time you index this document, you will get: 1)
-			long _version = response.getVersion();
+		int status = response.getStatus();
 		
-			System.out.println("** DELETED index= '" + _index + "' type= '" + _type + "' id= '" + _id + "' version= '" + _version + "'");
-		
-		} catch (Exception ex) {
+		if (status == 0) {
+			solrServer.commit();
+			System.out.println("** DELETED id= '" + id + "'");
+		} else {
 			
-			System.out.println("** Version Conflict for DELETE index= '" + index + "' type= '" + type + "' id= '" + id + "' version= '" + epoch + "'");
-			ex.printStackTrace();
-			throw(ex);
-			
+			System.out.println("Error deleting doc. id='"  + id + "'");
 		}
+				
 		
 	}
 	

@@ -72,9 +72,8 @@ public class AffiliationTransform {
 		"/xocs:doc/xocs:meta/xocs:eid//text()"
 	};
 	
-	private static String[] loaddateMappings = new String[] {
-		"/xocs:doc/xocs:meta/xocs:timestamp//text()"
-	};
+	// Assume there will only be one of these nodes in a doc.
+	private static String loaddateMappings = "/xocs:doc/xocs:meta/xocs:timestamp//text()";
 	
 	private static String[] namevarArrayMappings = new String[] {
 		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/name-variant"
@@ -149,11 +148,13 @@ public class AffiliationTransform {
 			
 			createArray("certScore", certscoreArrayMappings, "(.//text())");
 		
-			createArray("datecompleted", datecompletedtxtArrayMappings, "(.//text())");
+			createArray("datecompletedtxt", datecompletedtxtArrayMappings, "(.//text())");
 	
 			createSingleField("eid", eidMappings);
 			
-			createSingleField("loaddate", loaddateMappings);
+			// Note:  I'm cheating and not handling TZ offsets when turning dates into SOLR compatible GMT based times.  Basically just
+			// dropping the microsecond and timezone info and appending a 'Z' for zulu time.
+			createSingleDateField("loaddate", loaddateMappings);
 			
 			createArray("namevar", namevarArrayMappings, "(.//text())");
 			
@@ -217,6 +218,43 @@ public class AffiliationTransform {
 		
 		// Create the field and cache the results
 		if (wrkStr.length()  > 0) {
+			fieldValues.put(fieldName, wrkStr);
+			cachedFieldValues.put(xpathExpression, wrkStr);
+		} else {
+			cachedFieldValues.put(xpathExpression, "");
+		}
+
+	}
+
+	/**
+	 * Create a single field.  In other words, there will be only one field with this name in the docuemnt.
+	 * It is not possible for duplicate values (nodes) to occur in a single field.
+     * 
+	 * @param fieldName  field name
+	 * @param xpathExpression XPath to apply
+	 * @throws XPathExpressionException
+	 */
+	public void createSingleDateField(String fieldName, String xpathExpression) throws XPathExpressionException {
+		
+		// If we have already resolved this XPath expression, use the cached value to create the field and return
+		if (cachedFieldValues.containsKey(xpathExpression)) {
+			fieldValues.put(fieldName, cachedFieldValues.get(xpathExpression));
+			return;
+		}
+		
+		NodeList nodes = (NodeList)xpath.evaluate(xpathExpression, doc, XPathConstants.NODESET);
+		
+		// If it doesn't exist or more than one node exists, cache an empty results and return
+		if (nodes.getLength() == 0 || nodes.getLength() > 1) {
+			cachedFieldValues.put(xpathExpression, "");
+			return;
+		}
+		
+		String wrkStr = nodes.item(0).getNodeValue().trim();
+			
+		// Create the field and cache the results
+		if (wrkStr.length()  > 0) {
+			wrkStr = wrkStr.substring(0, wrkStr.lastIndexOf('.')) + "Z";
 			fieldValues.put(fieldName, wrkStr);
 			cachedFieldValues.put(xpathExpression, wrkStr);
 		} else {

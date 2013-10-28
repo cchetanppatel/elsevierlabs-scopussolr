@@ -119,7 +119,7 @@ public class SolrAffiliation {
 						// Currently, we catch all exceptions in Document.delete.
 						// TODO - think about moving messages to the problem queue
 						
-						//Document.delete(Variables.SOLR_COLLECTION, contentKey, epoch);
+						Document.delete(Variables.SOLR_COLLECTION, contentKey, epoch);
 											
 					} else {
 
@@ -164,7 +164,7 @@ public class SolrAffiliation {
 							
 						}
 						// Populate the ElasticSearch index
-						//Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
+						Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
 						
 					}
 					
