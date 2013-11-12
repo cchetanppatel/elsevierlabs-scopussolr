@@ -49,8 +49,6 @@ public class Document {
 		
 		SolrInputDocument solrDoc = new SolrInputDocument();
 		
-
-			solrDoc.addField("afid", id);
 			
 			// Get all of the keys in the Map
 			Set<String> keySet = map.keySet();

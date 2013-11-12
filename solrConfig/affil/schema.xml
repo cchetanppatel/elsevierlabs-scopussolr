@@ -114,9 +114,9 @@
 <field name="afid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="certscore" type="affil_std" multiValued="true" indexed="true" stored="true"/>
 <field name="certscore-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="certscore-s" type="affil_std" multiValued="false" indexed="true" stored="true""/>
+<field name="certscore-s" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
-<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="false" termVectors="false" termPositions="false" termOffsets="false"/>
+<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="false"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="fastloaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="loaddate" type="date"  multiValued="false" indexed="true" stored="true"/>

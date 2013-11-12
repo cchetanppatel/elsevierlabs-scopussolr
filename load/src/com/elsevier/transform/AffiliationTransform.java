@@ -55,8 +55,16 @@ public class AffiliationTransform {
 		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/name-variant"
 	};
 	
+	// After lots of discussion back and forth with STEPS, we have decided we can safely drop any
+	// documents with a parafid attribute ("departments") from index processing. As such, we are modifying this 
+	// particular mapping to always extract the afid so it will be present in all the records.
+	// The Affiliation driver will check for the existence of a parafid in the resulting map and 
+	// drop those records that have one from the processing stream. 
+	// NOTE: since we won't be indexing "Department" affiliation records, we could drop all of the 
+	// [not(@parent)] clauses from the various mappings where they occur. We haven't in case we
+	// find out our info from STEPS was wrong and we have to do things differently.
 	private static String[] afidMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/@affiliation-id"
+		"/xocs:doc/xocs:institution-profile/institution-profile/@affiliation-id"
 	};
 	
 	private static String[] certscoreArrayMappings = new String[] {
@@ -102,6 +110,10 @@ public class AffiliationTransform {
 	private static String[] statusMappings = new String[] {
 		"/xocs:doc/xocs:institution-profile/institution-profile/status//text()"
 	};
+	
+	private static String[] toplevelMappings = new String[] {
+		"/xocs:doc/xocs:institution-profile/institution-profile/@main"
+	};
 
 	
 
@@ -140,14 +152,22 @@ public class AffiliationTransform {
 			
 			createArray("affilcity", affilcityArrayMappings, "(./city-group//text() | ./city//text())");
 			
+			createSortFieldFromArrayField("affilcity-s", "affilcity");
+			
 			createArray("affilctry", affilctrytArrayMappings, "(.//text())");
+			
+			createSortFieldFromArrayField("affilctry-s", "affilctry");
 			
 			createArray("affilname", affilnameArrayMappings, "(.//text())");
 			
+			createSortFieldFromArrayField("affilname-s", "affilname");
+			
 			createSingleField("afid", afidMappings);
 			
-			createArray("certScore", certscoreArrayMappings, "(.//text())");
+			createArray("certscore", certscoreArrayMappings, "(.//text())");
 		
+			createSortFieldFromArrayField("certscore-s", "certscore");
+			
 			createArray("datecompletedtxt", datecompletedtxtArrayMappings, "(.//text())");
 	
 			createSingleField("eid", eidMappings);
@@ -169,6 +189,8 @@ public class AffiliationTransform {
 			createSingleField("sortname", sortnameMappings);
 			
 			createSingleField("status", statusMappings);
+			
+			createSingleField("toplevel", toplevelMappings);
 			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -429,6 +451,24 @@ public class AffiliationTransform {
 		
 	}
 	
+	// In Solr, you can't sort on a multivalued field. In many cases for Scopus, fields that are
+	// defined as multivalued are also listed as sortable. In order to get around this issues for 
+	// these cases, we want to create a new single value field from the various multi-values present
+	// in the field mapping. To do this, we make sure the target multivalue field exists, and if it 
+	// does we take the first entry from that field to use as the value for the single value sort field.
+	public void createSortFieldFromArrayField(String fieldName, String sourceArrayField) { 
+		
+		// Is there data in sourceArrayField to create the sort field from
+		if (fieldValues.containsKey(sourceArrayField) == false) {
+			// Nothing to do, just return without creating an empty field.
+			return;
+		}
+		Object values = fieldValues.get(sourceArrayField);
+		if (values instanceof ArrayList<?>) {
+			fieldValues.put(fieldName, ((ArrayList<String>)values).get(0));
+		}
+		
+	}
 	
 	public void createNestedField(String fieldName, String[] xpathExpressions, Map<String, String[]> subFieldExpressions) throws XPathExpressionException {
 		
