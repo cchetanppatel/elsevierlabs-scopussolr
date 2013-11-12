@@ -41,8 +41,8 @@ public class Variables {
 	}	
 	
 	// SOLR
-	public static final String SOLR_ENDPOINT = prop.getProperty("SOLR_ENDPOINT","http://localhost:8983/solr/affil/");
-	public static final String SOLR_COLLECTION = "affil";
+	public static final String SOLR_ENDPOINT = prop.getProperty("SOLR_ENDPOINT","http://localhost:8983/solr/affiliation/");
+	public static final String SOLR_COLLECTION = "affiliation";
 	//public static final String SOLR_COLLECTION = "author";
 	
 	// SQS Endpoint

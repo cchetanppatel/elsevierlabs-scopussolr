@@ -100,44 +100,87 @@
        when adding a document.
    
 -->
- 
 <field name="_version_" type="long" indexed="true" stored="true"/>
-<field name="affil" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="affilcity" type="affil_std_stopwords" multiValued="true" indexed="true"/>
-<field name="affilcity-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="affilcity-s" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="affilctry" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
-<field name="affilctry-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="affilctry-s" type="affil_std_stopwords" multiValued="false" indexed="true"/>
-<field name="affilname" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
-<field name="affilname-s" type="affil_std_stopwords" multiValued="false" indexed="true" stored="true"/>
-<field name="afid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
-<field name="certscore" type="affil_std" multiValued="true" indexed="true" stored="true"/>
-<field name="certscore-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="certscore-s" type="affil_std" multiValued="false" indexed="true" stored="true""/>
+<field name="active" type="integer" multiValued="false" indexed="true" stored="false"/>
+<field name="active-f" type="integer" multiValued="false" indexed="true" stored="false"/>
+<field name="afdispcity" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afdispcity-s" type="auth_std" multiValued="false" indexed="true"/>
+<field name="afdispctry" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afdispctry-s" type="auth_std" multiValued="false" indexed="true"/>
+<field name="afdispname" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="affilcity" type="auth_std_stopwords" multiValued="true" indexed="true" stored="false"/>
+<field name="affilcity-f" type="auth_facet" multiValued="true" indexed="true" stored="false" />
+<field name="affilcity-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="false"/>
+<field name="affilctry" type="auth_std_stopwords" multiValued="true" indexed="true" stored="false"/>
+<field name="affilctry-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="affilctry-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="false"/>
+<field name="affilcurr" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="affilhist" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="affilname" type="auth_std_stopwords" multiValued="true" indexed="true" stored="false"/>
+<field name="affilname-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="false"/>
+<field name="affilnamevar" type="auth_std_stopwords" multiValued="true" indexed="true"/>
+<field name="affilparafid" type="long" multiValued="true" indexed="true" stored="false"/>
+<field name="affilprefname" type="auth_std_stopwords" multiValued="true" indexed="true"/>
+<field name="affilsortname" type="auth_std_stopwords" multiValued="true" indexed="true" stored="false"/>
+<field name="affilsortname-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="false"/>
+<field name="afhistcity" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afhistcity-s" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="afhistctry" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afhistctry-s" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="afhistdispname" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afhistdispname-s" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="afhistid" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="afid" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afid-f" type="auth_facet" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="afnameid" type="auth_std_stopwords" multiValued="true" indexed="true"/>
+<field name="afnameid-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="alias" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="aliascurstatus" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="aliasauthorid" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="aliastimestamp" type="date"  multiValued="true" indexed="true" stored="false"/>
+<field name="aliasstatus" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="authfirst" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="authid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="authlast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="authname" type="auth_std" multiValued="false" indexed="true" stored="false"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
-<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="false" termVectors="false" termPositions="false" termOffsets="false"/>
+<field name="datecompletedtxt" type="date"  multiValued="true" indexed="true" stored="false"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
-<field name="fastloaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
+<field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="false"/>
 <field name="loaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="loadunit" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
-<field name="namevar" type="affil_std" multiValued="true" indexed="true" stored="true"/>
-<field name="parafid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
-<field name="prefname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="prefparname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="quality" type="integer" multiValued="false" indexed="true" stored="false"/>
-<field name="sortname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
+<field name="namevar" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="namevarfirst" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarini" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarlast" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="preffirst" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="preffirstsort" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="prefini" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="preflast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="prefname" type="auth_std" multiValued="false" indexed="true" stored="false"/>
+<field name="pubrangefirst" type="integer" multiValued="false" indexed="true" stored="true"/>
+<field name="pubrangelast" type="integer" multiValued="false" indexed="true" stored="true"/>
+<field name="srctitle" type="auth_std" multiValued="true" indexed="true" stored="false" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="srctitle-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="false"/>
-<field name="toplevel" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="subjabbr" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="subjclus" type="keyword_lc" multiValued="true" indexed="true" stored="false"/>
+<field name="subjclus-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="subjmain" type="keyword_lc" multiValued="true" indexed="true" stored="false"/>
+<field name="suppress" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 
 </fields>
-<uniqueKey>afid</uniqueKey>
+<uniqueKey>authid</uniqueKey>
 <defaultSearchField>affil</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
+<copyField source="active" dest="active-f"/>
 <copyField source="affilcity" dest="affilcity-f"/>
 <copyField source="affilctry" dest="affilctry-f"/>
-<copyField source="certscore" dest="certscore-f"/>
+<copyField source="afid" dest="afid-f"/>
+<copyField source="afnameid" dest="afnameid-f"/>
+<copyField source="srctitle" dest="srctitle-f"/>
+<copyField source="subjclus" dest="subjclus-f"/>
 
 <types>
 
@@ -150,15 +193,15 @@
         sortMissingLast="true" omitNorms="true"/>
 
  <!-- 
-  affil_std analyzer:
+  auth_std analyzer:
   
   Analyzer applies standard tokenizer to the text and applies ascii character folding, lower casing,
   synonym expansion, stop word removal to the submitted text.
   
-  This analyzer is typcially used on textual data that will be searched without any special considerations
+  This analyzer is typically used on textual data that will be searched without any special considerations
   (e.g. punctuation sensitivity, no stemming, etc.).
  -->
- <fieldType name="affil_std" class="solr.TextField">
+ <fieldType name="auth_std" class="solr.TextField">
   <analyzer>
    <tokenizer class="solr.ClassicTokenizerFactory"/>
    <filter class="solr.ClassicFilterFactory"/>
@@ -169,11 +212,11 @@
  </fieldType>
  
  <!-- 
-  affil_std_stopwords analyzer:
+  auth_std_stopwords analyzer:
   
   Identical to the affil_std analyzer with the exception that it enforces stop word processing.
  -->
- <fieldType name="affil_std_stopwords" class="solr.TextField">
+ <fieldType name="auth_std_stopwords" class="solr.TextField">
   <analyzer>
    <tokenizer class="solr.ClassicTokenizerFactory"/>
    <filter class="solr.ClassicFilterFactory"/>
@@ -185,7 +228,7 @@
  </fieldType>
  
   <!-- 
-  affil_facet analyzer:
+  auth_facet analyzer:
   
   Analyzer applies simpler keywording tokenizer only to the content and removes leading/trailing whitespace in the field data.
   
@@ -193,7 +236,7 @@
   cleansing of the input data.
   
  -->
- <fieldType name="affil_facet" class="solr.TextField">
+ <fieldType name="auth_facet" class="solr.TextField">
   <analyzer>
    <tokenizer class="solr.KeywordTokenizerFactory"/>
    <filter class="solr.TrimFilterFactory"/>
