@@ -82,7 +82,7 @@ public class Document {
 				
 			}	        
 					    
-			UpdateResponse response = solrServer.add(solrDoc, 1000);
+			UpdateResponse response = solrServer.add(solrDoc, 30000);
 		    
 			int status = response.getStatus();
 		

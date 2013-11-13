@@ -165,8 +165,11 @@ public class SolrAffiliation {
 						}
 						// Populate the ElasticSearch index
 						// Note, we want to drop "Department" records. Those with a parent afid.
-						if (fieldValues.containsKey("parafid") == false)
-							Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
+						if (fieldValues.containsKey("parafid") == false) {
+							Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);	
+						} else {
+							System.out.println("Skipping \"Department\" affiliation record for: " + contentKey);
+						}
 						
 					}
 					
