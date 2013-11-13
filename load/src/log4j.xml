@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+ 
+<appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+<appender-ref ref="RollingFileAppender"/>
+</appender>
+ 
+<appender name="RollingFileAppender" class="org.apache.log4j.RollingFileAppender">
+<param name="File" value="/elasticSearch/loader-ES.log"/>
+<param name="Append" value="true"/>
+<param name="MaxBackupIndex" value="5"/>
+<param name="MaxFileSize" value="200MB"/>
+<layout class="org.apache.log4j.PatternLayout">
+<param name="ConversionPattern" value="[%d{yyyy-MMM-dd HH:mm:ss:SSS}] %-5p %m%n"/>
+</layout>
+</appender>
+<logger name="org.elasticsearch" additivity="true">
+<level value="DEBUG"/>
+<appender-ref ref="ASYNC"/>
+</logger>
+ 
+<root>
+<level value="off"/>
+<appender-ref ref="ASYNC"/>
+</root>
+ 
+ 
+</log4j:configuration>

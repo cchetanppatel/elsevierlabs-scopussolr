@@ -105,7 +105,7 @@
 <field name="affil" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="affilcity" type="affil_std_stopwords" multiValued="true" indexed="true"/>
 <field name="affilcity-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="affilcity-s" type="affil_std" multiValued="false" indexed="true" stored="true"/>
+<field name="affilcity-s" type="affil_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="affilctry" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry-s" type="affil_std_stopwords" multiValued="false" indexed="true"/>
