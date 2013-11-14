@@ -47,7 +47,7 @@ public class AffiliationTransform {
 	};
 		
 	private static String[] affilctrytArrayMappings = new String[] {
-		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/address/country"
+		"/xocs:doc/xocs:institution-profile/institution-profile[not(@parent)]/address/@country"
 	};
 	
 	private static String[] affilnameArrayMappings = new String[] {
@@ -154,7 +154,7 @@ public class AffiliationTransform {
 			
 			createSortFieldFromArrayField("affilcity-s", "affilcity");
 			
-			createArray("affilctry", affilctrytArrayMappings, "(.//text())");
+			createArrayFromAttributes("affilctry", affilctrytArrayMappings);
 			
 			createSortFieldFromArrayField("affilctry-s", "affilctry");
 			
@@ -451,6 +451,58 @@ public class AffiliationTransform {
 		
 	}
 	
+	/**
+	 * Create an array of values for the specified field.  If there is only one value, an array will not be constructed.  Instead
+	 * a simple field/value will be constructed.  The xathExpresions[] should be considered the grouping.  Each matching node in 
+	 * the xml tree for the particular xpath expression will become a value in the array.  The second xpathExpression identifies
+	 * the children (of this match in the tree) that should be used for the values.
+	 * 
+	 * @param fieldName field name
+	 * @param xpathExpressions Array of XPath expressions to apply
+	 * @param xpathExpression Secondary XPath expression 
+	 * @throws XPathExpressionException
+	 */
+	public void createArrayFromAttributes(String fieldName, String[] xpathExpressions) throws XPathExpressionException {
+		
+		// Array to hold all the possible values
+		ArrayList<String> values = new ArrayList();
+		
+		// Loop through the outer xpath expressions and evaluate them separately 
+		for (int i=0; i < xpathExpressions.length; i++) {
+			
+			// Evaluate the xpath expression
+			NodeList nodes = (NodeList)xpath.evaluate(xpathExpressions[i], doc, XPathConstants.NODESET);
+			
+			// If no results for this xpath, continue with the next one
+			if (nodes.getLength() == 0) continue;
+			
+			// Create a buffer to hold the values collected for this xpath expression
+			StringBuilder sb = new StringBuilder(DEFAULT_JSON_FIELD_STRINGBUILDER_SIZE);
+			
+			for (int j = 0; j < nodes.getLength(); j++) {
+				sb.append(nodes.item(j).getNodeValue().trim());				
+				if (j < nodes.getLength() - 1) sb.append(" ");
+			    
+				// Add the value to the array
+				if (sb.length() > 0) {
+					values.add(sb.toString());
+					sb.setLength(0);
+				}			
+				
+			}			
+
+		}
+		
+		if (values.size() == 0) {
+			return;
+		} else if (values.size() == 1) {
+			fieldValues.put(fieldName, values.get(0));
+		} else {
+			fieldValues.put(fieldName, values);
+		}
+		
+	}
+	
 	// In Solr, you can't sort on a multivalued field. In many cases for Scopus, fields that are
 	// defined as multivalued are also listed as sortable. In order to get around this issues for 
 	// these cases, we want to create a new single value field from the various multi-values present
@@ -466,6 +518,8 @@ public class AffiliationTransform {
 		Object values = fieldValues.get(sourceArrayField);
 		if (values instanceof ArrayList<?>) {
 			fieldValues.put(fieldName, ((ArrayList<String>)values).get(0));
+		} else {
+			fieldValues.put(fieldName, values);
 		}
 		
 	}
