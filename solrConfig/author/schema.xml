@@ -140,8 +140,10 @@
 <field name="aliastimestamp" type="date"  multiValued="true" indexed="true" stored="false"/>
 <field name="aliasstatus" type="auth_std" multiValued="true" indexed="true" stored="false"/>
 <field name="authfirst" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="authfirst-p" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="authid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="authlast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="authlast-p" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="authname" type="auth_std" multiValued="false" indexed="true" stored="false"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="datecompletedtxt" type="date"  multiValued="true" indexed="true" stored="false"/>
