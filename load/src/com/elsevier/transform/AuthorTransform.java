@@ -180,9 +180,8 @@ public class AuthorTransform {
 		"/xocs:doc/xocs:author-profile/author-profile/journal-history/journal/issn"
 	};	
 	
-	private static String[] loaddateMappings = new String[] {
-		"/xocs:doc/xocs:meta/xocs:timestamp//text()"
-	};	
+	private static String loaddateMappings = "/xocs:doc/xocs:meta/xocs:timestamp//text()";
+
 	
 	private static String[] namevarArrayMappings = new String[] {
 		"/xocs:doc/xocs:author-profile/author-profile/name-variant"
@@ -284,19 +283,29 @@ public class AuthorTransform {
 
 			createArray("afdispcity",afdispcityArrayMappings, "(.//text())");
 			
+			createSortFieldFromArrayField("afdispcity-s", "afdispcity");
+			
 			createArray("afdispctry",afdispctryArrayMappings, "(.//text())");
+			
+			createSortFieldFromArrayField("afdispctry-s", "afdispctry");
 			
 			createArray("afdispname",afdispnameArrayMappings, "(.//text())");
 
 			createArray("affilcity",affilcityArrayMappings, "(.//text())");
 			
+			createSortFieldFromArrayField("affilcity-s", "affilcity");
+			
 			createArray("affilctry",affilctryArrayMappings, "(.//text())");
+			
+			createSortFieldFromArrayField("affilctry-s", "affilctry");
 			
 			createArray("affilcurr",affilcurrArrayMappings, "(./address/city//text() | ./address/city-group//text() | ./address/country//text() | ./afdispname//text())");
 			
 			createArray("affilhist",affilhistArrayMappings, "(./address/city//text() | ./address/city-group//text() | ./address/country//text() | ./afdispname//text())");
 
 			createArray("affilname",affilnameArrayMappings, "(.//text())");
+			
+			createSortFieldFromArrayField("affilname-s", "affilname");
 			
 			createArray("affilnamevar",affilnamevarArrayMappings, "(.//text())");
 			
@@ -306,11 +315,19 @@ public class AuthorTransform {
 			
 			createArray("affilsortname",affilsortnameArrayMappings, "(.//text())");
 			
+			createSortFieldFromArrayField("affilsortname-s", "affilsortname");
+			
 			createArray("afhistcity",afhistcityArrayMappings, "(.//text())");
+			
+			createSortFieldFromArrayField("afhistcity-s", "afhistcity");
 			
 			createArray("afhistctry",afhistctryArrayMappings, "(.//text())");
 			
+			createSortFieldFromArrayField("afhistctry-s", "afhistctry");
+			
 			createArray("afhistdispname",afhistdispnameArrayMappings, "(.//text())");
+			
+			createSortFieldFromArrayField("afhistdispname-s", "afhistdispname");
 			
 			createArray("afid",afidArrayMappings, "(@id)");
 			
@@ -318,11 +335,11 @@ public class AuthorTransform {
 			
 			createArray("alias",aliasArrayMappings, "(.//text())");
 			
-			createArray("aliascurstatus",aliascurstatusArrayMappings, "(.//text())");
+			createArray("aliascurstatus",aliascurstatusArrayMappings, "(@current-status)");
 			
 			createArray("aliasauthorid",aliasauthoridArrayMappings, "(.//text())");
 			
-			createArray("aliastimestamp",aliastimestampArrayMappings, "(@timestamp)");
+			createArrayDateField("aliastimestamp",aliastimestampArrayMappings, "(@timestamp)");
 			
 			createArray("aliasstatus",aliasstatusArrayMappings, "(@status)");
 			
@@ -334,13 +351,13 @@ public class AuthorTransform {
 			
 			createSingleField("authname", authnameMappings);
 			
-			createArray("datecompletedtxt",datecompletedtxtArrayMappings, "(@timestamp)");
+			createArrayDateField("datecompletedtxt",datecompletedtxtArrayMappings, "(@timestamp)");
 			
 			createSingleField("eid", eidMappings);
 			
 			createArray("issn",issnArrayMappings, "(.//text())");
 			
-			createSingleField("loaddate", loaddateMappings);
+			createSingleDateField("loaddate", loaddateMappings);
 			
 			createArray("namevar",namevarArrayMappings, "(./initials//text() | ./surname//text() | ./given-name//text())");
 			
@@ -389,6 +406,42 @@ public class AuthorTransform {
 		return fieldValues;
 	}
 	
+	/**
+	 * Create a single field.  In other words, there will be only one field with this name in the docuemnt.
+	 * It is not possible for duplicate values (nodes) to occur in a single field.
+     * 
+	 * @param fieldName  field name
+	 * @param xpathExpression XPath to apply
+	 * @throws XPathExpressionException
+	 */
+	public void createSingleDateField(String fieldName, String xpathExpression) throws XPathExpressionException {
+		
+		// If we have already resolved this XPath expression, use the cached value to create the field and return
+		if (cachedFieldValues.containsKey(xpathExpression)) {
+			fieldValues.put(fieldName, cachedFieldValues.get(xpathExpression));
+			return;
+		}
+		
+		NodeList nodes = (NodeList)xpath.evaluate(xpathExpression, doc, XPathConstants.NODESET);
+		
+		// If it doesn't exist or more than one node exists, cache an empty results and return
+		if (nodes.getLength() == 0 || nodes.getLength() > 1) {
+			cachedFieldValues.put(xpathExpression, "");
+			return;
+		}
+		
+		String wrkStr = nodes.item(0).getNodeValue().trim();
+			
+		// Create the field and cache the results
+		if (wrkStr.length()  > 0) {
+			wrkStr = wrkStr.substring(0, wrkStr.lastIndexOf('.')) + "Z";
+			fieldValues.put(fieldName, wrkStr);
+			cachedFieldValues.put(xpathExpression, wrkStr);
+		} else {
+			cachedFieldValues.put(xpathExpression, "");
+		}
+
+	}
 	
 	/**
 	 * Create a single field.  In other words, there will be only one field with this name in the docuemnt.
@@ -549,6 +602,68 @@ public class AuthorTransform {
 	 * @param xpathExpression Secondary XPath expression 
 	 * @throws XPathExpressionException
 	 */
+	public void createArrayDateField(String fieldName, String[] xpathExpressions, String xpathExpression) throws XPathExpressionException {
+		
+		// Array to hold all the possible values
+		ArrayList<String> values = new ArrayList();
+		
+		// Loop through the outer xpath expressions and evaluate them separately 
+		for (int i=0; i < xpathExpressions.length; i++) {
+			
+			// Evaluate the xpath expression
+			NodeList nodes = (NodeList)xpath.evaluate(xpathExpressions[i], doc, XPathConstants.NODESET);
+			
+			// If no results for this xpath, continue with the next one
+			if (nodes.getLength() == 0) continue;
+			
+			// Create a buffer to hold the values collected for this xpath expression
+			StringBuilder sb = new StringBuilder(DEFAULT_JSON_FIELD_STRINGBUILDER_SIZE);
+			
+			for (int j = 0; j < nodes.getLength(); j++) {
+				
+				// Evaluate the secondary xpath expression
+				Object result = xpath.evaluate(xpathExpression, nodes.item(j), XPathConstants.NODESET);
+				NodeList nodes2 = (NodeList) result;
+				
+				// Collect the values for the children 
+				for (int k = 0; k < nodes2.getLength(); k++) {
+					sb.append(nodes2.item(k).getNodeValue().trim());
+					if (k < nodes2.getLength() - 1) sb.append(" ");
+				}
+			    
+				// Add the value to the array
+				if (sb.length() > 0) {
+					String wrkStr = sb.toString();
+					wrkStr = wrkStr.substring(0, wrkStr.lastIndexOf('.')) + "Z";
+					values.add(wrkStr);
+					sb.setLength(0);
+				}			
+				
+			}			
+
+		}
+		
+		if (values.size() == 0) {
+			return;
+		} else if (values.size() == 1) {
+			fieldValues.put(fieldName, values.get(0));
+		} else {
+			fieldValues.put(fieldName, values);
+		}
+		
+	}
+	
+	/**
+	 * Create an array of values for the specified field.  If there is only one value, an array will not be constructed.  Instead
+	 * a simple field/value will be constructed.  The xathExpresions[] should be considered the grouping.  Each matching node in 
+	 * the xml tree for the particular xpath expression will become a value in the array.  The second xpathExpression identifies
+	 * the children (of this match in the tree) that should be used for the values.
+	 * 
+	 * @param fieldName field name
+	 * @param xpathExpressions Array of XPath expressions to apply
+	 * @param xpathExpression Secondary XPath expression 
+	 * @throws XPathExpressionException
+	 */
 	public void createArray(String fieldName, String[] xpathExpressions, String xpathExpression) throws XPathExpressionException {
 		
 		// Array to hold all the possible values
@@ -598,6 +713,79 @@ public class AuthorTransform {
 		
 	}
 	
+	
+	/**
+	 * Create an array of values for the specified field.  If there is only one value, an array will not be constructed.  Instead
+	 * a simple field/value will be constructed.  The xathExpresions[] should be considered the grouping.  Each matching node in 
+	 * the xml tree for the particular xpath expression will become a value in the array.  The second xpathExpression identifies
+	 * the children (of this match in the tree) that should be used for the values.
+	 * 
+	 * @param fieldName field name
+	 * @param xpathExpressions Array of XPath expressions to apply
+	 * @param xpathExpression Secondary XPath expression 
+	 * @throws XPathExpressionException
+	 */
+	public void createArrayFromAttributes(String fieldName, String[] xpathExpressions) throws XPathExpressionException {
+		
+		// Array to hold all the possible values
+		ArrayList<String> values = new ArrayList();
+		
+		// Loop through the outer xpath expressions and evaluate them separately 
+		for (int i=0; i < xpathExpressions.length; i++) {
+			
+			// Evaluate the xpath expression
+			NodeList nodes = (NodeList)xpath.evaluate(xpathExpressions[i], doc, XPathConstants.NODESET);
+			
+			// If no results for this xpath, continue with the next one
+			if (nodes.getLength() == 0) continue;
+			
+			// Create a buffer to hold the values collected for this xpath expression
+			StringBuilder sb = new StringBuilder(DEFAULT_JSON_FIELD_STRINGBUILDER_SIZE);
+			
+			for (int j = 0; j < nodes.getLength(); j++) {
+				sb.append(nodes.item(j).getNodeValue().trim());				
+				if (j < nodes.getLength() - 1) sb.append(" ");
+			    
+				// Add the value to the array
+				if (sb.length() > 0) {
+					values.add(sb.toString());
+					sb.setLength(0);
+				}			
+				
+			}			
+
+		}
+		
+		if (values.size() == 0) {
+			return;
+		} else if (values.size() == 1) {
+			fieldValues.put(fieldName, values.get(0));
+		} else {
+			fieldValues.put(fieldName, values);
+		}
+		
+	}
+	
+	// In Solr, you can't sort on a multivalued field. In many cases for Scopus, fields that are
+	// defined as multivalued are also listed as sortable. In order to get around this issues for 
+	// these cases, we want to create a new single value field from the various multi-values present
+	// in the field mapping. To do this, we make sure the target multivalue field exists, and if it 
+	// does we take the first entry from that field to use as the value for the single value sort field.
+	public void createSortFieldFromArrayField(String fieldName, String sourceArrayField) { 
+		
+		// Is there data in sourceArrayField to create the sort field from
+		if (fieldValues.containsKey(sourceArrayField) == false) {
+			// Nothing to do, just return without creating an empty field.
+			return;
+		}
+		Object values = fieldValues.get(sourceArrayField);
+		if (values instanceof ArrayList<?>) {
+			fieldValues.put(fieldName, ((ArrayList<String>)values).get(0));
+		} else {
+			fieldValues.put(fieldName, values);
+		}
+		
+	}
 	
 	public void createNestedField(String fieldName, String[] xpathExpressions, Map<String, String[]> subFieldExpressions) throws XPathExpressionException {
 		

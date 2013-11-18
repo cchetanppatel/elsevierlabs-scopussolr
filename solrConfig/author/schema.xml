@@ -174,7 +174,7 @@
 
 </fields>
 <uniqueKey>authid</uniqueKey>
-<defaultSearchField>affil</defaultSearchField>
+<defaultSearchField>authname</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
 <copyField source="active" dest="active-f"/>
 <copyField source="affilcity" dest="affilcity-f"/>
@@ -183,6 +183,8 @@
 <copyField source="afnameid" dest="afnameid-f"/>
 <copyField source="srctitle" dest="srctitle-f"/>
 <copyField source="subjclus" dest="subjclus-f"/>
+<copyField source="authfirst" dest="authfirst-p"/>
+<copyField source="authlast" dest="authlast-p"/>
 
 <types>
 

@@ -41,9 +41,9 @@ public class Variables {
 	}	
 	
 	// SOLR
-	public static final String SOLR_ENDPOINT = prop.getProperty("SOLR_ENDPOINT","http://localhost:8983/solr/affiliation/");
-	public static final String SOLR_COLLECTION = "affiliation";
-	//public static final String SOLR_COLLECTION = "author";
+	public static final String SOLR_ENDPOINT = prop.getProperty("SOLR_ENDPOINT","http://localhost:8983/solr/author/");
+	//public static final String SOLR_COLLECTION = "affiliation";
+	public static final String SOLR_COLLECTION = "author";
 	
 	// SQS Endpoint
 	public static final String SQS_ENDPOINT = prop.getProperty("SQS_ENDPOINT","https://sqs.us-east-1.amazonaws.com");
@@ -58,18 +58,18 @@ public class Variables {
 	public static final String SNS_ENDPOINT = prop.getProperty("SNS_ENDPOINT","https://sns.us-east-1.amazonaws.com");
 	
 	// SQS queue name
-	public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-affiliation-bulkload");
-	public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_affiliation-bulkload-problems");
-	//public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-author-bulkload");
-	//public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_author-bulkload-problems");
+	//public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-affiliation-bulkload");
+	//public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_affiliation-bulkload-problems");
+	public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-author-bulkload");
+	public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_author-bulkload-problems");
 	
 	// S3 bucket name
-	public static final String S3_XML_BUCKET_NAME = prop.getProperty("S3_XML_BUCKET_NAME","affiliation-xml");
-	//public static final String S3_XML_BUCKET_NAME = prop.getProperty("S3_XML_BUCKET_NAME","author-xml");
+	//public static final String S3_XML_BUCKET_NAME = prop.getProperty("S3_XML_BUCKET_NAME","affiliation-xml");
+	public static final String S3_XML_BUCKET_NAME = prop.getProperty("S3_XML_BUCKET_NAME","author-xml");
 	
 	// DynamoDB table name	
-	public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-affiliation");
-	//public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-author");
+	//public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-affiliation");
+	public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-author");
 	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_READ_CAPACITY = 5L;
 	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_WRITE_CAPACITY = 5L;
 	

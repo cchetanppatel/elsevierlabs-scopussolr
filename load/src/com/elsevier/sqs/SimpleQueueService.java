@@ -125,8 +125,8 @@ public class SimpleQueueService {
         
         // Set how long the message is 'invisible' in the queue (in seconds).  In other words, this is how long
         // the application has to process this message before it is automatically re-added back to the queue.
-        // This value is currently set to 12 hours.
-        receiveMessageRequest.setVisibilityTimeout(43200);
+        // This value is currently set to 30 minutes.
+        receiveMessageRequest.setVisibilityTimeout(1800);
         
         // Implement long polling (20 seconds)
         receiveMessageRequest.setWaitTimeSeconds(20);

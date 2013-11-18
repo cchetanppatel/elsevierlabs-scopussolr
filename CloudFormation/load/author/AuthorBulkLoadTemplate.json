@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
   
-  "Description" : "Start an EC2 Instance in the Eastern region for loading Affiliation content into Solr.",
+  "Description" : "Start an EC2 Instance in the Eastern region for loading Author content into Solr.",
   
   "Parameters" : {
       
@@ -26,13 +26,13 @@
     "SignedJarUrl" : {
       "Description" : "Signed URL for the jar file in S3",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/load/AffiliationLoader.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420354825&Signature=sHy08RdkKl5QvSHX2f5RMzllQv8%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/load/AuthorLoader.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420782316&Signature=TekSqzkuNFH8BdV5h19DMFIKjmQ%3D"
     },
     
     "SignedPropertiesUrl" : {
       "Description" : "Signed URL for the Loader properties file in S3",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/load/solr-affil.properties?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420354909&Signature=87%2BRE8IkmPI8dRZX3kTsYfR6JjA%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/load/solr-author.properties?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420782353&Signature=T%2Bmedoi3aXxnhKTh21uduKepZ%2B8%3D"
     },
       
     "Log4jURL" : {
@@ -102,11 +102,11 @@
                 "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
                 "cd /solr-load", "\n",
 				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
-                "curl -o AffiliationLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o AuthorLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml'-DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml'-DentityExpansionLimit=1000000 -jar AuthorLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -147,11 +147,11 @@
                 "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
                 "cd /solr-load", "\n",
 				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
-                "curl -o AffiliationLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o AuthorLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AuthorLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -192,11 +192,11 @@
                 "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
                 "cd /solr-load", "\n",
 				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
-                "curl -o AffiliationLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o AuthorLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AuthorLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -237,11 +237,11 @@
                 "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
                 "cd /solr-load", "\n",
 				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
-                "curl -o AffiliationLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o AuthorLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AuthorLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -282,11 +282,11 @@
                 "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
                 "cd /solr-load", "\n",
 				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
-                "curl -o AffiliationLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o AuthorLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AuthorLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
