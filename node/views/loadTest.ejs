@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Load Test Search Form — ScienceDirect — Elsevier</title>  
+	</head>
+	<body>
+		<b>Load Test Form</b>
+		<p>The input should be something like auth_1_1.  In other words, the primary keey for the stored query in the scopus-solr-load-query DDB table.</p>
+		<form action="/loadTest" method="post">
+			<input id="quickSearch1" type="text" name="query" size="125" maxlength="5000" value=""/>
+			<input type="submit" value="Submit"/>
+		</form>
+	    <p/>
+		<p/>
+		<b>Free Form</b>
+		<p>The input should be something like q=(afid:"60026108" OR afid:"60002934" OR afid:"60026108")&amp;fl=afid,affilname&amp;start=0&amp;rows=500.</p>
+		<form action="/loadTest" method="post">
+			<input id="quickSearch2" type="text" name="freeFormQuery" size="125" maxlength="5000" value=""/>
+			<input type="submit" value="Submit"/>
+		</form>
+	</body>
+</html>

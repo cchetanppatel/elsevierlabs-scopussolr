@@ -1,0 +1,216 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  
+  "Description" : "Start an EC2 Instance in the Eastern region for the Hothouse project.",
+  
+  "Parameters" : {
+      
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "Default" : "ats",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },    
+    
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "m1.small",
+      "AllowedValues" : [ "t1.micro", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "c1.medium", "c1.xlarge", "cc1.4xlarge", "cc2.8xlarge" ],
+      "ConstraintDescription" : "must be a valid EC2 instance type."
+    },
+    
+    "nginxconf" : {
+      "Description" : "Signed URL for the scopus solr nginx.conf file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/nginx/nginx.conf?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420453893&Signature=vXlOVNCaojCtaXXHNPnfVC/SBwk%3D"
+    },
+    
+    "hothouse" : {
+      "Description" : "Signed URL for the scopus solr app file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/app/scopusSolr.zip?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420454059&Signature=3RtCkGQDewhSV2SSjIMauEaizbQ%3D"
+    },
+    
+    "logstashconf" : {
+      "Description" : "Signed URL for the scopus solr logstash conf in S3",
+      "Type" : "String",
+      "Default" : ""
+     },
+
+    "kibanalogfile" : {
+      "Description" : "Kibana log file location on the ec2 instance.  NOTE: Slashes ('/')  must be escape!!",
+      "Type" : "String",
+      "Default" : "\\/hothouse\\/out.log"
+     },
+
+    "kibanalogtype" : {
+      "Description" : "Kibana log type on the ec2 instance",
+      "Type" : "String",
+      "Default" : "solar",
+      "AllowedValues" : ["es","ml","solar"]
+     },
+
+    "kibanahost" : {
+      "Description" : "Kibana host",
+      "Type" : "String",
+      "Default" : " 10.151.38.45"
+     },
+
+    "keyset" : {
+      "Description" : "keyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/affiliationLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420454260&Signature=tTeSoK1v00x3ti2%2BlIH8Ta7aGD4%3D"
+     }
+     
+  },
+  
+"Mappings" : {
+
+    "AWSInstanceType2AMI" : {
+      "t1.micro" : { "AMI" : "ami-100c6b79"},
+      "m1.small" : { "AMI" : "ami-100c6b79"},
+      "m1.medium" : { "AMI" : "ami-100c6b79"},
+      "m1.large" : { "AMI" : "ami-100c6b79"},
+      "m1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "c1.medium" : { "AMI" : "ami-100c6b79"},
+      "c1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.2xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.4xlarge" : { "AMI" : "ami-100c6b79"},
+      "cc1.4xlarge" : { "AMI" : "ami-100c6b79"},
+      "cc2.8xlarge" : { "AMI" : "ami-100c6b79"}
+    }
+    
+  },
+
+ "Resources": {
+         
+       "IPAssoc" : {
+            "Type" : "AWS::EC2::EIPAssociation",
+            "Properties" : {
+                "InstanceId" : { "Ref" : "Ec2Instance" },
+                "EIP" : "54.225.95.152"
+            }
+        },
+        
+        "Ec2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "AvailabilityZone" : "us-east-1b",
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "yum -y install nginx", "\n",
+                "cd /etc/nginx", "\n",
+                "curl -o nginx.conf '", { "Ref" : "nginxconf"}, "'", "\n",
+                "echo 'sdfe:$apr1$3pSLufl2$2JETcJ4rJsscAg5iUbcY51' >> /etc/nginx/htpasswd","\n",
+                "service nginx start", "\n", 
+				"mkdir /hothouse","\n",
+				"cd /hothouse","\n",  
+                "#curl -o /hothouse/logstash-1.1.13-flatjar.jar 'https://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar'","\n",
+                "#curl -o /hothouse/logstash.conf '", { "Ref" : "logstashconf" }, "'", "\n",
+		        "#sed -i -e 's/<KIBANA_LOGFILE>/", { "Ref" : "kibanalogfile"}, "/' /hothouse/logstash.conf", "\n",
+		        "#sed -i -e 's/<KIBANA_LOGTYPE>/", { "Ref" : "kibanalogtype"}, "/' /hothouse/logstash.conf", "\n",
+		        "#sed -i -e 's/<KIBANA_HOST>/", { "Ref" : "kibanahost"}, "/' /hothouse/logstash.conf", "\n",
+                "#nohup java -jar /hothouse/logstash-1.1.13-flatjar.jar agent -f /hothouse/logstash.conf &", "\n",
+				"curl -o node-v0.10.3-linux-x64.tar.gz http://nodejs.org/dist/v0.10.3/node-v0.10.3-linux-x64.tar.gz","\n",
+				"cd /usr/local","\n",
+				"tar -xzvf /hothouse/node-v0.10.3-linux-x64.tar.gz --strip=1","\n", 
+				"cd /hothouse","\n",
+				"curl -o hothouse.zip '", { "Ref" : "hothouse"}, "'", "\n",
+				"unzip hothouse.zip","\n",
+                "/usr/local/bin/npm install --production","\n",
+                "/usr/local/bin/npm install forever -g","\n",
+                "cd /usr/local/bin","\n",
+                "rm -f forever", "\n",
+                "echo '#!/usr/bin/env /usr/local/bin/node' >> forever","\n",
+                "echo $'require(\"../lib/node_modules/forever\").cli.start();' >> forever","\n",
+                "chmod 755 forever","\n",
+                "NODE_ENV=production ./forever -o /hothouse/out.log -e /hothouse/err.log start /hothouse/app.js","\n",
+                "cd /hothouse","\n",
+                "mkdir set","\n",
+                "cd set", "\n",
+                "curl -o set.zip '", { "Ref" : "keyset"}, "'", "\n",
+                "unzip set.zip","\n"
+                ]]}}   
+            }
+        },
+        
+        "InstanceSecurityGroup" : {
+	       "Type" : "AWS::EC2::SecurityGroup",
+	       "Properties" : {
+	         "GroupDescription" : "Enable SSH/HTTP access on the inbound port",
+             "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.18.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.25.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "145.36.0.0/16"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "24.123.6.131/32"
+                },                
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "80",
+                    "ToPort" : "80",
+                    "CidrIp" : "0.0.0.0/0"
+                }]
+           }
+        }
+        
+  },
+
+
+  "Outputs" : {
+  
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance" }
+    },
+    
+    "AZ" : {
+      "Description" : "Availability Zone of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "AvailabilityZone" ] }
+    },
+    
+    "PublicIP" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicIp" ] }
+    }
+    
+  }
+  
+}
