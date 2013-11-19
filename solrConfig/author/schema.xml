@@ -131,7 +131,7 @@
 <field name="afhistdispname-s" type="auth_std" multiValued="false" indexed="true" stored="true"/>
 <field name="afhistid" type="auth_std" multiValued="true" indexed="true" stored="false"/>
 <field name="afid" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="afid-f" type="auth_facet" multiValued="false" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="afid-f" type="auth_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="afnameid" type="auth_std_stopwords" multiValued="true" indexed="true"/>
 <field name="afnameid-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="alias" type="auth_std" multiValued="true" indexed="true" stored="false"/>
@@ -162,7 +162,8 @@
 <field name="prefname" type="auth_std" multiValued="false" indexed="true" stored="false"/>
 <field name="pubrangefirst" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="pubrangelast" type="integer" multiValued="false" indexed="true" stored="true"/>
-<field name="srctitle" type="auth_std" multiValued="true" indexed="true" stored="false" termVectors="true" termPositions="true" termOffsets="true"/>
+<field name="saffil" type="auth_std" multiValued="true" indexed="true" stored="false"/>
+<field name="srctitle" type="auth_std" multiValued="true" indexed="true" stored="false"/>
 <field name="srctitle-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="false"/>
 <field name="subjabbr" type="auth_std" multiValued="true" indexed="true" stored="false"/>
