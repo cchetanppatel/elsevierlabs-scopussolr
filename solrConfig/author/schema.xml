@@ -142,7 +142,7 @@
 <field name="authfirst" type="auth_std" multiValued="false" indexed="true" stored="true"/>
 <!-- authfirst-p is used for exact and starts with queries, but it is based on a composit field.
      We should probably make this a multi-value field based on all of the composite fields we add
-     together for authfirst ->>
+     together for authfirst -->
 <field name="authfirst-p" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="authid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="authlast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
