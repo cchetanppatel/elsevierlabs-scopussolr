@@ -20,7 +20,7 @@ import com.elsevier.sns.SimpleNotificationService;
 import com.elsevier.solr.Document;
 import com.elsevier.sqs.MessageEntryJson;
 import com.elsevier.sqs.SimpleQueueService;
-import com.elsevier.transform.AuthorTransform;
+import com.elsevier.transform.AbstractTransform;
 
 
 
@@ -137,7 +137,7 @@ public class SolrCore {
 					
 						// Parse to extract the bits we need
 						is = FileUtils.openInputStream(new File(filename));
-						AuthorTransform sdt = new AuthorTransform();
+						AbstractTransform sdt = new AbstractTransform();
 						HashMap<String, Object> fieldValues =  sdt.transform(is);
 								
 						//Debug ... output the keys/values to see if we did it right

@@ -159,7 +159,7 @@
 <field name="dummylink" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="ed" type="abs_std" multiValued="true" indexed="true" stored="false"/>
 <field name="edaddress" type="abs_std" multiValued="false" indexed="true" stored="false"/>
-<field name="edfirstini" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="edfirstini" type="abs_std" multiValued="true" indexed="true" stored="false"/>
 <field name="edidxname" type="abs_std" multiValued="true" indexed="true" stored="false"/>
 <field name="edition" type="abs_std" multiValued="false" indexed="true" stored="false"/>
 <field name="edlast" type="abs_std" multiValued="true" indexed="true" stored="false"/>
@@ -178,7 +178,7 @@
 <field name="fundsponsor" type="abs_std" multiValued="true" indexed="true" stored="false"/>
 <field name="groupid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="idxterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
-<field name="idxtypes" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="idxtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="isbn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issnp" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
