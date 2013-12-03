@@ -1,0 +1,373 @@
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!--
+  
+ This is the Solr schema file. This file should be named "schema.xml" and
+ should be in the conf directory under the solr home
+ (i.e. ./solr/conf/schema.xml by default) 
+ or located where the classloader for the Solr webapp can find it.
+
+ This example schema is the recommended starting point for users.
+ It should be kept correct and concise, usable out-of-the-box.
+
+ For more information, on how to customize this file, please see
+ http://wiki.apache.org/solr/SchemaXml
+
+ PERFORMANCE NOTE: this schema includes many optional features and should not
+ be used for benchmarking.  To improve performance one could
+  - set stored="false" for all fields possible (esp large fields) when you
+    only need to search on the field but don't need to return the original
+    value.
+  - set indexed="false" if you don't need to search on the field, but only
+    return the field as a result of searching on other indexed fields.
+  - remove all unneeded copyField statements
+  - for best index size and searching performance, set "index" to false
+    for all general text fields, use copyField to copy them to the
+    catchall "text" field, and use that for searching.
+  - For maximum indexing performance, use the StreamingUpdateSolrServer
+    java client.
+  - Remember to run the JVM in server mode, and use a higher logging level
+    that avoids logging every request
+-->
+<schema name="example" version="1.5">
+<!--
+ attribute "name" is the name of this schema and is only used for display purposes.
+       version="x.y" is Solr's version number for the schema syntax and 
+       semantics.  It should not normally be changed by applications.
+
+       1.0: multiValued attribute did not exist, all fields are multiValued 
+            by nature
+       1.1: multiValued attribute introduced, false by default 
+       1.2: omitTermFreqAndPositions attribute introduced, true by default 
+            except for text fields.
+       1.3: removed optional field compress feature
+       1.4: autoGeneratePhraseQueries attribute introduced to drive QueryParser
+            behavior when a single string produces multiple tokens.  Defaults 
+            to off for version >= 1.4
+       1.5: omitNorms defaults to true for primitive field types 
+            (int, float, boolean, string...)
+     
+-->
+<fields>
+<!--
+ Valid attributes for fields:
+     name: mandatory - the name for the field
+     type: mandatory - the name of a field type from the 
+       <types> fieldType section
+     indexed: true if this field should be indexed (searchable or sortable)
+     stored: true if this field should be retrievable
+     docValues: true if this field should have doc values. Doc values are
+       useful for faceting, grouping, sorting and function queries. Although not
+       required, doc values will make the index faster to load, more
+       NRT-friendly and more memory-efficient. They however come with some
+       limitations: they are currently only supported by StrField, UUIDField
+       and all Trie*Fields, and depending on the field type, they might
+       require the field to be single-valued, be required or have a default
+       value (check the documentation of the field type you're interested in
+       for more information)
+     multiValued: true if this field may contain multiple values per document
+     omitNorms: (expert) set to true to omit the norms associated with
+       this field (this disables length normalization and index-time
+       boosting for the field, and saves some memory).  Only full-text
+       fields or fields that need an index-time boost need norms.
+       Norms are omitted for primitive (non-analyzed) types by default.
+     termVectors: [false] set to true to store the term vector for a
+       given field.
+       When using MoreLikeThis, fields used for similarity should be
+       stored for best performance.
+     termPositions: Store position information with the term vector.  
+       This will increase storage costs.
+     termOffsets: Store offset information with the term vector. This 
+       will increase storage costs.
+     required: The field is required.  It will throw an error if the
+       value does not exist
+     default: a value that should be used if no value is specified
+       when adding a document.
+   
+-->
+<field name="_version_" type="long" indexed="true" stored="true"/>
+<field name="abs" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="absavail" type="integer" multiValued="false" indexed="true" stored="true"/>
+<field name="abslang" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="affil" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="affilcity" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="affilcity-f" type="abs_facet" multiValued="true" indexed="false" stored="false" />
+<field name="affilctry" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="affilctry-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="affilctry-s" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="affilorg" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="afid-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="all" type="abs_std_stem" multiValued="false" indexed="true" stored="false"/>
+<field name="allmed" type="abs_std_stem" multiValued="false" indexed="true" stored="false"/>
+<field name="allsmall" type="abs_std_stem" multiValued="false" indexed="true" stored="false"/>
+<field name="artnum" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="aucite" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="aucite-s" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="auth" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="auth-s" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="authemail" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="authfirstini" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="authgrpid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="authgrpid-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="authid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="authid-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="authidxname" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="authkeywords" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="authlast" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="authsuff" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="casregistrynum" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="chem" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="cheminfo" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="chemname" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="citeid" type="long" multiValued="true" indexed="true" stored="false"/>
+<field name="coden" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="collab" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="collec" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="collecid" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="confall" type="abs_std_stem" multiValued="false" indexed="true" stored="false"/>
+<field name="confcode" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="confloc" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="confname" type="abs_std_stem" multiValued="false" indexed="true" stored="false"/>
+<field name="confsponsor" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="copyright" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="corres" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="datecompletedtxt" type="date"  multiValued="false" indexed="true" stored="false"/>
+<field name="dateloaded" type="date"  multiValued="true" indexed="true" stored="true"/>
+<field name="daterevised" type="date"  multiValued="true" indexed="true" stored="false"/>
+<field name="datesort" type="date"  multiValued="false" indexed="true" stored="true"/>
+<field name="db" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="dbdocid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="doi" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="dptid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="dummycode" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="dummylink" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="ed" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="edaddress" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="edfirstini" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="edidxname" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="edition" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="edlast" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="eissn" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="exactkeyword" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="exactkeyword-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
+<field name="exactsrctitle" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="exactsrctitle-f" type="abs_facet" multiValued="false" indexed="true" stored="true"/>
+<field name="fastloaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
+<field name="fastloaddate-s" type="date"  multiValued="false" indexed="true" stored="false"/>
+<field name="firstauth" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="fundacr" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="fundall" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="fundno" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="fundsponsor" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="groupid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="idxterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="idxtypes" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="isbn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="issnp" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="issue" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="issue-s" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="itemtitle" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="itemtitle-s" type="abs_std_stem" multiValued="false" indexed="true" stored="false"/>
+<field name="keywords" type="abs_std_stem" multiValued="true" indexed="true" stored="false"/>
+<field name="lang" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="lang-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="langitemtitle" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="langreftitle" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="loadnum" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="manuf" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="numcitedby" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="numcitedby-s" type="long" multiValued="false" indexed="true" stored="false"/>
+<field name="numpacites" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="numwebcites" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="oeid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="pagecount" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="part" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="pateid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="patinfo" type="keyword_lc" multiValued="true" indexed="true" stored="false"/>
+<field name="pg" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="pgfirst" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="pgfirst-s" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="pginfo" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="pglast" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="pii" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="pmid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="prefnameauid" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="pub" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="pubdatetxt" type="abs_std"  multiValued="false" indexed="true" stored="true"/>
+<field name="pubyr" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="pubyr-f" type="long" multiValued="false" indexed="true" stored="false"/>
+<field name="pubyr-s" type="long" multiValued="false" indexed="true" stored="false"/>
+<field name="ref" type="abs_std_stem" multiValued="true" indexed="true" stored="false"/>
+<field name="refartnum" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="refauid" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="refcount" type="long" multiValued="false" indexed="true" stored="false"/>
+<field name="refeid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="refeidnss" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="refpg" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="refpgfirst" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="refpubyr" type="long" multiValued="true" indexed="true" stored="false"/>
+<field name="refpubyrtxt" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="refscp" type="keyword_lc" multiValued="true" indexed="true" stored="false"/>
+<field name="refsrctitle" type="abs_std_stem" multiValued="true" indexed="true" stored="false"/>
+<field name="reftitle" type="abs_std_stem" multiValued="true" indexed="true" stored="false"/>
+<field name="relauthid" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="restrictedaccess" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="sdeid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="sdfullavail" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="seqbank" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="seqnumber" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="srcid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="srctitle" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="srctitle-s" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="srctitleabbr" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="srctitleabbr-s" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="srctype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="srctype-f" type="abs_facet" multiValued="false" indexed="true" stored="true"/>
+<field name="srctype-s" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="statustype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="subjectabbr" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="subjmain" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="subjterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="subjtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="subtype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="supplement" type="abs_std" multiValued="false" indexed="true" stored="false"/>
+<field name="tradenames" type="abs_std" multiValued="true" indexed="true" stored="false"/>
+<field name="type" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="vol" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="webeid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="website" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+
+
+</fields>
+<uniqueKey>eid</uniqueKey>
+<defaultSearchField>all</defaultSearchField>
+<solrQueryParser defaultOperator="AND"/>
+<copyField source="affilcity" dest="affilcity-f"/>
+<copyField source="affilctry" dest="affilctry-f"/>
+<copyField source="afid" dest="afid-f"/>
+<copyField source="authid" dest="authid-f"/>
+<copyField source="exactkeyword" dest="exactkeyword-f"/>
+<copyField source="exactsrctitle" dest="exactsrctitle-f"/>
+<copyField source="lang" dest="lang-f"/>
+<copyField source="pubyr" dest="pubyr-f"/>
+<copyField source="refpubyr" dest="refpubyrtxt"/>
+<copyField source="srctype" dest="srctype-f"/>
+
+
+<types>
+
+<fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+<fieldType name="integer" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+<fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+<!--  boolean type: "true" or "false"  -->
+<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+<fieldType name="date" class="solr.TrieDateField"
+        sortMissingLast="true" omitNorms="true"/>
+
+ <!-- 
+  abs_std analyzer:
+  
+  Analyzer applies standard tokenizer to the text and applies ascii character folding, lower casing,
+  synonym expansion, stop word removal to the submitted text.
+  
+  This analyzer is typically used on textual data that will be searched without any special considerations
+  (e.g. punctuation sensitivity, no stemming, etc.).
+ -->
+ <fieldType name="abs_std" class="solr.TextField">
+  <analyzer>
+   <tokenizer class="solr.ClassicTokenizerFactory"/>
+   <filter class="solr.ClassicFilterFactory"/>
+   <filter class="solr.ASCIIFoldingFilterFactory"/>
+   <filter class="solr.LowerCaseFilterFactory"/>
+   <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="false"/>
+  </analyzer>
+ </fieldType>
+ 
+  <!-- 
+  abs_std_stem analyzer:
+  
+  Analyzer applies standard tokenizer to the text and applies ascii character folding, lower casing,
+  synonym expansion, stop word removal to the submitted text.
+  
+  This analyzer is typically used on textual data that will be searched without any special considerations
+  (e.g. punctuation sensitivity, no stemming, etc.).
+ -->
+ <fieldType name="abs_std_stem" class="solr.TextField">
+  <analyzer>
+   <tokenizer class="solr.ClassicTokenizerFactory"/>
+   <filter class="solr.ClassicFilterFactory"/>
+   <filter class="solr.ASCIIFoldingFilterFactory"/>
+   <filter class="solr.LowerCaseFilterFactory"/>
+   <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="false"/>
+  </analyzer>
+ </fieldType>
+ 
+ <!-- 
+  abs_std_stopwords analyzer:
+  
+  Identical to the affil_std analyzer with the exception that it enforces stop word processing.
+ -->
+ <fieldType name="abs_std_stopwords" class="solr.TextField">
+  <analyzer>
+   <tokenizer class="solr.ClassicTokenizerFactory"/>
+   <filter class="solr.ClassicFilterFactory"/>
+   <filter class="solr.ASCIIFoldingFilterFactory"/>
+   <filter class="solr.LowerCaseFilterFactory"/>
+   <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+   <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="false"/>
+  </analyzer>
+ </fieldType>
+ 
+  <!-- 
+  abs_facet analyzer:
+  
+  Analyzer applies simpler keywording tokenizer only to the content and removes leading/trailing whitespace in the field data.
+  
+  This analyzer is typically used on fields that will have facets generated from them.  They do minimal 
+  cleansing of the input data.
+  
+ -->
+ <fieldType name="abs_facet" class="solr.TextField">
+  <analyzer>
+   <tokenizer class="solr.KeywordTokenizerFactory"/>
+   <filter class="solr.TrimFilterFactory"/>
+  </analyzer>
+ </fieldType>
+ 
+ 
+<!-- 
+ keyword_lc analyzer:
+ 
+ Analyzer applies keyword tokenizer to the text and then applies lowercasing and leading/trailing 
+ whitespace removal filters to the generated tokens. 
+ 
+ This analyzer is typcially used on fields that are atomic values or case insensitive keys to other entities.
+-->
+<fieldType name="keyword_lc" class="solr.TextField">
+<analyzer>
+ <tokenizer class="solr.KeywordTokenizerFactory"/>
+ <filter class="solr.LowerCaseFilterFactory"/>
+ <filter class="solr.TrimFilterFactory"/>
+</analyzer>
+</fieldType>
+
+</types>
+</schema>
