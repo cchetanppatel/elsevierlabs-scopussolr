@@ -394,6 +394,10 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/citation-info/dummy-link/@restricted-access"	
 	};
 	
+	private static String[] scpidMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/item-info/itemidlist/itemid[@idtype='SCP']//text()"	
+	};
+	
 	private static String[] sdeidMappings = new String[] {
 		"/xocs:doc/xocs:meta/xocs:fulltext-eid//text()"
 	};	

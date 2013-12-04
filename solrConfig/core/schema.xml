@@ -230,6 +230,7 @@
 <field name="reftitle" type="abs_std_stem" multiValued="true" indexed="true" stored="false"/>
 <field name="relauthid" type="abs_std" multiValued="true" indexed="true" stored="false"/>
 <field name="restrictedaccess" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="scpid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="sdeid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="sdfullavail" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="seqbank" type="abs_std" multiValued="true" indexed="true" stored="false"/>
@@ -243,7 +244,7 @@
 <field name="srctype-f" type="abs_facet" multiValued="false" indexed="true" stored="true"/>
 <field name="srctype-s" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="statustype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
-<field name="subjectabbr" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="subjabbr" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="subjmain" type="abs_std" multiValued="true" indexed="true" stored="false"/>
 <field name="subjterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
 <field name="subjtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
@@ -257,7 +258,7 @@
 
 
 </fields>
-<uniqueKey>eid</uniqueKey>
+<uniqueKey>scpid</uniqueKey>
 <defaultSearchField>all</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
 <copyField source="affilcity" dest="affilcity-f"/>
