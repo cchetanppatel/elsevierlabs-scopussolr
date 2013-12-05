@@ -45,7 +45,6 @@ public class Document {
 	public static void add(String index, HashMap<String,Object> map, String id, long epoch) throws Exception {
 
 		HttpSolrServer solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
-		System.out.println("SolrServer Base URL: " + solrServer.getBaseURL());
 		
 		SolrInputDocument solrDoc = new SolrInputDocument();
 		

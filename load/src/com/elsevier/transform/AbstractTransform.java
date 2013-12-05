@@ -42,6 +42,10 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/abstracts/abstract"
 	};
 	
+	private static String[] absMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/abstracts/abstract//text()"
+	};
+	
 	private static String[] abslangArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/citation-info/abstract-language"
 	};
@@ -51,13 +55,27 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/city"
 	};
 	
+	private static String[] affilcityMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/city-group//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/city//text()"
+	};
+	
 	private static String[] affilctryArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/country"
+	};
+	
+	private static String[] affilctryMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/country//text()"
 	};
 	
 	private static String[] affilorgArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/organization",
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/ce:text"
+	};
+	
+	private static String[] affilorgMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/organization//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/ce:text//text()"
 	};
 	
 	private static String[] afhistidArrayMappings = new String[] {
@@ -68,7 +86,7 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation"
 	};	
 
-	private static String[] artnumArrayMappings = new String[] {
+	private static String[] artnumMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/article-number//text()"
 	};	
 	
@@ -81,9 +99,17 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:e-address"
 	};	
 	
+	private static String[] authemailMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:e-address//text()"
+	};
+	
 	private static String[] authfirstiniArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:initials"
 	};	
+	
+	private static String[] authfirstiniMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:initials//text()"
+	};
 	
 	private static String[] authgrpidArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group"
@@ -101,13 +127,25 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/citation-info/author-keywords/author-keyword"
 	};	
 	
+	private static String[] authkeywordsMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/citation-info/author-keywords/author-keyword//text()"
+	};
+	
 	private static String[] authlastArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:surname"
 	};	
 	
+	private static String[] authlastMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:surname//text()"
+	};
+	
 	private static String[] authsuffArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:suffix"
 	};	
+	
+	private static String[] authsuffMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:suffix//text()"
+	};
 	
 	private static String[] casregistrynumArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/chemicalgroup/chemicals/chemical/cas-registry-number"
@@ -117,8 +155,16 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/chemicalgroup/chemicals/chemical"
 	};
 	
+	private static String[] chemMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/chemicalgroup/chemicals/chemical//text()"
+	};
+	
 	private static String[] chemnameArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/chemicalgroup/chemicals/chemical/chemical-name"
+	};
+	
+	private static String[] chemnameMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/chemicalgroup/chemicals/chemical/chemical-name//text()"
 	};
 	
 	private static String[] codenMappings = new String[] {
@@ -127,6 +173,10 @@ public class AbstractTransform {
 	
 	private static String[] collabArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/collaboration"
+	};
+	
+	private static String[] collabMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/collaboration//text()"
 	};
 	
 	private static String[] collecidMappings = new String[] {
@@ -149,12 +199,20 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/additional-srcinfo/conferenceinfo/confevent/confsponsors/confsponsor"
 	};
 	
+	private static String[] confsponsorMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/additional-srcinfo/conferenceinfo/confevent/confsponsors/confsponsor//text()"
+	};
+	
 	private static String[] copyrightArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/item-info/copyright"
 	};
 	
 	private static String[] corresArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/correspondence"
+	};
+	
+	private static String[] corresMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/correspondence//text()"
 	};
 	
 	private static String datecompletedtxtMappings = "/xocs:doc/xocs:item/item/ait:process-info/ait:date-delivered/@timestamp";
@@ -199,6 +257,12 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/contributor-group/contributor[@role='edit']/ce:initials"
 	};
 	
+	private static String[] edfirstiniMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/editors/editor/ce:initials//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/additional-srcinfo/conferenceinfo/confpublication/confeditors/editors/editor/ce:initials//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/contributor-group/contributor[@role='edit']/ce:initials//text()"
+	};
+	
 	private static String[] edidxnameArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/editors/editor/ce:indexed-name",
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/additional-srcinfo/conferenceinfo/confpublication/confeditors/editors/editor/ce:indexed-name",
@@ -213,6 +277,12 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/editors/editor/ce:surname",
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/additional-srcinfo/conferenceinfo/confpublication/confeditors/editors/editor/ce:surname",
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/contributor-group/contributor[@role='edit']/ce:surname"
+	};
+	
+	private static String[] edlastMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/editors/editor/ce:surname//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/additional-srcinfo/conferenceinfo/confpublication/confeditors/editors/editor/ce:surname//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/contributor-group/contributor[@role='edit']/ce:surname//text()"
 	};
 	
 	private static String[] eidMappings = new String[] {
@@ -247,6 +317,10 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/descriptorgroup/descriptors/descriptor/mainterm"
 	};
 	
+	private static String[] idxtermsMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/descriptorgroup/descriptors/descriptor/mainterm//text()"
+	};
+	
 	private static String[] idxtypeArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/descriptorgroup/descriptors"
 	};
@@ -255,8 +329,16 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/isbn"
 	};
 	
+	private static String[] isbnMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/isbn//text()"
+	};
+	
 	private static String[] issnArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/issn"
+	};
+	
+	private static String[] issnMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/issn//text()"
 	};
 	
 	private static String[] issnpArrayMappings = new String[] {
@@ -271,8 +353,17 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/citation-title/titletext"
 	};
 	
+	private static String[] itemtitleMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/citation-title/titletext//text()"
+	};
+
+	
 	private static String[] langArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/citation-info/citation-language"
+	};
+	
+	private static String[] langMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/citation-info/citation-language/@xml:lang"
 	};
 	
 	private static String[] langitemtitleArrayMappings = new String[] {
@@ -283,6 +374,10 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/citation-title/titletext"
 	};
 	
+	private static String[] langreftitleMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/citation-title/titletext//text()"
+	};
+	
 	private static String[] loadnumArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/item-info/itemidlist/itemid[@idtype='PUI']"
 	};
@@ -290,6 +385,10 @@ public class AbstractTransform {
 	
 	private static String[] manufArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/manufacturergroup/manufacturers/manufacturer"
+	};
+	
+	private static String[] manufMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/manufacturergroup/manufacturers/manufacturer//text()"
 	};
 	
 	private static String[] oeidMappings = new String[] {
@@ -336,17 +435,33 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/publisher"	
 	};
 	
+	private static String[] pubMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/source/publisher//text()"	
+	};
+	
 	private static String pubdatetxtMappings = "/xocs:doc/xocs:item/item/bibrecord/head/source/publicationdate/date-text//text()";
 	
-	private static String pubyrMappings = "/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort/@year";
+	private static String[] pubyrMappings = new String[] {
+		"/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort/@year"
+	};
+	
 
 	private static String[] refartnumArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/article-number"	
 	};
 	
+	private static String[] refartnumMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/article-number//text()"	
+	};
+	
 	private static String[] refauidArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/author-group/author"	
 	};
+	
+	private static String[] refauidMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/author-group/author/@auid"	
+	};
+
 	
 	private static String[] refcountMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/@refcount"	
@@ -357,9 +472,19 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/oeid"
 	};
 	
+	private static String[] refeidMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/eid//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/oeid//text()"
+	};
+	
 	private static String[] refpgArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/volisspag/pages",
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-volisspag/pages"
+	};
+	
+	private static String[] refpgMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/volisspag/pages//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-volisspag/pages//text()"
 	};
 	
 	private static String[] refpgfirstArrayMappings = new String[] {
@@ -367,13 +492,27 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-volisspag/pagerange"
 	};
 	
+	private static String[] refpgfirstMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/volisspag/pagerange/@first",
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-volisspag/pagerange/@first"
+	};
+	
 	private static String[] refpubyrArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/publicationyear",
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-publicationyear"
 	};
 	
+	private static String[] refpubyrMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/publicationyear//@first",
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-publicationyear//@first"
+	};
+	
 	private static String[] refscpArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/refd-itemidlist/itemid[@idtype='SGR']"
+	};
+	
+	private static String[] refscpMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/refd-itemidlist/itemid[@idtype='SGR']//text()"
 	};
 	
 	private static String[] refsrctitleArrayMappings = new String[] {
@@ -381,9 +520,19 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-sourcetitle"
 	};
 	
+	private static String[] refsrctitleMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/sourcetitle//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-sourcetitle//text()"
+	};
+	
 	private static String[] reftitleArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/citation-title/titletext",
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-title/ref-titletext"
+	};
+	
+	private static String[] reftitleMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/citation-title/titletext//text()",
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/ref-info/ref-title/ref-titletext//text()"
 	};
 	
 	private static String[] relauthidArrayMappings = new String[] {
@@ -406,8 +555,16 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/sequencebanks/sequencebank"
 	};
 	
+	private static String[] seqbankMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/sequencebanks/sequencebank/@name"
+	};
+	
 	private static String[] seqnumberArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/sequencebanks/sequencebank/sequence-number"
+	};
+	
+	private static String[] seqnumberMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/sequencebanks/sequencebank/sequence-number//text()"
 	};
 	
 	private static String[] srcidMappings = new String[] {
@@ -424,6 +581,10 @@ public class AbstractTransform {
 	
 	private static String[] srctypeMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/@type"
+	};
+	
+	private static String[] statustypeMappings = new String[] {
+		"/xocs:doc/xocs:item/item/ait:process-info/ait:status/@type"
 	};
 	
 	private static String[] subjabbrArrayMappings = new String[] {
@@ -454,6 +615,10 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/ tradenamegroup/tradenames/trademanuitem/tradename"
 	};
 	
+	private static String[] tradenamesMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/enhancement/ tradenamegroup/tradenames/trademanuitem/tradename//text()"
+	};
+	
 	private static String[] volMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/volisspag/voliss/@volume"
 	};
@@ -464,8 +629,22 @@ public class AbstractTransform {
 	};
 	
 	
+	//
+	// Compound Field mappings
+	// Note: These fields must be generated after the single fields are generated to take advantage of the cached values to speed processing
+	//
 	
+	private static String[] affilMappings =  ArrayConcat.concatAll(affilcityMappings, affilctryMappings, affilorgMappings);
+	private static String[] authMappings =  ArrayConcat.concatAll(authlastMappings, authfirstiniMappings, authemailMappings, authsuffMappings);
+	private static String[] confallMappings =  ArrayConcat.concatAll(confnameMappings, confsponsorMappings, conflocMappings, confcodeMappings);
+	private static String[] edMappings =  ArrayConcat.concatAll(edlastMappings, edfirstiniMappings);
+	private static String[] keywordsMappings =  ArrayConcat.concatAll(authkeywordsMappings, idxtermsMappings, tradenamesMappings, chemnameMappings);
+	private static String[] pgMappings =  ArrayConcat.concatAll(pgfirstMappings, pglastMappings, pginfoMappings);
+	private static String[] refMappings =  ArrayConcat.concatAll(refeidMappings, reftitleMappings, langreftitleMappings,refsrctitleMappings, refpubyrMappings, refpgMappings, refpgfirstMappings, refartnumMappings,refscpMappings, refauidMappings, websiteMappings  );
 	
+	private static String[] allsmallMappings =  ArrayConcat.concatAll(itemtitleMappings, absMappings, keywordsMappings);
+	private static String[] allmedMappings =  ArrayConcat.concatAll(itemtitleMappings, authMappings, absMappings, keywordsMappings);
+	private static String[] allMappings =  ArrayConcat.concatAll(absMappings, affilMappings, artnumMappings, authMappings, chemMappings, codenMappings, collabMappings, confallMappings, corresMappings, doiMappings, edMappings, isbnMappings, issnMappings, issueMappings, itemtitleMappings, keywordsMappings, langMappings, manufMappings, pubMappings, pubyrMappings, refMappings, seqbankMappings, seqnumberMappings, srctitleMappings, srctitleabbrMappings, volMappings, websiteMappings);
 
 	
 	
@@ -515,7 +694,7 @@ public class AbstractTransform {
 			
 			createArray("afid",afidArrayMappings, "(@afid)");
 			
-			createSingleField("artnum",artnumArrayMappings);
+			createSingleField("artnum",artnumMappings);
 			
 			createArray("aucite", auciteArrayMappings, "(.//text())");
 			
@@ -686,6 +865,8 @@ public class AbstractTransform {
 			
 			createSingleField("restrictedaccess", restrictedaccessMappings);
 			
+			createSingleField("scpid", scpidMappings);
+			
 			createSingleField("sdeid", sdeidMappings);
 			
 			createArray("seqbank", seqbankArrayMappings, "(@name)");
@@ -699,6 +880,8 @@ public class AbstractTransform {
 			createSingleField("srctitleabbr", srctitleabbrMappings);
 			
 			createSingleField("srctype", srctypeMappings);
+			
+			createSingleField("statustype", statustypeMappings);
 			
 			createArray("subjabbr", subjabbrArrayMappings, "(.//text())");
 			
@@ -719,10 +902,19 @@ public class AbstractTransform {
 			createSingleField("website", websiteMappings);
 			
 			
+			// Create composite, single value fields
+			// Note: need to build those composite fields referenced in other composite fields first
 			
-			
-			
-				
+			createCompositeSingleField("affil", affilMappings);
+			createCompositeSingleField("auth", authMappings);
+			createCompositeSingleField("confall", confallMappings);
+			createCompositeSingleField("ed", edMappings);
+			createCompositeSingleField("keywords", keywordsMappings);
+			createCompositeSingleField("pg", pgMappings);
+			createCompositeSingleField("ref", refMappings);
+			createCompositeSingleField("allsmall", allsmallMappings);
+			createCompositeSingleField("allmed", allmedMappings);
+			createCompositeSingleField("all", allMappings);	
 			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();

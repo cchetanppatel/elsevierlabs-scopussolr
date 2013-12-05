@@ -27,8 +27,8 @@ public class ScopusNamespaceContext implements NamespaceContext {
         else if ("ait".equals(prefix)) return "http://www.elsevier.com/xml/ani/ait";
         else if ("cto".equals(prefix)) return "http://www.elsevier.com/xml/cto/dtd";
         else if ("xsi".equals(prefix)) return "http://www.w3.org/2001/XMLSchema-instance";  
-        else if ("fn".equals(prefix)) return "http://www.w3.org/2001/XMLSchema-instance"; 
-        else if ("xml".equals(prefix)) return "http://www.w3.org/2005/xpath-functions";
+        else if ("fn".equals(prefix)) return "http://www.w3.org/2005/xpath-functions";
+        else if ("xml".equals(prefix)) return "http://www.w3.org/XML/1998/namespace";
         return XMLConstants.NULL_NS_URI;
     }
     	 

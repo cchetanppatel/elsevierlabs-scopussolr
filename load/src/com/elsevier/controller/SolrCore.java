@@ -162,9 +162,8 @@ public class SolrCore {
 								System.out.println("  ]");
 							}
 							
-						}
+						}  
 						// Populate the ElasticSearch index
-						System.out.println("Xformed a record");
 						Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
 						
 					}
