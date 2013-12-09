@@ -1,0 +1,194 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  
+  "Description" : "Template to start up a set up a SolrCloud Bootstrap node",
+  
+  "Parameters" : {
+      
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "Default" : "ats",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },
+    
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "m1.large",
+      "AllowedValues" : [ "m1.large", "m1.xlarge", "m2.xlarge", "cc1.4xlarge", "cc2.8xlarge" ],
+      "ConstraintDescription" : "must be a valid EC2 instance type in the AWSInstanceType2AMI Mappings."
+    },
+    
+    "EphemeralMntPoint" : {
+      "Description" : "Where to mount the ephemeral raid.",
+      "Type" : "String",
+      "Default" : "/mnt/solr"
+    },
+    
+    "SolrDownloadURL" : {
+      "Description" : "Solr install gzip URL.",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solr/solr-4.4.0.tgz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422339921&Signature=oJX9gvBZzCfywxLXhHaI/cZ16w8%3D"
+    },
+         
+   "SolrConfigURL" : {
+      "Description" : "Solr Config File URL.",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340520&Signature=51fFLpQMxgJGxPKZAhxMzgJopSE%3D"
+    },
+    
+    "SolrSchemaURL" : {
+      "Description" : "Solr Config File URL.",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/schema.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340490&Signature=nDjgOn6M0QDP0FmrNtloJJPgfd4%3D"
+    },
+    
+    "SolrStopwordsURL" : {
+      "Description" : "Solr Stopwords File URL.",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/common/stopwords.txt?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340609&Signature=WnTXnCMMJWrAL8a7YXHqmojoOck%3D"
+    },
+    
+    "SolrSynonymsURL" : {
+      "Description" : "Solr Synonyms File URL.",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/common/synonyms.txt?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340640&Signature=FbLhSsK4wC3jWdsyuG4aVdNsH3E%3D"
+    },
+    
+    "ZooKeeperIP" : {
+      "Description" : "ZooKeeper IP address.",
+      "Type" : "String",
+      "Default" : "10.28.246.171:2181"
+    },
+    
+    "SolrClusterName" : {
+      "Description" : "Solr Cluster Name.",
+      "Type" : "String"
+    },
+    
+    "NumShards" : {
+      "Description" : "Number of shards for the cluster.",
+      "Type" : "Number",
+      "MinValue" : "1",
+      "Default" : "2"
+    }
+    
+  },
+  
+"Mappings" : {
+    "AWSInstanceType2AMI" : {
+      "m1.large" : { "AMI" : "ami-0b0a8362"},
+      "m1.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "c1.medium" : { "AMI" : "ami-0b0a8362"},
+      "c1.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.2xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.4xlarge" : { "AMI" : "ami-0b0a8362"},
+      "cc1.4xlarge" : { "AMI" : "ami-08249861"},
+      "cc2.8xlarge" : { "AMI" : "ami-08249861"}
+    }
+  },
+
+ "Resources": {
+        
+        "ServerGroup" : {
+            "Type" : "AWS::AutoScaling::AutoScalingGroup",
+            "Properties" : {
+                "AvailabilityZones" : [ "us-east-1b"],
+                "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
+                 "Tags" : [
+          					{ "Key" : "Name", "Value" :  "solr-scopus-cluster", "PropagateAtLaunch" : true }
+        		],
+                "MinSize" : 1,
+                "MaxSize" : 1
+            }
+        },
+        
+        "Ec2Instance": {
+            "Type": "AWS::AutoScaling::LaunchConfiguration",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "BlockDeviceMappings" : [ {"DeviceName" : "/dev/sdk", "VirtualName" : "ephemeral0"}, {"DeviceName" : "/dev/sdl", "VirtualName" : "ephemeral1"} ],
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Set up the ephemeral drives and mount them", "\n",
+                "# ", "\n",
+                "# Get rid of the default mount for drive 1 from Amazon", "\n",
+                "umount /media/ephemeral0", "\n",
+                "# Create the raid device from the ephemeral drives", "\n",
+                " yes | mdadm --create /dev/md0 --level=0 -c256 --raid-devices=2 /dev/sdk /dev/sdl", "\n",
+                "echo 'DEVICE /dev/sdk /dev/sdl' > /etc/mdadm.conf", "\n",
+                "mdadm --detail --scan >> /dev/mdadm.conf", "\n",
+                "# Create the file system on the raid", "\n",
+                "yum -y install xfsprogs", "\n",
+                "blockdev --setra 65536 /dev/md0", "\n",
+                "mkfs.xfs -f /dev/md0", "\n",
+                "mkdir -p ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "mount -t xfs -o rw,user,noatime /dev/md0 ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "# Install solr", "\n",
+                "cd ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "curl -o ./solr-4.4.0.tgz '", { "Ref" : "SolrDownloadURL"}, "'", "\n",
+                "gunzip ./solr-4.4.0.tgz", "\n",
+                "tar -xvf solr-4.4.0.tar", "\n",
+                "cd solr-4.4.0", "\n",
+                "mv ./example/solr/collection1 ./example/solr/", { "Ref" : "SolrClusterName" }, "\n",
+                "sed -i -e 's/collection1/", { "Ref" : "SolrClusterName"}, "/' ./example/solr/core/core.properties", "\n",
+                "curl -o ./example/solr/core/conf/stopwords.txt '", { "Ref" : "SolrStopwordsURL"}, "'", "\n",
+                "curl -o ./example/solr/core/conf/synonyms.txt '", { "Ref" : "SolrSynonymsURL"}, "'", "\n",
+                "curl -o ./example/solr/core/conf/schema.xml '", { "Ref" : "SolrSchemaURL"}, "'", "\n",
+                "curl -o ./example/solr/core/conf/solrconfig.xml '", { "Ref" : "SolrConfigURL"}, "'", "\n",
+                "# Start solr up with all the right parameters", "\n",
+                "cd example", "\n",
+                "nohup java -DnumShards=", { "Ref" : "NumShards"}, " -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
+                ]]}}
+            }
+        },
+ 		
+        "InstanceSecurityGroup" : {
+"Type" : "AWS::EC2::SecurityGroup",
+"Properties" : {
+"GroupDescription" : "Enable SSH access on the inbound port",
+             "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "0.0.0.0/0"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "8983",
+                    "ToPort" : "8983",
+                    "CidrIp" : "0.0.0.0/0"
+                }]
+           }
+        }
+    
+ },
+
+
+  "Outputs" : {
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance" }
+    }
+  }
+  
+}
