@@ -49,7 +49,11 @@ public class AbstractTransform {
 	private static String[] abslangArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/citation-info/abstract-language"
 	};
-			
+	
+	private static String[] affilArrayMappings =  new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation"
+	};
+	
 	private static String[] affilcityArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/city-group",
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/city"
@@ -89,6 +93,10 @@ public class AbstractTransform {
 	private static String[] artnumMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/article-number//text()"
 	};	
+	
+	private static String[] authArrayMappings =  new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author"
+	};
 	
 	private static String[] auciteArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author/ce:surname",
@@ -445,7 +453,10 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort/@year"
 	};
 	
-
+	private static String[] refArrayMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference"	
+	};
+	
 	private static String[] refartnumArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/article-number"	
 	};
@@ -905,13 +916,20 @@ public class AbstractTransform {
 			// Create composite, single value fields
 			// Note: need to build those composite fields referenced in other composite fields first
 			
-			createCompositeSingleField("affil", affilMappings);
-			createCompositeSingleField("auth", authMappings);
+			createArray("affil", affilArrayMappings, "./city-group//text() | ./city//text() | ./country//text() | ./organization//text() | ./ce:text//text()");
+			createArray("auth", authArrayMappings, "./ce:e-address//text() | ./ce:initials//text() | ./ce:surname//text() | ./ce:suffix//text()");
 			createCompositeSingleField("confall", confallMappings);
 			createCompositeSingleField("ed", edMappings);
 			createCompositeSingleField("keywords", keywordsMappings);
 			createCompositeSingleField("pg", pgMappings);
-			createCompositeSingleField("ref", refMappings);
+			createArray("ref", refArrayMappings, "  ./refd-itemcitation/article-number//text() | ./refd-itemcitation/author-group/author/@auid | ./refd-itemcitation/eid//text() " +
+					                             "| ./refd-itemcitation/oeid//text() | ./refd-itemcitation/volisspag/pages//text() | ./ref-info/ref-volisspag/pages//text() " +
+					                             "| ./refd-itemcitation/volisspag/pagerange/@first | ./ref-info/ref-volisspag/pagerange/@first | ./refd-itemcitation/publicationyear/@first " +
+					                             "| ./ref-info/ref-publicationyear/@first | ./ref-info/refd-itemidlist/itemid[@idtype='SGR']//text() | ./refd-itemcitation/sourcetitle//text() " + 
+					                             "| ./ref-info/ref-sourcetitle//text() | ./refd-itemcitation/citation-title/titletxt//text() | ./ref-info/ref-title/ref-titletext//text() " +
+					                             "| ./refd-itemcitation/author-group/author/ce:initials//text() | ./ref-info/ref-authors/author/ce:initials//text() " +
+					                             "| ./refd-itemcitation/author-group/author/ce:surname//text() | ./ref-info/ref-authors/author/ce:surname//text() "
+					    );
 			createCompositeSingleField("allsmall", allsmallMappings);
 			createCompositeSingleField("allmed", allmedMappings);
 			createCompositeSingleField("all", allMappings);	
