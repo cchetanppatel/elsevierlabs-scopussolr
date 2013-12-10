@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
   
-  "Description" : "Template to start up a set up a SolrCloud Bootstrap node",
+  "Description" : "Template to start up one or more SolrCloud secondary nodes",
   
   "Parameters" : {
       
@@ -34,33 +34,9 @@
       "Type" : "String",
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solr/solr-4.5.0.tgz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422622331&Signature=AF4mntShXSijh1VUV5uqG6szxwM%3D"
     },
-         
-   "SolrConfigURL" : {
-      "Description" : "Solr Config File URL.",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340520&Signature=51fFLpQMxgJGxPKZAhxMzgJopSE%3D"
-    },
-    
-    "SolrSchemaURL" : {
-      "Description" : "Solr Config File URL.",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/schema.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340490&Signature=nDjgOn6M0QDP0FmrNtloJJPgfd4%3D"
-    },
-    
-    "SolrStopwordsURL" : {
-      "Description" : "Solr Stopwords File URL.",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/common/stopwords.txt?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340609&Signature=WnTXnCMMJWrAL8a7YXHqmojoOck%3D"
-    },
-    
-    "SolrSynonymsURL" : {
-      "Description" : "Solr Synonyms File URL.",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/common/synonyms.txt?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340640&Signature=FbLhSsK4wC3jWdsyuG4aVdNsH3E%3D"
-    },
     
     "ZooKeeperIP" : {
-      "Description" : "ZooKeeper IP address.",
+      "Description" : "ZooKeeper IP address:port.",
       "Type" : "String",
       "Default" : "10.28.246.171:2181"
     },
@@ -69,12 +45,12 @@
       "Description" : "Solr Cluster Name.",
       "Type" : "String"
     },
-    
-    "NumShards" : {
-      "Description" : "Number of shards for the cluster.",
+   
+    "NodeCount" : {
+      "Description" : "Number of nodes to add to the cluster.",
       "Type" : "Number",
       "MinValue" : "1",
-      "Default" : "2"
+      "Default" : "1"
     }
     
   },
@@ -103,8 +79,8 @@
                  "Tags" : [
           					{ "Key" : "Name", "Value" :  "solr-scopus-cluster", "PropagateAtLaunch" : true }
         		],
-                "MinSize" : 1,
-                "MaxSize" : 1
+                "MinSize" : { "Ref" : "NodeCount" },
+                "MaxSize" : { "Ref" : "NodeCount" }
             }
         },
         
@@ -151,13 +127,9 @@
                 "cd solr-4.5.0", "\n",
                 "mv ./example/solr/collection1 ./example/solr/", { "Ref" : "SolrClusterName" }, "\n",
                 "sed -i -e 's/collection1/", { "Ref" : "SolrClusterName"}, "/' ./example/solr/core/core.properties", "\n",
-                "curl -o ./example/solr/core/conf/stopwords.txt '", { "Ref" : "SolrStopwordsURL"}, "'", "\n",
-                "curl -o ./example/solr/core/conf/synonyms.txt '", { "Ref" : "SolrSynonymsURL"}, "'", "\n",
-                "curl -o ./example/solr/core/conf/schema.xml '", { "Ref" : "SolrSchemaURL"}, "'", "\n",
-                "curl -o ./example/solr/core/conf/solrconfig.xml '", { "Ref" : "SolrConfigURL"}, "'", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
-                "nohup java -DnumShards=", { "Ref" : "NumShards"}, " -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
+                "nohup java -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
                 ]]}}
             }
         },
