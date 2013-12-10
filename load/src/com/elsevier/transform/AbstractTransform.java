@@ -305,6 +305,10 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author[@seq='1']/ce:indexed-name"
 	};
 	
+	private static String[] fundallArrayMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/grantlist/grant"
+	};
+	
 	private static String[] fundacrArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/grantlist/grant/grant-acronym"
 	};
@@ -790,6 +794,8 @@ public class AbstractTransform {
 			createArray("firstauth", firstauthArrayMappings, "(.//text())");
 			
 			createArray("fundacr", fundacrArrayMappings, "(.//text())");
+			
+			createArray("fundall", fundallArrayMappings, "./grantid//text() | ./grant-acronym//text() | ./grant-agency//text()");
 			
 			createArray("fundno", fundnoArrayMappings, "(.//text())");
 			
