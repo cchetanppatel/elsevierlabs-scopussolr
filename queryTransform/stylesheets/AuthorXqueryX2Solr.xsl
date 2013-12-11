@@ -165,8 +165,8 @@
       </xsl:otherwise>
     </xsl:choose>
     <xsl:text>:</xsl:text>
-    <!-- Go decide whether to quote the text -->
-    <xsl:call-template name="quote-lookup-field">
+    <!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
+    <xsl:call-template name="word-cleanup">
       <xsl:with-param name="w" select="."/>
     </xsl:call-template>    
   </xsl:template>
@@ -350,34 +350,175 @@
     </xsl:choose> 
   </xsl:template>
   
-
-  <!-- Quote lookup  -->
-  <xsl:template name="quote-lookup-field">
+ 
+  
+  <!-- Word cleanup  -->
+  <!-- For now, be safe and lower-case everything (may not really be needed) -->
+  <xsl:template name="word-cleanup">
     <xsl:param name="w"/> 
     <xsl:choose>
       
       <!-- Marked as a phrase so make it a phrase -->
       <xsl:when test="$w/@phrase='true'">
         <xsl:text>"</xsl:text>
-        <xsl:value-of select="$w/text()"/>
+        <xsl:value-of select="lower-case($w)"/>
         <xsl:text>"</xsl:text>
       </xsl:when>
       
-      <!-- Marked as a 'starts with' so add a wildcard -->
-      <xsl:when test="$w/@startsWith='true'">
-        <xsl:value-of select="./text()"/>
-        <xsl:text>*</xsl:text>
-      </xsl:when>
-      
-      <!-- Just use the text (no need for a phrase)  -->                                                                                                                                                                                                                                                                                                                                                                                 
+      <!-- Just use the text (no need for a phrase)  -->
+      <!-- Escape these characters for 'keyword' fields   + - & | ! ( ) { } [ ] ^ ~ : \ / " -->
       <xsl:otherwise>
-        <xsl:value-of select="$w/text()"/>
+        <xsl:variable name="var1">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="lower-case($w)" />
+            <xsl:with-param name="replace" select="'+'" />
+            <xsl:with-param name="by" select="'\+'" />
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="var2">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var1" />
+            <xsl:with-param name="replace" select="'-'" />
+            <xsl:with-param name="by" select="'\-'" />
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="var3">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var2" />
+            <xsl:with-param name="replace" select="'&amp;'" />
+            <xsl:with-param name="by" select="'\&amp;'" />
+          </xsl:call-template>
+        </xsl:variable>       
+        <xsl:variable name="var4">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var3" />
+            <xsl:with-param name="replace" select="'|'" />
+            <xsl:with-param name="by" select="'\|'" />
+          </xsl:call-template>
+        </xsl:variable>          
+        <xsl:variable name="var5">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var4" />
+            <xsl:with-param name="replace" select="'!'" />
+            <xsl:with-param name="by" select="'\!'" />
+          </xsl:call-template>
+        </xsl:variable>          
+        <xsl:variable name="var6">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var5" />
+            <xsl:with-param name="replace" select="'('" />
+            <xsl:with-param name="by" select="'\('" />
+          </xsl:call-template>
+        </xsl:variable>         
+        <xsl:variable name="var7">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var6" />
+            <xsl:with-param name="replace" select="')'" />
+            <xsl:with-param name="by" select="'\)'" />
+          </xsl:call-template>
+        </xsl:variable>        
+        <xsl:variable name="var8">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var7" />
+            <xsl:with-param name="replace" select="'{'" />
+            <xsl:with-param name="by" select="'\{'" />
+          </xsl:call-template>
+        </xsl:variable>         
+        <xsl:variable name="var9">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var8" />
+            <xsl:with-param name="replace" select="'}'" />
+            <xsl:with-param name="by" select="'\}'" />
+          </xsl:call-template>
+        </xsl:variable>        
+        <xsl:variable name="var10">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var9" />
+            <xsl:with-param name="replace" select="'['" />
+            <xsl:with-param name="by" select="'\['" />
+          </xsl:call-template>
+        </xsl:variable>  
+        <xsl:variable name="var11">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var10" />
+            <xsl:with-param name="replace" select="']'" />
+            <xsl:with-param name="by" select="'\]'" />
+          </xsl:call-template>
+        </xsl:variable>          
+        <xsl:variable name="var12">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var11" />
+            <xsl:with-param name="replace" select="'^'" />
+            <xsl:with-param name="by" select="'\^'" />
+          </xsl:call-template>
+        </xsl:variable>         
+        <xsl:variable name="var13">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var12" />
+            <xsl:with-param name="replace" select="'~'" />
+            <xsl:with-param name="by" select="'\~'" />
+          </xsl:call-template>
+        </xsl:variable> 
+        <xsl:variable name="var14">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var13" />
+            <xsl:with-param name="replace" select="':'" />
+            <xsl:with-param name="by" select="'\:'" />
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="var15">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var14" />
+            <xsl:with-param name="replace" select="'\'" />
+            <xsl:with-param name="by" select="'\\'" />
+          </xsl:call-template>
+        </xsl:variable>  
+        <xsl:variable name="var16">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var15" />
+            <xsl:with-param name="replace" select="'/'" />
+            <xsl:with-param name="by" select="'\/'" />
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="var17">
+          <xsl:call-template name="string-replace-all">
+            <xsl:with-param name="text" select="$var16" />
+            <xsl:with-param name="replace" select="'&quot;'" />
+            <xsl:with-param name="by" select="'\&quot;'" />
+          </xsl:call-template>
+        </xsl:variable>        
+        <xsl:value-of select="$var17"/>
+        <!-- Marked as a 'starts with' so add a wildcard -->
+        <xsl:if test="$w/@startsWith='true'">
+          <xsl:text>*</xsl:text>
+        </xsl:if>
       </xsl:otherwise>
       
     </xsl:choose> 
-  </xsl:template>    
-  
-  
+  </xsl:template>
+
+
+  <xsl:template name="string-replace-all">
+    <xsl:param name="text" />
+    <xsl:param name="replace" />
+    <xsl:param name="by" />
+    <xsl:choose>
+      <xsl:when test="contains($text, $replace)">
+        <xsl:value-of select="substring-before($text,$replace)" />
+        <xsl:value-of select="$by" />
+        <xsl:call-template name="string-replace-all">
+          <xsl:with-param name="text" select="substring-after($text,$replace)" />
+          <xsl:with-param name="replace" select="$replace" />
+          <xsl:with-param name="by" select="$by" />
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$text" />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+
   <!-- Ingore what we didn't explicitly ask for -->
   <xsl:template match="text()"/>
   

@@ -113,17 +113,15 @@
   
   
   <!-- Query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:query">
-    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare[ft:clause[@path!='count']]"/>
+    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare | proximityQuery"/>
   </xsl:template>
   
   
   <!-- AND query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:andQuery">
     <xsl:text>(</xsl:text>  
-    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare[ft:clause[@path!='count']]">
+    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare | proximityQuery">
       <xsl:if test="position() != 1">
         <xsl:text> AND </xsl:text>
       </xsl:if>
@@ -134,10 +132,9 @@
   
   
   <!-- OR query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:orQuery">
     <xsl:text>(</xsl:text>  
-    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare[ft:clause[@path!='count']]">
+    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare | proximityQuery">
       <xsl:if test="position() != 1">
         <xsl:text> OR </xsl:text>
       </xsl:if>
@@ -148,10 +145,9 @@
   
   
   <!-- NOT query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:notQuery">
     <xsl:text>NOT(</xsl:text>
-    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:numericCompare[ft:clause[@path!='count']]"/>
+    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:numericCompare | proximityQuery"/>
     <xsl:text>)</xsl:text>
   </xsl:template>
   
@@ -201,25 +197,33 @@
     </xsl:choose>
   </xsl:template>
  
+ 
+  <!-- PROXIMITY query clause -->
+  <xsl:template match="ft:proximityQuery">
+    <xsl:value-of select="./@path"/>
+    <xsl:text>:</xsl:text>
+    <xsl:text>"</xsl:text>
+    <xsl:for-each select="./ft:word">
+      <xsl:if test="position() != 1 and position() != last()">
+        <xsl:text> </xsl:text>
+      </xsl:if>
+      <xsl:call-template name="word-cleanup">
+        <xsl:with-param name="w" select="."/>
+      </xsl:call-template>
+    </xsl:for-each>
+    <xsl:text>"~</xsl:text>
+    <xsl:value-of select="./@slack"/>
+  </xsl:template>  
+  
   
   <!-- Sort lookup (replace field names) -->
   <xsl:template name="sort-lookup-field">
     <xsl:param name="f"/> 
     <xsl:choose>
       
-      <!-- Affiliation city -->
-      <xsl:when test="matches($f,'^affilcity$')">
-        <xsl:text>affilcity-s</xsl:text>
-      </xsl:when>
-      
-      <!-- Affiliation country -->
-      <xsl:when test="matches($f,'^affilctry$')">
-        <xsl:text>affilctry-s</xsl:text>
-      </xsl:when>
-      
-      <!-- Affiliation cert score -->
-      <xsl:when test="matches($f,'^certscore$')">
-        <xsl:text>certscore-s</xsl:text>
+      <!-- Some value -->
+      <xsl:when test="matches($f,'^somevalue$')">
+        <xsl:text>somevalue-new</xsl:text>
       </xsl:when>
       
       <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
@@ -236,19 +240,9 @@
     <xsl:param name="f"/> 
     <xsl:choose>
       
-      <!-- Affiliation city -->
-      <xsl:when test="matches($f,'^instaffilcitynav$')">
-        <xsl:text>affilcity-f</xsl:text>
-      </xsl:when>
- 
-      <!-- Affiliation country -->
-      <xsl:when test="matches($f,'^instaffilctrynav$')">
-        <xsl:text>affilctry-f</xsl:text>
-      </xsl:when>
-
-      <!-- Affiliation cert score -->
-      <xsl:when test="matches($f,'^instcertscorenav$')">
-        <xsl:text>certscore-f</xsl:text>
+      <!-- Some value -->
+      <xsl:when test="matches($f,'^somevalue$')">
+        <xsl:text>somevalue-new</xsl:text>
       </xsl:when>
       
       <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 

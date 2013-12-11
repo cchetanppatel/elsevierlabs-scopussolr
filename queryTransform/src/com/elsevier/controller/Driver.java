@@ -54,7 +54,7 @@ public class Driver {
 			BufferedReader br = new BufferedReader(new FileReader(xml));
 			String line;
 			int idx = 0;
-			String result;
+			String result = null;
 			
 			while ((line = br.readLine()) != null) {
 				InputStream contentIs = IOUtils.toInputStream(line, "utf-8");
@@ -63,20 +63,22 @@ public class Driver {
 					result = transform(transformer,contentIs);
 				} catch (Exception ex) {
 					// Catch badly formed xml (and ignore)
-					//System.out.println("Problems");
-					//ex.printStackTrace();
+					System.out.println(line);
+					System.out.println("Problems");
+					ex.printStackTrace();
+					//System.exit(1);
 					continue;
 				}
 				
 				idx++;
 				String key = type + "_" + set + "_" + idx;
 				
-				System.out.println(key);
-				System.out.println(line);
-				System.out.println(result);
+				//System.out.println(key);
+				//System.out.println(line);
+				//System.out.println(result);
 
 				try {
-					//DynamoDB.insertRecord(key, result);
+					DynamoDB.insertRecord(key, result);
 				} catch (Exception ddbex) {
 					System.out.println("Problems with " + key);
 				}
