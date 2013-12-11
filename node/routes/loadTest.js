@@ -59,7 +59,7 @@ exports.submit = function(req, res){
     
     if (typeof freeFormQuery !== 'undefined') {
 
-        searchParameters.dType = 'user';
+        searchParameters.dType = req.param('cluster');
         searchParameters.dSet = '1';
         searchParameters.dIdx = '1';
         
@@ -72,7 +72,7 @@ exports.submit = function(req, res){
         searchParameters.dIdx = keyToks[2];
         
     }
-
+    //console.log(searchParameters);
 
     // Get the query from DDB
     ddb.getQuery(key, freeFormQuery, function(err,query) {
@@ -98,10 +98,11 @@ exports.submit = function(req, res){
     
            // Set the HTTP Headers
            var headers = {
+                            'Content-Type' : 'application/x-www-form-urlencoded', 
                             'Accept-Encoding' : 'gzip'
            };
-    
-           var solrHostPort = cfg.INIT_PARMS['solr-host-port'][getRandomInt(0, cfg.INIT_PARMS['solr-host-port'].length - 1)];    
+  
+           var solrHostPort = cfg.INIT_PARMS['solr-host-port'][searchParameters.dType][getRandomInt(0, cfg.INIT_PARMS['solr-host-port'][searchParameters.dType].length - 1)];    
            
            var solrHostPortToks = solrHostPort.split(':');
     
@@ -111,11 +112,12 @@ exports.submit = function(req, res){
                             host: solrHostPortToks[0],
                             port: solrHostPortToks[1],
                             method: 'POST',
-                            path: '/solr/' + cfg.INIT_PARMS['solr-cluster'].affil + '/select?' + encodeURI(query) + '&wt=json&indent=true',
+                            //path: '/solr/' + cfg.INIT_PARMS['solr-cluster'][searchParameters.dType] + '/select?' + encodeURI(query) + '&wt=json&indent=true',
+                            path: '/solr/' + cfg.INIT_PARMS['solr-cluster'][searchParameters.dType] + '/select',
                             headers: headers
             };
             
-//console.log(options);
+            //console.log(options);
 
             var chunks = [];
             var solrRspLen;
@@ -177,7 +179,7 @@ exports.submit = function(req, res){
 
                              } else {
                              
-                                console.log(buf.toString());
+                                //console.log(buf.toString());
                                 var results = JSON.parse(buf);
                                 results.query = searchParameters.dType + '_' + searchParameters.dSet + '_' + searchParameters.dIdx;
 
@@ -273,7 +275,7 @@ exports.submit = function(req, res){
             });
                  
             // Send the request
-            req2.write('');
+            req2.write(query + '&wt=json&indent=true');
             req2.end();                              
                                 
         }

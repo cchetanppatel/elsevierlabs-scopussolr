@@ -17,6 +17,11 @@
 		<p>The input should be something like q=(afid:"60026108" OR afid:"60002934" OR afid:"60026108")&amp;fl=afid,affilname&amp;start=0&amp;rows=500.</p>
 		<form action="/loadTest" method="post">
 			<input id="quickSearch2" type="text" name="freeFormQuery" size="125" maxlength="5000" value=""/>
+			<select name="cluster" size="3">
+				<option value="affil" selected>Affiliation</option>
+				<option value="auth">Author</option>
+				<option value="core">Core</option>
+			</select>
 			<input type="submit" value="Submit"/>
 		</form>
 	</body>

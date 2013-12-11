@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Load Test Driver
+# Keys are in set/affilKeys or set/authKeys
 
 urlencode() {
     local l=${#1}
@@ -23,4 +24,4 @@ do
         curl -s 'localhost:81/loadTest/' -d $MSG >> /dev/null
     fi
     cnt=$((cnt+1))
-done < set/squery1.file
+done < set/affilKeys

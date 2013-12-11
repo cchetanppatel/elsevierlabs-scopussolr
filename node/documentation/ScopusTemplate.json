@@ -60,12 +60,24 @@
       "Default" : " 10.151.38.45"
      },
 
-    "keyset" : {
-      "Description" : "keyset",
+    "affilkeyset" : {
+      "Description" : "affilkeyset",
       "Type" : "String",
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/affiliationLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420454260&Signature=tTeSoK1v00x3ti2%2BlIH8Ta7aGD4%3D"
-     }
+     },
      
+    "authkeyset" : {
+      "Description" : "authkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/authorLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420957375&Signature=cH1V1QNTr%2BrcmlkE9lG9DS/ZGtg%3D"
+     },
+     
+     "loadtestscript" : {
+      "Description" : "loadtestscript",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/app/loadTest.sh?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420957576&Signature=viueapdvPmSdAoVMHc764Ds2MQ4%3D"
+     }     
+
   },
   
 "Mappings" : {
@@ -148,8 +160,13 @@
                 "cd /hothouse","\n",
                 "mkdir set","\n",
                 "cd set", "\n",
-                "curl -o set.zip '", { "Ref" : "keyset"}, "'", "\n",
-                "unzip set.zip","\n"
+                "curl -o affilKeys.gz '", { "Ref" : "affilkeyset"}, "'", "\n",
+                "gunzip affilKeys.gz","\n",
+                "curl -o authKeys.gz '", { "Ref" : "authkeyset"}, "'", "\n",
+                "gunzip authKeys.gz","\n",  
+                "cd /hothouse","\n",
+                "curl -o loadTest.sh '", { "Ref" : "loadtestscript"}, "'", "\n",
+                "chmod 777 loadTest.sh","\n"
                 ]]}}   
             }
         },
