@@ -18,8 +18,8 @@
     "InstanceType" : {
       "Description" : "EC2 instance type",
       "Type" : "String",
-      "Default" : "m1.small",
-      "AllowedValues" : [ "m1.small" ],
+      "Default" : "t1.micro",
+      "AllowedValues" : [ "t1.micro", "m1.small" ],
       "ConstraintDescription" : "must be a valid EC2 instance type in the AWSInstanceType2AMI Mappings."
     },
     
@@ -45,7 +45,7 @@
       "Description" : "Number of EC2 instances for the cluster.",
       "Type" : "Number",
       "MinValue" : "1",
-      "Default" : "1"
+      "Default" : "3"
     }
   },
   
@@ -102,17 +102,19 @@
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
                 "# Set up the ephemeral drives and mount them", "\n",
                 "mkdir -p ", { "Ref" : "EphemeralMntPoint" }, "\n",
-                "mount -o rw,user /dev/sdk ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "mount -o rw,user,exec /dev/sdk ", { "Ref" : "EphemeralMntPoint" }, "\n",
                 "# Download and install Zookeeper", "\n",
-                "cd ", { "Ref" : "EphemeralMntPoint" }, "\n",,
+                "cd ", { "Ref" : "EphemeralMntPoint" }, "\n",
                 "mkdir -p zookeeper" , "\n",
                 "cd zookeeper", "\n",
                 "wget http://apache.mirrors.timporter.net/zookeeper/current/zookeeper-3.4.5.tar.gz", "\n",
+				"mv zookeeper-3.4.5.tar.gz zookeeper-3.4.5.tgz", "\n",
 				"tar zxfv zookeeper-3.4.5.tgz", "\n",
 				"cd zookeeper-3.4.5/ ", "\n",
 				"curl -o conf/zoo.cfg '", { "Ref" : "ZKConfigURL"}, "'", "\n",
 				"# Setup zookeeper data directories", "\n",
-				"mkdir -p /usr/local/var/data/disk1/zookeeper", "\n"
+				"mkdir -p ", { "Ref" : "EphemeralMntPoint" } , "/zookeeper/zookeeper-3.4.5/", { "Ref" : "ZKDataDir" }, "\n",
+				"touch ", { "Ref" : "EphemeralMntPoint" } , "/zookeeper/zookeeper-3.4.5/", { "Ref" : "ZKDataDir" }, "/myid" , "\n"
                 ]]}}
             }
         },

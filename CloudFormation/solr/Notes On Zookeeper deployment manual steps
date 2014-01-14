@@ -1,0 +1,26 @@
+Here are some notes on deployment of ZooKeeper with the associated CloudFormation template in this directory.
+
+Since zookeeper is deployed as an ensemble of machines, there are a few pieces of the configuration that
+weren't worth trying to automate. Specifically, each instance in the ensemble must have a distinct 
+ZooKeeper copy number, and must also have the IP address/port info for all the nodes in the ensemble. 
+
+To finish configuring things after the CF template runs, you need to do this (assuming you are using the 
+default CF template values and deployed 3 instances)
+
+Each machine's /mnt/data/zookeeper/zookeeper.X.X.X/conf/zoo.cfg needs to update the 3 node's connection 
+details at the end of the file. Each of the 3 server lines must replace the placeholder text with the 
+private IP address for the server.  Leave the port info after the first ':' alone.
+
+Each machine must have its  /mnt/data/zookeeper/zookeeper.X.X.X/data/myid file that was created by the
+CF template updated with the corresponding copy number. In the previous step, you set IP addresses for
+server1, server2, and server3 in the zoo.cfg file. on the server1 box, you need to put a '1' in the myid
+file. In the server2 box, you need to set the value to 2, and so on.
+
+Finally, you can start up ZooKeeper on each box.
+
+Change directory to:  /mnt/data/zookeeper/zookeeper.X.X.X  and run this command
+
+   nohup ./bin/zkServer.sh start zoo.cfg &
+   
+ this will start the server as a deamon that will ignore disconnects from your terminal. You can monitor
+ the Zookeeper by tailing the zookeeper.out file in the current directory on each box.
