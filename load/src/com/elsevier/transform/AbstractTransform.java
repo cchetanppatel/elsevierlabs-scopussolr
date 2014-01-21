@@ -702,9 +702,7 @@ public class AbstractTransform {
 			createArray("affilctry",affilctryArrayMappings, "(.//text())");
 			
 			createSortFieldFromArrayField("affilctry-s", "affilctry");
-			
-			//createArray("affilcurr",affilcurrArrayMappings, "(./address/city//text() | ./address/city-group//text() | ./address/country//text() | ./afdispname//text())");
-			
+					
 			createArray("affilorg",affilorgArrayMappings, "(.//text())");
 			
 			createArray("afid",afidArrayMappings, "(@afid)");
@@ -759,7 +757,7 @@ public class AbstractTransform {
 			
 			createArrayDateField("daterevised", daterevisedArrayMappings, "(.//text())");
 
-			createSingleDateField("date-sort", datesortMappings);
+			createSingleDateField("datesort", datesortMappings);
 			
 			createArray("db", dbArrayMappings, "(.//text())");
 			
@@ -855,9 +853,7 @@ public class AbstractTransform {
 			createSingleField("pubdatetxt", pubdatetxtMappings);
 			
 			createSingleField("pubyr", pubyrMappings);
-			
-			//ref
-			
+						
 			createArray("refartnum", refartnumArrayMappings, "(.//text())");
 			
 			createArray("refauid", refauidArrayMappings, "(@auid)");
