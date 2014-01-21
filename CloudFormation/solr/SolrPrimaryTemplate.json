@@ -19,7 +19,7 @@
       "Description" : "EC2 instance type",
       "Type" : "String",
       "Default" : "m1.large",
-      "AllowedValues" : [ "m1.large", "m1.xlarge", "m2.xlarge", "cc1.4xlarge", "cc2.8xlarge" ],
+      "AllowedValues" : ["m1.large", "m1.xlarge", "m2.xlarge", "cc1.4xlarge", "cc2.8xlarge" ],
       "ConstraintDescription" : "must be a valid EC2 instance type in the AWSInstanceType2AMI Mappings."
     },
     
@@ -29,10 +29,16 @@
       "Default" : "/mnt/solr"
     },
     
+    "SolrVersion" : {
+      "Description" : "Solr version - must match up to the SOLR download URL value.",
+      "Type" : "String",
+      "Default" : "4.6.0"
+    },
+    
     "SolrDownloadURL" : {
       "Description" : "Solr install gzip URL.",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solr/solr-4.5.0.tgz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422622331&Signature=AF4mntShXSijh1VUV5uqG6szxwM%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solr/solr-4.6.0.tgz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426235662&Signature=qxLo7T85tsw3PNBzlzCmdgASebc%3D"
     },
          
    "SolrConfigURL" : {
@@ -62,7 +68,7 @@
     "ZooKeeperIP" : {
       "Description" : "ZooKeeper IP address.",
       "Type" : "String",
-      "Default" : "10.28.246.171:2181"
+      "Default" : "10.2.17.250:2181"
     },
     
     "SolrClusterName" : {
@@ -101,7 +107,7 @@
                 "AvailabilityZones" : [ "us-east-1b"],
                 "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
                  "Tags" : [
-          					{ "Key" : "Name", "Value" :  "solr-scopus-cluster", "PropagateAtLaunch" : true }
+          					{ "Key" : "Name", "Value" :  "solr-affil-p", "PropagateAtLaunch" : true }
         		],
                 "MinSize" : 1,
                 "MaxSize" : 1
@@ -145,16 +151,16 @@
                 "mount -t xfs -o rw,user,noatime /dev/md0 ", { "Ref" : "EphemeralMntPoint" }, "\n",
                 "# Install solr", "\n",
                 "cd ", { "Ref" : "EphemeralMntPoint" }, "\n",
-                "curl -o ./solr-4.5.0.tgz '", { "Ref" : "SolrDownloadURL"}, "'", "\n",
-                "gunzip ./solr-4.5.0.tgz", "\n",
-                "tar -xvf solr-4.5.0.tar", "\n",
-                "cd solr-4.5.0", "\n",
+                "curl -o ./solr-", { "Ref" : "SolrVersion"}, ".tgz '", { "Ref" : "SolrDownloadURL"}, "'", "\n",
+                "gunzip ./solr-", { "Ref" : "SolrVersion"}, ".tgz", "\n",
+                "tar -xvf solr-", { "Ref" : "SolrVersion"}, ".tar", "\n",
+                "cd solr-", { "Ref" : "SolrVersion"}, "\n",
                 "mv ./example/solr/collection1 ./example/solr/", { "Ref" : "SolrClusterName" }, "\n",
-                "sed -i -e 's/collection1/", { "Ref" : "SolrClusterName"}, "/' ./example/solr/core/core.properties", "\n",
-                "curl -o ./example/solr/core/conf/stopwords.txt '", { "Ref" : "SolrStopwordsURL"}, "'", "\n",
-                "curl -o ./example/solr/core/conf/synonyms.txt '", { "Ref" : "SolrSynonymsURL"}, "'", "\n",
-                "curl -o ./example/solr/core/conf/schema.xml '", { "Ref" : "SolrSchemaURL"}, "'", "\n",
-                "curl -o ./example/solr/core/conf/solrconfig.xml '", { "Ref" : "SolrConfigURL"}, "'", "\n",
+                "sed -i -e 's/collection1/", { "Ref" : "SolrClusterName"}, "/' ./example/solr/", { "Ref" : "SolrClusterName" },"/core.properties", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/stopwords.txt '", { "Ref" : "SolrStopwordsURL"}, "'", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/synonyms.txt '", { "Ref" : "SolrSynonymsURL"}, "'", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/schema.xml '", { "Ref" : "SolrSchemaURL"}, "'", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/solrconfig.xml '", { "Ref" : "SolrConfigURL"}, "'", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
                 "nohup java -DnumShards=", { "Ref" : "NumShards"}, " -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
