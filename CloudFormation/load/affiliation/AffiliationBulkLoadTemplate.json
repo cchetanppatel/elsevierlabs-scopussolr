@@ -106,7 +106,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml'-DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -151,7 +151,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -196,7 +196,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -241,7 +241,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -286,7 +286,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -DentityExpansionLimit=1000000 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar AffiliationLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
