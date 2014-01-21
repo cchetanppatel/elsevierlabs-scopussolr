@@ -1,7 +1,9 @@
 package com.elsevier.transform;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -34,6 +36,10 @@ public class AffiliationTransform {
 	XPath xpath = null;
 	HashMap<String,Object> fieldValues = new HashMap<String,Object>();
 	HashMap<String, String> cachedFieldValues = new HashMap<String, String>();
+	
+	private static Calendar now = Calendar.getInstance();
+	private static SimpleDateFormat fastloaddatefmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
 	
 	private static int DEFAULT_JSON_FIELD_STRINGBUILDER_SIZE = 1024;
 	
@@ -134,6 +140,7 @@ public class AffiliationTransform {
 		dbFactory.setNamespaceAware(true); // never forget this!
 		DocumentBuilder builder;
 		
+		
 		try {
 			builder = dbFactory.newDocumentBuilder();
 			doc = builder.parse(is);
@@ -156,6 +163,9 @@ public class AffiliationTransform {
 			
 			createArrayFromAttributes("affilctry", affilctrytArrayMappings);
 			
+			convertCountryCodesToNames("affilctry");
+			
+			// Note: Already changed to codes to names in the affilctry field, so don't need to worry about it here
 			createSortFieldFromArrayField("affilctry-s", "affilctry");
 			
 			createArray("affilname", affilnameArrayMappings, "(.//text())");
@@ -168,14 +178,24 @@ public class AffiliationTransform {
 		
 			createSortFieldFromArrayField("certscore-s", "certscore");
 			
+			// We don't have the fast generated value here.
+			fieldValues.put("count", "1");
+			
 			createArray("datecompletedtxt", datecompletedtxtArrayMappings, "(.//text())");
 	
 			createSingleField("eid", eidMappings);
 			
+			// We don't have the fast generated value - putting dummy value. Based on our actual load processing timestamp
+			String fastdatestr =  fastloaddatefmt.format(now.getTime());
+			fieldValues.put("fastloaddate", fastdatestr);
+						
 			// Note:  I'm cheating and not handling TZ offsets when turning dates into SOLR compatible GMT based times.  Basically just
 			// dropping the microsecond and timezone info and appending a 'Z' for zulu time.
 			createSingleDateField("loaddate", loaddateMappings);
 			
+			// We don't have the fast generated value - putting dummy value.
+			fieldValues.put("loadunit", "ABCDEFGHIJ0123456789");
+						
 			createArray("namevar", namevarArrayMappings, "(.//text())");
 			
 			createSingleField("parafid", parafidMappings);
@@ -191,6 +211,9 @@ public class AffiliationTransform {
 			createSingleField("status", statusMappings);
 			
 			createSingleField("toplevel", toplevelMappings);
+			
+			// We don't have the fast generated value - putting dummy value.
+			fieldValues.put("transid", "ABCDEFGHIJ0123456789");
 			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -582,6 +605,33 @@ public class AffiliationTransform {
 			return;
 		} else {
 			fieldValues.put(fieldName, values);
+		}
+	}
+	
+	private void convertCountryCodesToNames(String fieldValueKey) {
+		
+		// Change countrycodes into country names. Note, the value returned can be either a single string
+		// value or an arrayList of Strings.  Have to take this into account during processing.
+		Object val = fieldValues.get(fieldValueKey);
+		if (val instanceof String) {
+			String ctryName = CountryCodeMap.codes.get(val);
+			if (ctryName != null)
+				fieldValues.put(fieldValueKey, ctryName);
+		} else if (val instanceof ArrayList<?>){
+			ArrayList<String> oldvals = (ArrayList<String>)val;
+			ArrayList<String> newvals = new ArrayList<String>();
+			Iterator<String> it = oldvals.iterator();
+			while (it.hasNext()) {
+				String ctryCode = it.next();
+				String ctryName = CountryCodeMap.codes.get(ctryCode);
+				if (ctryName != null)
+					newvals.add(ctryName);
+				else
+					newvals.add(ctryCode);
+			}
+			fieldValues.put(fieldValueKey, newvals);
+		} else {
+			// just leave things alone..  Shouldn't happen unless there aren't any ctrycodes
 		}
 	}
 

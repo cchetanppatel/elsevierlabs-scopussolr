@@ -1005,11 +1005,11 @@
          updateRequestProcessorChains that can be used by name 
          on each Update Request
       -->
-    <!--
+    
        <lst name="defaults">
-         <str name="update.chain">dedupe</str>
+         <str name="update.chain">standard</str>
        </lst>
-       -->
+      
   </requestHandler>
 
   <!-- for back compat with clients using /update/json and /update/csv -->  
@@ -1658,6 +1658,18 @@
        uniqueness based on that anyway.  
        
     -->
+
+
+     <updateRequestProcessorChain name="standard" default="true">
+       
+       <processor class="solr.processor.DocBasedVersionConstraintsProcessorFactory">
+          <str name="versionField">epoch</str>
+       </processor>
+       <processor class="solr.LogUpdateProcessorFactory" />
+       <processor class="solr.RunUpdateProcessorFactory" />
+     </updateRequestProcessorChain>
+
+    
   <!--
      <updateRequestProcessorChain name="dedupe">
        <processor class="solr.processor.SignatureUpdateProcessorFactory">

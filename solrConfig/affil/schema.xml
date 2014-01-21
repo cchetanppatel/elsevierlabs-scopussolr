@@ -100,15 +100,15 @@
        when adding a document.
    
 -->
- 
-<field name="_version_" type="long" indexed="true" stored="true"/>
+
+<field name="_version_" type="long" indexed="true" stored="true"/> 
 <field name="affil" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="affilcity" type="affil_std_stopwords" multiValued="true" indexed="true"/>
+<field name="affilcity" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilcity-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="affilcity-s" type="affil_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="affilctry" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="affilctry-s" type="affil_std_stopwords" multiValued="false" indexed="true"/>
+<field name="affilctry-s" type="affil_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="affilname" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilname-s" type="affil_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="afid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
@@ -116,7 +116,7 @@
 <field name="certscore-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="certscore-s" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
-<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="false"/>
+<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="true"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="fastloaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="loaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
@@ -125,11 +125,12 @@
 <field name="parafid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="prefname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="prefparname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="quality" type="integer" multiValued="false" indexed="true" stored="false"/>
+<field name="quality" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="sortname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="false"/>
+<field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="toplevel" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="epoch" type="long" indexed="true" stored="true"/>
 
 </fields>
 <uniqueKey>afid</uniqueKey>
