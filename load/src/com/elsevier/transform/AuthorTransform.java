@@ -68,7 +68,7 @@ public class AuthorTransform {
 	};
 	
 	private static String[] affilhistArrayMappings = new String[] {
-		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']"
+		//"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']"
 	};
 
 	private static String[] affilnameArrayMappings = new String[] {
@@ -111,7 +111,8 @@ public class AuthorTransform {
 	};
 	
 	private static String[] afhistidArrayMappings = new String[] {
-		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']"
+		//"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc[@type='parent']"
+		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation"
 	};
 
 	// Note:  Since we aren't merging in the various affiliation record data as XFAB does, we are just merging in all the aff-ids
@@ -123,8 +124,9 @@ public class AuthorTransform {
 	};	
 
 	private static String[] afnameidArrayMappings = new String[] {
-		"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc/afnameid",
-		"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc/afnameid"
+		//"/xocs:doc/xocs:author-profile/author-profile/affiliation-current/affiliation/ip-doc/afnameid",
+		//"/xocs:doc/xocs:author-profile/author-profile/affiliation-history/affiliation/ip-doc/afnameid"
+		"/xocs:doc/xocs:author-profile/author-profile"
 	};	
 	
 	private static String[] aliasArrayMappings = new String[] {
@@ -349,10 +351,16 @@ public class AuthorTransform {
 			createSortFieldFromArrayField("afhistdispname-s", "afhistdispname");
 			
 			// Work around not having the affiliation records merged into our record.
+			createArray("afhistid",afhistidArrayMappings, "(@affiliation-id)");
+						
+			// Work around not having the affiliation records merged into our record.
 			//createArray("afid",afidArrayMappings, "(@id)");
 			createArray("afid",afidArrayMappings, "(@affiliation-id)");
 			
-			createArray("afnameid",afnameidArrayMappings, "(.//text())");
+			// Note Mappings are different as we don't have afname data.
+			//createArray("afnameid",afnameidArrayMappings, "(.//text())");
+			
+			createArray("afnameid",afnameidArrayMappings, "(./affiliation-current/affiliation/@affiliation-id | ./preferred-name/surname//text() )");
 			
 			createArray("alias",aliasArrayMappings, "(.//text())");
 			
@@ -384,6 +392,9 @@ public class AuthorTransform {
 			
 			createSingleDateField("loaddate", loaddateMappings);
 			
+			// We don't have the fast generated value - putting dummy value.
+			fieldValues.put("loadunit", "ABCDEFGHIJ0123456789");
+						
 			createArray("namevar",namevarArrayMappings, "(./initials//text() | ./surname//text() | ./given-name//text())");
 			
 			createArray("namevarfirst",namevarfirstArrayMappings, "(.//text())");
@@ -412,14 +423,22 @@ public class AuthorTransform {
 			
 			createSingleField("status", statusMappings);
 			
-			createArray("subjabbr",subjabbrArrayMappings, "(.//text())");
+			// See note after subjmain
+			//createArray("subjabbr",subjabbrArrayMappings, "(.//text())");
 			
 			createArray("subjclus",subjclusArrayMappings, "(.//text())");
 			
 			createArray("subjmain",subjmainArrayMappings, "(.//text())");
 			
+			// Note: our data doesn't have merged in subject abbreviations so we'll manually match them up and 
+			// put them in the index.
+			convertSubjectCodesToAbbrs("subjmain", "subjabbr");
+			
 			createSingleField("suppress", suppressMappings);	
 			
+			// We don't have the fast generated value - putting dummy value.
+			fieldValues.put("transid", "ABCDEFGHIJ0123456789");
+						
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -875,4 +894,30 @@ public class AuthorTransform {
 		}
 	}
 
+	private void convertSubjectCodesToAbbrs(String fieldValueKey, String newFieldValueKey) {
+		
+		// Change subject codes into subject abreviations. Note, the value returned can be either a single string
+		// value or an arrayList of Strings.  Have to take this into account during processing.
+		Object val = fieldValues.get(fieldValueKey);
+		if (val instanceof String) {
+			String subjAbbr = SubjectAbbrMap.codes.get(val);
+			if (subjAbbr != null)
+				fieldValues.put(newFieldValueKey, subjAbbr);
+		} else if (val instanceof ArrayList<?>){
+			ArrayList<String> oldvals = (ArrayList<String>)val;
+			ArrayList<String> newvals = new ArrayList<String>();
+			Iterator<String> it = oldvals.iterator();
+			while (it.hasNext()) {
+				String subjCode = it.next();
+				String subjAbbr = SubjectAbbrMap.codes.get(subjCode);
+				if (subjAbbr != null)
+					newvals.add(subjAbbr);
+				else
+					newvals.add(subjCode);
+			}
+			fieldValues.put(newFieldValueKey, newvals);
+		} else {
+			// just leave things alone..  Shouldn't happen unless there aren't any subject codes
+		}
+	}
 }

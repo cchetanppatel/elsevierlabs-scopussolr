@@ -139,7 +139,11 @@ public class SolrAuthor {
 						is = FileUtils.openInputStream(new File(filename));
 						AuthorTransform sdt = new AuthorTransform();
 						HashMap<String, Object> fieldValues =  sdt.transform(is);
-								
+						
+						// Put the requests epoch value into the document at the version of the document
+						// so Solr can filter out stale requests.
+						fieldValues.put("epoch", Long.toString(epoch, 10) );
+						
 						//Debug ... output the keys/values to see if we did it right
 						for (String key:fieldValues.keySet()) {
 							
