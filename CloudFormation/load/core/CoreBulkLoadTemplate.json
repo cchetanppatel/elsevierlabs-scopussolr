@@ -1,0 +1,363 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  
+  "Description" : "Start an EC2 Instance in the Eastern region for loading Core content into Solr.",
+  
+  "Parameters" : {
+      
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "Default" : "ats",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },    
+    
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "cc1.4xlarge",
+      "AllowedValues" : [ "t1.micro", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "c1.medium", "c1.xlarge", "cc1.4xlarge", "cc2.8xlarge" ],
+      "ConstraintDescription" : "must be a valid EC2 instance type."
+    },
+
+    "SignedJarUrl" : {
+      "Description" : "Signed URL for the jar file in S3",
+      "Type" : "String",
+      "Default" : ""
+    },
+    
+    "SignedPropertiesUrl" : {
+      "Description" : "Signed URL for the Loader properties file in S3",
+      "Type" : "String",
+      "Default" : ""
+    },
+      
+    "Log4jURL" : {
+      "Description" : "URL for the Log4J config file",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/load/log4j.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420355051&Signature=4ry/AW6uiO99LI8qp5IXsl7DLVE%3D"
+    },
+    
+    "NumberOfProcesses" : {
+      "Description" : "Number of processes to start",
+      "Type" : "Number",
+      "Default" : "20"
+    }
+  },
+  
+"Mappings" : {
+    "AWSInstanceType2AMI" : {
+      "t1.micro" : { "AMI" : "ami-0b0a8362"},
+      "m1.small" : { "AMI" : "ami-0b0a8362"},
+      "m1.medium" : { "AMI" : "ami-0b0a8362"},
+      "m1.large" : { "AMI" : "ami-0b0a8362"},
+      "m1.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "c1.medium" : { "AMI" : "ami-0b0a8362"},
+      "c1.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.2xlarge" : { "AMI" : "ami-0b0a8362"},
+      "m2.4xlarge" : { "AMI" : "ami-0b0a8362"},
+      "cc1.4xlarge" : { "AMI" : "ami-08249861"},
+      "cc2.8xlarge" : { "AMI" : "ami-08249861"}
+    }
+  },
+
+ "Resources": {
+ 
+        "Ec2Instance1": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "mkdir /solr-load", "\n",
+				"# Start up the indexers", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "echo /solr-load/logfile$i.log { >> /etc/logrotate.conf","\n",
+                "echo missingok >> /etc/logrotate.conf","\n",
+                "echo notifempty >> /etc/logrotate.conf","\n",
+                "echo daily >> /etc/logrotate.conf","\n",
+                "echo dateext >> /etc/logrotate.conf","\n",
+                "echo rotate 7 >> /etc/logrotate.conf","\n",
+                "echo copytruncate >> /etc/logrotate.conf","\n",
+                "echo } >> /etc/logrotate.conf","\n",
+                "done","\n",
+                "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
+                "cd /solr-load", "\n",
+				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
+                "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "sleep 30", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "done"                
+                ]]}}   
+            }
+        },  
+        
+        "Ec2Instance2": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "mkdir /solr-load", "\n",
+				"# Start up the indexers", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "echo /solr-load/logfile$i.log { >> /etc/logrotate.conf","\n",
+                "echo missingok >> /etc/logrotate.conf","\n",
+                "echo notifempty >> /etc/logrotate.conf","\n",
+                "echo daily >> /etc/logrotate.conf","\n",
+                "echo dateext >> /etc/logrotate.conf","\n",
+                "echo rotate 7 >> /etc/logrotate.conf","\n",
+                "echo copytruncate >> /etc/logrotate.conf","\n",
+                "echo } >> /etc/logrotate.conf","\n",
+                "done","\n",
+                "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
+                "cd /solr-load", "\n",
+				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
+                "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "sleep 30", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "done"                
+                ]]}}   
+            }
+        },  
+        
+        "Ec2Instance3": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "mkdir /solr-load", "\n",
+				"# Start up the indexers", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "echo /solr-load/logfile$i.log { >> /etc/logrotate.conf","\n",
+                "echo missingok >> /etc/logrotate.conf","\n",
+                "echo notifempty >> /etc/logrotate.conf","\n",
+                "echo daily >> /etc/logrotate.conf","\n",
+                "echo dateext >> /etc/logrotate.conf","\n",
+                "echo rotate 7 >> /etc/logrotate.conf","\n",
+                "echo copytruncate >> /etc/logrotate.conf","\n",
+                "echo } >> /etc/logrotate.conf","\n",
+                "done","\n",
+                "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
+                "cd /solr-load", "\n",
+				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
+                "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "sleep 30", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "done"                
+                ]]}}   
+            }
+        },  
+        
+        "Ec2Instance4": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "mkdir /solr-load", "\n",
+				"# Start up the indexers", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "echo /solr-load/logfile$i.log { >> /etc/logrotate.conf","\n",
+                "echo missingok >> /etc/logrotate.conf","\n",
+                "echo notifempty >> /etc/logrotate.conf","\n",
+                "echo daily >> /etc/logrotate.conf","\n",
+                "echo dateext >> /etc/logrotate.conf","\n",
+                "echo rotate 7 >> /etc/logrotate.conf","\n",
+                "echo copytruncate >> /etc/logrotate.conf","\n",
+                "echo } >> /etc/logrotate.conf","\n",
+                "done","\n",
+                "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
+                "cd /solr-load", "\n",
+				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
+                "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "sleep 30", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "done"                
+                ]]}}   
+            }
+        },  
+        
+        "Ec2Instance5": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "mkdir /solr-load", "\n",
+				"# Start up the indexers", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "echo /solr-load/logfile$i.log { >> /etc/logrotate.conf","\n",
+                "echo missingok >> /etc/logrotate.conf","\n",
+                "echo notifempty >> /etc/logrotate.conf","\n",
+                "echo daily >> /etc/logrotate.conf","\n",
+                "echo dateext >> /etc/logrotate.conf","\n",
+                "echo rotate 7 >> /etc/logrotate.conf","\n",
+                "echo copytruncate >> /etc/logrotate.conf","\n",
+                "echo } >> /etc/logrotate.conf","\n",
+                "done","\n",
+                "echo 02 0 * * * root run-parts /etc/cron.daily >> /etc/crontab","\n",
+                "cd /solr-load", "\n",
+				"curl -o log4j.xml '", { "Ref" : "Log4jURL"}, "'", "\n",                
+                "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
+                "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
+                "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
+                "sleep 30", "\n",
+                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "done"                
+                ]]}}   
+            }
+        },  
+        "InstanceSecurityGroup" : {
+	       "Type" : "AWS::EC2::SecurityGroup",
+	       "Properties" : {
+	         "GroupDescription" : "Enable SSH access on the inbound port",
+             "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.18.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.25.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "0.0.0.0/0"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "145.36.0.0/16"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "8983",
+                    "ToPort" : "8983",
+                    "CidrIp" : "0.0.0.0/0"
+                }]
+           }
+        }
+    	
+ },
+
+
+  "Outputs" : {
+    "InstanceId1" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance1" }
+    },
+
+    "PublicIP1" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance1", "PublicIp" ] }
+    },
+    "PublicIP2" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance2", "PublicIp" ] }
+    },
+    "PublicIP3" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance3", "PublicIp" ] }
+    },
+    "PublicIP4" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance4", "PublicIp" ] }
+    },
+    "PublicIP5" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance5", "PublicIp" ] }
+    }   
+    
+  }
+  
+}
