@@ -693,6 +693,13 @@ public class AbstractTransform {
 			
 			createArray("abs",absArrayMappings, "(.//text())");
 			
+			// Somehow FAST decides absavail... We will fake out the value by seeing if abs was populated in the previous line.
+			if (fieldValues.get("absavail") != null) {
+				fieldValues.put("absavail", "1");
+			} else {
+				fieldValues.put("absavail", "0");
+			}
+			
 			createSortFieldFromArrayField("afdispcity-s", "afdispcity");
 			
 			createArray("abslang",abslangArrayMappings, "(xml:lang)");
@@ -700,6 +707,9 @@ public class AbstractTransform {
 			createArray("affilcity",affilcityArrayMappings, "(.//text())");
 						
 			createArray("affilctry",affilctryArrayMappings, "(.//text())");
+			
+			// Convert the countyr codes we extracted to actual country names
+			convertCountryCodesToNames("affilctry");
 			
 			createSortFieldFromArrayField("affilctry-s", "affilctry");
 					
@@ -910,6 +920,9 @@ public class AbstractTransform {
 			
 			createArray("tradenames", tradenamesArrayMappings, "(.//text())");
 			
+			// We don't have the fast generated value - putting dummy value.
+			fieldValues.put("transid", "ABCDEFGHIJ0123456789");
+						
 			createSingleField("vol", volMappings);
 			
 			createSingleField("website", websiteMappings);
@@ -1391,4 +1404,30 @@ public class AbstractTransform {
 		}
 	}
 
+	private void convertCountryCodesToNames(String fieldValueKey) {
+		
+		// Change countrycodes into country names. Note, the value returned can be either a single string
+		// value or an arrayList of Strings.  Have to take this into account during processing.
+		Object val = fieldValues.get(fieldValueKey);
+		if (val instanceof String) {
+			String ctryName = CountryCodeMap.codes.get(val);
+			if (ctryName != null)
+				fieldValues.put(fieldValueKey, ctryName);
+		} else if (val instanceof ArrayList<?>){
+			ArrayList<String> oldvals = (ArrayList<String>)val;
+			ArrayList<String> newvals = new ArrayList<String>();
+			Iterator<String> it = oldvals.iterator();
+			while (it.hasNext()) {
+				String ctryCode = it.next();
+				String ctryName = CountryCodeMap.codes.get(ctryCode);
+				if (ctryName != null)
+					newvals.add(ctryName);
+				else
+					newvals.add(ctryCode);
+			}
+			fieldValues.put(fieldValueKey, newvals);
+		} else {
+			// just leave things alone..  Shouldn't happen unless there aren't any ctrycodes
+		}
+	}
 }
