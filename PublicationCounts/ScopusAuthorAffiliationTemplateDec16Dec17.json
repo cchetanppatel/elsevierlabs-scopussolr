@@ -1,0 +1,166 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  
+  "Description" : "Template to start up a machine to compare author and affiliation counts",
+  
+  "Parameters" : {
+      
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "Default" : "ats",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },
+    
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "m1.large",
+      "AllowedValues" : [ "m1.large" ],
+      "ConstraintDescription" : "must be a valid EC2 instance type in the AWSInstanceType2AMI Mappings."
+    },
+    
+    "EphemeralMntPoint" : {
+      "Description" : "Where to mount the first ephemeral drive.",
+      "Type" : "String",
+      "Default" : "/mnt/data"
+    }
+    
+  },
+  
+"Mappings" : {
+    "AWSInstanceType2AMI" : {
+      "t1.micro" : { "AMI" : "ami-100c6b79"},
+      "m1.small" : { "AMI" : "ami-100c6b79"},
+      "m1.medium" : { "AMI" : "ami-100c6b79"},
+      "m1.large" : { "AMI" : "ami-100c6b79"},
+      "m1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "c1.medium" : { "AMI" : "ami-100c6b79"},
+      "c1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.2xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.4xlarge" : { "AMI" : "ami-100c6b79"}
+    }
+  },
+
+ "Resources": {
+                
+        "Ec2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "BlockDeviceMappings" : [ {"DeviceName" : "/dev/sdk", "VirtualName" : "ephemeral0"} ],
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Set up the ephemeral drives and mount them", "\n",
+                "mkdir -p ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "mount -o rw,user /dev/sdk ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "cd ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "curl -o dec16_author.gz 'https://s3.amazonaws.com/prod-ScopusCustomData/%2Fscopus-hothouse%2F2013-12-16%2FAP_eid_timestamp_cnt_Dec16.csv.gz?Expires=1389814145&AWSAccessKeyId=AKIAIHQUVINAQPR2KJPQ&Signature=4deFEGunxIGQharNR8rI6iyOxzg%3D'", "\n",
+                "curl -o dec16_affiliation.gz 'https://s3.amazonaws.com/prod-ScopusCustomData/%2Fscopus-hothouse%2F2013-12-16%2FIP_eid_timestamp_cnt_Dec16.csv.gz?Expires=1389814146&AWSAccessKeyId=AKIAIHQUVINAQPR2KJPQ&Signature=0mYbV%2Fvn6204%2BMXSVHYncuPnIvE%3D'", "\n",
+                "gunzip dec16_author.gz", "\n",
+                "gunzip dec16_affiliation.gz", "\n",
+                "sort dec16_author -o dec16_author", "\n",
+                "sort dec16_affiliation -o dec16_affiliation", "\n",
+                "wc -l dec16_author > dec16_author_cnt", "\n",
+                "wc -l dec16_affiliation > dec16_affiliation_cnt", "\n",
+                "cut -d , -f1 dec16_author > dec16_author_eids", "\n",
+                "cut -d , -f1 dec16_affiliation > dec16_affiliation_eids", "\n",
+                "cut -d , -f1,2 dec16_author > dec16_author_ts", "\n",
+                "cut -d , -f1,2 dec16_affiliation > dec16_affiliation_ts", "\n",        
+                "cut -d , -f1,3 dec16_author > dec16_author_pc", "\n",
+                "cut -d , -f1,3 dec16_affiliation > dec16_affiliation_pc", "\n",  
+                "curl -o dec17_author.gz 'https://s3.amazonaws.com/prod-ScopusCustomData/%2Fscopus-hothouse%2F2013-12-17%2FAP_eid_timestamp_cnt_Dec17.csv.gz?Expires=1396788711&AWSAccessKeyId=AKIAIHQUVINAQPR2KJPQ&Signature=dQYiXYC2zFB1Z9bwYtU043O8pzo%3D'", "\n",
+                "curl -o dec17_affiliation.gz 'https://s3.amazonaws.com/prod-ScopusCustomData/%2Fscopus-hothouse%2F2013-12-17%2FIP_eid_timestamp_cnt_Dec17.csv.gz?Expires=1396788711&AWSAccessKeyId=AKIAIHQUVINAQPR2KJPQ&Signature=7UVUQhaYccQa1YAuNGzqSevnoTU%3D'", "\n",
+                "gunzip dec17_author.gz", "\n",
+                "gunzip dec17_affiliation.gz", "\n",
+                "sort dec17_author -o dec17_author", "\n",
+                "sort dec17_affiliation -o dec17_affiliation", "\n",
+                "wc -l dec17_author > dec17_author_cnt", "\n",
+                "wc -l dec17_affiliation > dec17_affiliation_cnt", "\n",              
+                "cut -d , -f1 dec17_author > dec17_author_eids", "\n",
+                "cut -d , -f1 dec17_affiliation > dec17_affiliation_eids", "\n",
+                "cut -d , -f1,2 dec17_author > dec17_author_ts", "\n",
+                "cut -d , -f1,2 dec17_affiliation > dec17_affiliation_ts", "\n",        
+                "cut -d , -f1,3 dec17_author > dec17_author_pc", "\n",
+                "cut -d , -f1,3 dec17_affiliation > dec17_affiliation_pc", "\n",                 
+                "comm -2 -3  --nocheck-order dec16_author_eids dec17_author_eids > dec16_author_eids_unique", "\n",
+                "comm -1 -3  --nocheck-order dec16_author_eids dec17_author_eids > dec17_author_eids_unique", "\n",                
+                "comm -2 -3  --nocheck-order dec16_affiliation_eids dec17_affiliation_eids > dec16_affiliation_eids_unique", "\n",
+                "comm -1 -3  --nocheck-order dec16_affiliation_eids dec17_affiliation_eids > dec17_affiliation_eids_unique", "\n",   
+                "comm -2 -3  --nocheck-order dec16_author_ts dec17_author_ts > dec16_author_ts_unique", "\n",
+                "comm -1 -3  --nocheck-order dec16_author_ts dec17_author_ts > dec17_author_ts_unique", "\n",                
+                "comm -2 -3  --nocheck-order dec16_affiliation_ts dec17_affiliation_ts > dec16_affiliation_ts_unique", "\n",
+                "comm -1 -3  --nocheck-order dec16_affiliation_ts dec17_affiliation_ts > dec17_affiliation_ts_unique", "\n", 
+                "comm -2 -3  --nocheck-order dec16_author_pc dec17_author_pc > dec16_author_pc_unique", "\n",
+                "comm -1 -3  --nocheck-order dec16_author_pc dec17_author_pc > dec17_author_pc_unique", "\n",                
+                "comm -2 -3  --nocheck-order dec16_affiliation_pc dec17_affiliation_pc > dec16_affiliation_pc_unique", "\n",
+                "comm -1 -3  --nocheck-order dec16_affiliation_pc dec17_affiliation_pc > dec17_affiliation_pc_unique", "\n",
+                "wc -l dec16_author_eids_unique > dec16_author_eids_unique_cnt", "\n",
+                "wc -l dec17_author_eids_unique > dec17_author_eids_unique_cnt", "\n",
+                "wc -l dec16_affiliation_eids_unique > dec16_affiliation_eids_unique_cnt", "\n",
+                "wc -l dec17_affiliation_eids_unique > dec17_affiliation_eids_unique_cnt", "\n",
+                "wc -l dec16_author_ts_unique > dec16_author_ts_unique_cnt", "\n",
+                "wc -l dec17_author_ts_unique > dec17_author_ts_unique_cnt", "\n",
+                "wc -l dec16_affiliation_ts_unique > dec16_affiliation_ts_unique_cnt", "\n",
+                "wc -l dec17_affiliation_ts_unique > dec17_affiliation_ts_unique_cnt", "\n",                
+                "wc -l dec16_author_pc_unique > dec16_author_pc_unique_cnt", "\n",
+                "wc -l dec17_author_pc_unique > dec17_author_pc_unique_cnt", "\n",
+                "wc -l dec16_affiliation_pc_unique > dec16_affiliation_pc_unique_cnt", "\n",
+                "wc -l dec17_affiliation_pc_unique > dec17_affiliation_pc_unique_cnt"          
+                ]]}}
+            }
+        },
+ 		
+        "InstanceSecurityGroup" : {
+        "Type" : "AWS::EC2::SecurityGroup",
+        "Properties" : {
+        "GroupDescription" : "Enable SSH access on the inbound port",
+             "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "0.0.0.0/0"
+                }]
+           }
+        }
+    
+ },
+
+
+  "Outputs" : {
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance" }
+    },
+    
+    "AZ" : {
+      "Description" : "Availability Zone of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "AvailabilityZone" ] }
+    },
+    
+    "PublicIP" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicIp" ] }
+    }
+    
+  }
+  
+}
