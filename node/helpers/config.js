@@ -23,28 +23,20 @@ exports.init = function(environment) {
    
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
                                 
-                                'solr-host-port-public' : { 'affil': ['ec2-54-224-19-230.compute-1.amazonaws.com:8983', 'ec2-54-211-189-131.compute-1.amazonaws.com:8983'],
-                                                            'auth' : ['ec2-54-224-19-230.compute-1.amazonaws.com:8984', 'ec2-54-211-189-131.compute-1.amazonaws.com:8984'],
-                                                            'core' : ['ec2-54-224-19-230.compute-1.amazonaws.com:8985', 'ec2-54-211-189-131.compute-1.amazonaws.com:8985'] },
+                                'solr-host-port-public' : { 'affil': ['54.224.52.75:8983'],
+                                                            'auth' : ['54.224.52.75:8983'],
+                                                            'core' : ['54.224.52.75:8983'] },
                                                            
-                                'solr-host-port-private' : { 'affil': ['10.234.11.254:8983','10.28.212.147:8983'],
-                                                             'auth' : ['10.234.11.254:8984','10.28.212.147:8984'],
-                                                             'core' : ['10.234.11.254:8985','10.28.212.147:8985'] },
-                                                             
-                                                             
-                                                            
-                                /*
-                                'solr-host-port' : { 'affil': ['ec2-54-211-189-131.compute-1.amazonaws.com:8983', 'ec2-54-211-189-131.compute-1.amazonaws.com:8983'],
-                                                     'auth' : ['ec2-54-224-19-230.compute-1.amazonaws.com:8984', 'ec2-54-211-189-131.compute-1.amazonaws.com:8984'],
-                                                     'core' : ['ec2-54-224-19-230.compute-1.amazonaws.com:8985', 'ec2-54-211-189-131.compute-1.amazonaws.com:8985'] },
-                                */
- 
-                                'solr-host-port' : { 'affil': ['localhost:8983'],
-                                                     'auth' : ['localhost:8983'],
-                                                     'core' : ['localhost:8983'] },
+                                'solr-host-port-private' : { 'affil': ['10.236.151.246:8983'],
+                                                             'auth' : ['10.236.151.246:8983'],
+                                                             'core' : ['10.236.151.246:8983'] },
+                                                                                                                        
+                                'solr-host-port' : { 'affil': ['54.224.52.75:8983'],
+                                                     'auth' : ['54.224.52.75:8983'],
+                                                     'core' : ['54.224.52.75:8983'] },
                                                      
-                                'solr-cluster' : { 'auth'  : 'author',
-                                                   'affil' : 'affiliation',
+                                'solr-cluster' : { 'auth'  : 'auth',
+                                                   'affil' : 'affil',
                                                    'core'  : 'core'},
                                 
                                 'mode' : 'development'
@@ -65,23 +57,22 @@ exports.init = function(environment) {
                                 'ddb-region' : 'us-east-1',
                                 'ddb-load-query-table' : 'scopus-solr-load-query',
                                 
-                                'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
-                           
+                                'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          
                                                            
-                                'solr-host-port-public' : { 'affil': ['ec2-54-224-19-230.compute-1.amazonaws.com:8983', 'ec2-54-211-189-131.compute-1.amazonaws.com:8983'],
-                                                            'auth' : ['ec2-54-224-19-230.compute-1.amazonaws.com:8984', 'ec2-54-211-189-131.compute-1.amazonaws.com:8984'],
-                                                            'core' : ['ec2-54-224-19-230.compute-1.amazonaws.com:8985', 'ec2-54-211-189-131.compute-1.amazonaws.com:8985'] },
+                                'solr-host-port-public' : { 'affil': ['54.224.52.75:8983'],
+                                                            'auth' : ['54.224.52.75:8983'],
+                                                            'core' : ['54.224.52.75:8983'] },
                                                            
-                                'solr-host-port-private' : { 'affil': ['10.234.11.254:8983','10.28.212.147:8983'],
-                                                             'auth' : ['10.234.11.254:8984','10.28.212.147:8984'],
-                                                             'core' : ['10.234.11.254:8985','10.28.212.147:8985'] },
-
-                                'solr-host-port' : { 'affil': ['10.234.11.254:8983','10.28.212.147:8983'],
-                                                     'auth' : ['10.234.11.254:8984','10.28.212.147:8984'],
-                                                     'core' : ['10.234.11.254:8985','10.28.212.147:8985'] },
+                                'solr-host-port-private' : { 'affil': ['10.236.151.246:8983'],
+                                                             'auth' : ['10.236.151.246:8983'],
+                                                             'core' : ['10.236.151.246:8983'] },
+                                                                                                                        
+                                'solr-host-port' : { 'affil': ['10.236.151.246:8983'],
+                                                     'auth' : ['10.236.151.246:8983'],
+                                                     'core' : ['10.236.151.246:8983'] },
                                                      
-                                'solr-cluster' : { 'auth'  : 'author',
-                                                   'affil' : 'affiliation',
+                                'solr-cluster' : { 'auth'  : 'auth',
+                                                   'affil' : 'affil',
                                                    'core'  : 'core'},
                                                    
                                 'mode' : 'production'                          
