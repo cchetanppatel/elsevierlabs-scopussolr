@@ -5,6 +5,15 @@
   xmlns:qw="http://webservices.elsevier.com/schemas/search/fast/types/v4"
   version="2.0">
     
+     <!-- 
+     
+    	Stylesheet for transforming author queries into Solr syntax.
+    
+    	Limitations:
+      		Navigator selection (AdjustmentGroup elements) are currently ignored.
+      
+     -->
+     
     <!-- Turn off auto-insertion of <?xml> tag and set indenting on -->
     <xsl:output method="text" encoding="utf-8" indent="yes"/>
     
@@ -38,6 +47,10 @@
       <xsl:apply-templates select="./ft:fullTextQuery/ft:query"/>
 
       <!--  return fields clause -->
+      <!--  All fields present in query set are correctly defined and to not need to be adjusted.
+      		Some of the fields may not actually have content (or contain dummy values).  This would 
+      		include many of the affiliation related fields not merged into the author record.
+      -->
       <xsl:if test="exists($fields)">
         <xsl:text>&amp;fl=</xsl:text>
         <xsl:for-each select="$fields">
@@ -211,61 +224,56 @@
     <xsl:param name="f"/> 
     <xsl:choose>
       
-      <!-- Affiliation display city -->
-      <!-- Don't have a value for afdispcity-s.  Use authfirst. -->
-      <xsl:when test="matches($f,'^afdispcity$')">
-        <xsl:text>authfirst</xsl:text>
+      <!-- Affiliation display city (21) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      
+      <!-- Affiliation display country (68) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+
+      <!-- Affiliation city (0) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      <!--  Never referenced in any queries anyway.                    -->
+
+      <!-- Affiliation country (0) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      <!--  Never referenced in any queries anyway.                    -->
+
+      <!-- Affiliation name (0) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      <!--  Never referenced in any queries anyway.                    -->
+
+      <!-- Affiliation sort name (37) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      
+      <!-- Affiliation history city (0) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      <!--  Never referenced in any queries anyway.                    -->
+
+      <!-- Affiliation history country (0) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      <!--  Never referenced in any queries anyway.                    -->
+
+      <!-- Affiliation history display name  (0) -->
+      <!--  Queries with this field removed as part of 'slim' script.  -->
+      <!--  Never referenced in any queries anyway.                    -->
+      
+      <!-- Relevancy (938) -->
+      <xsl:when test="matches($f,'^relevancy$')">
+        <xsl:text>score</xsl:text>
       </xsl:when>
       
-      <!-- Affiliation display country -->
-      <!-- Don't have a value for afdispctry-s.  Use issn. -->
-      <xsl:when test="matches($f,'^afdispctry$')">
-        <xsl:text>issn</xsl:text>
-      </xsl:when>
-
-      <!-- Affiliation city -->
-      <!-- Don't have a value for affilcity-s.  Use authfirst. -->
-      <xsl:when test="matches($f,'^affilcity$')">
-        <xsl:text>authfirst</xsl:text>
-      </xsl:when>
-
-      <!-- Affiliation country -->
-      <!-- Don't have a value for affilctry-s.  Use issn. -->
-      <xsl:when test="matches($f,'^affilctry$')">
-        <xsl:text>issn</xsl:text>
-      </xsl:when>
-
-      <!-- Affiliation name -->
-      <!-- Don't have a value for affilname-s.  Use namevarini. -->
-      <xsl:when test="matches($f,'^affilname$')">
-        <xsl:text>namevarini</xsl:text>
-      </xsl:when>
-
-      <!-- Affiliation sort name -->
-      <!-- Don't have a value for affilsortname-s.  Use namevarini. -->
-      <xsl:when test="matches($f,'^affilsortname$')">
-        <xsl:text>namevarini</xsl:text>
-      </xsl:when>
-      
-      <!-- Affiliation history city -->
-      <!-- Don't have a value for afdispcity-s.  Use authfirst. -->
-      <xsl:when test="matches($f,'^afhistcity$')">
-        <xsl:text>authfirst</xsl:text>
-      </xsl:when>
-
-      <!-- Affiliation history country -->
-      <!-- Don't have a value for afhistctry-s.  Use issn. -->
-      <xsl:when test="matches($f,'^afhistctry$')">
-        <xsl:text>issn</xsl:text>
-      </xsl:when>
-
-      <!-- Affiliation history display name  -->
-      <!-- Don't have a value for afhistdispname-s.  Use namevarini. -->
-      <xsl:when test="matches($f,'^afhistdispname$')">
-        <xsl:text>namevarini</xsl:text>
-      </xsl:when>
-      
-      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
+      <!-- Assume we use the specified name as the field  -->   
+      <!--  This would include 
+      			active (175259)
+      			authid (223826)
+      			count (223824)
+      			eid (0)
+      			preffirst (766)
+      			preffirstsort (223826)
+      			prefini (766)
+      			preflast (224869)
+      			prefname  (0)
+      -->                                                                                                                                                                                                                                                                                                                                                                               
       <xsl:otherwise>
         <xsl:value-of select="$f"/>
       </xsl:otherwise>
@@ -279,46 +287,47 @@
     <xsl:param name="f"/> 
     <xsl:choose>
       
-      <!-- Active -->
+      <!-- Active (38451) -->
       <xsl:when test="matches($f,'^autactivenav$')">
-        <xsl:text>active</xsl:text>
+        <xsl:text>active-f</xsl:text>
       </xsl:when>
       
-      <!-- Affiliation city -->
-      <!-- Don't have a value for affilcity-f.  Use authfirst. -->
+      <!-- Affiliation city (49754) -->
+      <!-- Don't have a value for affilcity-f.  -->
       <xsl:when test="matches($f,'^autaffilcitynav$')">
-        <xsl:text>authfirst</xsl:text>
+        <xsl:text>affilcity-f</xsl:text>
       </xsl:when>
  
-      <!-- Affiliation country -->
-      <!-- Don't have a value for affilctry-f.  Use issn. -->
+      <!-- Affiliation country (49734) -->
+      <!-- Don't have a value for affilctry-f.  -->
       <xsl:when test="matches($f,'^autaffilctrynav$')">
-        <xsl:text>issn</xsl:text>
+        <xsl:text>affilctry-f</xsl:text>
       </xsl:when>
 
-      <!-- Affiliation id -->
+      <!-- Affiliation id (0) -->
       <xsl:when test="matches($f,'^autafidnav$')">
         <xsl:text>afid-f</xsl:text>
       </xsl:when>
 
-      <!-- Affiliation name id -->
-      <!-- Don't have a value for afnameid-f.  Use namevarini. -->
+      <!-- Affiliation name id (49789) -->
+      <!-- Don't have a value for afnameid-f.  Used author last name and afid. -->
       <xsl:when test="matches($f,'^autafnameidnav$')">
-        <xsl:text>namevarini</xsl:text>
+        <xsl:text>afnameid-f</xsl:text>
       </xsl:when>
 
-      <!-- Source title  -->
+      <!-- Source title (49227) -->
       <xsl:when test="matches($f,'^autsrctitlenav$')">
         <xsl:text>srctitle-f</xsl:text>
       </xsl:when>
 
-      <!-- Subject cluster  -->
-      <!-- Don't have a value for subjclus-f.  Use subjmain.  -->
+      <!-- Subject cluster (49745) -->
+      <!-- Don't have a value for subjclus-f.  -->
       <xsl:when test="matches($f,'^autsubjclusnav$')">
-        <xsl:text>subjmain</xsl:text>
+        <xsl:text>subjclus-f</xsl:text>
       </xsl:when>
       
-      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
+      <!-- Assume we use the specified name as the field  -->
+      <!--  This should not happen. -->                                                                                                                                                                                                                                                                                                                                                                                 
       <xsl:otherwise>
         <xsl:value-of select="$f"/>
       </xsl:otherwise>

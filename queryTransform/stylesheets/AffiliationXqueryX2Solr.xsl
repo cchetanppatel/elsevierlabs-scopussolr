@@ -5,6 +5,15 @@
   xmlns:qw="http://webservices.elsevier.com/schemas/search/fast/types/v4"
   version="2.0">
     
+    <!-- 
+    
+    	Stylesheet for transforming affiliation queries into Solr syntax.
+    
+    	Limitations:
+      		Navigator selection (AdjustmentGroup elements) are currently ignored.
+      
+     -->
+     
     <!-- Turn off auto-insertion of <?xml> tag and set indenting on -->
     <xsl:output method="text" encoding="utf-8" indent="yes"/>
     
@@ -38,10 +47,12 @@
       <xsl:apply-templates select="./ft:fullTextQuery/ft:query"/>
 
       <!--  return fields clause -->
+      <!--  All fields present in query set are correctly defined and to not need to be adjusted.
+      		Some of the fields may not actually have content (or contain dummy values).
+      -->
       <xsl:if test="exists($fields)">
         <xsl:text>&amp;fl=</xsl:text>
         <xsl:for-each select="$fields">
-          <!-- TODO may need to adjust values for return field -->
           <xsl:value-of select="./text()"/>
           <xsl:if test="position() != last()">
             <xsl:text>,</xsl:text>
@@ -113,17 +124,15 @@
   
   
   <!-- Query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:query">
-    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare[ft:clause[@path!='count']]"/>
+    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare"/>
   </xsl:template>
   
   
   <!-- AND query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:andQuery">
     <xsl:text>(</xsl:text>  
-    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare[ft:clause[@path!='count']]">
+    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
       <xsl:if test="position() != 1">
         <xsl:text> AND </xsl:text>
       </xsl:if>
@@ -134,10 +143,9 @@
   
   
   <!-- OR query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:orQuery">
     <xsl:text>(</xsl:text>  
-    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare[ft:clause[@path!='count']]">
+    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
       <xsl:if test="position() != 1">
         <xsl:text> OR </xsl:text>
       </xsl:if>
@@ -148,17 +156,15 @@
   
   
   <!-- NOT query clause -->
-  <!-- TODO remove hack for count since a field is currently not indexed with that value -->
   <xsl:template match="ft:notQuery">
     <xsl:text>NOT(</xsl:text>
-    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:numericCompare[ft:clause[@path!='count']]"/>
+    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:numericCompare"/>
     <xsl:text>)</xsl:text>
   </xsl:template>
   
   
   <!-- WORD query clause -->
   <xsl:template match="ft:word">
-    <!--TODO may need to adjust values for the field -->
     <xsl:value-of select="./@path"/>
     <xsl:text>:</xsl:text>
     <!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
@@ -207,22 +213,43 @@
     <xsl:param name="f"/> 
     <xsl:choose>
       
-      <!-- Affiliation city -->
+      <!-- Affiliation  -->
+      <!--  No field available for sorting.  -->
+      <!--  May really not be needed as no one orders results on affilname.  -->
+      
+      <!-- Affiliation city (1) -->
       <xsl:when test="matches($f,'^affilcity$')">
         <xsl:text>affilcity-s</xsl:text>
       </xsl:when>
       
-      <!-- Affiliation country -->
+      <!-- Affiliation country (4) -->
       <xsl:when test="matches($f,'^affilctry$')">
         <xsl:text>affilctry-s</xsl:text>
       </xsl:when>
-      
-      <!-- Affiliation cert score -->
+
+      <!-- Affiliation name (0) -->
+      <!--  May really not be needed as no one orders results on affilname.  -->
+      <xsl:when test="matches($f,'^affilname$')">
+        <xsl:text>affilname-s</xsl:text>
+      </xsl:when>
+            
+      <!-- Affiliation cert score (0) -->
+      <!--  May really not be needed as no one orders results on certscore.  -->
       <xsl:when test="matches($f,'^certscore$')">
         <xsl:text>certscore-s</xsl:text>
       </xsl:when>
       
-      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
+      <!-- Assume we use the specified name as the field  -->
+      <!--  This would include 
+      			afid (24917)
+      			count (24925)
+      			eid (0)
+      			parafid (0)
+      			prefname (0)
+      			prefparname (0)
+      			sortname (24917)
+      			toplevel (0)
+      -->                                                                                                                                                                                                                                                                                                                                                                                 
       <xsl:otherwise>
         <xsl:value-of select="$f"/>
       </xsl:otherwise>
@@ -236,22 +263,25 @@
     <xsl:param name="f"/> 
     <xsl:choose>
       
-      <!-- Affiliation city -->
+      <!-- Affiliation city (1041) -->
       <xsl:when test="matches($f,'^instaffilcitynav$')">
         <xsl:text>affilcity-f</xsl:text>
       </xsl:when>
  
-      <!-- Affiliation country -->
+      <!-- Affiliation country (1039) -->
       <xsl:when test="matches($f,'^instaffilctrynav$')">
         <xsl:text>affilctry-f</xsl:text>
       </xsl:when>
 
-      <!-- Affiliation cert score -->
+      <!-- Affiliation cert score (117) -->
       <xsl:when test="matches($f,'^instcertscorenav$')">
         <xsl:text>certscore-f</xsl:text>
       </xsl:when>
       
-      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
+      <!-- Assume we use the specified name as the field  --> 
+      <!--  This would include 
+			toplevel (0)
+  		-->                                                                                                                                                                                                                                                                                                                                                                                 
       <xsl:otherwise>
         <xsl:value-of select="$f"/>
       </xsl:otherwise>

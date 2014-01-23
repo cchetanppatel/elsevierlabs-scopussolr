@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStream;
+import java.io.PrintWriter;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -30,12 +31,13 @@ public class Driver {
 		
 		try {
 			
-			if (args.length != 4) {
+			if (args.length != 5) {
 				System.out.println("Four parameters required.");
 				System.out.println("First parameter is the stylesheet name/location.");
 				System.out.println("Second parameter is the xml file name/location.");
 				System.out.println("Third parameter is type (auth, aff, main).");
 				System.out.println("Fourth parameter is set.");
+				System.out.println("Fifth parameter is output file.");
 				System.exit(-1);
 			}
 		  
@@ -44,6 +46,8 @@ public class Driver {
 			String xml = args[1];
 			String type = args[2];
 			String set = args[3];
+			
+			PrintWriter owriter = new PrintWriter(args[4], "UTF-8");
 			
 			// Prepare the transformer
 			InputStream stylesheetIs = new FileInputStream(stylesheet);	  
@@ -74,8 +78,11 @@ public class Driver {
 				String key = type + "_" + set + "_" + idx;
 				
 				//System.out.println(key);
-				//System.out.println(line);
-				//System.out.println(result);
+				System.out.println(line);
+				System.out.println(result);
+				//owriter.println(line);
+				//owriter.println("XQueryX record = " + idx + "\n" + result);
+				//owriter.flush();
 
 				try {
 					DynamoDB.insertRecord(key, result);
