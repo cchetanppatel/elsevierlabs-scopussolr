@@ -1,0 +1,196 @@
+Record Count - 707858
+
+
+Query Types
+
+numericCompare - 106757
+wordList - 0
+word - 697653
+orQuery - 170280
+andQuery - 324475
+anyQuery - 0
+rankQuery - 0
+notQuery - 32876
+proximityQuery - 1777
+childProximity - 0
+scopeQuery - 17831
+
+Wildcards
+
+single char wildcard - 773
+muli char wildcard - 15336
+
+
+Word Attributes
+
+stem=false - 0
+stem=true - 0
+phrase=false - 10331
+phrase=true - 61567
+case=sensitive - 0
+case=insensitive - 0
+punct=sensitive - 2338
+punct=insensitive - 60869
+diacrit=sensitive - 0
+diacrit=insensitive - 0
+equals=false - 1899
+equals=true - 0
+startsWith=false - 1901
+startsWith=true - 0
+endsWith=false - 1899
+endsWith=true - 0
+lang - 0
+weight - 88
+exactly - 0
+atleast - 0
+
+
+Field Counts
+
+abs - 658
+absavail - 0
+abslang - 0
+affil - 1416
+affilcity - 110
+affilctry - 367
+affilorg - 3122
+afid - 2663
+all - 26795
+allmed - 36848
+allsmall - 77487
+artnum - 0
+aucite - 0
+auth - 5523
+authemail - 0
+authfirstini - 6329
+authgrpid - 0
+authid - 144901
+authidxname - 0
+authkeywords - 15
+authlast - 7682
+authsuff - 0
+casregistrynum - 22
+chem - 0
+cheminfo - 0
+chemname - 14
+citeid - 12540
+coden - 6
+collab - 0
+collec - 0
+collecid - 7204
+confall - 261
+confcode - 0
+confloc - 0
+confname - 4
+confsponsor - 0
+copyright - 2
+corres - 0
+datecompletedtxt - 0
+dateloaded - 1
+daterevised - 0
+datesort - 575547
+db - 75008
+dbdocid - 0
+doi - 66838
+dptid - 0
+dummycode - 0
+dummylink - 0
+ed - 1
+edaddress - 0
+edfirstini - 0
+edidxname - 0
+edition - 0
+edlast - 0
+eid - 142003
+eissn - 418
+exactkeyword - 0
+exactsrctitle - 24
+fastloaddate - 20390
+firstauth - 1674
+fundacr - 1
+fundall - 0
+fundno - 0
+fundsponsor - 2
+groupid - 0
+idxterms - 32
+idxtype - 0
+intid - 0
+isbn - 1429
+issn - 8547
+issnp - 1
+issue - 3110
+itemtitle - 12893
+keywords - 1801
+lang - 352
+langitemtitle - 0
+langreftitle - 0
+loadnum - 11
+loadunit - 0
+manuf - 1
+numcitedby - 56421
+numpatcites - 0
+numwebcites - 0
+oeid - 0
+pagecount - 0
+part - 0
+pateid - 0
+patinfo - 0
+pg - 2422
+pgfirst - 901
+pginfo - 0
+pglast - 0
+pii - 30709
+pmid - 153
+prefnameauid - 0
+pub - 0
+pubdatetxt - 2489
+pubyr - 113020
+ref - 467
+refartnum - 0
+refauid - 1380
+refauth - 0
+refauthfirstini - 29
+refauthlast - 29
+refcount - 0
+refeid - 90312
+refeidnss - 165
+refpg - 0
+refpgfirst - 0
+refpubyr - 4
+refpubyrtxt - 0
+refscp - 1
+refsrctitle - 33
+reftitle - 79
+relauthid - 7
+restrictedaccess - 0
+saffil:affil - 1766
+sauth:auth - 16202
+sdeid - 46006
+sdfullavail - 0
+sed:ed - 0
+seqbank - 0
+seqnumber - 0
+sfundall:fundall - 1
+srcid - 10296
+srctitle - 4954
+srctitleabbr - 0
+srctype - 188
+sref:ref - 374
+sref:ref:refauth - 60
+sref:ref:refauth:refauthfirstini - 0
+sref:ref:refauth:refauthlast - 0
+statusstage - 0
+statusstate - 0
+statustype - 419667
+subjabbr - 8987
+subjmain - 0
+subjterms - 1
+subjtype - 0
+subtype - 15100
+supplement - 0
+tradenames - 33
+transid - 0
+type - 0
+vol - 3538
+webeid - 0
+website - 0

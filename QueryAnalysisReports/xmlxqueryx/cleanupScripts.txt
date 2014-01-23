@@ -1,0 +1,13 @@
+Cleaning up Scopus Files
+
+sed 's/^.*<search /<search /g'  SCOPUS_INSTITUTION_10152013.txt > tmp1
+sed 's/^.*<ns2\:search /<ns2\:search /g'  tmp1 > tmp2
+sed 's/<\/ns2\:search>.*$/<\/ns2\:search>/g' tmp2 > tmp3
+sed 's/<\/search>.*$/<\/search>/g' tmp3 > tmp4
+sed 's/^.*<ns1\:search /<ns1\:search /g'  tmp4 > tmp5
+sed 's/<\/ns1\:search>.*$/<\/ns1\:search>/g' tmp5 > tmp6
+
+vi commands
+:%s/&lt;/</g
+:%s/&gt;/>/g
+:%s/&#xd;//g

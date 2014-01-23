@@ -1,0 +1,1256 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww17640\viewh16600\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\b\fs24 \cf0 Scopus HotHouse Deliverables\
+
+\b0 \
+- PIP1 \'85 soon\
+- PIP2\
+  - Proposed Architecture(s)\
+  - Estimated Costs (dev/hw)\
+  - Proposed Schedule\
+  - Comparison of approaches and recommendation\
+  - Key issues/concerns/challenges/risks\
+\
+\
+
+\b Out of Scope (tentative)\
+
+\b0 \
+ - Implementation for Cardinality and CitRef (will investigate approaches)\
+ - Formatting output fields\
+ - Storing xml (was not done for SD either)\
+ - Highlighting\
+ - Relevancy testing\
+ - Spellcheck\
+ - Custom rules for preparing content\
+ - Scope searching (for load testing).  Will prove feature with small sample set.\
+ - Building custom SOLR parsers, query analyzers etc.  Will use out of the box capability.\
+ - Count queries (other than comparing ML and Solr)\
+ - Tombstone queries\
+ - Dummy records\
+ - Patents\
+\
+\
+
+\b What do we need\
+
+\b0 \
+ -Scopus Requirements
+\b \
+
+\b0    - 5 to 7 page document (see sd as an example)\
+   - core search features that need to be supported\
+   - query mix (types and qps \'85 peak and avg)\
+   - performance expectations (search, update)\
+   - prioritize key requirements (synchronization, performance, scope, deep/accurate navigators, latency, etc.)\
+ - Agreement on approach\
+    - dataset\
+    - queries (trade-offs)\
+ - Leverage MarkLogic (for search/repository)  and SOLR\
+ \
+\
+
+\b Questions
+\b0 \
+\
+ - What can be leveraged from initial SD HotHouse\
+     - Relevancy testing\
+     - Loading framework\
+     - Load testing framework\
+     - Kibana reporting tools\
+\
+\
+
+\b Next Steps\
+
+\b0 \
+ - PIP1 (soon)\
+ - Build out PoCs (complete end of March)\
+ - Write-up reports (begin in April)\
+\
+\
+
+\b Scopus Dataset\
+
+\b0 \
+ - Snapshot  (June 2013) of storage format XML for Authors, Institutions, and Cores\
+   - No merged fields\
+   - Authors\
+     - Missing fields\
+   - Affiliations\
+     - Missing fields\
+   - Core\
+     - Missing fields\
+-  Record counts\
+   - Author 
+\f1 49,705,979 (are 20M of these authors that have been tombstoned?)
+\f0 \
+   - Institution 
+\f1 8,163,349 (only 3M are searchable)
+\f0 \
+   - Core 
+\f1 50,773,230
+\f0 \
+ - No dummy records (or other content such as patents)\
+\
+\
+
+\b Scopus Update Volume Analysis\
+
+\b0 \
+ - Cores/Dummy\
+   - Daily Add,Update, Delete\
+   - Daily Cited By impacts (but not citref)\
+\
+ - Authors/Institutions\
+   - Daily Add, Update, Delete\
+   - Daily Publication Count impacts\
+\
+\
+
+\b Scopus Queries\
+
+\b0 \
+  \ul December 5 batch\
+\ulnone \
+   - Queries were extracted from Nov 19 through Dec 3, 2013 from one instance over a 24hour period each day.\
+\
+    \ul Author Queries\
+\ulnone \
+      - 299,084 queries\
+      - 176,547 only query on authid\
+\
+      - Navigator Counts (49,892)\
+        - autactivenav - 38,451\
+        - autaffilcitynav - 49,754\
+        - autaffilctrynav - 49,734\
+        - autafidnav - 0\
+        - autafnameidnav - 49,789\
+        - autsrctitle - 49227\
+        - autsubjclus - 49745\
+\
+      - Navigator Selected (588)\
+\
+      - Query Analysis\
+\
+          Query Types\
+            numericCompare - 60845\
+            wordList - 0\
+            word - 299083\
+            orQuery - 88563\
+            andQuery - 48092\
+            anyQuery - 0\
+            rankQuery - 0\
+            notQuery - 810\
+            proximityQuery - 0\
+            childProximity - 0\
+            scopeQuery - 0\
+\
+         Wildcards\
+            single char wildcard - 32\
+             muli char wildcard - 18379\
+\
+         Word Attributes\
+            stem=false - 0\
+            stem=true - 0\
+            phrase=false - 0\
+            phrase=true - 3576\
+            case=sensitive - 0\
+            case=insensitive - 0\
+            punct=sensitive - 0\
+            punct=insensitive - 3576\
+            diacrit=sensitive - 0\
+            diacrit=insensitive - 0\
+            equals=false - 0\
+            equals=true - 15636\
+            startsWith=false - 0\
+            startsWith=true - 13818\
+            endsWith=false - 0\
+            endsWith=true - 0\
+            lang - 0\
+            weight - 0\
+            exactly - 0\
+            atleast - 0\
+\
+         Search/Sort Field Counts\
+             active - 175259\
+             afdispcity - 21\
+             afdispctry - 68\
+             afdispname - 348\
+             affil - 0\
+             affilcity - 0\
+             affilctry - 0\
+             affilcurr - 0\
+             affilhist - 0\
+             affilname - 303\
+             affilnamevar - 0\
+             affilparafid - 0\
+             affilprefname - 0\
+             affilsortname - 37\
+             afhistcity - 0\
+             afhistctry - 0\
+             afhistdispname - 259\
+             afhistid - 0\
+             afid - 71461\
+             afnameid - 473\
+             alias - 0\
+             aliascurstatus - 73\
+             aliasauthorid - 0\
+             aliastimestamp - 0\
+             aliasstatus - 0\
+             authfirst - 44021\
+             authid - 278402\
+             authlast - 50787\
+             authname - 0\
+             certscore - 0\
+             count - 235501\
+             datecompletedtxt - 0\
+             eid - 0\
+             fastloaddate - 0\
+             issn - 0\
+             loaddate - 0\
+             loadunit - 0\
+             namevar - 0\
+             namevarfirst - 0\
+             namevarini - 0\
+             namevarlast - 0\
+             parafid - 0\
+             preffirst - 1030\
+             preffirstsort - 223826\
+             prefini - 1030\
+             preflast - 224878\
+             prefname - 0\
+             prefparname - 0\
+             pubrangefirst - 0\
+             pubrangelast - 0\
+             quality - 0\
+             saffil - 7710\
+             salias - 0\
+             scert:cert - 0\
+             scert:cert:orgid - 0\
+             orgid - 0\
+             scert:cert:score - 0\
+             score - 0\
+             sortname - 0\
+             srctitle - 0\
+             status - 0\
+             subjabbr - 3417\
+             subjclus - 0\
+             subjmain - 0\
+             suppress - 0\
+             toplevel - 0\
+             transid - 0\
+\
+          Sort Fields (those only with values)\
+            active - 175259\
+            afdispcity - 21\
+            afdispctry - 68\
+            affilsortname - 37\
+            authid - 223826\
+            count - 223824\
+            preffirst - 766\
+            preffirstsort - 223826\
+            prefini - 766\
+            preflast - 224869\
+            relevancy - 938\
+\
+        Return Fields (those only with values)\
+          active - 221971\
+          afdispcity - 228447\
+          afdispctry - 228447\
+          afdispname - 228447\
+          affilcity - 72\
+          affilctry - 72\
+          affilname - 72\
+          afhistdispname - 2245\
+          afid - 227097\
+          afnameid - 224764\
+          authfirst - 72\
+          authid - 290199\
+          authlast - 72\
+          count - 228448\
+          eid - 8956\
+          namevarfirst - 227097\
+          namevarini - 227097\
+          namevarlast - 227097\
+          preffirst - 290199\
+          prefini - 290199\
+          preflast - 290199\
+          pubrangefirst - 227025\
+          pubrangelast - 227025\
+          srctitle - 224764\
+          subjabbr - 227097\
+          suppress - 227025\
+\
+\
+    \ul Affiliation Queries\
+\ulnone \
+      - 91,548 queries\
+      - 90,508 queries only contain afid\
+\
+      - Navigator Counts (1,041)\
+        - instaffilcitynav - 1,041\
+        - instaffilctrynav - 1,039\
+        - instcertscorenav - 117\
+        - insttoplevelnav - 0\
+\
+      - Navigator Selected (36)\
+\
+      - Query Analysis\
+\
+         Query Types\
+           numericCompare - 1050\
+           wordList - 0\
+           word - 91548\
+           orQuery - 82253\
+           andQuery - 1053\
+           anyQuery - 0\
+           rankQuery - 0\
+           notQuery - 1050\
+           proximityQuery - 0\
+           childProximity - 0\
+           scopeQuery - 0\
+\
+        Wildcards\
+           single char wildcard - 0\
+           muli char wildcard - 18\
+\
+        Word Attributes\
+           stem=false - 0\
+           stem=true - 0\
+           phrase=false - 0\
+           phrase=true - 6\
+           case=sensitive - 0\
+           case=insensitive - 0\
+           punct=sensitive - 0\
+           punct=insensitive - 6\
+           diacrit=sensitive - 0\
+           diacrit=insensitive - 0\
+           equals=false - 0\
+           equals=true - 0\
+           startsWith=false - 0\
+           startsWith=true - 0\
+           endsWith=false - 0\
+           endsWith=true - 0\
+           lang - 0\
+           weight - 0\
+           exactly - 0\
+           atleast - 0\
+\
+         Search/Sort Field Counts\
+           active - 7\
+           afdispcity - 0\
+           afdispctry - 0\
+           afdispname - 0\
+           affil - 970\
+           affilcity - 1\
+           affilctry - 4\
+           affilcurr - 0\
+           affilhist - 0\
+           affilname - 70\
+           affilnamevar - 0\
+           affilparafid - 0\
+           affilprefname - 0\
+           affilsortname - 0\
+           afhistcity - 0\
+           afhistctry - 0\
+           afhistdispname - 0\
+           afhistid - 0\
+           afid - 91538\
+           afnameid - 0\
+           alias - 0\
+           aliascurstatus - 0\
+           aliasauthorid - 0\
+           aliastimestamp - 0\
+           aliasstatus - 0\
+           authfirst - 0\
+           authid - 7\
+           authlast - 0\
+           authname - 0\
+           certscore - 0\
+           count - 24930\
+           datecompletedtxt - 0\
+           eid - 0\
+           fastloaddate - 0\
+           issn - 0\
+           loaddate - 0\
+           loadunit - 0\
+           namevar - 0\
+           namevarfirst - 0\
+           namevarini - 0\
+           namevarlast - 0\
+           parafid - 1050\
+           preffirst - 0\
+           preffirstsort - 7\
+           prefini - 0\
+           preflast - 7\
+           prefname - 0\
+           prefparname - 0\
+           pubrangefirst - 0\
+           pubrangelast - 0\
+           quality - 1050\
+           saffil - 0\
+           salias - 0\
+           scert:cert - 0\
+           scert:cert:orgid - 0\
+           orgid - 0\
+           scert:cert:score - 0\
+           score - 0\
+           sortname - 24917\
+           srctitle - 0\
+           status - 0\
+           subjabbr - 0\
+           subjclus - 0\
+           subjmain - 0\
+           suppress - 0\
+           toplevel - 0\
+           transid - 0\
+\
+        Sort Fields (those only with values)\
+          active - 7\
+          affilcity - 1\
+          affilctry - 4\
+          afid - 24917\
+          authid - 7\
+          count - 24925\
+          preffirstsort - 7\
+          preflast - 7\
+          sortname - 24917\
+\
+        Return Fields (those only with values)\
+          affilcity - 82304\
+          affilctry - 82304\
+          affilname - 66624\
+          afid - 91548\
+          certscore - 24924\
+          count - 24930\
+          eid - 6\
+          namevar - 24930\
+          parafid - 24930\
+          prefname - 24924\
+          prefparname - 24924\
+\
+\
+   \ul Main Queries\
+\ulnone \
+      - 1,711,315 queries (Core 1,053,765 Dummy 1,272)\
+         - 143,194 only contain doi\
+         - 246,847 only contain eid\
+         - 97,661 only contain sdeid\
+         - 169,473 only contain refeid\
+         - 381,434 only contain authid\
+         - Total 1,038,608  (672,707 estimated user entered queries)\
+\
+      - Tombstone Queries (3,755)\
+\
+      - Navigator Counts (277,994)\
+        - scoaucite - 1,125\
+        - scoaffilctry - 187,636\
+        - scoafid - 195,488\
+        - scoauthgrpid - 0\
+        - scoauthid - 64,711\
+        - scoexactkeyword - 186,621\
+        - scoexactsrctitle - 189,573\
+        - scolang - 186,357\
+        - scoprefnameauid - 188,368\
+        - scopubyr - 200,427\
+        - scosrctype - 186,343\
+        - scostatustype - 463\
+        - scosubjabbr - 188,862\
+        - scosubtype - 187,916\
+\
+     - Navigator Selected (61,399)\
+\
+     - Query Analysis\
+\
+        Query Types\
+           numericCompare - 312530\
+           wordList - 0\
+           word - 1683396\
+           orQuery - 438078\
+           andQuery - 793689\
+           anyQuery - 0\
+           rankQuery - 0\
+           notQuery - 80602\
+           proximityQuery - 3252\
+           childProximity - 0\
+           scopeQuery - 46190\
+\
+        Wildcards\
+           single char wildcard - 4524\
+           muli char wildcard - 42724\
+\
+        Word Attributes\
+           stem=false - 0\
+           stem=true - 0\
+           phrase=false - 27854\
+           phrase=true - 166171\
+           case=sensitive - 0\
+           case=insensitive - 0\
+           punct=sensitive - 7452\
+           punct=insensitive - 163267\
+           diacrit=sensitive - 0\
+           diacrit=insensitive - 0\
+           equals=false - 5922\
+           equals=true - 0\
+           startsWith=false - 5931\
+           startsWith=true - 0\
+           endsWith=false - 5922\
+           endsWith=true - 0\
+           lang - 0\
+           weight - 194\
+           exactly - 0\
+           atleast - 0\
+\
+        Search/Sort Field Counts\
+           abs - 1837\
+           absavail - 0\
+           abslang - 0\
+           affil - 5004\
+           affilcity - 577\
+           affilctry - 1435\
+           affilorg - 7282\
+           afid - 17865\
+           all - 57383\
+           allmed - 89726\
+           allsmall - 206565\
+           artnum - 0\
+           aucite - 0\
+           auth - 11023\
+           authemail - 0\
+           authfirstini - 16908\
+           authgrpid - 0\
+           authid - 389599\
+           authidxname - 6\
+           authkeywords - 87\
+           authlast - 20623\
+           authsuff - 0\
+           casregistrynum - 130\
+           chem - 0\
+           cheminfo - 0\
+           chemname - 97\
+           citeid - 31746\
+           coden - 16\
+           collab - 1\
+           collec - 0\
+           collecid - 36576\
+           confall - 605\
+           confcode - 0\
+           confloc - 1\
+           confname - 6\
+           confsponsor - 0\
+           copyright - 7\
+           corres - 0\
+           datecompletedtxt - 0\
+           dateloaded - 733\
+           daterevised - 0\
+           datesort - 1476020\
+           db - 143484\
+           dbdocid - 0\
+           doi - 147853\
+           dptid - 0\
+           dummycode - 0\
+           dummylink - 0\
+           ed - 1\
+           edaddress - 0\
+           edfirstini - 1\
+           edidxname - 0\
+           edition - 0\
+           edlast - 0\
+           eid - 312585\
+           eissn - 1036\
+           exactkeyword - 0\
+           exactsrctitle - 137\
+           fastloaddate - 55559\
+           firstauth - 4129\
+           fundacr - 0\
+           fundall - 0\
+           fundno - 0\
+           fundsponsor - 2\
+           groupid - 0\
+           idxterms - 216\
+           idxtype - 0\
+           intid - 0\
+           isbn - 2930\
+           issn - 36001\
+           issnp - 6\
+           issue - 6366\
+           itemtitle - 53818\
+           keywords - 5820\
+           lang - 440\
+           langitemtitle - 1\
+           langreftitle - 1\
+           loadnum - 27\
+           loadunit - 0\
+           manuf - 1\
+           numcitedby - 141815\
+           numpatcites - 0\
+           numwebcites - 0\
+           oeid - 0\
+           pagecount - 1\
+           part - 2\
+           pateid - 0\
+           patinfo - 0\
+           pg - 5430\
+           pgfirst - 2022\
+           pginfo - 0\
+           pglast - 0\
+           pii - 6393\
+           pmid - 469\
+           prefnameauid - 0\
+           pub - 5\
+           pubdatetxt - 5108\
+           pubyr - 331011\
+           ref - 1560\
+           refartnum - 0\
+           refauid - 4253\
+           refauth - 10\
+           refauthfirstini - 124\
+           refauthlast - 124\
+           refcount - 0\
+           refeid - 223598\
+           refeidnss - 459\
+           refpg - 0\
+           refpgfirst - 0\
+           refpubyr - 31\
+           refpubyrtxt - 0\
+           refscp - 0\
+           refsrctitle - 56\
+           reftitle - 28\
+           relauthid - 43\
+           restrictedaccess - 0\
+           saffil:affil - 5764\
+           sauth:auth - 41117\
+           sdeid - 97661\
+           sdfullavail - 0\
+           sed:ed - 0\
+           seqbank - 0\
+           seqnumber - 0\
+           sfundall:fundall - 11\
+           srcid - 28666\
+           srctitle - 14891\
+           srctitleabbr - 0\
+           srctype - 603\
+           sref:ref - 1166\
+           sref:ref:refauth - 220\
+           sref:ref:refauth:refauthfirstini - 0\
+           sref:ref:refauth:refauthlast - 0\
+           statusstage - 0\
+           statusstate - 0\
+           statustype - 1055037\
+           subjabbr - 25050\
+           subjmain - 25\
+           subjterms - 6\
+           subjtype - 0\
+           subtype - 39939\
+           supplement - 0\
+           tradenames - 50\
+           transid - 0\
+           type - 0\
+           vol - 7184\
+           webeid - 0\
+           website - 0\
+\
+        Sort Fields (those only with values)\
+          auth - 2\
+          datesort - 1475970\
+          fastloaddate - 2456\
+          itemtitle - 1102\
+          numcitedby - 141814\
+          pubyr - 20374\
+          relevancy - 1326725\
+\
+        Return Fields (those only with values)\
+          abs - 223650\
+         absavail - 480972\
+         affil - 90750\
+         affilcity - 127950\
+         affilctry - 127950\
+         afid - 134975\
+         artnum - 474114\
+         auth - 879403\
+         authemail - 667\
+         authgrpid - 134940\
+         authid - 639262\
+         authkeywords - 134975\
+         authsuff - 667\
+         coden - 471948\
+         collec - 975031\
+         collecid - 664789\
+         dateloaded - 6853\
+         datesort - 168994\
+         db - 480220\
+         dbdocid - 491992\
+         doi - 785787\
+         dummycode - 471948\
+         dummylink - 471948\
+         eid - 1550946\
+         eissn - 471983\
+         fastloaddate - 6\
+         groupid - 7348\
+         idxterms - 2246\
+         intid - 1109901\
+         isbn - 599933\
+         issn - 697836\
+         issnp - 471948\
+         issue - 700381\
+         itemtitle - 948286\
+         loadnum - 7348\
+         numcitedby - 1443231\
+         pg - 691350\
+         pgfirst - 481135\
+         pglast - 473969\
+         pii - 567227\
+         pmid - 238726\
+         pub - 471948\
+         pubdatetxt - 137257\
+         pubyr - 846315\
+         refcount - 471192\
+         refeid - 20283\
+         restrictedaccess - 471948\
+         sdeid - 228186\
+         srcid - 471948\
+         srctitle - 878702\
+         srctitleabbr - 471948\
+         srctype - 608941\
+         statustype - 471948\
+         subjabbr - 471948\
+         subtype - 688655\
+         vol - 700381\
+\
+\
+   \ul October 15 batch\
+\ulnone \
+    - Queries were extracted  around Oct 15, 2013\
+\
+     \ul Author Queries\
+\ulnone \
+      - 118, 294  queries\
+      - 63,841 only query on authid\
+\
+      - Navigator Counts (19,158)\
+        - autactivenav - 14,696\
+        - autaffilcitynav - 19,104\
+        - autaffilctrynav - 19,104\
+        - autafidnav - 0\
+        - autafnameidnav - 19,128\
+        - autsrctitle - 18745\
+        - autsubjclus - 19100\
+\
+      - Navigator Selected (188)\
+\
+     - Query Analysis\
+\
+         Query Types\
+           numericCompare - 19262\
+           wordList - 0\
+           word - 118294\
+           orQuery - 43190\
+           andQuery - 17766\
+           anyQuery - 0\
+           rankQuery - 0\
+           notQuery - 266\
+           proximityQuery - 0\
+           childProximity - 0\
+           scopeQuery - 0\
+\
+        Wildcards\
+           single char wildcard - 2\
+           muli char wildcard - 7698\
+\
+        Word Attributes\
+          stem=false - 0\
+          stem=true - 0\
+          phrase=false - 0\
+          phrase=true - 1191\
+          case=sensitive - 0\
+          case=insensitive - 0\
+          punct=sensitive - 0\
+          punct=insensitive - 1191\
+          diacrit=sensitive - 0\
+          diacrit=insensitive - 0\
+          equals=false - 0\
+          equals=true - 4684\
+          startsWith=false - 0\
+          startsWith=true - 4109\
+          endsWith=false - 0\
+          endsWith=true - 0\
+          lang - 0\
+          weight - 0\
+          exactly - 0\
+          atleast - 0\
+\
+        Search/Sort Field Counts\
+          active - 63641\
+          afdispcity - 7\
+          afdispctry - 21\
+          afdispname - 16\
+          affil - 0\
+          affilcity - 0\
+          affilctry - 0\
+          affilcurr - 0\
+          affilhist - 0\
+          affilname - 127\
+          affilnamevar - 0\
+          affilparafid - 0\
+          affilprefname - 0\
+          affilsortname - 7\
+          afhistcity - 0\
+          afhistctry - 0\
+          afhistdispname - 85\
+          afhistid - 0\
+          afid - 35157\
+          afnameid - 149\
+          alias - 0\
+          aliascurstatus - 40\
+          aliasauthorid - 0\
+          aliastimestamp - 0\
+          aliasstatus - 0\
+          authfirst - 16145\
+          authid - 112708\
+          authlast - 18868\
+          authname - 0\
+          certscore - 0\
+          count - 82685\
+          datecompletedtxt - 0\
+          eid - 1\
+          fastloaddate - 0\
+          issn - 0\
+          loaddate - 0\
+          loadunit - 0\
+          namevar - 0\
+          namevarfirst - 0\
+          namevarini - 0\
+          namevarlast - 0\
+          parafid - 0\
+          preffirst - 454\
+          preffirstsort - 82141\
+          prefini - 454\
+          preflast - 82603\
+          prefname - 0\
+          prefparname - 0\
+          pubrangefirst - 0\
+          pubrangelast - 0\
+          quality - 0\
+          saffil - 3356\
+          salias - 0\
+          scert:cert - 0\
+          scert:cert:orgid - 0\
+          orgid - 0\
+          scert:cert:score - 0\
+          score - 0\
+          sortname - 0\
+          srctitle - 0\
+          status - 0\
+          subjabbr - 1273\
+          subjclus - 0\
+          subjmain - 0\
+          suppress - 0\
+          toplevel - 0\
+          transid - 0\
+\
+   \ul   Affiliation Queries\
+\ulnone \
+      - 53,590 queries\
+      - 53,183 queries only contain afid\
+\
+      - Navigator Counts (394)\
+        - instaffilcitynav - 393\
+        - instaffilctrynav - 394\
+        - instcertscorenav - 33\
+        - insttoplevelnav - 0\
+\
+      - Navigator Selected (9)\
+\
+      - Query Analysis\
+\
+          Query Types\
+             numericCompare - 398\
+             wordList - 0\
+             word - 53590\
+             orQuery - 50241\
+             andQuery - 401\
+             anyQuery - 0\
+             rankQuery - 0\
+             notQuery - 398\
+             proximityQuery - 0\
+             childProximity - 0\
+             scopeQuery - 0\
+\
+         Wildcards\
+           single char wildcard - 0\
+           muli char wildcard - 5\
+\
+         Word Attributes\
+           stem=false - 0\
+           stem=true - 0\
+           phrase=false - 0\
+           phrase=true - 1\
+           case=sensitive - 0\
+           case=insensitive - 0\
+           punct=sensitive - 0\
+           punct=insensitive - 1\
+           diacrit=sensitive - 0\
+           diacrit=insensitive - 0\
+           equals=false - 0\
+           equals=true - 0\
+           startsWith=false - 0\
+           startsWith=true - 0\
+           endsWith=false - 0\
+           endsWith=true - 0\
+           lang - 0\
+           weight - 0\
+           exactly - 0\
+           atleast - 0\
+\
+        Search/Sort Field Counts\
+          active - 0\
+          afdispcity - 0\
+          afdispctry - 0\
+          afdispname - 0\
+          affil - 369\
+          affilcity - 0\
+          affilctry - 2\
+          affilcurr - 0\
+          affilhist - 0\
+          affilname - 19\
+          affilnamevar - 0\
+          affilparafid - 0\
+          affilprefname - 0\
+          affilsortname - 0\
+          afhistcity - 0\
+          afhistctry - 0\
+          afhistdispname - 0\
+          afhistid - 0\
+          afid - 53587\
+          afnameid - 0\
+          alias - 0\
+          aliascurstatus - 0\
+          aliasauthorid - 0\
+          aliastimestamp - 0\
+          aliasstatus - 0\
+          authfirst - 0\
+          authid - 0\
+          authlast - 0\
+          authname - 0\
+          certscore - 0\
+          count - 9695\
+          datecompletedtxt - 0\
+          eid - 0\
+          fastloaddate - 0\
+          issn - 0\
+          loaddate - 0\
+          loadunit - 0\
+          namevar - 0\
+          namevarfirst - 0\
+          namevarini - 0\
+          namevarlast - 0\
+          parafid - 398\
+          preffirst - 0\
+          preffirstsort - 0\
+          prefini - 0\
+          preflast - 0\
+          prefname - 0\
+          prefparname - 0\
+          pubrangefirst - 0\
+          pubrangelast - 0\
+          quality - 398\
+          saffil - 0\
+          salias - 0\
+          scert:cert - 0\
+          scert:cert:orgid - 0\
+          orgid - 0\
+          scert:cert:score - 0\
+          score - 0\
+          sortname - 9644\
+          srctitle - 0\
+          status - 0\
+          subjabbr - 0\
+          subjclus - 0\
+          subjmain - 0\
+          suppress - 0\
+          toplevel - 0\
+          transid - 0\
+\
+    \ul Main Queries\
+\ulnone \
+       - 707,858 queries (Core 419,043 Dummy 624)\
+         - 64,285 only contain doi\
+         - 106,172 only contain eid\
+         -  46,006 only contain sdeid\
+         -  66,767 only contain refeid\
+         -  142,148 only contain authid\
+         -  Total 425,378 (282,480 estimated user entered queries)\
+\
+      - Tombstone Queries (2,660)\
+\
+      - Navigator Counts (114,834)\
+        - scoaucite - 438\
+        - scoaffilctry - 81,952\
+        - scoafid - 85,375\
+        - scoauthgrpid - 0\
+        - scoauthid - 25,553\
+        - scoexactkeyword - 81,554\
+        - scoexactsrctitle - 82,644\
+        - scolang - 81,413\
+        - scoprefnameauid - 82,349\
+        - scopubyr - 83,700\
+        - scosrctype - 81,410\
+        - scostatustype - 145\
+        - scosubjabbr - 82,362\
+        - scosubtype - 82,000\
+\
+      - Navigator Selected (23,461)\
+\
+      - Query Analysis\
+\
+          Query Types\
+            numericCompare - 106757\
+            wordList - 0\
+            word - 697653\
+            orQuery - 170280\
+            andQuery - 324475\
+            anyQuery - 0\
+            rankQuery - 0\
+            notQuery - 32876\
+            proximityQuery - 1777\
+            childProximity - 0\
+            scopeQuery - 17831\
+\
+         Wildcards\
+            single char wildcard - 773\
+            muli char wildcard - 15336\
+\
+         Word Attributes\
+            stem=false - 0\
+            stem=true - 0\
+            phrase=false - 10331\
+            phrase=true - 61567\
+            case=sensitive - 0\
+            case=insensitive - 0\
+            punct=sensitive - 2338\
+            punct=insensitive - 60869\
+            diacrit=sensitive - 0\
+            diacrit=insensitive - 0\
+            equals=false - 1899\
+            equals=true - 0\
+            startsWith=false - 1901\
+            startsWith=true - 0\
+            endsWith=false - 1899\
+            endsWith=true - 0\
+            lang - 0\
+            weight - 88\
+            exactly - 0\
+            atleast - 0\
+\
+          Search/Sort Field Counts\
+             abs - 658\
+             absavail - 0\
+             abslang - 0\
+             affil - 1416\
+             affilcity - 110\
+             affilctry - 367\
+             affilorg - 3122\
+             afid - 2663\
+             all - 26795\
+             allmed - 36848\
+             allsmall - 77487\
+             artnum - 0\
+             aucite - 0\
+             auth - 5523\
+             authemail - 0\
+             authfirstini - 6329\
+             authgrpid - 0\
+             authid - 144901\
+             authidxname - 0\
+             authkeywords - 15\
+             authlast - 7682\
+             authsuff - 0\
+             casregistrynum - 22\
+             chem - 0\
+             cheminfo - 0\
+             chemname - 14\
+             citeid - 12540\
+             coden - 6\
+             collab - 0\
+             collec - 0\
+             collecid - 7204\
+             confall - 261\
+             confcode - 0\
+             confloc - 0\
+             confname - 4\
+             confsponsor - 0\
+             copyright - 2\
+             corres - 0\
+             datecompletedtxt - 0\
+             dateloaded - 1\
+             daterevised - 0\
+             datesort - 575547\
+             db - 75008\
+             dbdocid - 0\
+             doi - 66838\
+             dptid - 0\
+             dummycode - 0\
+             dummylink - 0\
+             ed - 1\
+             edaddress - 0\
+             edfirstini - 0\
+             edidxname - 0\
+             edition - 0\
+             edlast - 0\
+             eid - 142003\
+             eissn - 418\
+             exactkeyword - 0\
+             exactsrctitle - 24\
+             fastloaddate - 20390\
+             firstauth - 1674\
+             fundacr - 1\
+             fundall - 0\
+             fundno - 0\
+             fundsponsor - 2\
+             groupid - 0\
+             idxterms - 32\
+             idxtype - 0\
+             intid - 0\
+             isbn - 1429\
+             issn - 8547\
+             issnp - 1\
+             issue - 3110\
+             itemtitle - 12893\
+             keywords - 1801\
+             lang - 352\
+             langitemtitle - 0\
+             langreftitle - 0\
+             loadnum - 11\
+             loadunit - 0\
+             manuf - 1\
+             numcitedby - 56421\
+             numpatcites - 0\
+             numwebcites - 0\
+             oeid - 0\
+             pagecount - 0\
+             part - 0\
+             pateid - 0\
+             patinfo - 0\
+             pg - 2422\
+             pgfirst - 901\
+             pginfo - 0\
+             pglast - 0\
+             pii - 30709\
+             pmid - 153\
+             prefnameauid - 0\
+             pub - 0\
+             pubdatetxt - 2489\
+             pubyr - 113020\
+             ref - 467\
+             refartnum - 0\
+             refauid - 1380\
+             refauth - 0\
+             refauthfirstini - 29\
+             refauthlast - 29\
+             refcount - 0\
+             refeid - 90312\
+             refeidnss - 165\
+             refpg - 0\
+             refpgfirst - 0\
+             refpubyr - 4\
+             refpubyrtxt - 0\
+             refscp - 1\
+             refsrctitle - 33\
+             reftitle - 79\
+             relauthid - 7\
+             restrictedaccess - 0\
+             saffil:affil - 1766\
+             sauth:auth - 16202\
+             sdeid - 46006\
+             sdfullavail - 0\
+             sed:ed - 0\
+             seqbank - 0\
+             seqnumber - 0\
+             sfundall:fundall - 1\
+             srcid - 10296\
+             srctitle - 4954\
+             srctitleabbr - 0\
+             srctype - 188\
+             sref:ref - 374\
+             sref:ref:refauth - 60\
+             sref:ref:refauth:refauthfirstini - 0\
+             sref:ref:refauth:refauthlast - 0\
+             statusstage - 0\
+             statusstate - 0\
+             statustype - 419667\
+             subjabbr - 8987\
+             subjmain - 0\
+             subjterms - 1\
+             subjtype - 0\
+             subtype - 15100\
+             supplement - 0\
+             tradenames - 33\
+             transid - 0\
+             type - 0\
+             vol - 3538\
+             webeid - 0\
+             website - 0\
+\
+\
+
+\b Approach\
+
+\b0 \
+ - Create a 'slim' version of above query sets\
+    - remove queries that won't have 'merged' fields (or post processing fields such as citeid)\
+    - can provide dummy values for fields such as numcitedby, etc. \
+    - can map similar fields when we don't have a given field\
+ - Store the slim queries in S3\
+ - Pre-build queries into native syntax and store in DDB\
+\
+\
+
+\b Questions\
+
+\b0 \
+ - What exactly is CITREF processing (and why wasn't refeid used)?\
+    - It would appear to allow you to run a query and then scope it to a list of 'cited by' identifiers (look at citeid field)\
+ - CTO Batch \'85 should these run on a separate 'cluster' as is done in FAST today (separate row)\
+ - Stopwords are indexed but removed from queries when not part of a phrase.\
+ - What is boundary matching? (starts-with, ends-wtih, equals)\
+ - How often is 'numcitedby' used as a sort field option (may not really matter)\
+ - Do the link cardinality files still need to be sent back to Dayton?  How are they used?\
+ - Freshness (and relevancy)?\
+ - Do publication counts include 'dummy' documents?\
+ - Do cited by counts include 'dummy' documents?  Don't think this is possible as dummy's have no references.\
+ - Does citeid need to be added as a field to 'dummy' documents.\
+ - How to handle version in Solr (issue for both SD and Scopus)?\
+ - Scopus (and switch) need to make sure we are processing the correct document version.\
+\
+\
+
+\b CITREF Thoughts\
+
+\b0 \
+- Need to think about (adds, updates, deletes)\
+- See no way than periodic 'snapshots' and number crunching\
+- May need to keep a digest for each document (list of eids that cite this document).  Help determine whether document needs to be re-indexed\
+\
+\
+
+\b Questions\
+
+\b0 \
+- What is acceptable latency for indexing?\
+- Are deep (accurate) navigators needed?\
+\
+
+\b More Like This Queries\
+
+\b0 \
+- References \'85 field used is refeid\
+- Authors \'85 field used is relauid\
+- Keywords \'85 field used is allsmall\
+\
+\
+}

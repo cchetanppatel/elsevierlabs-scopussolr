@@ -1,0 +1,116 @@
+Record Count - 118294
+
+
+Query Types
+
+numericCompare - 19262
+wordList - 0
+word - 118294
+orQuery - 43190
+andQuery - 17766
+anyQuery - 0
+rankQuery - 0
+notQuery - 266
+proximityQuery - 0
+childProximity - 0
+scopeQuery - 0
+
+Wildcards
+
+single char wildcard - 2
+muli char wildcard - 7698
+
+
+Word Attributes
+
+stem=false - 0
+stem=true - 0
+phrase=false - 0
+phrase=true - 1191
+case=sensitive - 0
+case=insensitive - 0
+punct=sensitive - 0
+punct=insensitive - 1191
+diacrit=sensitive - 0
+diacrit=insensitive - 0
+equals=false - 0
+equals=true - 4684
+startsWith=false - 0
+startsWith=true - 4109
+endsWith=false - 0
+endsWith=true - 0
+lang - 0
+weight - 0
+exactly - 0
+atleast - 0
+
+
+Field Counts
+
+active - 63641
+afdispcity - 7
+afdispctry - 21
+afdispname - 16
+affil - 0
+affilcity - 0
+affilctry - 0
+affilcurr - 0
+affilhist - 0
+affilname - 127
+affilnamevar - 0
+affilparafid - 0
+affilprefname - 0
+affilsortname - 7
+afhistcity - 0
+afhistctry - 0
+afhistdispname - 85
+afhistid - 0
+afid - 35157
+afnameid - 149
+alias - 0
+aliascurstatus - 40
+aliasauthorid - 0
+aliastimestamp - 0
+aliasstatus - 0
+authfirst - 16145
+authid - 112708
+authlast - 18868
+authname - 0
+certscore - 0
+count - 82685
+datecompletedtxt - 0
+eid - 1
+fastloaddate - 0
+issn - 0
+loaddate - 0
+loadunit - 0
+namevar - 0
+namevarfirst - 0
+namevarini - 0
+namevarlast - 0
+parafid - 0
+preffirst - 454
+preffirstsort - 82141
+prefini - 454
+preflast - 82603
+prefname - 0
+prefparname - 0
+pubrangefirst - 0
+pubrangelast - 0
+quality - 0
+saffil - 3356
+salias - 0
+scert:cert - 0
+scert:cert:orgid - 0
+orgid - 0
+scert:cert:score - 0
+score - 0
+sortname - 0
+srctitle - 0
+status - 0
+subjabbr - 1273
+subjclus - 0
+subjmain - 0
+suppress - 0
+toplevel - 0
+transid - 0
