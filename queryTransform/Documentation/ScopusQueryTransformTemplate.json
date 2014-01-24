@@ -1,0 +1,158 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  
+  "Description" : "Start an EC2 Instance in the Eastern region for Transforming queries for Scopus.",
+  
+  "Parameters" : {
+      
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "Default" : "ats",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },    
+    
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "m1.large",
+      "AllowedValues" : [ "t1.micro", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "c1.medium", "c1.xlarge" ],
+      "ConstraintDescription" : "must be a valid EC2 instance type."
+    },
+
+    "ScopusQueryTransformSignedJarUrl" : {
+      "Description" : "Signed URL for the query transform jar file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/scopusQueryTransform.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426581673&Signature=MjmBIxb3tN80Cmf9x1t9Svia4HE%3D"
+    },
+    
+    "AffiliationStylesheetSignedUrl" : {
+      "Description" : "Signed URL for the affiliation stylesheet file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/stylesheets/AffiliationXqueryX2Solr.xsl?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426581009&Signature=NqNnHqvECTKgOyyu/3H/1Sr1YN8%3D"
+    },
+    
+    "AuthorStylesheetSignedUrl" : {
+      "Description" : "Signed URL for the author stylesheet file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/stylesheets/AuthorXqueryX2Solr.xsl?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426580976&Signature=N/lgxr5dfkzoeFwnINBsojWU26g%3D"
+    },
+
+    "AffiliationQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the affiliation query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/ScopusInstitutionXQueryX_Dec052013.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426580869&Signature=v0Ut9laiioYvJf5/3QEZtFZhCa8%3D"
+    },
+    
+    "AuthorQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the author query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/ScopusAuthorXQueryX_Dec052013.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426580673&Signature=h9x9OFsngqRs3r23l6TnG0UoEsI%3D"
+    }
+    
+  },
+  
+"Mappings" : {
+    "AWSInstanceType2AMI" : {
+      "t1.micro" : { "AMI" : "ami-100c6b79"},
+      "m1.small" : { "AMI" : "ami-100c6b79"},
+      "m1.medium" : { "AMI" : "ami-100c6b79"},
+      "m1.large" : { "AMI" : "ami-100c6b79"},
+      "m1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "c1.medium" : { "AMI" : "ami-100c6b79"},
+      "c1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.2xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.4xlarge" : { "AMI" : "ami-100c6b79"}
+    }
+  },
+
+ "Resources": {
+ 
+        "Ec2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "mkdir /sets", "\n",
+                "cd /sets", "\n",
+                "curl -o authorSet.gz '", { "Ref" : "AuthorQuerySetSignedUrl"}, "'", "\n",
+                "gunzip authorSet.gz", "\n",
+                "curl -o affiliationSet.gz '", { "Ref" : "AffiliationQuerySetSignedUrl"}, "'", "\n",
+                "gunzip affiliationSet.gz", "\n",
+                "mkdir /stylesheets", "\n",
+                "cd /stylesheets", "\n",
+                "curl -o author.xsl '", { "Ref" : "AuthorStylesheetSignedUrl"}, "'", "\n",
+                "curl -o affiliation.xsl '", { "Ref" : "AffiliationStylesheetSignedUrl"}, "'", "\n",     
+                "mkdir /transform", "\n",
+                "cd /transform", "\n",
+                "curl -o scopusQueryTransform.jar '", { "Ref" : "ScopusQueryTransformSignedJarUrl"}, "'"         
+                ]]}}   
+            }
+        },
+ 
+        "InstanceSecurityGroup" : {
+	       "Type" : "AWS::EC2::SecurityGroup",
+	       "Properties" : {
+	         "GroupDescription" : "Enable SSH access on the inbound port",
+             "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.18.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.25.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "145.36.0.0/16"
+                }]
+           }
+        }
+    	
+ },
+
+ "Outputs" : {
+ 
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance" }
+    },
+    
+    "AZ" : {
+      "Description" : "Availability Zone of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "AvailabilityZone" ] }
+    },
+    
+    "PublicIP" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicIp" ] }
+    }
+    
+  }
+  
+}
