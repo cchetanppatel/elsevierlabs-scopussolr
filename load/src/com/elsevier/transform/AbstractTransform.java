@@ -935,6 +935,8 @@ public class AbstractTransform {
 			createSingleField("refcount", refcountMappings);
 			
 			createArray("refeid", refeidArrayMappings, "(.//text())");
+			// Need to transform the values we are using in the ref-eid from short eids to full eids so our sample queries work
+			convertRefEids("refeid");
 			
 			createArray("refpg", refpgArrayMappings, "(.//text())");
 			
@@ -1535,6 +1537,29 @@ public class AbstractTransform {
 			fieldValues.put(newFieldValueKey, newvals);
 		} else {
 			// just leave things alone..  Shouldn't happen unless there aren't any subject codes
+		}
+	}
+	
+	private void convertRefEids(String fieldValueKey) {
+		
+		// Change short refeids into full length eids.
+		Object val = fieldValues.get(fieldValueKey);
+		String prefix = "2.s2.0-";
+		if (val instanceof String) {
+			String newEid = prefix + (String)val;
+			fieldValues.put(fieldValueKey, newEid);
+		} else if (val instanceof ArrayList<?>){
+			ArrayList<String> oldvals = (ArrayList<String>)val;
+			ArrayList<String> newvals = new ArrayList<String>();
+			Iterator<String> it = oldvals.iterator();
+			while (it.hasNext()) {
+				String oldeid = it.next();
+				String neweid = prefix + oldeid;
+				newvals.add(neweid);
+			}
+			fieldValues.put(fieldValueKey, newvals);
+		} else {
+			// just leave things alone..  Shouldn't happen unless there aren't any refeids
 		}
 	}
 }
