@@ -1,7 +1,9 @@
 package com.elsevier.transform;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -35,6 +37,9 @@ public class AbstractTransform {
 	HashMap<String,Object> fieldValues = new HashMap<String,Object>();
 	HashMap<String, String> cachedFieldValues = new HashMap<String, String>();
 	
+	private static Calendar now = Calendar.getInstance();
+	private static SimpleDateFormat fastloaddatefmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
 	private static int DEFAULT_JSON_FIELD_STRINGBUILDER_SIZE = 1024;
 	
 	// Basic field mappings	
@@ -65,11 +70,11 @@ public class AbstractTransform {
 	};
 	
 	private static String[] affilctryArrayMappings = new String[] {
-		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/country"
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation"
 	};
 	
 	private static String[] affilctryMappings = new String[] {
-		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/country//text()"
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/@country"
 	};
 	
 	private static String[] affilorgArrayMappings = new String[] {
@@ -233,10 +238,24 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/item-info/history/date-revised"
 	};
 	
-	private static String datesortMappings = "/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort//text()";
+	//private static String datesortMappings = "/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort//text()";
 	
+	private static String[] datesortYearMappings = new String[] {
+		"/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort/@year"
+	};
+	private static String[] datesortMonthMappings = new String[] {
+		"/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort/@month"
+	};
+	private static String[] datesortDayMappings = new String[] {
+		"/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort/@day"
+	};
+
 	private static String[] dbArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/item-info/dbcollection"
+	};
+	
+	private static String[] dbdocidArrayMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/item-info/itemidlist/itemid"	
 	};
 	
 	private static String[] doiMappings = new String[] {
@@ -439,9 +458,11 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/item-info/itemidlist/itemid[@idtype='MEDL']//text()"	
 	};
 	
-	/*private static String[] prefnameauid = new String[] {
-		"/xocs:doc/xocs:item/item/bibrecord/item-info/itemidlist/itemid[@idtype='MEDL']//text()"	
-	};*/
+	private static String[] prefnameauidArrayMappings = new String[] {
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author", 
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author",
+		"/xocs:doc/xocs:item/item/bibrecord/head/author-group/author"
+	};
 	
 	private static String[] pubArrayMappings = new String[] {
 		"/xocs:doc/xocs:item/item/bibrecord/head/source/publisher"	
@@ -482,14 +503,18 @@ public class AbstractTransform {
 		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/@refcount"	
 	};
 	
+	// Original CIP mappings not present in docs, pulling different values that are in the doc
 	private static String[] refeidArrayMappings = new String[] {
-		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/eid",
-		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/oeid"
+		//"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/eid",
+		//"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/oeid"
+		"/xocs:doc/xocs:meta/cto:ref-id"
 	};
 	
+	// Original CIP mappings not present in docs, pulling different values that are in the doc
 	private static String[] refeidMappings = new String[] {
-		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/eid//text()",
-		"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/oeid//text()"
+		//"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/eid//text()",
+		//"/xocs:doc/xocs:item/item/bibrecord/tail/bibliography/reference/refd-itemcitation/oeid//text()"
+		"/xocs:doc/xocs:meta/cto:ref-id//text()"
 	};
 	
 	private static String[] refpgArrayMappings = new String[] {
@@ -672,9 +697,13 @@ public class AbstractTransform {
 	 * 
 	 * @param is
 	 * @return fieldValues;
+	 * @throws XPathExpressionException 
+	 * @throws IOException 
+	 * @throws ParserConfigurationException 
+	 * @throws SAXException 
 	 */
 	
-	public HashMap<String,Object> transform(InputStream is) {
+	public HashMap<String,Object> transform(InputStream is) throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
 		
 		//fieldValues = new HashMap();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -694,7 +723,7 @@ public class AbstractTransform {
 			createArray("abs",absArrayMappings, "(.//text())");
 			
 			// Somehow FAST decides absavail... We will fake out the value by seeing if abs was populated in the previous line.
-			if (fieldValues.get("absavail") != null) {
+			if (fieldValues.get("abs") != null) {
 				fieldValues.put("absavail", "1");
 			} else {
 				fieldValues.put("absavail", "0");
@@ -705,10 +734,10 @@ public class AbstractTransform {
 			createArray("abslang",abslangArrayMappings, "(xml:lang)");
 						
 			createArray("affilcity",affilcityArrayMappings, "(.//text())");
-						
-			createArray("affilctry",affilctryArrayMappings, "(.//text())");
 			
-			// Convert the countyr codes we extracted to actual country names
+			// Note we need to merge in country names instead of codes
+			createArray("affilctry", affilctryArrayMappings, "(@country)");
+			
 			convertCountryCodesToNames("affilctry");
 			
 			createSortFieldFromArrayField("affilctry-s", "affilctry");
@@ -725,8 +754,9 @@ public class AbstractTransform {
 			
 			createArray("authfirstini",authfirstiniArrayMappings, "(.//text())");
 			
-			//createArray("authgrpid", authgrpidArrayMappings, "(./author/@auid | ./affiliation/@afid");
-						
+			//createArray("authgrpid", authgrpidArrayMappings, "(./author/@auid | ./affiliation/@afid)");
+			createArray("authgrpid", authgrpidArrayMappings, "((./author/@auid) | (./affiliation/@afid))");			 
+			
 			createArray("authid",authidArrayMappings, "(@auid)");
 			
 			createArray("authidxname", authidxnameArrayMappings, "(.//text())");
@@ -747,6 +777,9 @@ public class AbstractTransform {
 			
 			createArray("collab", collabArrayMappings, "(.//text())");
 			
+			// We don't have the fast generated value - putting dummy value.
+			fieldValues.put("collec", "SCOPUS");
+						
 			createSingleField("collecid", collecidMappings);
 			
 			createSingleField("confcode", confcodeMappings);
@@ -767,11 +800,24 @@ public class AbstractTransform {
 			
 			createArrayDateField("daterevised", daterevisedArrayMappings, "(.//text())");
 
-			createSingleDateField("datesort", datesortMappings);
+			// Note: We need to put the datesort field together since it exists as discrete tag attributes.
+			createSingleField("datesortyear", datesortYearMappings);
+			createSingleField("datesortmonth", datesortMonthMappings);
+			createSingleField("datesortday", datesortDayMappings);
+			
+			String datesortyear = (String) fieldValues.get("datesortyear");
+			String datesortmonth = (String) fieldValues.get("datesortmonth");
+			String datesortday = (String) fieldValues.get("datesortday");
+			if (datesortyear != null && datesortmonth != null && datesortday != null) {
+				fieldValues.put("datesort", datesortyear + datesortmonth + datesortday);
+			}
+			fieldValues.remove("datesortyear");
+			fieldValues.remove("datesortmonth");
+			fieldValues.remove("datesortday");
 			
 			createArray("db", dbArrayMappings, "(.//text())");
 			
-			// dbdocid?????
+			createArray("dbdocid", dbdocidArrayMappings, "(@idtype)");
 			
 			createSingleField("doi", doiMappings);
 			
@@ -799,6 +845,10 @@ public class AbstractTransform {
 			
 			// exactsrctitle - handle in schema.xml
 			
+			// We don't have the fast generated value - putting dummy value. Based on our actual load processing timestamp
+			String fastdatestr =  fastloaddatefmt.format(now.getTime());
+			fieldValues.put("fastloaddate", fastdatestr);
+						
 			createArray("firstauth", firstauthArrayMappings, "(.//text())");
 			
 			createArray("fundacr", fundacrArrayMappings, "(.//text())");
@@ -814,6 +864,14 @@ public class AbstractTransform {
 			createArray("idxterms", idxtermsArrayMappings, "(.//text())");
 			
 			createArray("idxtype", idxtypeArrayMappings, "(@type)");
+			
+			// Create an inteid field from the eid field suffix
+			Object val = fieldValues.get("eid");
+			if (val instanceof String) {
+				String intid = (String)val;
+				intid = intid.substring(intid.lastIndexOf("-") + 1);
+				fieldValues.put("intid", intid);
+			}
 			
 			createArray("isbn", isbnArrayMappings, "(.//text())");
 			
@@ -832,11 +890,16 @@ public class AbstractTransform {
 			createArray("langreftitle", langreftitleArrayMappings, "(@xml:lang)");
 			
 			createArray("loadnum", loadnumArrayMappings, "(.//text())");
+			
+			// We don't have the fast generated value - putting dummy value.
+			fieldValues.put("loadunit", "ABCDEFGHIJ0123456789");
 						
 			createArray("manuf", manufArrayMappings, "(.//text())");
 			
-			// numcitedby
+			// Hard coding these values for now.
 			fieldValues.put("numcitedby", "10");
+			fieldValues.put("numpatcites", "5");
+			fieldValues.put("numwebcites", "1");
 			
 			createSingleField("oeid", oeidMappings);
 			
@@ -856,7 +919,7 @@ public class AbstractTransform {
 			
 			createSingleField("pmid", pmidMappings);
 			
-			//createSingleField("prefnameauid", prefnameauidMappings);
+			createArray("prefnameauid", prefnameauidArrayMappings, "(./preferred-name/ce:surname//text() | ./preferred-name/ce:initials//text() | @auid)");
 			
 			createArray("pub", pubArrayMappings, "(.//text())");
 			
@@ -892,6 +955,13 @@ public class AbstractTransform {
 			
 			createSingleField("sdeid", sdeidMappings);
 			
+			// Somehow FAST decides sdfullavail... We will fake out the value by seeing if sdeid was populated in the previous line.
+			if (fieldValues.get("sdeid") != null) {
+				fieldValues.put("sdfullavail", "1");
+			} else {
+				fieldValues.put("sdfullavail", "0");
+			}
+			
 			createArray("seqbank", seqbankArrayMappings, "(@name)");
 			
 			createArray("seqnumber", seqnumberArrayMappings, "(.//text())");
@@ -906,9 +976,13 @@ public class AbstractTransform {
 			
 			createSingleField("statustype", statustypeMappings);
 			
-			createArray("subjabbr", subjabbrArrayMappings, "(.//text())");
+			//createArray("subjabbr", subjabbrArrayMappings, "(.//text())");
 			
 			createArray("subjmain", subjmainArrayMappings, "(.//text())");
+			
+			// Note: our data doesn't have merged in subject abbreviations so we'll manually match them up and 
+			// put them in the index.
+			convertSubjectCodesToAbbrs("subjmain", "subjabbr");
 			
 			createArray("subjterms", subjtermsArrayMappings, "(.//text())");
 			
@@ -951,12 +1025,16 @@ public class AbstractTransform {
 			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
+			throw e;
 		} catch (SAXException e) {
 			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw e;
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
+			throw e;
 		} finally {
 		}
 		return fieldValues;
@@ -1403,7 +1481,7 @@ public class AbstractTransform {
 			fieldValues.put(fieldName, values);
 		}
 	}
-
+	
 	private void convertCountryCodesToNames(String fieldValueKey) {
 		
 		// Change countrycodes into country names. Note, the value returned can be either a single string
@@ -1428,6 +1506,33 @@ public class AbstractTransform {
 			fieldValues.put(fieldValueKey, newvals);
 		} else {
 			// just leave things alone..  Shouldn't happen unless there aren't any ctrycodes
+		}
+	}
+	
+	private void convertSubjectCodesToAbbrs(String fieldValueKey, String newFieldValueKey) {
+		
+		// Change subject codes into subject abreviations. Note, the value returned can be either a single string
+		// value or an arrayList of Strings.  Have to take this into account during processing.
+		Object val = fieldValues.get(fieldValueKey);
+		if (val instanceof String) {
+			String subjAbbr = SubjectAbbrMap.codes.get(val);
+			if (subjAbbr != null)
+				fieldValues.put(newFieldValueKey, subjAbbr);
+		} else if (val instanceof ArrayList<?>){
+			ArrayList<String> oldvals = (ArrayList<String>)val;
+			ArrayList<String> newvals = new ArrayList<String>();
+			Iterator<String> it = oldvals.iterator();
+			while (it.hasNext()) {
+				String subjCode = it.next();
+				String subjAbbr = SubjectAbbrMap.codes.get(subjCode);
+				if (subjAbbr != null)
+					newvals.add(subjAbbr);
+				else
+					newvals.add(subjCode);
+			}
+			fieldValues.put(newFieldValueKey, newvals);
+		} else {
+			// just leave things alone..  Shouldn't happen unless there aren't any subject codes
 		}
 	}
 }

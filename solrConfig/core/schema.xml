@@ -101,6 +101,7 @@
    
 -->
 <field name="_version_" type="long" indexed="true" stored="true"/>
+<field name="epoch" type="long" indexed="true" stored="true"/>
 <field name="abs" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
 <field name="absavail" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="abslang" type="abs_std" multiValued="true" indexed="true" stored="true"/>
@@ -150,7 +151,7 @@
 <field name="datecompletedtxt" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="dateloaded" type="date"  multiValued="true" indexed="true" stored="true"/>
 <field name="daterevised" type="date"  multiValued="true" indexed="true" stored="true"/>
-<field name="datesort" type="date"  multiValued="false" indexed="true" stored="true"/>
+<field name="datesort" type="integer"  multiValued="false" indexed="true" stored="true"/>
 <field name="db" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="dbdocid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="doi" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
@@ -179,6 +180,7 @@
 <field name="groupid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="idxterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
 <field name="idxtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="intid" type="keyword_lc" indexed="true" stored="true"/>
 <field name="isbn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issnp" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
@@ -192,10 +194,11 @@
 <field name="langitemtitle" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="langreftitle" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="loadnum" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="loadunit" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="manuf" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="numcitedby" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="numcitedby-s" type="long" multiValued="false" indexed="true" stored="true"/>
-<field name="numpacites" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="numpatcites" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="numwebcites" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="oeid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="pagecount" type="abs_std" multiValued="false" indexed="true" stored="true"/>
@@ -251,6 +254,7 @@
 <field name="subtype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="supplement" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="tradenames" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="type" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="vol" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="webeid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
@@ -265,8 +269,10 @@
 <copyField source="affilctry" dest="affilctry-f"/>
 <copyField source="afid" dest="afid-f"/>
 <copyField source="authid" dest="authid-f"/>
-<copyField source="exactkeyword" dest="exactkeyword-f"/>
-<copyField source="exactsrctitle" dest="exactsrctitle-f"/>
+<copyField source="keywords" dest="exactkeyword"/>
+<copyField source="keywords" dest="exactkeyword-f"/>
+<copyField source="srctitle" dest="exactsrctitle"/>
+<copyField source="srctitle" dest="exactsrctitle-f"/>
 <copyField source="lang" dest="lang-f"/>
 <copyField source="pubyr" dest="pubyr-f"/>
 <copyField source="refpubyr" dest="refpubyrtxt"/>

@@ -24,7 +24,7 @@ import com.elsevier.transform.AbstractTransform;
 
 
 
-public class SolrCore {
+public class SolrCore { 
 
 	// Format for the timestamp 
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
@@ -139,7 +139,11 @@ public class SolrCore {
 						is = FileUtils.openInputStream(new File(filename));
 						AbstractTransform sdt = new AbstractTransform();
 						HashMap<String, Object> fieldValues =  sdt.transform(is);
-								
+						
+						// Put the requests epoch value into the document at the version of the document
+						// so Solr can filter out stale requests.
+						fieldValues.put("epoch", Long.toString(epoch, 10) );
+						
 						//Debug ... output the keys/values to see if we did it right
 						for (String key:fieldValues.keySet()) {
 							
