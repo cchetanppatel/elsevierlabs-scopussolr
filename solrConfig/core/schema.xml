@@ -172,8 +172,8 @@
 <field name="exactkeyword-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="exactsrctitle" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="exactsrctitle-f" type="abs_facet" multiValued="false" indexed="true" stored="true"/>
-<field name="fastloaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
-<field name="fastloaddate-s" type="date"  multiValued="false" indexed="true" stored="true"/>
+<field name="fastloaddate" type="long"  multiValued="false" indexed="true" stored="true"/>
+<field name="fastloaddate-s" type="long"  multiValued="false" indexed="true" stored="true"/>
 <field name="firstauth" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="fundacr" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="fundall" type="abs_std" multiValued="true" indexed="true" stored="true"/>

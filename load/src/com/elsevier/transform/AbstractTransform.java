@@ -845,9 +845,12 @@ public class AbstractTransform {
 			
 			// exactsrctitle - handle in schema.xml
 			
+			// Note!!! Per Darin's email, fastloaddate is really yhe epoch.  We don't have that value available to us here,
+			// but can add it into the values much like we do the epoch in the SolrCore controller for the Transform process.
+			
 			// We don't have the fast generated value - putting dummy value. Based on our actual load processing timestamp
-			String fastdatestr =  fastloaddatefmt.format(now.getTime());
-			fieldValues.put("fastloaddate", fastdatestr);
+			//String fastdatestr =  fastloaddatefmt.format(now.getTime());
+			//fieldValues.put("fastloaddate", fastdatestr);
 						
 			createArray("firstauth", firstauthArrayMappings, "(.//text())");
 			
