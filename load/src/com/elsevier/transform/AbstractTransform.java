@@ -728,9 +728,7 @@ public class AbstractTransform {
 			} else {
 				fieldValues.put("absavail", "0");
 			}
-			
-			createSortFieldFromArrayField("afdispcity-s", "afdispcity");
-			
+						
 			createArray("abslang",abslangArrayMappings, "(xml:lang)");
 						
 			createArray("affilcity",affilcityArrayMappings, "(.//text())");
@@ -749,6 +747,8 @@ public class AbstractTransform {
 			createSingleField("artnum",artnumMappings);
 			
 			createArray("aucite", auciteArrayMappings, "(.//text())");
+			createSortFieldFromArrayField("aucite-s", "aucite");
+
 			
 			createArray("authemail",authemailArrayMappings, "(.//text())");
 			
@@ -882,6 +882,7 @@ public class AbstractTransform {
 			createSingleField("issue", issueMappings);
 			
 			createArray("itemtitle", itemtitleArrayMappings, "(.//text())");
+			createSortFieldFromArrayField("itemtitle-s", "itemtitle");
 			
 			createArray("lang", langArrayMappings, "(@xml:lang)");
 			
@@ -1007,6 +1008,7 @@ public class AbstractTransform {
 			
 			createArray("affil", affilArrayMappings, "./city-group//text() | ./city//text() | ./country//text() | ./organization//text() | ./ce:text//text()");
 			createArray("auth", authArrayMappings, "./ce:e-address//text() | ./ce:initials//text() | ./ce:surname//text() | ./ce:suffix//text()");
+			createSortFieldFromArrayField("auth-s", "auth");
 			createCompositeSingleField("confall", confallMappings);
 			createCompositeSingleField("ed", edMappings);
 			createCompositeSingleField("keywords", keywordsMappings);
