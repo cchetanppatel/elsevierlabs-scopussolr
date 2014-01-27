@@ -35,6 +35,18 @@
       "Default" : "4.6.0"
     },
     
+    "JavaHeapMin" : {
+      "Description" : "Minimum heap size.",
+      "Type" : "String",
+      "Default" : "4096M"
+    },
+    
+    "JavaHeapMax" : {
+      "Description" : "Maximum heap size.",
+      "Type" : "String",
+      "Default" : "4096M"
+    },
+    
     "SolrDownloadURL" : {
       "Description" : "Solr install gzip URL.",
       "Type" : "String",
@@ -81,6 +93,11 @@
       "Type" : "Number",
       "MinValue" : "1",
       "Default" : "2"
+    },
+    
+    "SematextCfgId" : {
+      "Description" : "Sematext Cluster ID.",
+      "Type" : "String"
     }
     
   },
@@ -107,7 +124,7 @@
                 "AvailabilityZones" : [ "us-east-1b"],
                 "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
                  "Tags" : [
-          					{ "Key" : "Name", "Value" :  "solr-affil-p", "PropagateAtLaunch" : true }
+          					{ "Key" : "Name", "Value" :  "solr-core-p", "PropagateAtLaunch" : true }
         		],
                 "MinSize" : 1,
                 "MaxSize" : 1
@@ -135,6 +152,12 @@
                 "yum -y update", "\n",
                 "rm /etc/localtime", "\n",
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Set up the Sematext monitor", "\n",
+                "yum -y install collectd ", "\n",
+                "service collectd start", "\n",
+                "rpm -Uvh https://pub-repo.sematext.com/centos/sematext-centos-repo.noarch.rpm", "\n",
+                "yum -y install spm-client", "\n",
+                "bash /opt/spm/bin/spm-client-setup-conf.sh " , { "Ref" : "SematextCfgId"}, " solrcloud javaagent", "\n",
                 "# Set up the ephemeral drives and mount them", "\n",
                 "# ", "\n",
                 "# Get rid of the default mount for drive 1 from Amazon", "\n",
@@ -163,7 +186,7 @@
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/solrconfig.xml '", { "Ref" : "SolrConfigURL"}, "'", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
-                "nohup java -DnumShards=", { "Ref" : "NumShards"}, " -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
+                "nohup java -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
                 ]]}}
             }
         },
