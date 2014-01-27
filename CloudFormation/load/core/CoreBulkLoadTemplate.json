@@ -26,13 +26,13 @@
     "SignedJarUrl" : {
       "Description" : "Signed URL for the jar file in S3",
       "Type" : "String",
-      "Default" : ""
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/load/CoreLoader.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426839451&Signature=1kIAV8ebOJjqOVJd%2BFwgHp85Ds8%3D"
     },
     
     "SignedPropertiesUrl" : {
       "Description" : "Signed URL for the Loader properties file in S3",
       "Type" : "String",
-      "Default" : ""
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/load/solr-core.properties?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426839533&Signature=aQTBHC3mPh1xaHzzoiShGYEXGuI%3D"
     },
       
     "Log4jURL" : {
