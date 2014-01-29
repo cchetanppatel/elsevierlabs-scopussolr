@@ -103,6 +103,7 @@
 
 <field name="_version_" type="long" indexed="true" stored="true"/> 
 <field name="affil" type="affil_std" multiValued="false" indexed="true" stored="true"/>
+<field name="affil-p" type="affil_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="affilcity" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilcity-f" type="affil_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="affilcity-s" type="affil_std_stopwords" multiValued="false" indexed="true" stored="true"/>
@@ -117,14 +118,18 @@
 <field name="certscore-s" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="true"/>
+<field name="datecompletedtxt-p" type="affil_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="fastloaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="loaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="loadunit" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="namevar" type="affil_std" multiValued="true" indexed="true" stored="true"/>
+<field name="namevar-p" type="affil_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="parafid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="prefname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
+<field name="prefname-p" type="affil_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="prefparname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
+<field name="prefparname-p" type="affil_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="quality" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="sortname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
@@ -136,9 +141,15 @@
 <uniqueKey>afid</uniqueKey>
 <defaultSearchField>affil</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
+<copyField source="affil" dest="affil-p"/>
 <copyField source="affilcity" dest="affilcity-f"/>
 <copyField source="affilctry" dest="affilctry-f"/>
 <copyField source="certscore" dest="certscore-f"/>
+<copyField source="datecompletedtxt" dest="datecompletedtxt-p"/>
+<copyField source="namevar" dest="namevar-p"/>
+<copyField source="prefname" dest="prefname-p"/>
+<copyField source="prefparname" dest="prefparname-p"/>
+
 
 <types>
 
@@ -201,6 +212,20 @@
   </analyzer>
  </fieldType>
  
+<!-- 
+ affil_ex_phrase analyzer:
+ 
+ Analyzer applies keyword tokenizer to the text and then applies lowercasing and leading/trailing 
+ whitespace removal filters to the generated tokens. 
+ 
+ This analyzer is typcially used on fields that are atomic values or case insensitive keys to other entities.
+-->
+<fieldType name="affil_ex_phrase" class="solr.TextField">
+<analyzer>
+ <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+ <filter class="solr.LowerCaseFilterFactory"/>
+</analyzer>
+</fieldType> 
  
 <!-- 
  keyword_lc analyzer:
