@@ -113,7 +113,7 @@
 <field name="affilctry" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
-<field name="affilctry-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="affilctry-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="affilorg" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilorg-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="afid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
@@ -130,10 +130,10 @@
 <field name="aucite" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="aucite-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="aucite-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
-<field name="aucite-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="aucite-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="auth" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="auth-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
-<field name="auth-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="auth-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="authemail" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="authemail-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="authfirstini" type="abs_std" multiValued="true" indexed="true" stored="true"/>
