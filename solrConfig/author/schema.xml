@@ -119,9 +119,12 @@
 <field name="affilhist" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilname" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilname-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="true"/>
+<field name="affilname-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="affilnamevar" type="auth_std_stopwords" multiValued="true" indexed="true"/>
+<field name="affilnamevar-p" type="auth_ex_phrase" multiValued="true" indexed="true"/>
 <field name="affilparafid" type="long" multiValued="true" indexed="true" stored="true"/>
 <field name="affilprefname" type="auth_std_stopwords" multiValued="true" indexed="true"/>
+<field name="affilprefname-p" type="auth_ex_phrase" multiValued="true" indexed="true"/>
 <field name="affilsortname" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilsortname-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="afhistcity" type="auth_std" multiValued="true" indexed="true" stored="true"/>
@@ -144,31 +147,42 @@
 <!-- authfirst-p is used for exact and starts with queries, but it is based on a composit field.
      We should probably make this a multi-value field based on all of the composite fields we add
      together for authfirst -->
-<field name="authfirst-p" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="authfirst-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="authid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="authlast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<field name="authlast-p" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="authlast-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="authname" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="authname-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="datecompletedtxt" type="date"  multiValued="true" indexed="true" stored="true"/>
+<field name="datecompletedtxt-p" type="auth_ex_phrase"  multiValued="true" indexed="true" stored="true"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="loaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="loadunit" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="namevar" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="namevar-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="namevarfirst" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarfirst-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="namevarini" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarini-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="namevarlast" type="auth_std" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarlast-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="preffirst" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="preffirst-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="preffirstsort" type="auth_std" multiValued="false" indexed="true" stored="true"/>
 <field name="prefini" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="prefini-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="preflast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="preflast-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="prefname" type="auth_std" multiValued="false" indexed="true" stored="true"/>
+<field name="prefname-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="pubrangefirst" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="pubrangelast" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="saffil" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="srctitle" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="srctitle-f" type="auth_facet" multiValued="true" indexed="true" stored="true"/>
+<field name="srctitle-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="subjabbr" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="subjclus" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
@@ -182,14 +196,31 @@
 <defaultSearchField>authname</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
 <copyField source="active" dest="active-f"/>
+<copyField source="afdispcity" dest="afdispcity-s"/>
+<copyField source="afdispctry" dest="afdispctry-s"/>
 <copyField source="affilcity" dest="affilcity-f"/>
 <copyField source="affilctry" dest="affilctry-f"/>
+<copyField source="affilname" dest="affilname-p"/>
+<copyField source="affilnamevar" dest="affilnamevar-p"/>
+<copyField source="affilprefname" dest="affilprefname-p"/>
 <copyField source="afid" dest="afid-f"/>
 <copyField source="afnameid" dest="afnameid-f"/>
-<copyField source="srctitle" dest="srctitle-f"/>
-<copyField source="subjclus" dest="subjclus-f"/>
 <copyField source="authfirst" dest="authfirst-p"/>
 <copyField source="authlast" dest="authlast-p"/>
+<copyField source="authname" dest="authname-p"/>
+<copyField source="datecompletedtxt" dest="datecompletedtxt-p"/>
+<copyField source="namevar" dest="namevar-p"/>
+<copyField source="namevarfirst" dest="namevarfirst-p"/>
+<copyField source="namevarini" dest="namevarini-p"/>
+<copyField source="namevarlast" dest="namevarlast-p"/>
+<copyField source="preffirst" dest="preffirst-p"/>
+<copyField source="prefini" dest="prefini-p"/>
+<copyField source="preflast" dest="preflast-p"/>
+<copyField source="prefname" dest="prefname-p"/>
+<copyField source="srctitle" dest="srctitle-f"/>
+<copyField source="srctitle" dest="srctitle-p"/>
+<copyField source="subjclus" dest="subjclus-f"/>
+
 
 <types>
 
@@ -252,6 +283,20 @@
   </analyzer>
  </fieldType>
  
+<!-- 
+ auth_ex_phrase analyzer:
+ 
+ Analyzer applies keyword tokenizer to the text and then applies lowercasing and leading/trailing 
+ whitespace removal filters to the generated tokens. 
+ 
+ This analyzer is typcially used on fields that are atomic values or case insensitive keys to other entities.
+-->
+<fieldType name="auth_ex_phrase" class="solr.TextField">
+<analyzer>
+ <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+ <filter class="solr.LowerCaseFilterFactory"/>
+</analyzer>
+</fieldType> 
  
 <!-- 
  keyword_lc analyzer:
