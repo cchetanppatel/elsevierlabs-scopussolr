@@ -103,53 +103,83 @@
 <field name="_version_" type="long" indexed="true" stored="true"/>
 <field name="epoch" type="long" indexed="true" stored="true"/>
 <field name="abs" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="abs-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="absavail" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="abslang" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affil" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="affil-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="affilcity" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="affilcity-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="affilctry-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="affilctry-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="affilorg" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="affilorg-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="afid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="afid-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="all" type="abs_std_stem" multiValued="false" indexed="true" stored="true"/>
+<field name="all-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="allmed" type="abs_std_stem" multiValued="false" indexed="true" stored="true"/>
+<field name="allmed-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="allsmall" type="abs_std_stem" multiValued="false" indexed="true" stored="true"/>
+<field name="allsmall-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="artnum" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="artnum-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="artnum-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="aucite" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="aucite-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="aucite-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="aucite-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="auth" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="auth-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="auth-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="authemail" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="authemail-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="authfirstini" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="authfirstini-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="authgrpid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="authgrpid-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="authid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="authid-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="authidxname" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="authidxname-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="authkeywords" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="authkeywords-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="authlast" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="authlast-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="authsuff" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="authsuff-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="casregistrynum" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="casregistrynum-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="chem" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="chem-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="cheminfo" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="cheminfo-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="chemname" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="chemname-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="citeid" type="long" multiValued="true" indexed="true" stored="true"/>
 <field name="coden" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="collab" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="collab-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="collec" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="collecid" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="confall" type="abs_std_stem" multiValued="false" indexed="true" stored="true"/>
+<field name="confall-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="confcode" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="confcode-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="confloc" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="confloc-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="confname" type="abs_std_stem" multiValued="false" indexed="true" stored="true"/>
+<field name="confname-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="confsponsor" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="confsponsor-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="copyright" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="copyright-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="corres" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="corres-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="datecompletedtxt" type="date"  multiValued="false" indexed="true" stored="true"/>
+<field name="datecompletedtxt-p" type="abs_ex_phrase"  multiValued="false" indexed="true" stored="true"/>
 <field name="dateloaded" type="date"  multiValued="true" indexed="true" stored="true"/>
 <field name="daterevised" type="date"  multiValued="true" indexed="true" stored="true"/>
 <field name="datesort" type="integer"  multiValued="false" indexed="true" stored="true"/>
@@ -161,11 +191,17 @@
 <field name="dummycode" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="dummylink" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="ed" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="ed-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="edaddress" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="edaddress-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="edfirstini" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="edfirstini-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="edidxname" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="edidxname-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="edition" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="edition-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="edlast" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="edlast-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="eissn" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="exactkeyword" type="abs_std" multiValued="true" indexed="true" stored="true"/>
@@ -175,12 +211,18 @@
 <field name="fastloaddate" type="long"  multiValued="false" indexed="true" stored="true"/>
 <field name="fastloaddate-s" type="long"  multiValued="false" indexed="true" stored="true"/>
 <field name="firstauth" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="firstauth-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="fundacr" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="fundacr-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="fundall" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="fundall-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="fundno" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="fundno-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="fundsponsor" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="fundsponsor-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="groupid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="idxterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="idxterms-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="idxtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="intid" type="keyword_lc" indexed="true" stored="true"/>
 <field name="isbn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
@@ -188,9 +230,12 @@
 <field name="issnp" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issue" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="issue-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="issue-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="itemtitle" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
 <field name="itemtitle-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="itemtitle-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="keywords" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="keywords-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="lang" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="lang-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="langitemtitle" type="abs_std" multiValued="true" indexed="true" stored="true"/>
@@ -198,6 +243,7 @@
 <field name="loadnum" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="loadunit" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="manuf" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="manuf-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="numcitedby" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="numcitedby-s" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="numpatcites" type="long" multiValued="false" indexed="true" stored="true"/>
@@ -206,8 +252,10 @@
 <field name="pagecount" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="pagecount-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
 <field name="part" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="part-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="pateid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="patinfo" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="patinfo-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="pg" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="pg-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
 <field name="pgfirst" type="abs_std" multiValued="false" indexed="true" stored="true"/>
@@ -218,13 +266,19 @@
 <field name="pmid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="prefnameauid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="prefnameauid-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
+<field name="prefnameauid-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="pub" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="pub-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="pubdatetxt" type="abs_std"  multiValued="false" indexed="true" stored="true"/>
+<field name="pubdatetxt-p" type="abs_ex_phrase"  multiValued="false" indexed="true" stored="true"/>
 <field name="pubyr" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="pubyr-f" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="pubyr-s" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="ref" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="ref-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="refartnum" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="refartnum-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
+
 <field name="refauid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="refcount" type="long" multiValued="false" indexed="true" stored="true"/>
 <field name="refeid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
@@ -235,19 +289,25 @@
 <field name="refpubyrtxt" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="refscp" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="refsrctitle" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="refsrctitle-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="reftitle" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="reftitle-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="relauthid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="restrictedaccess" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="scpid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="sdeid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="sdfullavail" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="seqbank" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="seqbank-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="seqnumber" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="seqnumber-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="srcid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="srctitle" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="srctitle-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="srctitle-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="srctitleabbr" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="srctitleabbr-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
+<field name="srctitleabbr-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="srctype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="srctype-f" type="abs_facet" multiValued="false" indexed="true" stored="true"/>
 <field name="srctype-s" type="abs_sort" multiValued="false" indexed="true" stored="true"/>
@@ -256,29 +316,79 @@
 <field name="subjabbr-f" type="abs_facet" multiValued="true" indexed="true" stored="true"/>
 <field name="subjmain" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="subjterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
+<field name="subjterms-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="subjtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="subtype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="subtype-f" type="abs_facet" multiValued="false" indexed="true" stored="true"/>
 <field name="supplement" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="supplement-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="tradenames" type="abs_std" multiValued="true" indexed="true" stored="true"/>
+<field name="tradenames-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="true"/>
 <field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="type" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="vol" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="vol-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 <field name="webeid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="website" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="website-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="true"/>
 
 
 </fields>
 <uniqueKey>scpid</uniqueKey>
 <defaultSearchField>all</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
+<copyField source="abs" dest="abs-p"/>
+<copyField source="affil" dest="affil-p"/>
+<copyField source="affilcity" dest="affilcity-p"/>
 <copyField source="affilctry" dest="affilctry-f"/>
+<copyField source="affilctry" dest="affilctry-p"/>
+<copyField source="affilorg" dest="affilorg-p"/>
 <copyField source="afid" dest="afid-f"/>
+<copyField source="all" dest="all-p"/>
+<copyField source="allmed" dest="allmed-p"/>
+<copyField source="allsmall" dest="allsmall-p"/>
 <copyField source="artnum" dest="artnum-s"/>
+<copyField source="artnum" dest="artnum-p"/>
 <copyField source="aucite" dest="aucite-f"/>
+<copyField source="aucite" dest="aucite-p"/>
+<copyField source="auth" dest="auth-p"/>
+<copyField source="authemail" dest="authemail-p"/>
+<copyField source="authfirstini" dest="authfirstini-p"/>
 <copyField source="authgrpid" dest="authgrpid-f"/>
 <copyField source="authid" dest="authid-f"/>
+<copyField source="authidxname" dest="authidxname-p"/>
+<copyField source="authkeywords" dest="authkeywords-p"/>
+<copyField source="authlast" dest="authlast-p"/>
+<copyField source="authsuff" dest="authsuff-p"/>
+<copyField source="casregistrynum" dest="casregistrynum-p"/>
+<copyField source="chem" dest="chem-p"/>
+<copyField source="cheminfo" dest="cheminfo-p"/>
+<copyField source="chemname" dest="chemname-p"/>
+<copyField source="collab" dest="collab-p"/>
+<copyField source="confall" dest="confall-p"/>
+<copyField source="confcode" dest="confcode-p"/>
+<copyField source="confloc" dest="confloc-p"/>
+<copyField source="confname" dest="confname-p"/>
+<copyField source="confsponsor" dest="confsponsor-p"/>
+<copyField source="copyright" dest="copyright-p"/>
+<copyField source="corres" dest="corres-p"/>
+<copyField source="datecompletedtxt" dest="datecompletedtxt-p"/>
 <copyField source="datesort" dest="datesort-s"/>
+<copyField source="ed" dest="ed-p"/>
+<copyField source="edaddress" dest="edaddress-p"/>
+<copyField source="edfirstini" dest="edfirstini-p"/>
+<copyField source="edidxname" dest="edidxname-p"/>
+<copyField source="edition" dest="edition-p"/>
+<copyField source="edlast" dest="edlast-p"/>
+<copyField source="firstauth" dest="firstauth-p"/>
+<copyField source="fundacr" dest="fundacr-p"/>
+<copyField source="fundall" dest="fundall-p"/>
+<copyField source="fundno" dest="fundno-p"/>
+<copyField source="fundsponsor" dest="fundsponsor-p"/>
+<copyField source="idxterms" dest="idxterms-p"/>
+<copyField source="issue" dest="issue-p"/>
+<copyField source="itemtitle" dest="itemtitle-p"/>
+<copyField source="keywords" dest="keywords-p"/>
 <copyField source="keywords" dest="exactkeyword"/>
 <copyField source="keywords" dest="exactkeyword-f"/>
 <copyField source="srctitle" dest="exactsrctitle"/>
@@ -286,19 +396,39 @@
 <copyField source="fastloaddate" dest="fastloaddate-s"/>
 <copyField source="issue" dest="issue-s"/>
 <copyField source="lang" dest="lang-f"/>
+<copyField source="manuf" dest="manuf-p"/>
 <copyField source="numcitedby" dest="numcitedby-s"/>
 <copyField source="pagecount" dest="pagecount-s"/>
+<copyField source="part" dest="part-p"/>
+<copyField source="patinfo" dest="patinfo-p"/>
 <copyField source="pg" dest="pg-s"/>
 <copyField source="pgfirst" dest="pgfirst-s"/>
 <copyField source="prefnameauid" dest="prefnameauid-f"/>
+<copyField source="prefnameauid" dest="prefnameauid-p"/>
+<copyField source="pub" dest="pub-p"/>
+<copyField source="pubdatetxt" dest="pubdatetxt-p"/>
 <copyField source="pubyr" dest="pubyr-f"/>
 <copyField source="pubyr" dest="pubyr-s"/>
+<copyField source="ref" dest="ref-p"/>
+<copyField source="refartnum" dest="refartnum-p"/>
 <copyField source="refpubyr" dest="refpubyrtxt"/>
+<copyField source="refsrctitle" dest="refsrctitle-p"/>
+<copyField source="reftitle" dest="reftitle-p"/>
+<copyField source="seqbank" dest="seqbank-p"/>
+<copyField source="seqnumber" dest="seqnumber-p"/>
 <copyField source="srctitle" dest="srctitle-s"/>
+<copyField source="srctitle" dest="srctitle-p"/>
+<copyField source="srctitleabbr" dest="srctitleabbr-p"/>
 <copyField source="srctype" dest="srctype-f"/>
 <copyField source="srctype" dest="srctype-s"/>
 <copyField source="subjabbr" dest="subjabbr-f"/>
+<copyField source="subjterms" dest="subjterms-p"/>
 <copyField source="subtype" dest="subtype-f"/>
+<copyField source="supplement" dest="supplement-p"/>
+<copyField source="tradenames" dest="tradenames-p"/>
+<copyField source="vol" dest="vol-p"/>
+<copyField source="website" dest="website-p"/>
+
 
 
 <types>
@@ -397,6 +527,21 @@
    <filter class="solr.TrimFilterFactory"/>
   </analyzer>
  </fieldType>
+
+<!-- 
+ abs_ex_phrase analyzer:
+ 
+ Analyzer applies keyword tokenizer to the text and then applies lowercasing and leading/trailing 
+ whitespace removal filters to the generated tokens. 
+ 
+ This analyzer is typcially used on fields that are atomic values or case insensitive keys to other entities.
+-->
+<fieldType name="abs_ex_phrase" class="solr.TextField">
+<analyzer>
+ <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+ <filter class="solr.LowerCaseFilterFactory"/>
+</analyzer>
+</fieldType>
  
 <!-- 
  keyword_lc analyzer:
