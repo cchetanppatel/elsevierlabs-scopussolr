@@ -5,6 +5,9 @@
   xmlns:qw="http://webservices.elsevier.com/schemas/search/fast/types/v4"
   version="2.0">
     
+    <!-- Check for highlighting flag (only highlights abs) -->    
+    <!--  Switch fields for 'punct sensitive'               -->
+    
     <!-- Turn off auto-insertion of <?xml> tag and set indenting on -->
     <xsl:output method="text" encoding="utf-8" indent="yes"/>
     
@@ -155,6 +158,11 @@
   <!-- WORD query clause -->
   <xsl:template match="ft:word">
     <!--TODO may need to adjust values for the field -->
+    <!--
+      Need to figure out those fields for weighting 
+      _query_:"{!edismax qf='itemtitle^10 abs^5'}earth"
+      auth:mcbeath
+     -->
     <xsl:value-of select="./@path"/>
     <xsl:text>:</xsl:text>
     <!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
@@ -199,6 +207,9 @@
  
  
   <!-- PROXIMITY query clause -->
+  <!-- _query_:"{!surround}(abs:(heat 15w drive))"  -->
+  <!-- May want to ignore complex proximity queries -->
+  <!-- Can handle descendant OR but not AND         -->
   <xsl:template match="ft:proximityQuery">
     <xsl:value-of select="./@path"/>
     <xsl:text>:</xsl:text>
@@ -220,13 +231,94 @@
   <xsl:template name="sort-lookup-field">
     <xsl:param name="f"/> 
     <xsl:choose>
-      
-      <!-- Some value -->
-      <xsl:when test="matches($f,'^somevalue$')">
-        <xsl:text>somevalue-new</xsl:text>
+          
+      <!-- Affiliation Country (0) -->
+      <xsl:when test="matches($f,'^affilctry$')">
+        <xsl:text>affilctry-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Article Number (0) -->
+      <xsl:when test="matches($f,'^artnum$')">
+        <xsl:text>artnum-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Author Cite (0) -->
+      <xsl:when test="matches($f,'aucite')">
+        <xsl:text>aucite-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Author (2) -->
+      <xsl:when test="matches($f,'auth')">
+        <xsl:text>auth-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Datesort (1475970) -->
+      <xsl:when test="matches($f,'datesort')">
+        <xsl:text>datesort-s</xsl:text>
+      </xsl:when>
+
+	  <!-- FAST Load Date (2456) -->
+      <xsl:when test="matches($f,'fastloaddate')">
+        <xsl:text>fastloaddate-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Issue (0) -->
+      <xsl:when test="matches($f,'issue')">
+        <xsl:text>issue-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Item Title (1102) -->
+      <xsl:when test="matches($f,'itemtitle')">
+        <xsl:text>itemtitle-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Number Cited By (141814) -->
+      <xsl:when test="matches($f,'numcitedby')">
+        <xsl:text>numcitedby-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Page Count (0) -->
+      <xsl:when test="matches($f,'pagecount')">
+        <xsl:text>pagecount-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Pages (0) -->
+      <xsl:when test="matches($f,'pg')">
+        <xsl:text>pg-s</xsl:text>
+      </xsl:when>
+
+	  <!-- Page (First) (0) -->
+      <xsl:when test="matches($f,'pgfirst')">
+        <xsl:text>pgfirst-s</xsl:text>
+      </xsl:when>
+ 
+ 	  <!-- Publication Year (20374) -->
+      <xsl:when test="matches($f,'pubyr')">
+        <xsl:text>pubyr-s</xsl:text>
+      </xsl:when>
+
+      <!-- Relevancy (1326725) -->
+      <xsl:when test="matches($f,'^relevancy$')">
+        <xsl:text>score</xsl:text>
       </xsl:when>
       
-      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
+ 	  <!-- Source Title (0) -->
+      <xsl:when test="matches($f,'srctitle')">
+        <xsl:text>srctitle-s</xsl:text>
+      </xsl:when>
+
+ 	  <!-- Status Type (0) -->
+      <xsl:when test="matches($f,'statustype')">
+        <xsl:text>statustype-s</xsl:text>
+      </xsl:when>
+
+ 	  <!-- Volume (0) -->
+      <xsl:when test="matches($f,'vol')">
+        <xsl:text>vol-s</xsl:text>
+      </xsl:when>
+                                                                                               
+      <!-- Assume we use the specified name as the field  -->
+      <!--  This should not happen. -->                                                                                                                                                                                                                                                                                                                                                                                 
       <xsl:otherwise>
         <xsl:value-of select="$f"/>
       </xsl:otherwise>
@@ -239,13 +331,79 @@
   <xsl:template name="facet-lookup-field">
     <xsl:param name="f"/> 
     <xsl:choose>
-      
-      <!-- Some value -->
-      <xsl:when test="matches($f,'^somevalue$')">
-        <xsl:text>somevalue-new</xsl:text>
+         
+      <!-- Affiliation Country (187,636) -->
+      <xsl:when test="matches($f,'affilctry')">
+        <xsl:text>affilctry-f</xsl:text>
+      </xsl:when>
+
+      <!-- Affiliation Id (195,488) -->
+      <xsl:when test="matches($f,'afid')">
+        <xsl:text>afid-f</xsl:text>
       </xsl:when>
       
-      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
+      <!-- Author Cite (1,125) -->
+      <xsl:when test="matches($f,'aucite')">
+        <xsl:text>aucite-f</xsl:text>
+      </xsl:when>     
+
+      <!-- Author Group Id (0) -->
+      <xsl:when test="matches($f,'authgrpid')">
+        <xsl:text>authgrpid-f</xsl:text>
+      </xsl:when> 
+
+      <!-- Author Id (64,711) -->
+      <xsl:when test="matches($f,'authid')">
+        <xsl:text>authid-f</xsl:text>
+      </xsl:when> 
+      
+      <!-- Exact Keyword (186,621) -->
+      <xsl:when test="matches($f,'exactkeyword')">
+        <xsl:text>exactkeyword-f</xsl:text>
+      </xsl:when> 
+
+      <!-- Exact Source Title (189,573) -->
+      <xsl:when test="matches($f,'exactsrctitle')">
+        <xsl:text>exactsrctitle-f</xsl:text>
+      </xsl:when> 
+
+      <!-- Language (186,357) -->
+      <xsl:when test="matches($f,'lang')">
+        <xsl:text>lang-f</xsl:text>
+      </xsl:when> 
+
+      <!-- Preferred Name Author Id (188,368) -->
+      <xsl:when test="matches($f,'prefnameauid')">
+        <xsl:text>prefnameauid-f</xsl:text>
+      </xsl:when> 
+
+      <!-- Publication Year (200,427) -->
+      <xsl:when test="matches($f,'pubyr')">
+        <xsl:text>pubyr-f</xsl:text>
+      </xsl:when>
+
+      <!-- Source Type (186,343) -->
+      <xsl:when test="matches($f,'srctype')">
+        <xsl:text>srctype-f</xsl:text>
+      </xsl:when>
+
+      <!-- Status Type (463) -->
+      <xsl:when test="matches($f,'statustype')">
+        <xsl:text>statustype-f</xsl:text>
+      </xsl:when>
+
+      <!-- Subject Abbreviation (188,862) -->
+      <xsl:when test="matches($f,'subjabbr')">
+        <xsl:text>subjabbr-f</xsl:text>
+      </xsl:when>
+
+      <!-- Sub Type (187,916) -->
+      <xsl:when test="matches($f,'subtype')">
+        <xsl:text>subtype-f</xsl:text>
+      </xsl:when>
+                                                                         
+      <!-- Assume we use the specified name as the field  -->  
+      <!--  This should not happen. -->                                                                                                                                                                                                                                                                                                                                                                                
       <xsl:otherwise>
         <xsl:value-of select="$f"/>
       </xsl:otherwise>

@@ -64,7 +64,7 @@ public class DynamoDB {
 		createTable(Variables.DYNAMO_SCOPUS_QUERY_TABLE_NAME);
 		
 		// Get a record
-		//getRecord(Variables.DYNAMO_ELASTIC_SEARCH_TABLE_NAME,"S1074761312005067");
+		//getRecord("auth_1_106364");
 		
 		// Dump the comparison file
 		// R throughput for sdxcr-xml should be temporarily increased to 1600 (really 3200 inconsistent)
@@ -221,30 +221,62 @@ public class DynamoDB {
     }
 	
     
+	/**
+	 * Get an item (as a serialized string)
+	 * 
+	 * @param attributeList
+	 */
+    private static String getItem(Map<String, AttributeValue> attributeList) {
+    	
+    	StringBuffer sb = new StringBuffer();
+        for (Map.Entry<String, AttributeValue> item : attributeList.entrySet()) {
+            String attributeName = item.getKey();
+            AttributeValue value = item.getValue();
+            sb.append(attributeName
+                    + " "
+                    + (value.getS() == null ? "" : "S=[" + value.getS() + "]")
+                    + (value.getN() == null ? "" : "N=[" + value.getN() + "]")
+                    + (value.getSS() == null ? "" : "SS=[" + value.getSS() + "]")
+                    + (value.getNS() == null ? "" : "NS=[" + value.getNS() + "] \n"));
+        }
+        return sb.toString();
+        
+    }
+    
+    
     /**
      * Helper method that retrieves a record from a DynamoDB table based on the primary key.
      * 
      * @param tableName DynamoDB table name.
      * @param key Primary key value.
      */
-    /*
-    public static void getRecord(String tableName, String key) {
+    
+    public static String getRecord(String key) {
     	
-		GetItemResult result = adbClient.getItem(new GetItemRequest(tableName, new Key(new AttributeValue(key))).withConsistentRead(true));
+    	HashMap<String, AttributeValue> hmkey = new HashMap<String, AttributeValue>();
+    	hmkey.put("k", new AttributeValue().withS(key));
+    	GetItemRequest getItemRequest = new GetItemRequest()
+        											.withTableName(Variables.DYNAMO_SCOPUS_QUERY_TABLE_NAME)
+        											.withKey(hmkey)
+        											.withConsistentRead(true);
+    	
+    	
+    	GetItemResult result = adbClient.getItem(getItemRequest);
+
 		Map<String,AttributeValue>resultMap = result.getItem();
 		
 		if (resultMap == null) {
 			
-			System.out.println("Record not found");
+			return key + " not found";
 			
 		} else {
 		
-			printItem(resultMap);
+			return getItem(resultMap);
 			
 		}
 		
     }
-    */
+
     
 }
 

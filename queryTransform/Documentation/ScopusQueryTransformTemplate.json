@@ -44,13 +44,13 @@
     "AffiliationQuerySetSignedUrl" : {
       "Description" : "Signed URL for the affiliation query set file in S3",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/ScopusInstitutionXQueryX_Dec052013.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426580869&Signature=v0Ut9laiioYvJf5/3QEZtFZhCa8%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimInstitution.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427089984&Signature=P9LP%2BX36JVyjhu2Rkb3JVZcvSMQ%3D"
     },
     
     "AuthorQuerySetSignedUrl" : {
       "Description" : "Signed URL for the author query set file in S3",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/ScopusAuthorXQueryX_Dec052013.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426580673&Signature=h9x9OFsngqRs3r23l6TnG0UoEsI%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimAuthor.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427090030&Signature=1NlmA%2BHzQTYT9h05e5njDdfxh9c%3D"
     }
     
   },
