@@ -103,28 +103,28 @@
 <field name="_version_" type="long" indexed="true" stored="true"/>
 <field name="epoch" type="long" indexed="true" stored="true"/>
 <field name="active" type="integer" multiValued="false" indexed="true" stored="true"/>
-<field name="active-f" type="integer" multiValued="false" indexed="true" stored="true"/>
+<field name="active-f" type="integer" multiValued="false" indexed="true" stored="false"/>
 <field name="afdispcity" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="afdispcity-s" type="auth_std" multiValued="false" indexed="true"/>
+<field name="afdispcity-s" type="auth_std" multiValued="false" indexed="true" stored="true"/>
 <field name="afdispctry" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="afdispctry-s" type="auth_std" multiValued="false" indexed="true"/>
+<field name="afdispctry-s" type="auth_std" multiValued="false" indexed="true" stored="true"/>
 <field name="afdispname" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilcity" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
-<field name="affilcity-f" type="auth_facet" multiValued="true" indexed="true" stored="true" />
+<field name="affilcity-f" type="auth_facet" multiValued="true" indexed="true" stored="false" />
 <field name="affilcity-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="affilctry" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
-<field name="affilctry-f" type="auth_facet" multiValued="true" indexed="true" stored="true"/>
+<field name="affilctry-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="affilctry-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="affilcurr" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilhist" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilname" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilname-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="true"/>
-<field name="affilname-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
-<field name="affilnamevar" type="auth_std_stopwords" multiValued="true" indexed="true"/>
-<field name="affilnamevar-p" type="auth_ex_phrase" multiValued="true" indexed="true"/>
+<field name="affilname-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
+<field name="affilnamevar" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
+<field name="affilnamevar-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="affilparafid" type="long" multiValued="true" indexed="true" stored="true"/>
-<field name="affilprefname" type="auth_std_stopwords" multiValued="true" indexed="true"/>
-<field name="affilprefname-p" type="auth_ex_phrase" multiValued="true" indexed="true"/>
+<field name="affilprefname" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
+<field name="affilprefname-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="affilsortname" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
 <field name="affilsortname-s" type="auth_std_stopwords" multiValued="false" indexed="true" stored="true"/>
 <field name="afhistcity" type="auth_std" multiValued="true" indexed="true" stored="true"/>
@@ -135,58 +135,55 @@
 <field name="afhistdispname-s" type="auth_std" multiValued="false" indexed="true" stored="true"/>
 <field name="afhistid" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="afid" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="afid-f" type="auth_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="afnameid" type="auth_std_stopwords" multiValued="true" indexed="true"/>
-<field name="afnameid-f" type="auth_facet" multiValued="true" indexed="true" stored="true"/>
+<field name="afid-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="afnameid" type="auth_std_stopwords" multiValued="true" indexed="true" stored="true"/>
+<field name="afnameid-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="alias" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="aliascurstatus" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="aliasauthorid" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="aliastimestamp" type="date"  multiValued="true" indexed="true" stored="true"/>
 <field name="aliasstatus" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="authfirst" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<!-- authfirst-p is used for exact and starts with queries, but it is based on a composit field.
-     We should probably make this a multi-value field based on all of the composite fields we add
-     together for authfirst -->
-<field name="authfirst-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="authfirst-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="authid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="authlast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<field name="authlast-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="authlast-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="authname" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<field name="authname-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="authname-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="datecompletedtxt" type="date"  multiValued="true" indexed="true" stored="true"/>
-<field name="datecompletedtxt-p" type="auth_ex_phrase"  multiValued="true" indexed="true" stored="true"/>
+<field name="datecompletedtxt-p" type="auth_ex_phrase"  multiValued="true" indexed="true" stored="false"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="loaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="loadunit" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="namevar" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="namevar-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
+<field name="namevar-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="namevarfirst" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="namevarfirst-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarfirst-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="namevarini" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="namevarini-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarini-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="namevarlast" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="namevarlast-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
+<field name="namevarlast-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="preffirst" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<field name="preffirst-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="preffirst-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="preffirstsort" type="auth_std" multiValued="false" indexed="true" stored="true"/>
 <field name="prefini" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<field name="prefini-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="prefini-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="preflast" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<field name="preflast-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="preflast-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="prefname" type="auth_std" multiValued="false" indexed="true" stored="true"/>
-<field name="prefname-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="true"/>
+<field name="prefname-p" type="auth_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="pubrangefirst" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="pubrangelast" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="saffil" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="srctitle" type="auth_std" multiValued="true" indexed="true" stored="true"/>
-<field name="srctitle-f" type="auth_facet" multiValued="true" indexed="true" stored="true"/>
-<field name="srctitle-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="true"/>
+<field name="srctitle-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="srctitle-p" type="auth_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="subjabbr" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="subjclus" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
-<field name="subjclus-f" type="auth_facet" multiValued="true" indexed="true" stored="true"/>
+<field name="subjclus-f" type="auth_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="subjmain" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="suppress" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
@@ -196,8 +193,6 @@
 <defaultSearchField>authname</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
 <copyField source="active" dest="active-f"/>
-<copyField source="afdispcity" dest="afdispcity-s"/>
-<copyField source="afdispctry" dest="afdispctry-s"/>
 <copyField source="affilcity" dest="affilcity-f"/>
 <copyField source="affilctry" dest="affilctry-f"/>
 <copyField source="affilname" dest="affilname-p"/>
