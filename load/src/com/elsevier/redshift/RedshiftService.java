@@ -12,10 +12,10 @@ import com.elsevier.common.Variables;
 
 
 /**
- * Class with static methods to handle interactions with SQS.  The main is used for testing/debugging.
+ * Class with static methods to handle JDBC interactions with RedShift.  The main is used for testing/debugging.
  * The remaining methods would be used by other classes.
  * 
- * @author Darin McBeath
+ * @author Curt Kohler
  *
  */
 public class RedshiftService {
