@@ -87,8 +87,8 @@ public class DynamoDB {
 		
 
         ProvisionedThroughput provisionedThroughput = new ProvisionedThroughput()
-        .withReadCapacityUnits(10L)
-        .withWriteCapacityUnits(10L);
+        .withReadCapacityUnits(5L)
+        .withWriteCapacityUnits(40L);
     
         CreateTableRequest request = new CreateTableRequest()
         									.withTableName(tableName)

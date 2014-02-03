@@ -11,6 +11,9 @@
     
     	Limitations:
       		Navigator selection (AdjustmentGroup elements) are currently ignored.
+      		
+        TODO:
+          May want to add -p field for punct="sensitive" queries although none exist
       
      -->
      
@@ -343,12 +346,12 @@
       
       <!-- Author first name -->
       <xsl:when test="matches($f,'^authfirst$')">
-        <xsl:text>authfirst-p</xsl:text>
+        <xsl:text>authfirst-m</xsl:text>
       </xsl:when>
       
       <!-- Author last name -->
       <xsl:when test="matches($f,'^authlast$')">
-        <xsl:text>authlast-p</xsl:text>
+        <xsl:text>authlast-m</xsl:text>
       </xsl:when>
      
       <!-- Assume we use the specified name for now as the field (which really won't work as expected) -->                                                                                                                                                                                                                                                                                                                                                                                 
@@ -380,8 +383,8 @@
         <xsl:variable name="var1">
           <xsl:call-template name="string-replace-all">
             <xsl:with-param name="text" select="lower-case($w)" />
-            <xsl:with-param name="replace" select="'+'" />
-            <xsl:with-param name="by" select="'\+'" />
+            <xsl:with-param name="replace" select="'\'" />
+            <xsl:with-param name="by" select="'\\'" />
           </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="var2">
@@ -478,8 +481,8 @@
         <xsl:variable name="var15">
           <xsl:call-template name="string-replace-all">
             <xsl:with-param name="text" select="$var14" />
-            <xsl:with-param name="replace" select="'\'" />
-            <xsl:with-param name="by" select="'\\'" />
+            <xsl:with-param name="replace" select="'+'" />
+            <xsl:with-param name="by" select="'\+'" />
           </xsl:call-template>
         </xsl:variable>  
         <xsl:variable name="var16">

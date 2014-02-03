@@ -11,7 +11,11 @@
     
     	Limitations:
       		Navigator selection (AdjustmentGroup elements) are currently ignored.
-      
+
+        TODO:
+          May want to add -p field for punct="sensitive" queries although none exist
+          May want to add -m for 'boundary' queries although none exist
+                
      -->
      
     <!-- Turn off auto-insertion of <?xml> tag and set indenting on -->
@@ -307,8 +311,8 @@
         <xsl:variable name="var1">
           <xsl:call-template name="string-replace-all">
             <xsl:with-param name="text" select="$w/text()" />
-            <xsl:with-param name="replace" select="'+'" />
-            <xsl:with-param name="by" select="'\+'" />
+            <xsl:with-param name="replace" select="'\'" />
+            <xsl:with-param name="by" select="'\\'" />
           </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="var2">
@@ -405,8 +409,8 @@
         <xsl:variable name="var15">
           <xsl:call-template name="string-replace-all">
             <xsl:with-param name="text" select="$var14" />
-            <xsl:with-param name="replace" select="'\'" />
-            <xsl:with-param name="by" select="'\\'" />
+            <xsl:with-param name="replace" select="'+'" />
+            <xsl:with-param name="by" select="'\+'" />
           </xsl:call-template>
         </xsl:variable>  
         <xsl:variable name="var16">

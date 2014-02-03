@@ -40,6 +40,12 @@
       "Type" : "String",
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/stylesheets/AuthorXqueryX2Solr.xsl?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426580976&Signature=N/lgxr5dfkzoeFwnINBsojWU26g%3D"
     },
+    
+    "CoreStylesheetSignedUrl" : {
+      "Description" : "Signed URL for the core stylesheet file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/stylesheets/CoreXqueryX2Solr.xsl?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427436835&Signature=onL6xpwDCA3ZN/B7FKrSPXjONLg%3D"
+    },
 
     "AffiliationQuerySetSignedUrl" : {
       "Description" : "Signed URL for the affiliation query set file in S3",
@@ -101,7 +107,8 @@
                 "mkdir /stylesheets", "\n",
                 "cd /stylesheets", "\n",
                 "curl -o author.xsl '", { "Ref" : "AuthorStylesheetSignedUrl"}, "'", "\n",
-                "curl -o affiliation.xsl '", { "Ref" : "AffiliationStylesheetSignedUrl"}, "'", "\n",     
+                "curl -o affiliation.xsl '", { "Ref" : "AffiliationStylesheetSignedUrl"}, "'", "\n",  
+                "curl -o core.xsl '", { "Ref" : "CoreStylesheetSignedUrl"}, "'", "\n", 
                 "mkdir /transform", "\n",
                 "cd /transform", "\n",
                 "curl -o scopusQueryTransform.jar '", { "Ref" : "ScopusQueryTransformSignedJarUrl"}, "'"         

@@ -35,7 +35,7 @@ public class Driver {
 				System.out.println("Four parameters required.");
 				System.out.println("First parameter is the stylesheet name/location.");
 				System.out.println("Second parameter is the xml file name/location.");
-				System.out.println("Third parameter is type (auth, aff, main).");
+				System.out.println("Third parameter is type (auth, affil, main).");
 				System.out.println("Fourth parameter is set.");
 				System.out.println("Fifth parameter is output file.");
 				System.exit(-1);

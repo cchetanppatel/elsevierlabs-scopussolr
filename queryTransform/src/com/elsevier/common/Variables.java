@@ -17,8 +17,8 @@ public class Variables {
 		
 	// DynamoDB table name	
 	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-core-query";
-	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-author-query";
-	public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-institution-query";
+	public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-author-query";
+	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-institution-query";
 	
 	// AWS access key
 	public static final String AWS_ACCESS_KEY = "AKIAJC674WSBSYUQYJLQ";
