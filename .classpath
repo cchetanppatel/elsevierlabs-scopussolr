@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="load/lib/slf4j-api-1.6.6.jar"/>
 	<classpathentry kind="lib" path="load/lib/slf4j-log4j12-1.6.6.jar"/>
 	<classpathentry kind="lib" path="load/lib/noggit-0.5.jar"/>
+	<classpathentry kind="lib" path="load/lib/postgresql-8.4-703.jdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

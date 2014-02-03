@@ -78,6 +78,16 @@ public class Variables {
 	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_READ_CAPACITY = 100L;
 	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_WRITE_CAPACITY = 100L;
 	
+	
+	// Redshift variables
+	public static final String AWS_REDSHIFT_INTEGRATE_REDSHIFT = prop.getProperty("AWS_REDSHIFT_INTEGRATE_REDSHIFT","false");
+	public static final String AWS_REDSHIFT_ID = prop.getProperty("AWS_REDSHIFT_ID","es");
+	public static final String AWS_REDSHIFT_PSWD = prop.getProperty("AWS_REDSHIFT_PSWD","Els3vier");
+	public static final String AWS_REDSHIFT_CONNECT_URL = prop.getProperty("AWS_REDSHIFT_CONNECT_URL", "jdbc:postgresql://scopussolr.cx3c0gtqjf0o.us-east-1.redshift.amazonaws.com:5439/counts?tcpKeepAlive=true");
+	public static final String AWS_REDSHIFT_AFFIL_CNT_TABLE = prop.getProperty("AWS_REDSHIFT_AFFIL_CNT_TABLE","corestoaffiliations");
+	public static final String AWS_REDSHIFT_AUTH_CNT_TABLE = prop.getProperty("AWS_REDSHIFT_AUTH_CNT_TABLE","corestoauthors");
+	public static final String AWS_REDSHIFT_REF_CNT_TABLE = prop.getProperty("AWS_REDSHIFT_REF_CNT_TABLE","corestoreferences");
+	
 	// SNS topic name
 	public static final String SNS_TOPIC_NAME = prop.getProperty("SNS_TOPIC_NAME","arn:aws:sns:us-east-1:545957204479:solr-scopus");
 	
