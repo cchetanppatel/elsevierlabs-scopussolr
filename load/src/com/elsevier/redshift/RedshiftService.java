@@ -18,7 +18,7 @@ import com.elsevier.common.Variables;
  * @author Curt Kohler
  *
  */
-public class RedshiftService {
+public class RedShiftService {
 
 	private static String redshiftId = Variables.AWS_REDSHIFT_ID;
 	private static String redshiftPswd = Variables.AWS_REDSHIFT_PSWD;

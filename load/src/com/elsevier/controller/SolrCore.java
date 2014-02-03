@@ -17,6 +17,7 @@ import com.elsevier.common.Variables;
 import com.elsevier.dynamo.DynamoDB;
 import com.elsevier.s3.SimpleStorageService;
 import com.elsevier.sns.SimpleNotificationService;
+import com.elsevier.redshift.RedShiftService;
 import com.elsevier.solr.Document;
 import com.elsevier.sqs.MessageEntryJson;
 import com.elsevier.sqs.SimpleQueueService;
@@ -172,6 +173,43 @@ public class SolrCore {
 						// Populate the ElasticSearch index
 						Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
 						
+						if (Variables.AWS_REDSHIFT_INTEGRATE_REDSHIFT.equals("true")) {
+							// Get core id
+							String key = (String)fieldValues.get("intid");
+							// Get author ids
+							if (fieldValues.containsKey("authid") == true) {
+								Object vals = fieldValues.get("authid");
+								if (vals instanceof String) {
+									ArrayList<String> workVals = new ArrayList<String>();
+									workVals.add((String)vals);
+									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, workVals);
+								} else if (vals instanceof ArrayList<?>) {
+									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, (ArrayList<String>)vals);
+								}
+							}
+							
+							// Get affiliation ids
+							if (fieldValues.containsKey("afid") == true) {
+								Object vals = fieldValues.get("afid");
+								if (vals instanceof String) {
+									ArrayList<String> workVals = new ArrayList<String>();
+									workVals.add((String)vals);
+									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, workVals);
+								} else if (vals instanceof ArrayList<?>) {
+									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, (ArrayList<String>)vals);
+								}
+							}
+							// Get reference ids
+							
+							// Update the author counts
+							
+							
+							// Update the affilliation counts
+							
+							
+							// Update the reference counts
+							
+						}
 					}
 					
 					// Update DynamoDB
