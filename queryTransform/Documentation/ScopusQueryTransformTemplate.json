@@ -57,6 +57,12 @@
       "Description" : "Signed URL for the author query set file in S3",
       "Type" : "String",
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimAuthor.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427090030&Signature=1NlmA%2BHzQTYT9h05e5njDdfxh9c%3D"
+    },
+ 
+    "CoreQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMain.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427565787&Signature=jEZer2/W1wZp1vbhPdt95vPcZJ0%3D"
     }
     
   },
@@ -104,6 +110,8 @@
                 "gunzip authorSet.gz", "\n",
                 "curl -o affiliationSet.gz '", { "Ref" : "AffiliationQuerySetSignedUrl"}, "'", "\n",
                 "gunzip affiliationSet.gz", "\n",
+                "curl -o coreSet.gz '", { "Ref" : "CoreQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreSet.gz", "\n",                
                 "mkdir /stylesheets", "\n",
                 "cd /stylesheets", "\n",
                 "curl -o author.xsl '", { "Ref" : "AuthorStylesheetSignedUrl"}, "'", "\n",

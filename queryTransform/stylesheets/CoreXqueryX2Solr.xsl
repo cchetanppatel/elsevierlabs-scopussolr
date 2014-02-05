@@ -21,17 +21,7 @@
           		Multi-character wildcard (*) requires 3 leading characeters.  A* or AB* will not work (by default).
           		There is no analysis of the tokens.  In other words, no lower-casing, stemming, punctuation, etc.
           		Not sure edixmax will be suported (need to verify).
-          		
-          Implement basic field weighting (perhaps model after SD)
-			field-ref="ref"           value="0"       May want to ignore as value is 0
-			field-ref="abs"           value="10"      all,allmed,allsmall
-			field-ref="srctitle"      value="20"      all
-			field-ref="auth"          value="25"      all,allmed
-			//field-ref="subheadings" value="0"       Field not present in Scopus
-			field-ref="keywords"      value="40"      all,allmed,allsmall
-			field-ref="itemtitle"     value="80"      all,allmed,allsmall
-			//field-ref=”body”        value=”10”      Field not present in Scopus
-			       
+			
           May want to add -m for 'boundary' queries although none exist
       
      -->
@@ -81,7 +71,7 @@
       
       <!-- go build the query -->
       <xsl:text>q=</xsl:text>
-      <xsl:apply-templates select="./ft:fullTextQuery/ft:query"/>
+      <xsl:apply-templates select="./ft:fullTextQuery/ft:query" mode="query"/>
 
       <!--  return fields clause -->
       <xsl:if test="exists($fields)">
@@ -152,7 +142,7 @@
       <!-- filter query -->
       <xsl:if test="exists($filter)">
         <xsl:text>&amp;fq=</xsl:text>
-        <xsl:apply-templates select="ft:query"/>
+        <xsl:apply-templates select="$filter/ft:query" mode="query"/>
       </xsl:if>
       
       <!-- highlight clause -->
@@ -164,11 +154,15 @@
   
   
   <!-- Query clause -->
-  <xsl:template match="ft:query">
+  <xsl:template match="ft:query" mode="query">
     <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare | proximityQuery"/>
   </xsl:template>
   
+
+  <!--  Prevent filter query from being processed twice -->
+  <xsl:template match="ft:query"/>
   
+    
   <!-- AND query clause -->
   <xsl:template match="ft:andQuery">
     <xsl:text>(</xsl:text>  
@@ -204,18 +198,29 @@
   
   
   <!-- WORD query clause -->
+  <!-- TODO Currently ignore 'punc sensitive' when adjusting field weights -->
   <xsl:template match="ft:word">
-    <!--Adjust punct sensitive fields -->
-    <!--TODO Adjust field weights  _query_:"{!edismax qf='itemtitle^10 abs^5'}earth"       -->
-    <xsl:call-template name="word-lookup-field">
-    	<xsl:with-param name="f" select="string(./@path)"/>
-    	<xsl:with-param name="p" select="string(./@punct)"/>
-    </xsl:call-template>
-    <xsl:text>:</xsl:text>
-    <!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
-    <xsl:call-template name="word-cleanup">
-      <xsl:with-param name="w" select="."/>
-    </xsl:call-template>
+  	<xsl:choose>
+  		<xsl:when test="string(./@path) = ('abs','srctitle','auth','keywords','itemtitle','all','allmed','allsmall')">
+  			<!--  Adjust query for field weighting -->
+	    	<xsl:call-template name="field-weight-adjustment">
+    			<xsl:with-param name="f" select="string(./@path)"/>
+    			<xsl:with-param name="w" select="."/>
+    		</xsl:call-template>
+  		</xsl:when>
+  		<xsl:otherwise>
+    		<!--Adjust punct sensitive fields (if needed) -->
+    		<xsl:call-template name="word-lookup-field">
+    			<xsl:with-param name="f" select="string(./@path)"/>
+    			<xsl:with-param name="p" select="string(./@punct)"/>
+    		</xsl:call-template>
+    		<xsl:text>:</xsl:text>
+    		<!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
+    		<xsl:call-template name="word-cleanup">
+      			<xsl:with-param name="w" select="."/>
+    		</xsl:call-template>
+    	</xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   
@@ -273,7 +278,54 @@
     <xsl:value-of select="./@slack"/>
   </xsl:template>  
   
+
+  <!-- Field Weight Lookup (adjust field names) 
+       Implement basic field weighting (perhaps model after SD)
+			field-ref="abs"           value="10"      all,allmed,allsmall
+			field-ref="srctitle"      value="20"      all
+			field-ref="auth"          value="25"      all,allmed
+			field-ref="keywords"      value="40"      all,allmed,allsmall
+			field-ref="itemtitle"     value="80"      all,allmed,allsmall	       
+    -->
+  <xsl:template name="field-weight-adjustment">
+    <xsl:param name="f"/>
+    <xsl:param name="w"/>
+    <xsl:choose>
+    	<xsl:when test="$f='abs'">
+    		<xsl:text>_query_:"{!edismax qf='abs^10'}</xsl:text>
+    	</xsl:when>
+        <xsl:when test="$f='srctitle'">
+        	<xsl:text>_query_:"{!edismax qf='srctitle^20'}</xsl:text>
+    	</xsl:when>
+        <xsl:when test="$f='auth'">
+        	<xsl:text>_query_:"{!edismax qf='auth^25'}</xsl:text>
+    	</xsl:when>
+        <xsl:when test="$f='keywords'">
+        	<xsl:text>_query_:"{!edismax qf='keywords^40'}</xsl:text>
+    	</xsl:when>    
+        <xsl:when test="$f='itemtitle'">
+        	<xsl:text>_query_:"{!edismax qf='itemtitle^80'}</xsl:text>
+    	</xsl:when>
+        <xsl:when test="$f='all'">
+        	<xsl:text>_query_:"{!edismax qf='all abs^10 srctitle^20 auth^25 keywords^40 itemtitle^80'}</xsl:text>
+    	</xsl:when>
+        <xsl:when test="$f='allmed'">
+        	<xsl:text>_query_:"{!edismax qf='all abs^10 auth^25 keywords^40 itemtitle^80'}</xsl:text>
+    	</xsl:when> 
+        <xsl:when test="$f='allsmall'">
+        	<xsl:text>_query_:"{!edismax qf='all abs^10 keywords^40 itemtitle^80'}</xsl:text>
+    	</xsl:when>    	   	    	
+    	<!-- Should never happen. --> 
+    	<xsl:otherwise/>  	
+    </xsl:choose>
+    <!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
+    <xsl:call-template name="word-cleanup">
+    	<xsl:with-param name="w" select="."/>
+    </xsl:call-template>
+    <xsl:text>"</xsl:text>
+  </xsl:template>
   
+   
   <!-- Word lookup (replace field names) -->
   <xsl:template name="word-lookup-field">
     <xsl:param name="f"/>
@@ -624,7 +676,7 @@
 		</xsl:choose>
       </xsl:when>
     
-      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                             
+      <!-- Assume we use the specified name as the field  -->                                                                                                                                                                                                                                                                                                                                                                                 
       <xsl:otherwise>
         <xsl:value-of select="$f"/>
       </xsl:otherwise>

@@ -82,6 +82,7 @@ public class Driver {
 				System.out.println(result);
 				//owriter.println(line);
 				//owriter.println("XQueryX record = " + idx + "\n" + result);
+				//owriter.println(result);
 				//owriter.flush();
 
 				try {

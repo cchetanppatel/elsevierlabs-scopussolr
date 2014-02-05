@@ -47,7 +47,7 @@
       
       <!-- go build the query -->
       <xsl:text>q=</xsl:text>
-      <xsl:apply-templates select="./ft:fullTextQuery/ft:query"/>
+      <xsl:apply-templates select="./ft:fullTextQuery/ft:query" mode="query"/>
 
       <!--  return fields clause -->
       <!--  All fields present in query set are correctly defined and to not need to be adjusted.
@@ -118,20 +118,24 @@
           <xsl:value-of select="./qw:count/text()"/>
         </xsl:for-each>          
       </xsl:if>
-      
+
       <!-- filter query -->
       <xsl:if test="exists($filter)">
         <xsl:text>&amp;fq=</xsl:text>
-        <xsl:apply-templates select="ft:query"/>
+        <xsl:apply-templates select="$filter/ft:query" mode="query"/>
       </xsl:if>
-      
+
   </xsl:template>
   
   
   <!-- Query clause -->
-  <xsl:template match="ft:query">
+  <xsl:template match="ft:query" mode="query">
     <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare"/>
   </xsl:template>
+   
+   
+  <!--  Prevent filter query from being processed twice -->
+  <xsl:template match="ft:query"/>
   
   
   <!-- AND query clause -->
