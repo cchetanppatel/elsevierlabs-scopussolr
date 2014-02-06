@@ -36,17 +36,25 @@
     <xsl:variable name="fields" select="/qw:search/qw:searchReqPayload/qw:reqFields"/>
   
     <!-- Get the start -->
-    <xsl:variable name="start" select="/qw:search/qw:searchReqPayload/qw:returnAttributes/@start"/>
- 
+    <xsl:variable name="start">
+      <xsl:variable name="val" select="/qw:search/qw:searchReqPayload/qw:returnAttributes/@start"/>
+      <xsl:choose>
+        <xsl:when test="number($val) ge 0">
+          <xsl:value-of select="$val"/>
+        </xsl:when>
+        <xsl:otherwise>0</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+  
     <!-- Get the maxResults -->
     <xsl:variable name="maxResults" select="/qw:search/qw:searchReqPayload/qw:returnAttributes/@maxResults"/>
   
     <!-- Get the orderBy fields -->
-    <xsl:variable name="orderBys" select="/qw:search/qw:searchReqPayload/qw:orderByList/qw:orderByAttributes"/>
+    <xsl:variable name="orderBys" select="/qw:search/qw:searchReqPayload/qw:orderByList/qw:orderByAttributes[@path=('affilctry','artnum','aucite','auth','datesort','fastloaddate','issue','itemtitle','numcitedby','pagecount','pg','pgfirst','pubyr','relevancy','srctitle','statustype','vol')]"/>
+      
+    <!-- Get the facet fields (what to do about scoundefinednav?) -->
+    <xsl:variable name="facets" select="/qw:search/qw:searchReqPayload/qw:reqDimension[qw:navigator=('scoaffilctrynav','scoafidnav','scoaucitenav','scoauthgrpidnav','scoauthidnav','scoexactkeywordsnav','scoexactsrctitlenav','scolangnav','scoprefnameauidnav','scopubyrnav','scosrctypenav','scostatustypenav','scosubjabbrnav','scosubtypenav')]"/>
   
-    <!-- Get the facet fields -->
-    <xsl:variable name="facets" select="/qw:search/qw:searchReqPayload/qw:reqDimension[qw:navigator]"/>
-
     <!-- Get the filter query -->
     <xsl:variable name="filter" select="/qw:search/qw:searchReqPayload/qw:elsfilter/ft:fullTextQuery"/>
   
@@ -198,7 +206,6 @@
   
   
   <!-- WORD query clause -->
-  <!-- TODO Currently ignore 'punc sensitive' when adjusting field weights -->
   <xsl:template match="ft:word">
   	<xsl:choose>
   		<xsl:when test="string(./@path) = ('abs','srctitle','auth','keywords','itemtitle','all','allmed','allsmall')">
@@ -225,7 +232,6 @@
   
   
   <!-- NUMERIC queryclause -->
-  <!-- TODO may need to adjust the values for the field -->
   <!-- TODO need to check if a date value may need to be adjusted (but date is never used) -->
   <xsl:template match="ft:numericCompare">  
     <xsl:value-of select="ft:clause/@path"/>
@@ -279,8 +285,9 @@
   </xsl:template>  
   
 
-  <!-- Field Weight Lookup (adjust field names) 
-       Implement basic field weighting (perhaps model after SD)
+  <!-- TODO Add field weights for exact phrase (punct sensitive)
+      Field Weight Lookup (adjust field names) 
+      Implement basic field weighting (perhaps model after SD)
 			field-ref="abs"           value="10"      all,allmed,allsmall
 			field-ref="srctitle"      value="20"      all
 			field-ref="auth"          value="25"      all,allmed
@@ -310,18 +317,29 @@
         	<xsl:text>_query_:"{!edismax qf='all abs^10 srctitle^20 auth^25 keywords^40 itemtitle^80'}</xsl:text>
     	</xsl:when>
         <xsl:when test="$f='allmed'">
-        	<xsl:text>_query_:"{!edismax qf='all abs^10 auth^25 keywords^40 itemtitle^80'}</xsl:text>
+        	<xsl:text>_query_:"{!edismax qf='allmed abs^10 auth^25 keywords^40 itemtitle^80'}</xsl:text>
     	</xsl:when> 
         <xsl:when test="$f='allsmall'">
-        	<xsl:text>_query_:"{!edismax qf='all abs^10 keywords^40 itemtitle^80'}</xsl:text>
+        	<xsl:text>_query_:"{!edismax qf='allsmall abs^10 keywords^40 itemtitle^80'}</xsl:text>
     	</xsl:when>    	   	    	
     	<!-- Should never happen. --> 
     	<xsl:otherwise/>  	
-    </xsl:choose>
-    <!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
-    <xsl:call-template name="word-cleanup">
-    	<xsl:with-param name="w" select="."/>
-    </xsl:call-template>
+    </xsl:choose>    
+    <!-- Check if a phrase or punc sensitive -->
+    <xsl:choose>
+      <xsl:when test="$w[@phrase='true' or @punct='sensitive']">
+        <xsl:text>\"</xsl:text>
+        <xsl:call-template name="string-escape">
+          <xsl:with-param name="str" select="$w/text()" />
+        </xsl:call-template> 
+        <xsl:text>\"</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="string-escape">
+          <xsl:with-param name="str" select="$w/text()" />
+        </xsl:call-template> 
+      </xsl:otherwise>     
+    </xsl:choose> 
     <xsl:text>"</xsl:text>
   </xsl:template>
   
@@ -791,75 +809,75 @@
     <xsl:choose>
          
       <!-- Affiliation Country (187,636) -->
-      <xsl:when test="matches($f,'^affilctry$')">
+      <xsl:when test="matches($f,'^scoaffilctrynav$')">
         <xsl:text>affilctry-f</xsl:text>
       </xsl:when>
 
       <!-- Affiliation Id (195,488) -->
-      <xsl:when test="matches($f,'^afid$')">
+      <xsl:when test="matches($f,'^scoafidnav$')">
         <xsl:text>afid-f</xsl:text>
       </xsl:when>
       
       <!-- Author Cite (1,125) -->
-      <xsl:when test="matches($f,'^aucite$')">
+      <xsl:when test="matches($f,'^scoaucitenav$')">
         <xsl:text>aucite-f</xsl:text>
       </xsl:when>     
 
       <!-- Author Group Id (0) -->
-      <xsl:when test="matches($f,'^authgrpid$')">
+      <xsl:when test="matches($f,'^scoauthgrpidnav$')">
         <xsl:text>authgrpid-f</xsl:text>
       </xsl:when> 
 
       <!-- Author Id (64,711) -->
-      <xsl:when test="matches($f,'^authid$')">
+      <xsl:when test="matches($f,'^scoauthidnav$')">
         <xsl:text>authid-f</xsl:text>
       </xsl:when> 
       
       <!-- Exact Keyword (186,621) -->
-      <xsl:when test="matches($f,'^exactkeyword$')">
+      <xsl:when test="matches($f,'^scoexactkeywordsnav$')">
         <xsl:text>exactkeyword-f</xsl:text>
       </xsl:when> 
 
       <!-- Exact Source Title (189,573) -->
-      <xsl:when test="matches($f,'^exactsrctitle$')">
+      <xsl:when test="matches($f,'^scoexactsrctitlenav$')">
         <xsl:text>exactsrctitle-f</xsl:text>
       </xsl:when> 
 
       <!-- Language (186,357) -->
-      <xsl:when test="matches($f,'lang$')">
+      <xsl:when test="matches($f,'scolangnav$')">
         <xsl:text>lang-f</xsl:text>
       </xsl:when> 
 
       <!-- Preferred Name Author Id (188,368) -->
-      <xsl:when test="matches($f,'^prefnameauid$')">
+      <xsl:when test="matches($f,'^scoprefnameauidnav$')">
         <xsl:text>prefnameauid-f</xsl:text>
       </xsl:when> 
 
       <!-- Publication Year (200,427) -->
-      <xsl:when test="matches($f,'^pubyr$')">
+      <xsl:when test="matches($f,'^scopubyrnav$')">
         <xsl:text>pubyr-f</xsl:text>
       </xsl:when>
 
       <!-- Source Type (186,343) -->
-      <xsl:when test="matches($f,'^srctype$')">
+      <xsl:when test="matches($f,'^scosrctypenav$')">
         <xsl:text>srctype-f</xsl:text>
       </xsl:when>
 
       <!-- Status Type (463) -->
-      <xsl:when test="matches($f,'^statustype$')">
+      <xsl:when test="matches($f,'^scostatustypenav$')">
         <xsl:text>statustype-f</xsl:text>
       </xsl:when>
 
       <!-- Subject Abbreviation (188,862) -->
-      <xsl:when test="matches($f,'^subjabbr$')">
+      <xsl:when test="matches($f,'^scosubjabbrnav$')">
         <xsl:text>subjabbr-f</xsl:text>
       </xsl:when>
 
       <!-- Sub Type (187,916) -->
-      <xsl:when test="matches($f,'^subtype$')">
+      <xsl:when test="matches($f,'^scosubtypenav$')">
         <xsl:text>subtype-f</xsl:text>
       </xsl:when>
-                                                                         
+      
       <!-- Assume we use the specified name as the field  -->  
       <!--  This should not happen. -->                                                                                                                                                                                                                                                                                                                                                                                
       <xsl:otherwise>
@@ -870,11 +888,13 @@
   </xsl:template>
   
   <!-- Word cleanup  -->
+  <!-- TODO add another param to indicate edismax -->
   <xsl:template name="word-cleanup">
     <xsl:param name="w"/> 
     <xsl:choose>
       
       <!-- Marked as a phrase (or punct=sensitive) so make it a phrase -->
+      <!-- TODO Must minimally escape the " -->
       <xsl:when test="$w[@phrase='true' or @punct='sensitive']">
         <xsl:text>"</xsl:text>
         <xsl:value-of select="$w/text()"/>
@@ -884,132 +904,138 @@
       <!-- Just use the text (no need for a phrase)  -->
       <!-- Escape these characters for 'keyword' fields   + - & | ! ( ) { } [ ] ^ ~ : \ / " -->
       <xsl:otherwise>
-        <xsl:variable name="var1">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$w/text()" />
-            <xsl:with-param name="replace" select="'\'" />
-            <xsl:with-param name="by" select="'\\'" />
-          </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="var2">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var1" />
-            <xsl:with-param name="replace" select="'-'" />
-            <xsl:with-param name="by" select="'\-'" />
-          </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="var3">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var2" />
-            <xsl:with-param name="replace" select="'&amp;'" />
-            <xsl:with-param name="by" select="'\&amp;'" />
-          </xsl:call-template>
-        </xsl:variable>       
-        <xsl:variable name="var4">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var3" />
-            <xsl:with-param name="replace" select="'|'" />
-            <xsl:with-param name="by" select="'\|'" />
-          </xsl:call-template>
-        </xsl:variable>          
-        <xsl:variable name="var5">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var4" />
-            <xsl:with-param name="replace" select="'!'" />
-            <xsl:with-param name="by" select="'\!'" />
-          </xsl:call-template>
-        </xsl:variable>          
-        <xsl:variable name="var6">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var5" />
-            <xsl:with-param name="replace" select="'('" />
-            <xsl:with-param name="by" select="'\('" />
-          </xsl:call-template>
-        </xsl:variable>         
-        <xsl:variable name="var7">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var6" />
-            <xsl:with-param name="replace" select="')'" />
-            <xsl:with-param name="by" select="'\)'" />
-          </xsl:call-template>
-        </xsl:variable>        
-        <xsl:variable name="var8">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var7" />
-            <xsl:with-param name="replace" select="'{'" />
-            <xsl:with-param name="by" select="'\{'" />
-          </xsl:call-template>
-        </xsl:variable>         
-        <xsl:variable name="var9">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var8" />
-            <xsl:with-param name="replace" select="'}'" />
-            <xsl:with-param name="by" select="'\}'" />
-          </xsl:call-template>
-        </xsl:variable>        
-        <xsl:variable name="var10">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var9" />
-            <xsl:with-param name="replace" select="'['" />
-            <xsl:with-param name="by" select="'\['" />
-          </xsl:call-template>
-        </xsl:variable>  
-        <xsl:variable name="var11">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var10" />
-            <xsl:with-param name="replace" select="']'" />
-            <xsl:with-param name="by" select="'\]'" />
-          </xsl:call-template>
-        </xsl:variable>          
-        <xsl:variable name="var12">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var11" />
-            <xsl:with-param name="replace" select="'^'" />
-            <xsl:with-param name="by" select="'\^'" />
-          </xsl:call-template>
-        </xsl:variable>         
-        <xsl:variable name="var13">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var12" />
-            <xsl:with-param name="replace" select="'~'" />
-            <xsl:with-param name="by" select="'\~'" />
-          </xsl:call-template>
-        </xsl:variable> 
-        <xsl:variable name="var14">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var13" />
-            <xsl:with-param name="replace" select="':'" />
-            <xsl:with-param name="by" select="'\:'" />
-          </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="var15">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var14" />
-            <xsl:with-param name="replace" select="'+'" />
-            <xsl:with-param name="by" select="'\+'" />
-          </xsl:call-template>
-        </xsl:variable>  
-        <xsl:variable name="var16">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var15" />
-            <xsl:with-param name="replace" select="'/'" />
-            <xsl:with-param name="by" select="'\/'" />
-          </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="var17">
-          <xsl:call-template name="string-replace-all">
-            <xsl:with-param name="text" select="$var16" />
-            <xsl:with-param name="replace" select="'&quot;'" />
-            <xsl:with-param name="by" select="'\&quot;'" />
-          </xsl:call-template>
-        </xsl:variable>        
-        <xsl:value-of select="$var17"/>    
+        <xsl:call-template name="string-escape">
+          <xsl:with-param name="str" select="$w/text()" />
+        </xsl:call-template> 
       </xsl:otherwise>
       
     </xsl:choose> 
   </xsl:template>
 
-
+  <xsl:template name="string-escape">
+    <xsl:param name="str"/>
+    <xsl:variable name="var1">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$str" />
+        <xsl:with-param name="replace" select="'\'" />
+        <xsl:with-param name="by" select="'\\'" />
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="var2">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var1" />
+        <xsl:with-param name="replace" select="'-'" />
+        <xsl:with-param name="by" select="'\-'" />
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="var3">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var2" />
+        <xsl:with-param name="replace" select="'&amp;'" />
+        <xsl:with-param name="by" select="'\&amp;'" />
+      </xsl:call-template>
+    </xsl:variable>       
+    <xsl:variable name="var4">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var3" />
+        <xsl:with-param name="replace" select="'|'" />
+        <xsl:with-param name="by" select="'\|'" />
+      </xsl:call-template>
+    </xsl:variable>          
+    <xsl:variable name="var5">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var4" />
+        <xsl:with-param name="replace" select="'!'" />
+        <xsl:with-param name="by" select="'\!'" />
+      </xsl:call-template>
+    </xsl:variable>          
+    <xsl:variable name="var6">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var5" />
+        <xsl:with-param name="replace" select="'('" />
+        <xsl:with-param name="by" select="'\('" />
+      </xsl:call-template>
+    </xsl:variable>         
+    <xsl:variable name="var7">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var6" />
+        <xsl:with-param name="replace" select="')'" />
+        <xsl:with-param name="by" select="'\)'" />
+      </xsl:call-template>
+    </xsl:variable>        
+    <xsl:variable name="var8">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var7" />
+        <xsl:with-param name="replace" select="'{'" />
+        <xsl:with-param name="by" select="'\{'" />
+      </xsl:call-template>
+    </xsl:variable>         
+    <xsl:variable name="var9">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var8" />
+        <xsl:with-param name="replace" select="'}'" />
+        <xsl:with-param name="by" select="'\}'" />
+      </xsl:call-template>
+    </xsl:variable>        
+    <xsl:variable name="var10">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var9" />
+        <xsl:with-param name="replace" select="'['" />
+        <xsl:with-param name="by" select="'\['" />
+      </xsl:call-template>
+    </xsl:variable>  
+    <xsl:variable name="var11">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var10" />
+        <xsl:with-param name="replace" select="']'" />
+        <xsl:with-param name="by" select="'\]'" />
+      </xsl:call-template>
+    </xsl:variable>          
+    <xsl:variable name="var12">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var11" />
+        <xsl:with-param name="replace" select="'^'" />
+        <xsl:with-param name="by" select="'\^'" />
+      </xsl:call-template>
+    </xsl:variable>         
+    <xsl:variable name="var13">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var12" />
+        <xsl:with-param name="replace" select="'~'" />
+        <xsl:with-param name="by" select="'\~'" />
+      </xsl:call-template>
+    </xsl:variable> 
+    <xsl:variable name="var14">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var13" />
+        <xsl:with-param name="replace" select="':'" />
+        <xsl:with-param name="by" select="'\:'" />
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="var15">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var14" />
+        <xsl:with-param name="replace" select="'+'" />
+        <xsl:with-param name="by" select="'\+'" />
+      </xsl:call-template>
+    </xsl:variable>  
+    <xsl:variable name="var16">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var15" />
+        <xsl:with-param name="replace" select="'/'" />
+        <xsl:with-param name="by" select="'\/'" />
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="var17">
+      <xsl:call-template name="string-replace-all">
+        <xsl:with-param name="text" select="$var16" />
+        <xsl:with-param name="replace" select="'&quot;'" />
+        <xsl:with-param name="by" select="'\&quot;'" />
+      </xsl:call-template>
+    </xsl:variable>        
+    <xsl:value-of select="$var17"/>        
+  </xsl:template>
+  
   <xsl:template name="string-replace-all">
     <xsl:param name="text" />
     <xsl:param name="replace" />
