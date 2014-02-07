@@ -1,0 +1,166 @@
+This file documents the tables (and general processes) around using RedShift
+to calculate publication counts for authors/affiliations and cited by counts
+for cores.
+
+################################
+# Tables
+################################
+
+# authors (core eid to author id mappings)
+create table corestoauthors(
+	eid varchar(20),
+	auid varchar(15) sortkey,
+	primary key(eid,auid));
+
+
+# affiliations (core eid to affiliation id mappings)
+create table corestoaffiliations(
+	eid varchar(20),
+	afid varchar(15) sortkey,
+	primary key(eid,afid));
+
+
+# references (core eid to reference eid mappings)
+create table corestoreferences(
+	eid varchar(20),
+	refid varchar(20) sortkey,
+	primary key(eid,refid));
+	
+	
+# Table to hold the publication counts for each author
+# Will need multiple tables (current-n through current)
+create table authorpubcnt(
+	authid varchar(15) sortkey,
+	pubcnt Integer,
+	primary key(authid));
+	
+	
+# Table to hold the publication counts for each affiliation
+# Will need multiple tables (current-n through current)
+create table affiliationpubcnt(
+	afid varchar(15) sortkey,
+	pubcnt Integer,
+	primary key(afid));
+
+
+# Table to hold the citedby counts for each core eid
+# Will need multiple tables (current-n through current)
+create table corecbcnt(
+	refid varchar(15) sortkey,
+	cbcnt Integer,
+	primary key(eid));
+	
+	
+################################
+# Load Queries
+# Initial population of tables.
+# This is atypical as the table
+# will be incrementally updated
+# as content is loaded into the
+# search engine.  This is more
+# of a bulk load approach.
+################################
+
+# authors
+copy corestoauthors from 's3://darin-core-auths/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+
+# affiliations
+copy corestoaffiliations from 's3://darin-core-afils/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+
+# references
+copy corestoreferences from 's3://darin-core-refs/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+
+
+###################################
+# Publication/CitedBy Count Queries
+# Populate to S3.  This is not the
+# norm, as the results of the query
+# would be put into a table and not
+# to S3
+###################################
+
+# authors (Push the publication counts to S3)
+unload ('SELECT auid, COUNT(*) AS "pubcnt"
+FROM corestoauthors
+GROUP BY auid
+ORDER BY auid') to  's3://darin-core-auths-results/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+# affiliations (Push the publication counts to S3)
+unload ('SELECT afid, COUNT(*) AS "pubcnt"
+FROM corestoaffiliations
+GROUP BY afid
+ORDER BY afid') to  's3://darin-core-afils-results/afil-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+# cores (Push the cited by counts to S3)
+unload ('SELECT refid, COUNT(*) AS "cbcnt"
+FROM corestoreferences
+GROUP BY refid
+ORDER BY refid') to  's3://darin-core-refs-results/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+# authors (Populate the publication counts into a table)
+# The table will be different each day (current-n through current)
+insert into authorpubcnt(authid,pubcnt)
+SELECT authid, COUNT(*) 
+FROM corestoauthors
+GROUP BY authid
+ORDER BY authid;
+
+# affiliations (Populate the publication counts into a table)
+# The table will be different each day (current-n through current)
+insert into affiliationpubcnt(authid,pubcnt)
+SELECT authid, COUNT(*) 
+FROM corestoaffiliations
+GROUP BY afid
+ORDER BY afid;
+
+# cores (Populate the cited by counts into a table)
+# The table will be different each day (current-n through current)
+insert into corecbcnt(authid,pubcnt)
+SELECT authid, COUNT(*) 
+FROM corestoreferences
+GROUP BY refid
+ORDER BY refid;
+
+
+###################################
+# Calculate the delta between
+# 2 files.  This will identify the
+# records where the count needs to
+# be updated.
+###################################
+
+# authors (Push to S3 only those records that are unique in authorpubcnt2 ...the 'new' table) 
+# assume 'authorpubcnt2' is the 'current' table and 'authorpubcnt' is the 'current-1'.
+unload ('
+select * from authorpubcnt2
+minus
+select * from authorpubcnt') to  's3://darintest/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+# affiliations (Push to S3 only those records that are unique in affiliationpubcnt2 ...the 'new' table) 
+# assume 'affiliationpubcnt2' is the 'current' table and 'affiliationpubcnt' is the 'current-1'.
+unload ('
+select * from affiliationpubcnt2
+minus
+select * from affiliationpubcnt') to  's3://darintest/aff-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+# cores (Push to S3 only those records that are unique in corecbcnt2 ...the 'new' table) 
+# assume 'corecbcnt2' is the 'current' table and 'corecbcnt' is the 'current-1'.
+unload ('
+select * from corecbcnt2
+minus
+select * from corecbcnt') to  's3://darintest/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+
+###################################
+# Helpful scripts
+###################################
+
+# Output the publication counts 
+unload ('SELECT authid, pubcnt
+FROM authorspubcnt') to  's3://darin-core-auths-results/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+# concatenating multiple files
+cat 'file'* > 'newfile'
+
+# compare count files (that were output to s3)
+comm -1 -3 'old' 'new' > 'baseline'
