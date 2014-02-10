@@ -182,9 +182,9 @@ public class SolrCore {
 								if (vals instanceof String) {
 									ArrayList<String> workVals = new ArrayList<String>();
 									workVals.add((String)vals);
-									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, workVals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, epoch, workVals);
 								} else if (vals instanceof ArrayList<?>) {
-									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, (ArrayList<String>)vals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, epoch, (ArrayList<String>)vals);
 								}
 							}
 							
@@ -194,9 +194,9 @@ public class SolrCore {
 								if (vals instanceof String) {
 									ArrayList<String> workVals = new ArrayList<String>();
 									workVals.add((String)vals);
-									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, workVals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, epoch, workVals);
 								} else if (vals instanceof ArrayList<?>) {
-									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, (ArrayList<String>)vals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, epoch, (ArrayList<String>)vals);
 								}
 							}
 							// Get reference ids

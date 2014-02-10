@@ -49,11 +49,11 @@ public class RedshiftService {
 		ArrayList<String> values = new ArrayList<String>();
         values.add("456");
         values.add("10");
-		replaceRecord("corestoauthors", "1", values);
+		replaceRecord("corestoauthors", "1", 1L, values);
 		
 		ArrayList<String> values2 = new ArrayList<String>();
 		values2.add("5");
-		replaceRecord("corestoauthors", "1", values2);
+		replaceRecord("corestoauthors", "1", 2L, values2);
 
 		//deleteRecord("corestoauthors", "1");
 		
@@ -71,11 +71,11 @@ public class RedshiftService {
 	 * @param values value(s) to associate with the specified key in the table.
 	 * 
 	 */
-	public static boolean replaceRecord(String tableName, String key, List<String> values) {
+	public static boolean replaceRecord(String tableName, String key, long epoch, List<String> values) {
 		// 
 		if (deleteRecord(tableName, key) == false)
 			return false;
-		else if (addRecord(tableName, key, values))
+		else if (addRecord(tableName, key, epoch, values))
 			return false;
 		else
 			return true;
@@ -90,14 +90,14 @@ public class RedshiftService {
 	 * @param values value(s) to associate with the specified key in the table.
 	 * 
 	 */
-	public static boolean addRecord(String tableName, String key, List<String> values) {
+	public static boolean addRecord(String tableName, String key, long epoch, List<String> values) {
 		try {
 			Connection db = DriverManager.getConnection(redshiftConnectURL, redshiftId, redshiftPswd);
 			db.setAutoCommit(false);
 			Statement st = db.createStatement();	
 			for (int x = 0; x < values.size(); x++) {
 				String value = values.get(x);
-				int rowsInserted = st.executeUpdate("INSERT INTO  " +  tableName + " values(" + key + "," + value +")");
+				int rowsInserted = st.executeUpdate("INSERT INTO  " +  tableName + " values(" + key + "," + value + "," + epoch + ")");
 			}
 			st.close();
 			db.commit();
