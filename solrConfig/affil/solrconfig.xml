@@ -1663,7 +1663,7 @@
      <updateRequestProcessorChain name="standard" default="true">
        
        <processor class="solr.processor.DocBasedVersionConstraintsProcessorFactory">
-          <str name="versionField">epoch</str>
+          <str name="versionField">epoch-rs</str>
        </processor>
        <processor class="solr.LogUpdateProcessorFactory" />
        <processor class="solr.RunUpdateProcessorFactory" />

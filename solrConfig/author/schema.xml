@@ -102,6 +102,7 @@
 -->
 <field name="_version_" type="long" indexed="true" stored="true"/>
 <field name="epoch" type="long" indexed="true" stored="true"/>
+<field name="epoch-rs" type="long" indexed="true" stored="true"/>
 <field name="active" type="integer" multiValued="false" indexed="true" stored="true"/>
 <field name="active-f" type="integer" multiValued="false" indexed="true" stored="false"/>
 <field name="afdispcity" type="auth_std" multiValued="true" indexed="true" stored="true"/>
@@ -208,6 +209,7 @@
 <copyField source="authlast" dest="authlast-p"/>
 <copyField source="authname" dest="authname-p"/>
 <copyField source="datecompletedtxt" dest="datecompletedtxt-p"/>
+<copyField source="epoch" dest="epoch-rs"/>
 <copyField source="namevar" dest="namevar-p"/>
 <copyField source="namevarfirst" dest="namevarfirst-p"/>
 <copyField source="namevarini" dest="namevarini-p"/>
