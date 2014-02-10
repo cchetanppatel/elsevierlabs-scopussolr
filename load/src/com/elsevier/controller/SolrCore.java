@@ -17,7 +17,7 @@ import com.elsevier.common.Variables;
 import com.elsevier.dynamo.DynamoDB;
 import com.elsevier.s3.SimpleStorageService;
 import com.elsevier.sns.SimpleNotificationService;
-import com.elsevier.redshift.RedShiftService;
+import com.elsevier.redshift.RedshiftService;
 import com.elsevier.solr.Document;
 import com.elsevier.sqs.MessageEntryJson;
 import com.elsevier.sqs.SimpleQueueService;
@@ -182,9 +182,9 @@ public class SolrCore {
 								if (vals instanceof String) {
 									ArrayList<String> workVals = new ArrayList<String>();
 									workVals.add((String)vals);
-									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, workVals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, workVals);
 								} else if (vals instanceof ArrayList<?>) {
-									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, (ArrayList<String>)vals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AUTH_CNT_TABLE, key, (ArrayList<String>)vals);
 								}
 							}
 							
@@ -194,9 +194,9 @@ public class SolrCore {
 								if (vals instanceof String) {
 									ArrayList<String> workVals = new ArrayList<String>();
 									workVals.add((String)vals);
-									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, workVals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, workVals);
 								} else if (vals instanceof ArrayList<?>) {
-									RedShiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, (ArrayList<String>)vals);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_AFFIL_CNT_TABLE, key, (ArrayList<String>)vals);
 								}
 							}
 							// Get reference ids
