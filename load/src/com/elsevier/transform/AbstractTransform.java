@@ -901,7 +901,8 @@ public class AbstractTransform {
 			createArray("manuf", manufArrayMappings, "(.//text())");
 			
 			// Hard coding these values for now.
-			fieldValues.put("numcitedby", "10");
+			// Commented out because this in now populated by Redshift job and we don't want to overwrite good values on record updates.
+			//fieldValues.put("numcitedby", "10");
 			fieldValues.put("numpatcites", "5");
 			fieldValues.put("numwebcites", "1");
 			

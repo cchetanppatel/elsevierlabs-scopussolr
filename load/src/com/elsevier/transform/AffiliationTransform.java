@@ -179,7 +179,8 @@ public class AffiliationTransform {
 			createSortFieldFromArrayField("certscore-s", "certscore");
 			
 			// We don't have the fast generated value here.
-			fieldValues.put("count", "1");
+			// Note: not putting this here because Redshift will be populating values and we don't want to override them on updates
+			//fieldValues.put("count", "1");
 			
 			createArray("datecompletedtxt", datecompletedtxtArrayMappings, "(.//text())");
 	
