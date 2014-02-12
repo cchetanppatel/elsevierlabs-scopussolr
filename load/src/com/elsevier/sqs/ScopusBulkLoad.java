@@ -26,7 +26,7 @@ public class ScopusBulkLoad {
 		if (args.length != 2 && args.length != 3) {
 			System.err.println("Two parameters are required.  The third parameter is optional.");
 			System.err.println("First parameter is the file containing the Scopus S3 keys.");
-			System.err.println("Second parameter is the version to use.");
+			System.err.println("Second parameter is the version to use. A version of 0 will use the current timestamp as the epoch");
 			System.err.println("Third parameter is the number of keys to process.");
 	        System.exit(1);
 		}
@@ -57,8 +57,16 @@ public class ScopusBulkLoad {
     			 // Process a record.  The only thing in a line will be the key.
     			 String key = line.trim();
 
+    			 long messageEpoch = 0;
+    			 // should we use the current time as the epoch?
+    			 if (epoch.contentEquals("0")) {
+    				 messageEpoch = System.currentTimeMillis();
+    				 version = "" + messageEpoch;
+    			 } else {
+    				 messageEpoch = Long.parseLong(epoch,10);
+    			 }
     			 
-				 MessageEntryForXMLProcessing entry = new MessageEntryForXMLProcessing(action, Long.parseLong(epoch,10), key, prefix, version);
+				 MessageEntryForXMLProcessing entry = new MessageEntryForXMLProcessing(action, messageEpoch, key, prefix, version);
 				 String jsonEntry = MessageForXMLProcessing.toJson(Variables.S3_XML_BUCKET_NAME, entry);
 				 SendMessageBatchRequestEntry messageEntry = new SendMessageBatchRequestEntry()
 				 													.withMessageBody(jsonEntry)
