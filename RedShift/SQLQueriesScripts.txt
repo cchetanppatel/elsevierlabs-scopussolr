@@ -6,50 +6,87 @@ for cores.
 # Tables
 ################################
 
-# authors (core eid to author id mappings)
-create table corestoauthors(
+# authors (set 1 ... core eid to author id mappings)
+create table corestoauthors1(
 	eid varchar(20),
 	auid varchar(15) sortkey,
 	primary key(eid,auid));
 
+# authors (set 2 ... core eid to author id mappings)
+create table corestoauthors2(
+	eid varchar(20),
+	auid varchar(15) sortkey,
+	primary key(eid,auid));
+	
 
-# affiliations (core eid to affiliation id mappings)
-create table corestoaffiliations(
+# affiliations (set 1 ... core eid to affiliation id mappings)
+create table corestoaffiliations1(
 	eid varchar(20),
 	afid varchar(15) sortkey,
 	primary key(eid,afid));
 
-
-# references (core eid to reference eid mappings)
-create table corestoreferences(
+# affiliations (set2 ... core eid to affiliation id mappings)
+create table corestoaffiliations2(
+	eid varchar(20),
+	afid varchar(15) sortkey,
+	primary key(eid,afid));
+	
+	
+# references (set 1 ... core eid to reference eid mappings)
+create table corestoreferences1(
 	eid varchar(20),
 	refid varchar(20) sortkey,
 	primary key(eid,refid));
 	
+# references (set 2 ... core eid to reference eid mappings)
+create table corestoreferences2(
+	eid varchar(20),
+	refid varchar(20) sortkey,
+	primary key(eid,refid));
 	
+		
 # Table to hold the publication counts for each author
 # Will need multiple tables (current-n through current)
-create table authorpubcnt(
-	authid varchar(15) sortkey,
+create table authorpubcnt1(
+	auid varchar(15) sortkey,
 	pubcnt Integer,
-	primary key(authid));
-	
+	primary key(auid));
+
+create table authorpubcnt2(
+	auid varchar(15) sortkey,
+	pubcnt Integer,
+	primary key(auid));
+		
 	
 # Table to hold the publication counts for each affiliation
 # Will need multiple tables (current-n through current)
-create table affiliationpubcnt(
+create table affiliationpubcnt1(
 	afid varchar(15) sortkey,
 	pubcnt Integer,
 	primary key(afid));
 
+# Table to hold the publication counts for each affiliation
+# Will need multiple tables (current-n through current)
+create table affiliationpubcnt2(
+	afid varchar(15) sortkey,
+	pubcnt Integer,
+	primary key(afid));
+	
 
 # Table to hold the citedby counts for each core eid
 # Will need multiple tables (current-n through current)
-create table corecbcnt(
+create table corecbcnt1(
 	refid varchar(15) sortkey,
 	cbcnt Integer,
-	primary key(eid));
-	
+	primary key(refid));
+
+# Table to hold the citedby counts for each core eid
+# Will need multiple tables (current-n through current)
+create table corecbcnt2(
+	refid varchar(15) sortkey,
+	cbcnt Integer,
+	primary key(refid));
+		
 	
 ################################
 # Load Queries
@@ -61,14 +98,19 @@ create table corecbcnt(
 # of a bulk load approach.
 ################################
 
-# authors
-copy corestoauthors from 's3://darin-core-auths/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+# authors (set 1 and set 2)
+copy corestoauthors1 from 's3://els-ats/scopuscnts/pc/author/set1/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+copy corestoauthors2 from 's3://els-ats/scopuscnts/pc/author/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
 
-# affiliations
-copy corestoaffiliations from 's3://darin-core-afils/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
 
-# references
-copy corestoreferences from 's3://darin-core-refs/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+# affiliations (set 1 and set 2)
+copy corestoaffiliations1 from 's3://els-ats/scopuscnts/pc/affiliation/set1/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+copy corestoaffiliations2 from 's3://els-ats/scopuscnts/pc/affiliation/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+
+
+# references (set 1 and set 2).  Took 22m to load set1 (759,190,044 records)
+copy corestoreferences1 from 's3://els-ats/scopuscnts/cbc/core/set1/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+copy corestoreferences2 from 's3://els-ats/scopuscnts/cbc/core/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
 
 
 ###################################
@@ -79,45 +121,89 @@ copy corestoreferences from 's3://darin-core-refs/' CREDENTIALS 'aws_access_key_
 # to S3
 ###################################
 
-# authors (Push the publication counts to S3)
+# authors (set 1 ... Push the publication counts to S3)
 unload ('SELECT auid, COUNT(*) AS "pubcnt"
-FROM corestoauthors
+FROM corestoauthors1
 GROUP BY auid
-ORDER BY auid') to  's3://darin-core-auths-results/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY auid') to  's3://els-ats/scopuscnts/pc/author/results/set1/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
 
-# affiliations (Push the publication counts to S3)
+# authors (set 2 ... Push the publication counts to S3)
+unload ('SELECT auid, COUNT(*) AS "pubcnt"
+FROM corestoauthors2
+GROUP BY auid
+ORDER BY auid') to  's3://els-ats/scopuscnts/pc/author/results/set2/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+
+# affiliations (set 1 ... Push the publication counts to S3)
 unload ('SELECT afid, COUNT(*) AS "pubcnt"
-FROM corestoaffiliations
+FROM corestoaffiliations1
 GROUP BY afid
-ORDER BY afid') to  's3://darin-core-afils-results/afil-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY afid') to  's3://els-ats/scopuscnts/pc/affiliation/results/set1/afil-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
 
-# cores (Push the cited by counts to S3)
+# affiliations (set 2 ... Push the publication counts to S3)
+unload ('SELECT afid, COUNT(*) AS "pubcnt"
+FROM corestoaffiliations2
+GROUP BY afid
+ORDER BY afid') to  's3://els-ats/scopuscnts/pc/affiliation/results/set2/afil-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+
+# cores (set 1 ... Push the cited by counts to S3)
 unload ('SELECT refid, COUNT(*) AS "cbcnt"
-FROM corestoreferences
+FROM corestoreferences1
 GROUP BY refid
-ORDER BY refid') to  's3://darin-core-refs-results/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY refid') to  's3://els-ats/scopuscnts/cbc/core/results/set1/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+# cores (set 2 ... Push the cited by counts to S3)
+unload ('SELECT refid, COUNT(*) AS "cbcnt"
+FROM corestoreferences2
+GROUP BY refid
+ORDER BY refid') to  's3://els-ats/scopuscnts/cbc/core/results/set2/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
 
 # authors (Populate the publication counts into a table)
 # The table will be different each day (current-n through current)
-insert into authorpubcnt(authid,pubcnt)
-SELECT authid, COUNT(*) 
-FROM corestoauthors
-GROUP BY authid
-ORDER BY authid;
+insert into authorpubcnt1(auid,pubcnt)
+SELECT auid, COUNT(*) 
+FROM corestoauthors1
+GROUP BY auid
+ORDER BY auid;
+
+insert into authorpubcnt2(auid,pubcnt)
+SELECT auid, COUNT(*) 
+FROM corestoauthors2
+GROUP BY auid
+ORDER BY auid;
+
 
 # affiliations (Populate the publication counts into a table)
 # The table will be different each day (current-n through current)
-insert into affiliationpubcnt(authid,pubcnt)
+insert into affiliationpubcnt1(afid,pubcnt)
 SELECT authid, COUNT(*) 
-FROM corestoaffiliations
+FROM corestoaffiliations1
 GROUP BY afid
 ORDER BY afid;
 
+insert into affiliationpubcnt2(afid,pubcnt)
+SELECT authid, COUNT(*) 
+FROM corestoaffiliations2
+GROUP BY afid
+ORDER BY afid;
+
+
 # cores (Populate the cited by counts into a table)
 # The table will be different each day (current-n through current)
-insert into corecbcnt(authid,pubcnt)
-SELECT authid, COUNT(*) 
-FROM corestoreferences
+# Query took 4m.  has 141,752,199 records (must be cores and dummy records)
+insert into corecbcnt1(refid,cbcnt)
+SELECT refid, COUNT(*) 
+FROM corestoreferences1
+GROUP BY refid
+ORDER BY refid;
+
+# cores (Populate the cited by counts into a table)
+# The table will be different each day (current-n through current)
+insert into corecbcnt2(refid,cbcnt)
+SELECT refid, COUNT(*) 
+FROM corestoreferences2
 GROUP BY refid
 ORDER BY refid;
 
@@ -130,25 +216,58 @@ ORDER BY refid;
 ###################################
 
 # authors (Push to S3 only those records that are unique in authorpubcnt2 ...the 'new' table) 
-# assume 'authorpubcnt2' is the 'current' table and 'authorpubcnt' is the 'current-1'.
+# assume 'authorpubcnt2' is the 'current' table and 'authorpubcnt1' is the 'current-1'.
 unload ('
 select * from authorpubcnt2
 minus
-select * from authorpubcnt') to  's3://darintest/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+select * from authorpubcnt1') to  's3://els-ats/scopuscnts/pc/author/results/diff/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
 
 # affiliations (Push to S3 only those records that are unique in affiliationpubcnt2 ...the 'new' table) 
-# assume 'affiliationpubcnt2' is the 'current' table and 'affiliationpubcnt' is the 'current-1'.
+# assume 'affiliationpubcnt2' is the 'current' table and 'affiliationpubcnt1' is the 'current-1'.
 unload ('
 select * from affiliationpubcnt2
 minus
-select * from affiliationpubcnt') to  's3://darintest/aff-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+select * from affiliationpubcnt1') to  's3://els-ats/scopuscnts/pc/affiliation/results/diff/aff-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
 
 # cores (Push to S3 only those records that are unique in corecbcnt2 ...the 'new' table) 
-# assume 'corecbcnt2' is the 'current' table and 'corecbcnt' is the 'current-1'.
+# assume 'corecbcnt2' is the 'current' table and 'corecbcnt1' is the 'current-1'.
 unload ('
 select * from corecbcnt2
 minus
-select * from corecbcnt') to  's3://darintest/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+select * from corecbcnt1') to  's3://els-ats/scopuscnts/cbc/core/results/diff/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+
+
+######################
+# Investigating citref
+######################
+
+# Create the table
+create table citrefcnts(
+	neid decimal,
+	refid varchar(15) sortkey,
+	primary key(neid,refid));
+
+# Insert the records (make a numeric version of the eid)
+# Took about 14m
+insert into citrefcnts(
+SELECT cast(substring(eid,8) as decimal) as neid, refid
+FROM corestoreferences1);
+
+# Table to hold the sum (think of this as a hash)
+create table citrefsum(
+	refid varchar(15) sortkey,
+	tot decimal(38,0),
+	primary key(refid));
+	
+# Group and Sum
+# Took about 5 minutes
+insert into citrefsum(
+SELECT refid, SUM(neid) as tot
+FROM citrefcnts
+GROUP BY refid
+ORDER BY refid);
+
+
 
 
 ###################################
@@ -161,6 +280,9 @@ FROM authorspubcnt') to  's3://darin-core-auths-results/auth-' CREDENTIALS 'aws_
 
 # concatenating multiple files
 cat 'file'* > 'newfile'
+
+# sorting a file in place
+sort -o file1.txt file1.txt
 
 # compare count files (that were output to s3)
 comm -1 -3 'old' 'new' > 'baseline'
