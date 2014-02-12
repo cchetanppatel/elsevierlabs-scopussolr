@@ -143,6 +143,7 @@ public class SolrAffiliation {
 						// Put the requests epoch value into the document at the version of the document
 						// so Solr can filter out stale requests.
 						fieldValues.put("epoch", Long.toString(epoch, 10) );
+						fieldValues.put("epoch-rs", Long.toString(epoch, 10) );
 						
 						//Debug ... output the keys/values to see if we did it right
 						for (String key:fieldValues.keySet()) {

@@ -147,7 +147,6 @@
 <copyField source="affilctry" dest="affilctry-f"/>
 <copyField source="certscore" dest="certscore-f"/>
 <copyField source="datecompletedtxt" dest="datecompletedtxt-p"/>
-<copyField source="epoch" dest="epoch-rs"/>
 <copyField source="namevar" dest="namevar-p"/>
 <copyField source="prefname" dest="prefname-p"/>
 <copyField source="prefparname" dest="prefparname-p"/>

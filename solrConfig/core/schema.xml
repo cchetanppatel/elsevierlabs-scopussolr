@@ -380,7 +380,6 @@
 <copyField source="edidxname" dest="edidxname-p"/>
 <copyField source="edition" dest="edition-p"/>
 <copyField source="edlast" dest="edlast-p"/>
-<copyField source="epoch" dest="epoch-rs"/>
 <copyField source="firstauth" dest="firstauth-p"/>
 <copyField source="fundacr" dest="fundacr-p"/>
 <copyField source="fundall" dest="fundall-p"/>

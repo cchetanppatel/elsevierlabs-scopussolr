@@ -209,7 +209,6 @@
 <copyField source="authlast" dest="authlast-p"/>
 <copyField source="authname" dest="authname-p"/>
 <copyField source="datecompletedtxt" dest="datecompletedtxt-p"/>
-<copyField source="epoch" dest="epoch-rs"/>
 <copyField source="namevar" dest="namevar-p"/>
 <copyField source="namevarfirst" dest="namevarfirst-p"/>
 <copyField source="namevarini" dest="namevarini-p"/>
