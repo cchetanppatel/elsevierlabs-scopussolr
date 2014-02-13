@@ -119,4 +119,63 @@ public class Document {
 		
 	}
 	
+	/**
+	 * Update fields in the document to the ElasticSearch index. 
+	 * 
+	 * @param index ElasticSearch index name
+	 * @param type ElasticSearch index type
+	 * @param map Field/Values to update in the document
+	 * @param idFieldName Solr schema field defined as the unique id
+	 * @param id unique identifier for the document
+	 * @param epoch version for the document
+	 */
+	public static void update(String index, HashMap<String,Object> map, String idFieldName, String id, long epoch) throws Exception {
+		
+		HttpSolrServer solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
+		
+		SolrInputDocument solrDoc = new SolrInputDocument();
+		
+		// Make sure we update the correct document
+		solrDoc.addField(idFieldName, id);
+		solrDoc.addField("epoch", Long.toString(epoch, 10) );
+		
+		Map<String,String> updateVals = new HashMap<String, String>();
+		
+		// Get all of the keys in the Map
+		Set<String> keySet = map.keySet();
+		Iterator<String> it = keySet.iterator();
+		
+		while (it.hasNext()) {
+			
+			String key = it.next();
+			
+			// Get the object
+			Object obj = map.get(key);
+						
+			if (obj instanceof String) {
+				updateVals.put("set", (String)obj);
+				
+			} else if (obj instanceof ArrayList) {
+				//Iterator<String> it2 = ((ArrayList) obj).iterator();
+				//while(it2.hasNext()) {
+				//	updateVals.put("set", it2.next());
+				//}
+				throw new Exception("Haven't implemented updating multi-value fields yet.");
+			}
+			
+			solrDoc.addField(key, updateVals);
+		}
+		
+		UpdateResponse response = solrServer.add(solrDoc, 30000);
+	    
+		int status = response.getStatus();
+	
+		if (status == 0) {
+			System.out.println("** Updated id= '" + id + "'");
+		} else {
+			System.out.println("Error atomic updating doc. id='"  + id + "'");
+		}
+		
+	}
+	
 }
