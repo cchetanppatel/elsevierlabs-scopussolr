@@ -318,180 +318,180 @@
       <xsl:when test="$f='itemtitle'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='itemtitle-p^12'}</xsl:text>
+            <xsl:text>{!edismax qf='itemtitle-p^12'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='itemtitle^12'}</xsl:text>
+            <xsl:text>{!edismax qf='itemtitle^12'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='keywords'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='keywords-p^8'}</xsl:text>
+            <xsl:text>{!edismax qf='keywords-p^8'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='keywords^8'}</xsl:text>
+            <xsl:text>{!edismax qf='keywords^8'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='abs'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='abs-p^8'}</xsl:text>
+            <xsl:text>{!edismax qf='abs-p^8'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='abs^8'}</xsl:text>
+            <xsl:text>{!edismax qf='abs^8'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='auth'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='auth-p^8'}</xsl:text>
+            <xsl:text>{!edismax qf='auth-p^8'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='auth^8'}</xsl:text>
+            <xsl:text>{!edismax qf='auth^8'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='srctitle'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='srctitle-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='srctitle-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='srctitle^2'}</xsl:text>
+            <xsl:text>{!edismax qf='srctitle^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='issn'">
-        <xsl:text>_query_:"{!edismax qf='issn^2'}</xsl:text>
+        <xsl:text>{!edismax qf='issn^2'}</xsl:text>
       </xsl:when>
       <xsl:when test="$f='coden'">
-        <xsl:text>_query_:"{!edismax qf='coden^2'}</xsl:text>
+        <xsl:text>{!edismax qf='coden^2'}</xsl:text>
       </xsl:when>
       <xsl:when test="$f='doi'">
-        <xsl:text>_query_:"{!edismax qf='doi^2'}</xsl:text>
+        <xsl:text>{!edismax qf='doi^2'}</xsl:text>
       </xsl:when>
       <xsl:when test="$f='isbn'">
-        <xsl:text>_query_:"{!edismax qf='isbn^2'}</xsl:text>
+        <xsl:text>{!edismax qf='isbn^2'}</xsl:text>
       </xsl:when>
       <xsl:when test="$f='lang'">
-        <xsl:text>_query_:"{!edismax qf='lang^2'}</xsl:text>
+        <xsl:text>{!edismax qf='lang^2'}</xsl:text>
       </xsl:when>
       <xsl:when test="$f='pub'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='pub-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='pub-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='pub^2'}</xsl:text>
+            <xsl:text>{!edismax qf='pub^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='chemname'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='chemname-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='chemname-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='chemname^2'}</xsl:text>
+            <xsl:text>{!edismax qf='chemname^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='affil'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='affil-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='affil-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='affil^2'}</xsl:text>
+            <xsl:text>{!edismax qf='affil^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='ed'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='ed-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='ed-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='ed^2'}</xsl:text>
+            <xsl:text>{!edismax qf='ed^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='corres'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='corres-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='corres-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='corres^2'}</xsl:text>
+            <xsl:text>{!edismax qf='corres^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='collab'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='collab-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='collab-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='collab^2'}</xsl:text>
+            <xsl:text>{!edismax qf='collab^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='confall'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='confall-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='confall-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='confall^2'}</xsl:text>
+            <xsl:text>{!edismax qf='confall^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='all'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='all-p itemtitle-p^12 keywords-p^8 abs-p^8 auth-p^8 srctitle-p^2 issn^2 coden^2 doi^2 isbn^2 lang^2 pub-p^2 chemname-p^2 affil-p^2 ed-p^2 corres-p^2 collab-p^2 confall-p^2'}</xsl:text>
+            <xsl:text>{!edismax qf='all-p itemtitle-p^12 keywords-p^8 abs-p^8 auth-p^8 srctitle-p^2 issn^2 coden^2 doi^2 isbn^2 lang^2 pub-p^2 chemname-p^2 affil-p^2 ed-p^2 corres-p^2 collab-p^2 confall-p^2'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='all itemtitle^12 keywords^8 abs^8 auth^8 srctitle^2 issn^2 coden^2 doi^2 isbn^2 lang^2 pub^2 chemname^2 affil^2 ed^2 corres^2 collab^2 confall^2'}</xsl:text>
+            <xsl:text>{!edismax qf='all itemtitle^12 keywords^8 abs^8 auth^8 srctitle^2 issn^2 coden^2 doi^2 isbn^2 lang^2 pub^2 chemname^2 affil^2 ed^2 corres^2 collab^2 confall^2'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='allmed'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='allmed-p itemtitle-p^12 keywords-p^8 abs-p^8 auth-p^8'}</xsl:text>
+            <xsl:text>{!edismax qf='allmed-p itemtitle-p^12 keywords-p^8 abs-p^8 auth-p^8'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='allmed itemtitle^12 keywords^8 abs^8 auth^8'}</xsl:text>
+            <xsl:text>{!edismax qf='allmed itemtitle^12 keywords^8 abs^8 auth^8'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$f='allsmall'">
         <xsl:choose>
           <xsl:when test="$w[@punct='sensitive']">
-            <xsl:text>_query_:"{!edismax qf='allsmall-p itemtitle-p^12 keywords-p^8 abs-p^8'}</xsl:text>
+            <xsl:text>{!edismax qf='allsmall-p itemtitle-p^12 keywords-p^8 abs-p^8'}</xsl:text>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>_query_:"{!edismax qf='allsmall itemtitle^12 keywords^8 abs^8'}</xsl:text>
+            <xsl:text>{!edismax qf='allsmall itemtitle^12 keywords^8 abs^8'}</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
-
       <!-- Should never happen. -->
       <xsl:otherwise/>
+      
     </xsl:choose>
     <!-- Check if a phrase or punc sensitive -->
     <xsl:choose>
       <xsl:when test="$w[@phrase='true' or @punct='sensitive']">
-        <xsl:text>\"</xsl:text>
+        <xsl:text>"</xsl:text>
         <xsl:call-template name="string-escape">
           <xsl:with-param name="str" select="$w/text()"/>
         </xsl:call-template>
-        <xsl:text>\"</xsl:text>
+        <xsl:text>"</xsl:text>
       </xsl:when>
       <xsl:otherwise>
         <xsl:call-template name="string-escape">
@@ -499,7 +499,6 @@
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
-    <xsl:text>"</xsl:text>
   </xsl:template>
 
 
