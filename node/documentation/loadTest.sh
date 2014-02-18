@@ -17,11 +17,11 @@ urlencode() {
 cnt=0
 while read LINE
 do
-    if [ "$cnt" -lt 100000 ];
+    if [ "$cnt" -lt 5000 ];
     then
         ENCODEDQUERY="$(urlencode "$LINE")"
         MSG="query="$ENCODEDQUERY
         curl -s 'localhost:81/loadTest/' -d $MSG >> /dev/null
     fi
     cnt=$((cnt+1))
-done < set/affilKeys
+done < coreLoadQueryKeys 

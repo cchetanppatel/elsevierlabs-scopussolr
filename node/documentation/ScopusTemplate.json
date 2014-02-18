@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
   
-  "Description" : "Start an EC2 Instance in the Eastern region for the Hothouse project.",
+  "Description" : "Start an EC2 Instance in the Eastern region for the Hothouse project (for load testing Scopus).",
   
   "Parameters" : {
       
@@ -18,7 +18,7 @@
     "InstanceType" : {
       "Description" : "EC2 instance type",
       "Type" : "String",
-      "Default" : "m1.small",
+      "Default" : "m1.large",
       "AllowedValues" : [ "t1.micro", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "c1.medium", "c1.xlarge", "cc1.4xlarge", "cc2.8xlarge" ],
       "ConstraintDescription" : "must be a valid EC2 instance type."
     },
@@ -38,7 +38,7 @@
     "logstashconf" : {
       "Description" : "Signed URL for the scopus solr logstash conf in S3",
       "Type" : "String",
-      "Default" : ""
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/conf/logstash-solr.conf?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1428734832&Signature=sUpJQ5V4VUgEK9x2NV5OiYScr3w%3D"
      },
 
     "kibanalogfile" : {
@@ -50,14 +50,14 @@
     "kibanalogtype" : {
       "Description" : "Kibana log type on the ec2 instance",
       "Type" : "String",
-      "Default" : "solar",
-      "AllowedValues" : ["es","ml","solar"]
+      "Default" : "s-aff",
+      "AllowedValues" : ["s-auth","s-aff","s-core"]
      },
 
     "kibanahost" : {
       "Description" : "Kibana host",
       "Type" : "String",
-      "Default" : " 10.151.38.45"
+      "Default" : " 10.93.23.108"
      },
 
     "affilkeyset" : {
@@ -70,6 +70,12 @@
       "Description" : "authkeyset",
       "Type" : "String",
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/authorLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420957375&Signature=cH1V1QNTr%2BrcmlkE9lG9DS/ZGtg%3D"
+     },
+
+    "corekeyset" : {
+      "Description" : "corekeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427619950&Signature=dys7V1i/cumsRjE4ifMqxSXS/SI%3D"
      },
      
      "loadtestscript" : {
@@ -137,12 +143,12 @@
                 "service nginx start", "\n", 
 				"mkdir /hothouse","\n",
 				"cd /hothouse","\n",  
-                "#curl -o /hothouse/logstash-1.1.13-flatjar.jar 'https://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar'","\n",
-                "#curl -o /hothouse/logstash.conf '", { "Ref" : "logstashconf" }, "'", "\n",
-		        "#sed -i -e 's/<KIBANA_LOGFILE>/", { "Ref" : "kibanalogfile"}, "/' /hothouse/logstash.conf", "\n",
-		        "#sed -i -e 's/<KIBANA_LOGTYPE>/", { "Ref" : "kibanalogtype"}, "/' /hothouse/logstash.conf", "\n",
-		        "#sed -i -e 's/<KIBANA_HOST>/", { "Ref" : "kibanahost"}, "/' /hothouse/logstash.conf", "\n",
-                "#nohup java -jar /hothouse/logstash-1.1.13-flatjar.jar agent -f /hothouse/logstash.conf &", "\n",
+                "curl -o /hothouse/logstash-1.1.13-flatjar.jar 'https://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar'","\n",
+                "curl -o /hothouse/logstash.conf '", { "Ref" : "logstashconf" }, "'", "\n",
+		        "sed -i -e 's/<KIBANA_LOGFILE>/", { "Ref" : "kibanalogfile"}, "/' /hothouse/logstash.conf", "\n",
+		        "sed -i -e 's/<KIBANA_LOGTYPE>/", { "Ref" : "kibanalogtype"}, "/' /hothouse/logstash.conf", "\n",
+		        "sed -i -e 's/<KIBANA_HOST>/", { "Ref" : "kibanahost"}, "/' /hothouse/logstash.conf", "\n",
+                "nohup java -jar /hothouse/logstash-1.1.13-flatjar.jar agent -f /hothouse/logstash.conf &", "\n",
 				"curl -o node-v0.10.3-linux-x64.tar.gz http://nodejs.org/dist/v0.10.3/node-v0.10.3-linux-x64.tar.gz","\n",
 				"cd /usr/local","\n",
 				"tar -xzvf /hothouse/node-v0.10.3-linux-x64.tar.gz --strip=1","\n", 
@@ -163,7 +169,9 @@
                 "curl -o affilKeys.gz '", { "Ref" : "affilkeyset"}, "'", "\n",
                 "gunzip affilKeys.gz","\n",
                 "curl -o authKeys.gz '", { "Ref" : "authkeyset"}, "'", "\n",
-                "gunzip authKeys.gz","\n",  
+                "gunzip authKeys.gz","\n",
+                "curl -o coreKeys.gz '", { "Ref" : "corekeyset"}, "'", "\n",
+                "gunzip coreKeys.gz","\n",                 
                 "cd /hothouse","\n",
                 "curl -o loadTest.sh '", { "Ref" : "loadtestscript"}, "'", "\n",
                 "chmod 777 loadTest.sh","\n"

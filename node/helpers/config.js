@@ -19,21 +19,23 @@ exports.init = function(environment) {
 
                                 'ddb-endpoint' : 'https://dynamodb.us-east-1.amazonaws.com',
                                 'ddb-region' : 'us-east-1',
-                                'ddb-load-query-table' : 'scopus-solr-load-query',
+                                'ddb-load-query-table' : 'scopus-solr-load-institution-query',
+                                //'ddb-load-query-table' : 'scopus-solr-load-author-query',
+                                //'ddb-load-query-table' : 'scopus-solr-load-core-query',
    
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
                                 
                                 'solr-host-port-public' : { 'affil': ['54.224.52.75:8983'],
-                                                            'auth' : ['54.224.52.75:8983'],
-                                                            'core' : ['54.224.52.75:8983'] },
+                                                            'auth' : ['54.225.27.71:8983'],
+                                                            'core' : ['54.205.113.128:8983'] },
                                                            
                                 'solr-host-port-private' : { 'affil': ['10.236.151.246:8983'],
-                                                             'auth' : ['10.236.151.246:8983'],
-                                                             'core' : ['10.236.151.246:8983'] },
+                                                             'auth' : ['10.9.129.139:8983'],
+                                                             'core' : ['10.210.81.235:8983'] },
                                                                                                                         
                                 'solr-host-port' : { 'affil': ['54.224.52.75:8983'],
-                                                     'auth' : ['54.224.52.75:8983'],
-                                                     'core' : ['54.224.52.75:8983'] },
+                                                     'auth' : ['54.225.27.71:8983'],
+                                                     'core' : ['localhost:8983'] },
                                                      
                                 'solr-cluster' : { 'auth'  : 'auth',
                                                    'affil' : 'affil',
@@ -55,21 +57,23 @@ exports.init = function(environment) {
 
                                 'ddb-endpoint' : 'https://dynamodb.us-east-1.amazonaws.com',
                                 'ddb-region' : 'us-east-1',
-                                'ddb-load-query-table' : 'scopus-solr-load-query',
+                                'ddb-load-query-table' : 'scopus-solr-load-institution-query',
+                                //'ddb-load-query-table' : 'scopus-solr-load-author-query',
+                                //'ddb-load-query-table' : 'scopus-solr-load-core-query',
                                 
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          
                                                            
                                 'solr-host-port-public' : { 'affil': ['54.224.52.75:8983'],
-                                                            'auth' : ['54.224.52.75:8983'],
-                                                            'core' : ['54.224.52.75:8983'] },
+                                                            'auth' : ['54.225.27.71:8983'],
+                                                            'core' : ['54.205.113.128:8983'] },
                                                            
                                 'solr-host-port-private' : { 'affil': ['10.236.151.246:8983'],
-                                                             'auth' : ['10.236.151.246:8983'],
-                                                             'core' : ['10.236.151.246:8983'] },
+                                                             'auth' : ['10.9.129.139:8983'],
+                                                             'core' : ['10.210.81.235:8983'] },
                                                                                                                         
                                 'solr-host-port' : { 'affil': ['10.236.151.246:8983'],
-                                                     'auth' : ['10.236.151.246:8983'],
-                                                     'core' : ['10.236.151.246:8983'] },
+                                                     'auth' : ['10.9.129.139:8983'],
+                                                     'core' : ['10.210.81.235:8983'] },
                                                      
                                 'solr-cluster' : { 'auth'  : 'auth',
                                                    'affil' : 'affil',
