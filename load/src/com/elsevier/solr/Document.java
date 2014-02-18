@@ -89,6 +89,7 @@ public class Document {
 				System.out.println("** ADDED id= '" + id + "'");
 			} else {
 				System.out.println("Error adding doc. id='"  + id + "'");
+				throw new Exception("Error adding doc to index. doc. id='"  + id + "'");
 			}
 		
 	}
@@ -112,8 +113,8 @@ public class Document {
 			solrServer.commit();
 			System.out.println("** DELETED id= '" + id + "'");
 		} else {
-			
 			System.out.println("Error deleting doc. id='"  + id + "'");
+			throw new Exception("Error deleting doc from index. doc. id='"  + id + "'");
 		}
 				
 		
@@ -174,6 +175,7 @@ public class Document {
 			System.out.println("** Updated id= '" + id + "'");
 		} else {
 			System.out.println("Error atomic updating doc. id='"  + id + "'");
+			throw new Exception("Error atomic updating doc. id='"  + id + "'");
 		}
 		
 	}
