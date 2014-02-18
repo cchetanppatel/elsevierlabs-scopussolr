@@ -281,7 +281,7 @@ public class AuthorTransform {
 	 * @return fieldValues;
 	 */
 	
-	public HashMap<String,Object> transform(InputStream is) {
+	public HashMap<String,Object> transform(InputStream is) throws Exception {
 		
 		//fieldValues = new HashMap();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -442,12 +442,16 @@ public class AuthorTransform {
 						
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
+			throw e;
 		} catch (SAXException e) {
 			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw e;
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
+			throw e;
 		} finally {
 		}
 		return fieldValues;

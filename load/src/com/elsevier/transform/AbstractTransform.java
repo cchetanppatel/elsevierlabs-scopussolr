@@ -703,7 +703,7 @@ public class AbstractTransform {
 	 * @throws SAXException 
 	 */
 	
-	public HashMap<String,Object> transform(InputStream is) throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
+	public HashMap<String,Object> transform(InputStream is) throws Exception {
 		
 		//fieldValues = new HashMap();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
