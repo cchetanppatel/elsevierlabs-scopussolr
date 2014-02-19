@@ -130,39 +130,41 @@ public class Document {
 	 * @param id unique identifier for the document
 	 * @param epoch version for the document
 	 */
-	public static void update(String index, HashMap<String,Object> map, String idFieldName, String id, long epoch) throws Exception {
+	public static void update(String index, HashMap<String,Object> map, String idFieldName, String id, String versionFieldName, long epoch) throws Exception {
 		
 		HttpSolrServer solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
 		
 		SolrInputDocument solrDoc = new SolrInputDocument();
 		
-		// Make sure we update the correct document
+		//
+		// Updates are different in that you need to do a standard addField for the id and version control 
+		// field without any of the special update triggering payloads settings. This means that we 
+		// can't just pass in the key/value pairs for those with the fields to be updated.  We'll pass them
+		// in separately here and just add them to the doc, and then process the Hashmap of values to be 
+		// update fields.
+		//
 		solrDoc.addField(idFieldName, id);
-		solrDoc.addField("epoch", Long.toString(epoch, 10) );
+		solrDoc.addField(versionFieldName, epoch);
 		
-		Map<String,String> updateVals = new HashMap<String, String>();
-		
-		// Get all of the keys in the Map
+		// Get all of the keys in the field value Map coming into the function
 		Set<String> keySet = map.keySet();
 		Iterator<String> it = keySet.iterator();
 		
+		// While there are still fields we want to update for the document
 		while (it.hasNext()) {
+			
+			// Solr Atomic Update uses a payload of and Map<String, String> to manage getting
+			// new updated values into the indexed document (leveraging the saved fields from the 
+			// previous add/update). By leveraging the defined value of "set" for the HashMap key,
+			// it instructs Solr to replace the existing values with the current value for the 
+			// key value specified in the addField call.
+			Map<String,Object> updateVals = new HashMap<String, Object>();
 			
 			String key = it.next();
 			
-			// Get the object
+			// Get the object representing the values and set it to replace any existing values in the index
 			Object obj = map.get(key);
-						
-			if (obj instanceof String) {
-				updateVals.put("set", (String)obj);
-				
-			} else if (obj instanceof ArrayList) {
-				//Iterator<String> it2 = ((ArrayList) obj).iterator();
-				//while(it2.hasNext()) {
-				//	updateVals.put("set", it2.next());
-				//}
-				throw new Exception("Haven't implemented updating multi-value fields yet.");
-			}
+			updateVals.put("set", obj);
 			
 			solrDoc.addField(key, updateVals);
 		}

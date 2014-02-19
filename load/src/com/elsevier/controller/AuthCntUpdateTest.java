@@ -13,7 +13,7 @@ public class AuthCntUpdateTest {
 		// TODO Auto-generated method stub
 
 		// Make up a new count
-		long epoch = 1001;
+		long epoch = System.currentTimeMillis();
 		
 		HashMap<String, Object> fieldValues = new HashMap<String, Object>();
 		fieldValues.put("count", "10");
@@ -21,7 +21,7 @@ public class AuthCntUpdateTest {
 		String id = "36135960300";
 
 		try {
-			Document.update(Variables.SOLR_COLLECTION, fieldValues, idFieldName, id, epoch );
+			Document.update(Variables.SOLR_COLLECTION, fieldValues, idFieldName, id, "epoch-rs", epoch );
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
 		}
