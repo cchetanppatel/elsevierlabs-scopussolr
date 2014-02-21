@@ -140,10 +140,7 @@ public class SolrAffiliation {
 						AffiliationTransform sdt = new AffiliationTransform();
 						HashMap<String, Object> fieldValues =  sdt.transform(is);
 						
-						// Put the requests epoch value into the document at the version of the document
-						// so Solr can filter out stale requests.
-						fieldValues.put("epoch", Long.toString(epoch, 10) );
-						fieldValues.put("epoch-rs", Long.toString(epoch, 10) );
+						
 						
 						//Debug ... output the keys/values to see if we did it right
 						for (String key:fieldValues.keySet()) {
@@ -171,7 +168,17 @@ public class SolrAffiliation {
 						// Populate the ElasticSearch index
 						// Note, we want to drop "Department" records. Those with a parent afid.
 						if (fieldValues.containsKey("parafid") == false) {
-							Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);	
+							// Is this an add?
+							if (json.getAction().compareTo("a") == 0) {
+								fieldValues.put("id", contentKey); 
+								fieldValues.put("epoch", Long.toString(epoch, 10) );   // Put the XFab epoch in the index
+								fieldValues.put("epoch-rs", Long.toString(epoch, 10) ); // actual version control value is the epoch for adds
+								fieldValues.put("count", "-1");   // Dummy value for count until Redshift job values comes back with one.  Value of -1 will make non-updated records easy to find 
+								Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);
+							} else {  // Must be an update...
+								fieldValues.put("epoch", Long.toString(epoch, 10) );
+								Document.update(Variables.SOLR_COLLECTION, fieldValues, "id", contentKey, "epoch-rs", epoch);
+							}
 						} else {
 							System.out.println("Skipping \"Department\" affiliation record for: " + contentKey);
 						}

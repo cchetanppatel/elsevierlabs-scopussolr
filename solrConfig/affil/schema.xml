@@ -102,6 +102,9 @@
 -->
 
 <field name="_version_" type="long" indexed="true" stored="true"/> 
+<field name="id" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="epoch" type="long" indexed="true" stored="true"/>
+<field name="epoch-rs" type="long" indexed="true" stored="true"/>
 <field name="affil" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="affil-p" type="affil_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="affilcity" type="affil_std_stopwords" multiValued="true" indexed="true" stored="true"/>
@@ -135,11 +138,10 @@
 <field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="toplevel" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
-<field name="epoch" type="long" indexed="true" stored="true"/>
-<field name="epoch-rs" type="long" indexed="true" stored="true"/>
+
 
 </fields>
-<uniqueKey>afid</uniqueKey>
+<uniqueKey>id</uniqueKey>
 <defaultSearchField>affil</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
 <copyField source="affil" dest="affil-p"/>

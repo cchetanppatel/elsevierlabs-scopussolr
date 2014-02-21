@@ -46,6 +46,8 @@ public class Variables {
 	//public static final String SOLR_COLLECTION = "author";
 	public static final String SOLR_COLLECTION = "core";
 	
+	public static final int SOLR_AUTOCOMMIT_DELAY_MS = Integer.parseInt(prop.getProperty("SOLR_AUTOCOMMIT_DELAY_MS","-1"));   // -1 will use the autocommit delay defined in core's solrconfig.xml
+	
 	// SQS Endpoint
 	public static final String SQS_ENDPOINT = prop.getProperty("SQS_ENDPOINT","https://sqs.us-east-1.amazonaws.com");
 	

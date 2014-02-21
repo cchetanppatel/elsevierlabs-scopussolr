@@ -81,7 +81,13 @@ public class Document {
 				
 			}	        
 					    
-			UpdateResponse response = solrServer.add(solrDoc, 30000);
+			UpdateResponse response = null;
+			
+			if (Variables.SOLR_AUTOCOMMIT_DELAY_MS == -1) {
+				response = solrServer.add(solrDoc);
+			} else {
+				response = solrServer.add(solrDoc, Variables.SOLR_AUTOCOMMIT_DELAY_MS);
+			}
 		    
 			int status = response.getStatus();
 		
@@ -169,7 +175,13 @@ public class Document {
 			solrDoc.addField(key, updateVals);
 		}
 		
-		UpdateResponse response = solrServer.add(solrDoc, 30000);
+		UpdateResponse response = null;
+		
+		if (Variables.SOLR_AUTOCOMMIT_DELAY_MS == -1) {
+			response = solrServer.add(solrDoc);
+		} else {
+			response = solrServer.add(solrDoc, Variables.SOLR_AUTOCOMMIT_DELAY_MS);
+		}
 	    
 		int status = response.getStatus();
 	
