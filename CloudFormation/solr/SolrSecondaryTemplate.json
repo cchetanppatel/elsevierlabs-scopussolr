@@ -35,6 +35,12 @@
       "Default" : "4.6.0"
     },
     
+    "Java7URL" : {
+      "Description" : "URL for the Java 7, 64 bit AWS download",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/java/jdk-7u51-linux-x64.rpm?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1428994149&Signature=DAArYIYTvzz9LKBNaIZJKKvVbmE%3D"
+    },
+    
     "JavaHeapMin" : {
       "Description" : "Minimum heap size.",
       "Type" : "String",
@@ -148,6 +154,12 @@
                 "mkfs.xfs -f /dev/md0", "\n",
                 "mkdir -p ", { "Ref" : "EphemeralMntPoint" }, "\n",
                 "mount -t xfs -o rw,user,noatime /dev/md0 ", { "Ref" : "EphemeralMntPoint" }, "\n",
+                "# Download and install Oracle Java 7", "\n",
+                "curl -o /tmp/jdk-7u51-linux-x64.rpm '", { "Ref" : "Java7URL"}, "'", "\n",
+                "cd /tmp" , "\n",
+                "rpm -i /tmp/jdk-7u51-linux-x64.rpm", "\n",
+                "/usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.7.0_51/bin/java 20000", "\n",
+                "java -version", "\n",
                 "# Install solr", "\n",
                 "cd ", { "Ref" : "EphemeralMntPoint" }, "\n",
                 "curl -o ./solr-", { "Ref" : "SolrVersion"}, ".tgz '", { "Ref" : "SolrDownloadURL"}, "'", "\n",
