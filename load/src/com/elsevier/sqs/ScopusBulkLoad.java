@@ -23,11 +23,12 @@ public class ScopusBulkLoad {
 	public static void main(String[] args) {
 		
 		// Must be one parameter
-		if (args.length != 2 && args.length != 3) {
-			System.err.println("Two parameters are required.  The third parameter is optional.");
+		if (args.length != 3 && args.length != 4) {
+			System.err.println("Three parameters are required.  The fourth parameter is optional.");
 			System.err.println("First parameter is the file containing the Scopus S3 keys.");
-			System.err.println("Second parameter is the version to use. A version of 0 will use the current timestamp as the epoch");
-			System.err.println("Third parameter is the number of keys to process.");
+			System.err.println("Second parameter is record type to add ('a' for adds, 'u' for updates");
+			System.err.println("Third parameter is the version to use. A version of 0 will use the current timestamp as the epoch");
+			System.err.println("Fourth (optional) parameter is the number of keys to process.");
 	        System.exit(1);
 		}
 
@@ -40,13 +41,13 @@ public class ScopusBulkLoad {
     		String line;
     		List<SendMessageBatchRequestEntry> batch = new ArrayList<SendMessageBatchRequestEntry>();
 
-			 String action = "a";
+			 String action = args[1];
 			 String prefix = "pfx";
-			 String version = args[1];
-			 String epoch = args[1];
+			 String version = args[2];
+			 String epoch = args[2];
 			 int numberRecordsToProcess = 0;
-			 if (args.length == 3) {
-				 numberRecordsToProcess = Integer.parseInt(args[2],10);
+			 if (args.length == 4) {
+				 numberRecordsToProcess = Integer.parseInt(args[3],10);
 			 }
 			 int numProcessed = 0;
 			 
