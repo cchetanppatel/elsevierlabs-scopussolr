@@ -11,13 +11,8 @@
        
     <xsl:template match="text()|@*"/>
 	
-	<xsl:template match="/ns2:search/ns2:searchReqPayload/ns2:xQueryX/ft:fullTextQuery[.//ft:word[@path='authid'] and not(.//ft:word[@path!='authid'])]">
-		<xsl:for-each select=".//ft:word">
-			<xsl:value-of select="./@path"/>
-			<xsl:text>:</xsl:text>
-			<xsl:value-of select="./text()"/>
-			<xsl:text> </xsl:text>
-		</xsl:for-each>
+	<xsl:template match="/ns2:search/ns2:searchReqPayload/ns2:xQueryX/ft:fullTextQuery[not(exists(.//ft:word))]">
+		<xsl:text>Found One</xsl:text>
 	</xsl:template>
 	
 </xsl:stylesheet>

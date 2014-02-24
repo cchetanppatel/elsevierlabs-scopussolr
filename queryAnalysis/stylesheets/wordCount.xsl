@@ -10,15 +10,9 @@
        
     <xsl:template match="text()|@*"/>
 	
-	<xsl:template match="ft:fullTextQuery">
-		<xsl:for-each select=".//ft:word[@punct='sensitive']">
-			<xsl:text> </xsl:text>
-			<xsl:value-of select="./@path"/>
-			<xsl:text>:</xsl:text>
-			<xsl:value-of select="./text()"/>
-			<xsl:text> </xsl:text>
-			<!--  <xsl:text>&#10;</xsl:text> -->
-		</xsl:for-each>
+	<xsl:template match="ft:fullTextQuery[.//ft:word]">
+		<xsl:value-of select="count(.//ft:word)"/>
+		<xsl:text>+</xsl:text>
 	</xsl:template>
 	
 </xsl:stylesheet>

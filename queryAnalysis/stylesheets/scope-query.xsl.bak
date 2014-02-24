@@ -11,13 +11,22 @@
     <xsl:template match="text()|@*"/>
 	
 	<xsl:template match="ft:fullTextQuery">
-		<xsl:for-each select=".//ft:word[@punct='sensitive']">
-			<xsl:text> </xsl:text>
+		<xsl:for-each select=".//ft:scopeQuery">
+			<xsl:text>scope:</xsl:text>
 			<xsl:value-of select="./@path"/>
-			<xsl:text>:</xsl:text>
-			<xsl:value-of select="./text()"/>
-			<xsl:text> </xsl:text>
-			<!--  <xsl:text>&#10;</xsl:text> -->
+			<xsl:text>&#10;</xsl:text>			
+			<xsl:for-each select=".//ft:word">
+				<xsl:choose>
+					<xsl:when test="string-length(./text())!=0">
+						<xsl:text>  </xsl:text>
+						<xsl:value-of select="./@path"/>
+						<xsl:text>:</xsl:text>
+						<xsl:value-of select="./text()"/>
+						<xsl:text>&#10;</xsl:text>
+					</xsl:when>
+					<xsl:otherwise/>
+				</xsl:choose>
+			</xsl:for-each>		
 		</xsl:for-each>
 	</xsl:template>
 	

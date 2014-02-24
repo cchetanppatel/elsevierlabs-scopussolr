@@ -17,25 +17,29 @@ import org.apache.commons.io.IOUtils;
 
 public class Driver {
 
-	//private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/punct-sensitive.xsl";
-	//private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/scope-query.xsl";
+	//private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/highlight.xsl";
+	private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/auth-user.xsl";
 	//private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/starts-equals.xsl";
-	private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/auid-only.xsl";
-	//private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/proximity.xsl";
+	//private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/returnfields.xsl";
+	//private static String stylesheet = "/Users/mcbeathd/Documents/eclipse/XQueryXAnalysis/stylesheets/scope-query.xsl";
 
-	//private static String xml = "/Users/mcbeathd/ScopusSearchQueries/xmlxqueryx/SCOPUS_MAIN_FULLTEXTQUERY_10152013.txt";
-	//private static String xml = "/Users/mcbeathd/ScopusSearchQueries/xmlxqueryx/SCOPUS_AUTHOR_FULLTEXTQUERY_10152013.txt";
-	private static String xml = "/Users/mcbeathd/ScopusSearchQueries/dec052013/ScopusMainXQueryX_Dec052013.txt";
+	//private static String xml = "/Users/mcbeathd/SDSearchQueries/sdweb/SDWeb_XQueryX_Jan2014.txt";
+	//private static String xml = "/Users/mcbeathd/ScopusSearchQueries/dec052013/ScopusMainXQueryX_Dec052013.txt";
+	//private static String xml = "/Users/mcbeathd/ScopusSearchQueries/xmlxqueryx/SCOPUS_INSTITUTION_FULLTEXTQUERY_10152013.txt";
+	//private static String xml = "/Users/mcbeathd/ScopusSearchQueries/dec052013/ScopusAuthorXQueryX_Dec052013.txt";
+	private static String xml = "/Users/mcbeathd/ScopusSearchQueries/dec052013/slimAuthor.txt";
 	//private static String xml = "/Users/mcbeathd/SDSearchQueries/xmlxqueryx/SD_XQueryX_Logs_Nov2013.txt";
 	//private static String xml = "/Users/mcbeathd/SDSearchQueries/alerts/alerts.txt";
 	//private static String xml = "/Users/mcbeathd/SDSearchQueries/rss/SD_RSS.txt";
 	
-	private static String ofile = "/Users/mcbeathd/ScopusSearchQueries/dec052013/results/ScopusMainAuId.txt";
-	//private static String ofile = "/Users/mcbeathd/ScopusSearchQueries/xmlxqueryx/results/ScopusAffiliationAfid.txt";
-	//private static String ofile = "/Users/mcbeathd/SDSearchQueries/xmlxqueryx/results/punctSensitiveAnalysis.txt";
-	//private static String ofile = "/Users/mcbeathd/SDSearchQueries/rss/results/scopeAnalysis.txt";
+	//private static String ofile = "/Users/mcbeathd/ScopusSearchQueries/dec052013/results/ScopusMainPunctSensitive2.txt";
+	//private static String ofile = "/Users/mcbeathd/ScopusSearchQueries/dec052013/results/ScopusMainAuId.txt";
+	//private static String ofile = "/Users/mcbeathd/ScopusSearchQueries/dec052013/results/ScopusAuthorNavigators.txt";
+	//private static String ofile = "/Users/mcbeathd/ScopusSearchQueries/dec052013/results/ScopusMainHighlight.txt";
+	private static String ofile = "/Users/mcbeathd/ScopusSearchQueries/dec052013/slimAuthorSubset/slimAuthorUserNew.txt";
+	//private static String ofile = "/Users/mcbeathd/SDSearchQueries/sdweb/results/wordCount.txt";
 	//private static String ofile = "/Users/mcbeathd/SDSearchQueries/alerts/results/proximityAnalysis.txt";
-	//private static String ofile = "/Users/mcbeathd/SDSearchQueries/rss/results/proximityAnalysis.txt";
+	//private static String ofile = "/Users/mcbeathd/SDSearchQueries/sdweb/results/punctSensitiveAnalysis.txt";
 	
 	private static int errorCnt = 0;
 	
@@ -86,7 +90,8 @@ public class Driver {
 					System.out.println(line);
 					System.out.println(result);
 					// Write to a file
-					owriter.println(result);
+					//owriter.println(result);
+					owriter.println(line);
 					owriter.flush();
 
 				}
