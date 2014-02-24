@@ -42,8 +42,8 @@ public class Variables {
 	
 	// SOLR
 	public static final String SOLR_ENDPOINT = prop.getProperty("SOLR_ENDPOINT","http://localhost:8983/solr/core/");
-	//public static final String SOLR_COLLECTION = "affiliation";
-	//public static final String SOLR_COLLECTION = "author";
+	//public static final String SOLR_COLLECTION = "affil";
+	//public static final String SOLR_COLLECTION = "auth";
 	public static final String SOLR_COLLECTION = "core";
 	
 	public static final int SOLR_AUTOCOMMIT_DELAY_MS = Integer.parseInt(prop.getProperty("SOLR_AUTOCOMMIT_DELAY_MS","-1"));   // -1 will use the autocommit delay defined in core's solrconfig.xml
@@ -64,9 +64,9 @@ public class Variables {
 	//public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-affiliation-bulkload");
 	//public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_affiliation-bulkload-problems");
 	//public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-author-bulkload");
-	//public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_author-bulkload-problems");
+	//public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr-author-bulkload-problems");
 	public static final String SQS_QUEUE_NAME = prop.getProperty("SQS_QUEUE_NAME","solr-core-bulkload");
-	public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr_core-bulkload-problems");
+	public static final String SQS_PROBLEM_QUEUE_NAME = prop.getProperty("SQS_PROBLEM_QUEUE_NAME","solr-core-bulkload-problems");
 	
 	// S3 bucket name
 	//public static final String S3_XML_BUCKET_NAME = prop.getProperty("S3_XML_BUCKET_NAME","affiliation-xml");
