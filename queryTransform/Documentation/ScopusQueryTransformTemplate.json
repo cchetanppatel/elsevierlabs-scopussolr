@@ -23,10 +23,22 @@
       "ConstraintDescription" : "must be a valid EC2 instance type."
     },
 
-    "ScopusQueryTransformSignedJarUrl" : {
-      "Description" : "Signed URL for the query transform jar file in S3",
+    "ScopusQueryAffiliationTransformSignedJarUrl" : {
+      "Description" : "Signed URL for the affiliation query transform jar file in S3",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/scopusQueryTransform.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426581673&Signature=MjmBIxb3tN80Cmf9x1t9Svia4HE%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/scopusQueryAffiliationTransform.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1429014451&Signature=LRNIV0/ZSA8o3dYthLJOjr05Ib4%3D"
+    },
+ 
+    "ScopusQueryAuthorTransformSignedJarUrl" : {
+      "Description" : "Signed URL for the author query transform jar file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/scopusQueryAuthorTransform.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1429014428&Signature=rR/i36oOltWNokpmMtkRIdWlw74%3D"
+    },
+
+    "ScopusQueryCoreTransformSignedJarUrl" : {
+      "Description" : "Signed URL for the core query transform jar file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/scopusQueryCoreTransform.jar?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1429014374&Signature=vP9X%2BeZ8ZPipigQTLr/gz4hvny4%3D"
     },
     
     "AffiliationStylesheetSignedUrl" : {
@@ -47,24 +59,101 @@
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/stylesheets/CoreXqueryX2Solr.xsl?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427436835&Signature=onL6xpwDCA3ZN/B7FKrSPXjONLg%3D"
     },
 
-    "AffiliationQuerySetSignedUrl" : {
-      "Description" : "Signed URL for the affiliation query set file in S3",
+    "AffiliationAfidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the affiliation afid query set file in S3",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimInstitution.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427089984&Signature=P9LP%2BX36JVyjhu2Rkb3JVZcvSMQ%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimInstitutionAfid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400194114&Signature=XLzpEUXLwMhsa1jS29wrL9fAHJQ%3D"
+    },
+
+    "AffiliationUserQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the affiliation user query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimInstitutionUser.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400194179&Signature=XqVwTfKJ6SAPIalJYuP%2BaVZaRU0%3D"
+    },
+
+    "AuthorAuidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the author auid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimAuthorAuid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400194242&Signature=AGOybA6tdH0D9U0VAoM0%2BJ/fl1g%3D"
+    },
+
+    "AuthorAuidafidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the author auidafid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimAuthorAuidafid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400454642&Signature=VAJC4TsrXeo2H9VJ6o2gpXfO4%2BA%3D"
     },
     
-    "AuthorQuerySetSignedUrl" : {
-      "Description" : "Signed URL for the author query set file in S3",
+    "AuthorUserQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the author user query set file in S3",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimAuthor.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427090030&Signature=1NlmA%2BHzQTYT9h05e5njDdfxh9c%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimAuthorUser.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400194319&Signature=XRlETN2sdsFfRUXM%2BnMtCoQugzY%3D"
     },
- 
-    "CoreQuerySetSignedUrl" : {
-      "Description" : "Signed URL for the core query set file in S3",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMain.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1427565787&Signature=jEZer2/W1wZp1vbhPdt95vPcZJ0%3D"
-    }
     
+    "CoreDoiQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core doi query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainDoi.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207021&Signature=CLL2Wr%2BUQLgjgU3gYYXjxyzXAuQ%3D"
+     },
+     
+    "CoreEidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core eid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainEid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207053&Signature=cwq/z6%2B2J3fqFUaKIqjw%2Bge2vqw%3D"
+     },
+
+    "CoreSdeidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core sdeid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainSdeid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207076&Signature=uRXHQmCYvu874G1kNmzLMExKWsQ%3D"
+     },
+
+    "CoreRefeidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core refeid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainRefeid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207102&Signature=VBr2hJ5awp6iYF5DMsdc0QF4ZeU%3D"
+     },
+
+    "CoreAuidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core auid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainAuid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207130&Signature=kqmr6ZCZZimDH6GQmvh0k8VrQ5c%3D"
+     },
+
+    "CoreAfidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core afid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainAfid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207191&Signature=GGb1Hg7QEYhKP1wOPvTx9E4UKwI%3D"
+     },
+
+    "CoreIssnisbnQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core issnisbn query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainIssnisbn.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207218&Signature=KfCIacxwOHAtEamWmb9JzyeQU7k%3D"
+     },
+
+    "CoreCollecidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core collecid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainCollecid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207245&Signature=TBTUQVjltvpu6MwXyRqhD0Uj1u4%3D"
+     },
+
+    "CoreRefeidneidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core refeidneid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainRefeidneid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207281&Signature=ecxyugkJGF5gCaoXwmWneqdvm9A%3D"
+     },
+
+    "CoreSrcidQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core srcid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainSrcid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207304&Signature=bmtyInTzjKnSR/QNlDuCxcCcHcQ%3D"
+     },
+
+    "CoreUserQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core user query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainUser.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207329&Signature=qpJlKuw9anV8t8N8K8W2bnMNCdI%3D"
+     }
   },
   
 "Mappings" : {
@@ -106,12 +195,38 @@
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
                 "mkdir /sets", "\n",
                 "cd /sets", "\n",
-                "curl -o authorSet.gz '", { "Ref" : "AuthorQuerySetSignedUrl"}, "'", "\n",
-                "gunzip authorSet.gz", "\n",
-                "curl -o affiliationSet.gz '", { "Ref" : "AffiliationQuerySetSignedUrl"}, "'", "\n",
-                "gunzip affiliationSet.gz", "\n",
-                "curl -o coreSet.gz '", { "Ref" : "CoreQuerySetSignedUrl"}, "'", "\n",
-                "gunzip coreSet.gz", "\n",                
+                "curl -o affiliationAfidSet.gz '", { "Ref" : "AffiliationAfidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip affiliationAfidSet.gz", "\n",
+                "curl -o affiliationUserSet.gz '", { "Ref" : "AffiliationUserQuerySetSignedUrl"}, "'", "\n",
+                "gunzip affiliationUserSet.gz", "\n",
+                "curl -o authorAuidSet.gz '", { "Ref" : "AuthorAuidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip authorAuidSet.gz", "\n",
+                "curl -o authorAuidafidSet.gz '", { "Ref" : "AuthorAuidafidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip authorAuidafidSet.gz", "\n",                
+                "curl -o authorUserSet.gz '", { "Ref" : "AuthorUserQuerySetSignedUrl"}, "'", "\n",
+                "gunzip authorUserSet.gz", "\n",
+                "curl -o coreDoiSet.gz '", { "Ref" : "CoreDoiQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreDoiSet.gz", "\n",
+                "curl -o coreEidSet.gz '", { "Ref" : "CoreEidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreEidSet.gz", "\n",
+                "curl -o coreSdeidSet.gz '", { "Ref" : "CoreSdeidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreSdeidSet.gz", "\n",    
+                "curl -o coreRefeidSet.gz '", { "Ref" : "CoreRefeidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreRefeidSet.gz", "\n",                 
+                "curl -o coreAuidSet.gz '", { "Ref" : "CoreAuidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreAuidSet.gz", "\n",     
+                "curl -o coreAfidSet.gz '", { "Ref" : "CoreAfidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreAfidSet.gz", "\n",                
+                "curl -o coreIssnisbnSet.gz '", { "Ref" : "CoreIssnisbnQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreIssnisbnSet.gz", "\n",                 
+                "curl -o coreCollecidSet.gz '", { "Ref" : "CoreCollecidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreCollecidSet.gz", "\n",  
+                "curl -o coreRefeidneidSet.gz '", { "Ref" : "CoreRefeidneidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreRefeidneidSet.gz", "\n",  
+                "curl -o coreSrcidSet.gz '", { "Ref" : "CoreSrcidQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreSrcidSet.gz", "\n", 
+                "curl -o coreUserSet.gz '", { "Ref" : "CoreUserQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreUserSet.gz", "\n",
                 "mkdir /stylesheets", "\n",
                 "cd /stylesheets", "\n",
                 "curl -o author.xsl '", { "Ref" : "AuthorStylesheetSignedUrl"}, "'", "\n",
@@ -119,7 +234,9 @@
                 "curl -o core.xsl '", { "Ref" : "CoreStylesheetSignedUrl"}, "'", "\n", 
                 "mkdir /transform", "\n",
                 "cd /transform", "\n",
-                "curl -o scopusQueryTransform.jar '", { "Ref" : "ScopusQueryTransformSignedJarUrl"}, "'"         
+                "curl -o scopusQueryAffiliationTransform.jar '", { "Ref" : "ScopusQueryAffiliationTransformSignedJarUrl"}, "'", "\n",        
+                "curl -o scopusQueryAuthorTransform.jar '", { "Ref" : "ScopusQueryAuthorTransformSignedJarUrl"}, "'", "\n", 
+                "curl -o scopusQueryCoreTransform.jar '", { "Ref" : "ScopusQueryCoreTransformSignedJarUrl"}, "'" 
                 ]]}}   
             }
         },

@@ -11,6 +11,16 @@
       		Navigator selection (AdjustmentGroup elements) are currently ignored.
       		Scope query not implemented
       		Proximity query not implemented
+      		
+        TODO:
+        
+          Implement basic proximity (no children AND nodes)
+          	Surround Query Parser Limitations:
+          		Multi-character wildcard (*) requires 3 leading characeters.  A* or AB* will not work (by default).
+          		There is no analysis of the tokens.  In other words, no lower-casing, stemming, punctuation, etc.
+          		Not sure edixmax will be suported (need to verify).
+			
+          May want to add -m for 'boundary' queries although none exist
       
      -->
 
@@ -155,7 +165,7 @@
   <!-- Query clause -->
   <xsl:template match="ft:query" mode="query">
     <xsl:apply-templates
-      select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare"
+      select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare | proximityQuery"
     />
   </xsl:template>
 
@@ -168,7 +178,7 @@
   <xsl:template match="ft:andQuery">
     <xsl:text>(</xsl:text>
     <xsl:for-each
-      select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
+      select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare | proximityQuery">
       <xsl:if test="position() != 1">
         <xsl:text> AND </xsl:text>
       </xsl:if>
@@ -182,7 +192,7 @@
   <xsl:template match="ft:orQuery">
     <xsl:text>(</xsl:text>
     <xsl:for-each
-      select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
+      select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare | proximityQuery">
       <xsl:if test="position() != 1">
         <xsl:text> OR </xsl:text>
       </xsl:if>
@@ -196,7 +206,7 @@
   <xsl:template match="ft:notQuery">
     <xsl:text>NOT(</xsl:text>
     <xsl:apply-templates
-      select="ft:word | ft:andQuery | ft:orQuery | ft:numericCompare"/>
+      select="ft:word | ft:andQuery | ft:orQuery | ft:numericCompare | proximityQuery"/>
     <xsl:text>)</xsl:text>
   </xsl:template>
 
@@ -258,6 +268,27 @@
         <xsl:value-of select="ft:decimal | ft:date"/>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+
+
+  <!-- PROXIMITY query clause -->
+  <!-- _query_:"{!surround}(abs:(heat 15w drive))"  -->
+  <!-- May want to ignore complex proximity queries -->
+  <!-- Can handle descendant OR but not AND         -->
+  <xsl:template match="ft:proximityQuery">
+    <xsl:value-of select="./@path"/>
+    <xsl:text>:</xsl:text>
+    <xsl:text>"</xsl:text>
+    <xsl:for-each select="./ft:word">
+      <xsl:if test="position() != 1 and position() != last()">
+        <xsl:text> </xsl:text>
+      </xsl:if>
+      <xsl:call-template name="word-cleanup">
+        <xsl:with-param name="w" select="."/>
+      </xsl:call-template>
+    </xsl:for-each>
+    <xsl:text>"~</xsl:text>
+    <xsl:value-of select="./@slack"/>
   </xsl:template>
 
 

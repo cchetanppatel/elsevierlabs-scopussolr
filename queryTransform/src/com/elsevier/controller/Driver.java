@@ -32,7 +32,7 @@ public class Driver {
 		try {
 			
 			if (args.length != 5) {
-				System.out.println("Four parameters required.");
+				System.out.println("Five parameters required.");
 				System.out.println("First parameter is the stylesheet name/location.");
 				System.out.println("Second parameter is the xml file name/location.");
 				System.out.println("Third parameter is type (auth, affil, main).");
