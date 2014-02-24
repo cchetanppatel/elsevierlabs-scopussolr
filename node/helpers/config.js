@@ -25,17 +25,17 @@ exports.init = function(environment) {
    
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
                                 
-                                'solr-host-port-public' : { 'affil': ['54.224.52.75:8983'],
+                                'solr-host-port-public' : { 'affil': ['23.22.65.28:8983'],
                                                             'auth' : ['54.225.27.71:8983'],
                                                             'core' : ['54.205.113.128:8983'] },
                                                            
-                                'solr-host-port-private' : { 'affil': ['10.236.151.246:8983'],
+                                'solr-host-port-private' : { 'affil': ['10.207.53.181:8983'],
                                                              'auth' : ['10.9.129.139:8983'],
                                                              'core' : ['10.210.81.235:8983'] },
                                                                                                                         
-                                'solr-host-port' : { 'affil': ['54.224.52.75:8983'],
+                                'solr-host-port' : { 'affil': ['23.22.65.28:8983'],
                                                      'auth' : ['54.225.27.71:8983'],
-                                                     'core' : ['localhost:8983'] },
+                                                     'core' : ['54.205.113.128:8983'] },
                                                      
                                 'solr-cluster' : { 'auth'  : 'auth',
                                                    'affil' : 'affil',
@@ -63,15 +63,15 @@ exports.init = function(environment) {
                                 
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          
                                                            
-                                'solr-host-port-public' : { 'affil': ['54.224.52.75:8983'],
+                                'solr-host-port-public' : { 'affil': ['23.22.65.28:8983'],
                                                             'auth' : ['54.225.27.71:8983'],
                                                             'core' : ['54.205.113.128:8983'] },
                                                            
-                                'solr-host-port-private' : { 'affil': ['10.236.151.246:8983'],
+                                'solr-host-port-private' : { 'affil': ['10.207.53.181:8983'],
                                                              'auth' : ['10.9.129.139:8983'],
                                                              'core' : ['10.210.81.235:8983'] },
                                                                                                                         
-                                'solr-host-port' : { 'affil': ['10.236.151.246:8983'],
+                                'solr-host-port' : { 'affil': ['10.207.53.181:8983'],
                                                      'auth' : ['10.9.129.139:8983'],
                                                      'core' : ['10.210.81.235:8983'] },
                                                      

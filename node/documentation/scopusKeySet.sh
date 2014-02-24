@@ -1,20 +1,16 @@
 #!/bin/bash
 
 # Core type
-keytype="core"
+#keytype="core"
 # Affiliation type
 #keytype="affil"
 # Author Type
-#keytype="auth"
+keytype="auth"
 
-keyset="1"
+keyset="auidafid"
 
-# Core Count
-cnt="1622399"
-# Affiliation Count
-#cnt="91533"
-# Author Count
-#cnt="289656"
+#  Count
+cnt="52221"
 
 for (( i=1; i <= $cnt; i++ ))
 do
