@@ -101,6 +101,7 @@
    
 -->
 <field name="_version_" type="long" indexed="true" stored="true"/>
+<field name="id" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="epoch" type="long" indexed="true" stored="true"/>
 <field name="epoch-rs" type="long" indexed="true" stored="true"/>
 <field name="active" type="integer" multiValued="false" indexed="true" stored="true"/>
