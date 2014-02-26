@@ -20,7 +20,9 @@ import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.SendMessageBatchRequest;
 import com.amazonaws.services.sqs.model.SendMessageBatchRequestEntry;
+import com.amazonaws.services.sqs.model.SendMessageBatchResult;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
+import com.amazonaws.services.sqs.model.SendMessageResult;
 import com.elsevier.common.Variables;
 
 
@@ -55,7 +57,7 @@ public class SimpleQueueService {
         try {
          	
         	// Create a SQS queue
-        	//createQueue(Variables.SQS_QUEUE_NAME);
+        	createQueue(Variables.SQS_QUEUE_NAME);
         	
         	// Create a SQS problem queue
         	//createQueue(Variables.SQS_PROBLEM_QUEUE_NAME);
@@ -64,7 +66,7 @@ public class SimpleQueueService {
         	//processProblemQueue();
         	
         	// Populate queue
-        	populateQueue();
+        	//populateQueue();
         	
 
         } catch (AmazonServiceException ase) {
@@ -152,14 +154,14 @@ public class SimpleQueueService {
 	 * @param qName SQS queue name
 	 * @param msg Message added to the queue
 	 */
-	public static void addmessage(String qName, String msg) {
+	public static SendMessageResult addmessage(String qName, String msg) {
 		// Note:  Running into Java bug that limits the number of Readers that can be generated
 		// from a single XMLInputFactory (basically what happens in the AWS client). It becomes a 
 		// problem for long running processes with a static client that do a lot of calls. In order 
 		// to get around it, we create now the client new for each request even though it is less efficient for now.
-		AmazonSQS sqsClient = new AmazonSQSClient(awsCredentials, cCfg);
-        sqsClient.sendMessage(new SendMessageRequest(getQueueUrl(qName), msg));
-
+		//AmazonSQS sqsClient = new AmazonSQSClient(awsCredentials, cCfg);
+		SendMessageResult res = sqsClient.sendMessage(new SendMessageRequest(getQueueUrl(qName), msg));
+		return res;
 	}
 	
 	/**
@@ -169,14 +171,14 @@ public class SimpleQueueService {
 	 * @param qName SQS queue name
 	 * @param batch Messages to add to the queue
 	 */
-	public static void addMessageBatch(String qName, List<SendMessageBatchRequestEntry> batch) {
+	public static SendMessageBatchResult addMessageBatch(String qName, List<SendMessageBatchRequestEntry> batch) {
 		// Note:  Running into Java bug that limits the number of Readers that can be generated
 		// from a single XMLInputFactory (basically what happens in the AWS client). It becomes a 
 		// problem for long running processes with a static client that do a lot of calls. In order 
 		// to get around it, we create now the client new for each request even though it is less efficient for now.
-		AmazonSQS sqsClient = new AmazonSQSClient(awsCredentials, cCfg);
-        sqsClient.sendMessageBatch(new SendMessageBatchRequest(getQueueUrl(qName), batch));
-
+		//AmazonSQS sqsClient = new AmazonSQSClient(awsCredentials, cCfg);
+        SendMessageBatchResult res = sqsClient.sendMessageBatch(new SendMessageBatchRequest(getQueueUrl(qName), batch));
+        return res;
 	}
 	
 	

@@ -5,14 +5,17 @@ import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import com.amazonaws.services.sqs.model.BatchResultErrorEntry;
 import com.amazonaws.services.sqs.model.SendMessageBatchRequestEntry;
+import com.amazonaws.services.sqs.model.SendMessageBatchResult;
 import com.elsevier.common.Variables;
 
 /**
  * 
- * @author Darin McBeath
+ * @author Curt Kohler
  *
  */
 public class ScopusBulkLoad {
@@ -51,21 +54,30 @@ public class ScopusBulkLoad {
 			 }
 			 int numProcessed = 0;
 			 
+			 long messageEpoch = 0;
+			 // should we use the current time as the epoch?
+			 if (epoch.contentEquals("0")) {
+				 // All messages in this run will have the same epoch value
+				 messageEpoch = System.currentTimeMillis();
+				 version = "" + messageEpoch;
+			 } else {
+				 messageEpoch = Long.parseLong(epoch,10);
+			 }
+			 
+			 System.out.println("Configuation based on parameters:");
+			 System.out.println("Number of paramaters: " +  args.length);
+			 System.out.println("File: " + args[0]);
+			 System.out.println("Action: " + args[1]);
+			 System.out.println("messageEpoch: " + messageEpoch);
+			 System.out.println("numberRecordsToProcess: " + numberRecordsToProcess + " (0 means process all keys in file)");
+			 System.out.println("");
+			 
     		 while((line = br.readLine()) != null && (numberRecordsToProcess == 0 || numProcessed < numberRecordsToProcess)) {
     			 
     			 numProcessed++;
     			 
     			 // Process a record.  The only thing in a line will be the key.
     			 String key = line.trim();
-
-    			 long messageEpoch = 0;
-    			 // should we use the current time as the epoch?
-    			 if (epoch.contentEquals("0")) {
-    				 messageEpoch = System.currentTimeMillis();
-    				 version = "" + messageEpoch;
-    			 } else {
-    				 messageEpoch = Long.parseLong(epoch,10);
-    			 }
     			 
 				 MessageEntryForXMLProcessing entry = new MessageEntryForXMLProcessing(action, messageEpoch, key, prefix, version);
 				 String jsonEntry = MessageForXMLProcessing.toJson(Variables.S3_XML_BUCKET_NAME, entry);
@@ -77,7 +89,15 @@ public class ScopusBulkLoad {
 				 
 				 // Output in batches of 10
     			 if (batch.size() == 10) {
-    				 SimpleQueueService.addMessageBatch(Variables.SQS_QUEUE_NAME, batch);
+    				 SendMessageBatchResult res = SimpleQueueService.addMessageBatch(Variables.SQS_QUEUE_NAME, batch);
+    				 List<BatchResultErrorEntry> failed = res.getFailed();
+    				 if (failed.isEmpty() == false) {
+    					 Iterator<BatchResultErrorEntry> iter = failed.iterator();
+    					 while (iter.hasNext()) {
+    						 BatchResultErrorEntry error = iter.next();
+    						 System.out.println("*** SQS batch add error: ID: " + error.getId() + ", Code: " + error.getCode() + ", SenderFault: " + error.getSenderFault() + ", Msg: " + error.getMessage());
+    					 }
+    				 }
     				 batch.clear();
     				 System.out.println("Messages = '" + ctr + "'");
     			 }
@@ -88,13 +108,18 @@ public class ScopusBulkLoad {
     			 SimpleQueueService.addMessageBatch(Variables.SQS_QUEUE_NAME, batch);
     		 }
 
-    		 System.out.println("Messages = '" + ctr + "'");
+    		 System.out.println("Total Messages = '" + ctr + "'");
     		 System.out.println("*** End " + sdf.format(new Date()));
     		
     	} catch (Exception ex) {
+    		System.out.println("Exception Msg: " + ex.getMessage());
+    		ex.printStackTrace(System.out);
     		
-    		ex.printStackTrace();
-    		
+    	}
+    	
+    	catch (Throwable t) {
+    		System.out.println("Throwable Msg: " + t.getMessage());
+    		throw new RuntimeException(t);
     	}
 		
 	}
