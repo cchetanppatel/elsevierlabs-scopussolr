@@ -150,6 +150,8 @@ public class SolrCore {
 						fieldValues.put("fastloaddate", Long.toString(epoch, 10) );
 						
 						//Debug ... output the keys/values to see if we did it right
+						
+						/*
 						for (String key:fieldValues.keySet()) {
 							
 							Object val = fieldValues.get(key);
@@ -172,6 +174,8 @@ public class SolrCore {
 							}
 							
 						}  
+						*/
+						
 						// Populate the ElasticSearch index
 						Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
 						
@@ -247,10 +251,21 @@ public class SolrCore {
 				
 				// Problems encountered
 				problems = true;
-				
-				ex.printStackTrace();
+				System.out.println("Exception in mainline..");
+				ex.printStackTrace(System.out);
 							
-			} finally {
+			} 
+			
+			catch (Throwable t) {
+				
+				// Problems encountered
+				problems = true;
+				System.out.println("Throwable in mainline...");
+				t.printStackTrace(System.out);
+				throw new RuntimeException(t);
+							
+			}
+			finally {
 
 				try {
 					
@@ -271,7 +286,7 @@ public class SolrCore {
 				
 				} catch (IOException e) {
 					
-					e.printStackTrace();
+					e.printStackTrace(System.out);
 					
 				}
 				
@@ -294,7 +309,7 @@ public class SolrCore {
 						
 							String msg = "** SQS Problems with adding " + message.getBody() + " to the the '" + Variables.SQS_PROBLEM_QUEUE_NAME + "' queue.";
 							System.out.println(msg);
-							exc.printStackTrace();
+							exc.printStackTrace(System.out);
 							SimpleNotificationService.sendMessage(Variables.SNS_TOPIC_NAME, msg); 
 						
 						}
@@ -311,7 +326,7 @@ public class SolrCore {
 						
 						String msg = "** SQS Problems with removing " + message.getBody() + " from the queue.";
 						System.out.println(msg);
-						ex.printStackTrace();
+						ex.printStackTrace(System.out);
 						SimpleNotificationService.sendMessage(Variables.SNS_TOPIC_NAME, msg);
 						
 					}

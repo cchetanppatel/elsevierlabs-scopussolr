@@ -146,7 +146,8 @@ public class SolrAuthor {
 						fieldValues.put("epoch-rs", Long.toString(epoch, 10) );
 						
 						//Debug ... output the keys/values to see if we did it right
-						for (String key:fieldValues.keySet()) {
+						/*
+						  for (String key:fieldValues.keySet()) {
 							
 							Object val = fieldValues.get(key);
 							if (val instanceof String) {
@@ -168,6 +169,7 @@ public class SolrAuthor {
 							}
 							
 						}
+						*/
 						
 						// Is this an add?
 						if (json.getAction().compareTo("a") == 0) {
@@ -216,10 +218,15 @@ public class SolrAuthor {
 				
 				// Problems encountered
 				problems = true;
-				
-				ex.printStackTrace();
+				System.out.println("Exception in mainline..");
+				ex.printStackTrace(System.out);
 							
-			} finally {
+			} catch (Throwable e) {
+				System.out.println("Error in mainline..");
+		        e.printStackTrace(System.out);
+		        throw new RuntimeException(e);
+		    }
+			finally {
 
 				try {
 					
@@ -239,8 +246,8 @@ public class SolrAuthor {
 					}
 				
 				} catch (IOException e) {
-					
-					e.printStackTrace();
+					System.out.println("IOException in main finally block");
+					e.printStackTrace(System.out);
 					
 				}
 				
@@ -280,7 +287,7 @@ public class SolrAuthor {
 						
 						String msg = "** SQS Problems with removing " + message.getBody() + " from the queue.";
 						System.out.println(msg);
-						ex.printStackTrace();
+						ex.printStackTrace(System.out);
 						SimpleNotificationService.sendMessage(Variables.SNS_TOPIC_NAME, msg);
 						
 					}
