@@ -12,6 +12,12 @@
     	Limitations:
       		Navigator selection (AdjustmentGroup elements) are currently ignored.
 
+      	Assumptions:
+      	    Only mark as a phrase if specified in the ft:word attribute (@phrase)
+      	    Remove double-quotes from ft:word text (so not to falsely process as a phrase)
+      	    Remove stop words if phrase is not specified in the ft:word attribute (@phrase)
+      	    When more than one token exists for ft:word, treat them as an implicit AND.
+      	    
         TODO:
           May want to add -p field for punct="sensitive" queries although none exist
           May want to add -m for 'boundary' queries although none exist
@@ -42,6 +48,8 @@
     <!-- Get the filter query -->
     <xsl:variable name="filter" select="/qw:search/qw:searchReqPayload/qw:elsfilter/ft:fullTextQuery"/>
   
+    <!--  Stopwords -->
+    <xsl:variable name="stopwords"  select="('about','again','all','almost','also','although','always','am','among','an','and','another','any','are','as','at','be','because','been','before','being','between','both','but','by','can','could','did','do','does','done','due','during','each','either','enough','especially','etc','ever','for','found','from','further','had','hardly','has','have','having','hence','her','here','him','his','how','however','if','in','into','is','it','its','itself','just','made','mainly','make','might','most','mostly','must','nearly','neither','obtained','of','often','on','onto','or','our','overall','perhaps','quite','rather','really','regarding','said','seem','seen','several','she','should','show','showed','shown','shows','significantly','since','so','some','such','than','that','the','their','theirs','them','then','there','thereby','therefore','these','they','this','those','through','thus','to','too','upon','use','used','using','various','very','viz','was','we','were','what','when','where','whereby','wherein','whether','which','while','whom','whose','why','with','within','without','would','you')"/>
   
     <!-- Build the query -->
     <xsl:template match="/qw:search/qw:searchReqPayload/qw:xQueryX">
@@ -129,7 +137,7 @@
   
   <!-- Query clause -->
   <xsl:template match="ft:query" mode="query">
-    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare"/>
+    <xsl:apply-templates select="ft:word[empty(index-of($stopwords,lower-case(.)))] | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare"/>
   </xsl:template>
   
   
@@ -140,7 +148,7 @@
   <!-- AND query clause -->
   <xsl:template match="ft:andQuery">
     <xsl:text>(</xsl:text>  
-    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
+    <xsl:for-each select="ft:word[empty(index-of($stopwords,lower-case(.)))] | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
       <xsl:if test="position() != 1">
         <xsl:text> AND </xsl:text>
       </xsl:if>
@@ -153,7 +161,7 @@
   <!-- OR query clause -->
   <xsl:template match="ft:orQuery">
     <xsl:text>(</xsl:text>  
-    <xsl:for-each select="ft:word | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
+    <xsl:for-each select="ft:word[empty(index-of($stopwords,lower-case(.)))] | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
       <xsl:if test="position() != 1">
         <xsl:text> OR </xsl:text>
       </xsl:if>
@@ -166,7 +174,7 @@
   <!-- NOT query clause -->
   <xsl:template match="ft:notQuery">
     <xsl:text>NOT(</xsl:text>
-    <xsl:apply-templates select="ft:word | ft:andQuery | ft:orQuery | ft:numericCompare"/>
+    <xsl:apply-templates select="ft:word[empty(index-of($stopwords,lower-case(.)))] | ft:andQuery | ft:orQuery | ft:numericCompare"/>
     <xsl:text>)</xsl:text>
   </xsl:template>
   
@@ -174,11 +182,12 @@
   <!-- WORD query clause -->
   <xsl:template match="ft:word">
     <xsl:value-of select="./@path"/>
-    <xsl:text>:</xsl:text>
+    <xsl:text>:(</xsl:text>
     <!-- Go decide whether to cleanup the word (add quotes, escape characters, add trailing wildcard) -->
     <xsl:call-template name="word-cleanup">
       <xsl:with-param name="w" select="."/>
     </xsl:call-template>
+    <xsl:text>)</xsl:text>
   </xsl:template>
   
   
@@ -428,16 +437,22 @@
           <xsl:call-template name="string-replace-all">
             <xsl:with-param name="text" select="$var16" />
             <xsl:with-param name="replace" select="'&quot;'" />
-            <xsl:with-param name="by" select="'\&quot;'" />
+            <xsl:with-param name="by" select="''" />
           </xsl:call-template>
-        </xsl:variable>        
-        <xsl:value-of select="$var17"/>    
+        </xsl:variable>
+        <xsl:variable name="var18">
+          <xsl:call-template name="remove-stop-words">
+            <xsl:with-param name="text" select="$var16" />
+          </xsl:call-template>
+        </xsl:variable>                
+        <xsl:value-of select="normalize-space($var18)"/>    
       </xsl:otherwise>
       
     </xsl:choose> 
   </xsl:template>
 
 
+  <!--  Replace text in the current string using specified parameters -->
   <xsl:template name="string-replace-all">
     <xsl:param name="text" />
     <xsl:param name="replace" />
@@ -458,6 +473,16 @@
     </xsl:choose>
   </xsl:template>
   
+  <!--  Remove stopwrods from token -->
+  <xsl:template name="remove-stop-words">
+    <xsl:param name="text" />
+  	<xsl:for-each select="tokenize($text, ' ')">
+  		<xsl:if test="empty(index-of($stopwords,lower-case(.)))">
+  			<xsl:value-of select="."/>
+  			<xsl:text> </xsl:text>
+  		</xsl:if>
+  	</xsl:for-each>
+  </xsl:template>  
   
   <!-- Ingore what we didn't explicitly ask for -->
   <xsl:template match="text()"/>
