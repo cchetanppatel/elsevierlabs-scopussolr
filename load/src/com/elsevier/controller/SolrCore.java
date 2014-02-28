@@ -141,14 +141,6 @@ public class SolrCore {
 						AbstractTransform sdt = new AbstractTransform();
 						HashMap<String, Object> fieldValues =  sdt.transform(is);
 						
-						// Put the requests epoch value into the document at the version of the document
-						// so Solr can filter out stale requests.
-						fieldValues.put("epoch", Long.toString(epoch, 10) );
-						fieldValues.put("epoch-rs", Long.toString(epoch, 10) );
-						
-						// Making fastload date the same as the epoch per Darin's email.
-						fieldValues.put("fastloaddate", Long.toString(epoch, 10) );
-						
 						//Debug ... output the keys/values to see if we did it right
 						
 						/*
@@ -176,8 +168,18 @@ public class SolrCore {
 						}  
 						*/
 						
-						// Populate the ElasticSearch index
-						Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);							
+						// Is this an add?
+						if (json.getAction().compareTo("a") == 0) {
+							fieldValues.put("id", contentKey); 
+							fieldValues.put("epoch", Long.toString(epoch, 10) );   // Put the XFab epoch in the index
+							fieldValues.put("epoch-rs", Long.toString(epoch, 10) ); // actual version control value is the epoch for adds
+							// Making fastload date the same as the epoch per Darin's email.
+							fieldValues.put("fastloaddate", Long.toString(epoch, 10) );
+							Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);
+						} else {  // Must be an update...
+							fieldValues.put("epoch", Long.toString(epoch, 10) );
+							Document.update(Variables.SOLR_COLLECTION, fieldValues, "id", contentKey, "epoch-rs", epoch);
+						}								
 						
 						if (Variables.AWS_REDSHIFT_INTEGRATE_REDSHIFT.equals("true")) {
 							// Get core id

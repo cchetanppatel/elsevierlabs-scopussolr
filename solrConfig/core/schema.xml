@@ -101,6 +101,7 @@
    
 -->
 <field name="_version_" type="long" indexed="true" stored="true"/>
+<field name="id" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="epoch" type="long" indexed="true" stored="true"/>
 <field name="epoch-rs" type="long" indexed="true" stored="true"/>
 <field name="abs" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
@@ -334,7 +335,7 @@
 
 
 </fields>
-<uniqueKey>intid</uniqueKey>
+<uniqueKey>id</uniqueKey>
 <defaultSearchField>all</defaultSearchField>
 <solrQueryParser defaultOperator="AND"/>
 <copyField source="abs" dest="abs-p"/>
