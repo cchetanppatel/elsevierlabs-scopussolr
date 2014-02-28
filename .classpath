@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="load/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="load/lib/aws-java-sdk-1.4.7.jar"/>
 	<classpathentry kind="lib" path="load/lib/commons-codec-1.6.jar"/>
 	<classpathentry kind="lib" path="load/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="load/lib/jackson-core-lgpl-1.9.4.jar"/>
@@ -18,5 +17,6 @@
 	<classpathentry kind="lib" path="load/lib/slf4j-log4j12-1.6.6.jar"/>
 	<classpathentry kind="lib" path="load/lib/noggit-0.5.jar"/>
 	<classpathentry kind="lib" path="load/lib/postgresql-8.4-703.jdbc4.jar"/>
+	<classpathentry kind="lib" path="load/lib/aws-java-sdk-1.4.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
