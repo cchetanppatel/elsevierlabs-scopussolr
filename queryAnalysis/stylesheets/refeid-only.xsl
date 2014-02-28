@@ -11,7 +11,7 @@
        
     <xsl:template match="text()|@*"/>
 	
-	<xsl:template match="/ns2:search/ns2:searchReqPayload/ns2:xQueryX/ft:fullTextQuery[.//ft:word[@path='refeid'] and not(.//ft:word[@path!='refeid'])]">
+	<xsl:template match="/ns2:search/ns2:searchReqPayload/ns2:xQueryX/ft:fullTextQuery/ft:query[.//ft:word[@path='refeid'] and not(.//ft:word[@path!='refeid'])]">
 		<xsl:for-each select=".//ft:word">
 			<xsl:value-of select="./@path"/>
 			<xsl:text>:</xsl:text>

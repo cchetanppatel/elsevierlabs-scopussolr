@@ -11,7 +11,7 @@
        
     <xsl:template match="text()|@*"/>
 	
-	<xsl:template match="/ns2:search/ns2:searchReqPayload[ns2:xQueryX/ft:fullTextQuery[not((.//ft:word[@path='authid'] and not(.//ft:word[@path!='authid']))
+	<xsl:template match="/ns2:search/ns2:searchReqPayload[ns2:xQueryX/ft:fullTextQuery/ft:query[not((.//ft:word[@path='authid'] and not(.//ft:word[@path!='authid']))
 	                                       or (.//ft:word[@path=('authid')] and .//ft:word[@path=('afid')] and (count(distinct-values(.//ft:word/@path)) = 2)))
 	                                       and exists(..//ft:word)]]">
 	                                       

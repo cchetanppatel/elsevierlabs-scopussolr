@@ -11,7 +11,7 @@
        
     <xsl:template match="text()|@*"/>
 	
-	<xsl:template match="/ns2:search/ns2:searchReqPayload[ns2:xQueryX/ft:fullTextQuery[not((.//ft:word[@path='doi'] and not(.//ft:word[@path!='doi']))
+	<xsl:template match="/ns2:search/ns2:searchReqPayload[ns2:xQueryX/ft:fullTextQuery/ft:query[not((.//ft:word[@path='doi'] and not(.//ft:word[@path!='doi']))
 	                                       or (.//ft:word[@path='eid'] and not(.//ft:word[@path!='eid']))
 	                                       or (.//ft:word[@path='sdeid'] and not(.//ft:word[@path!='sdeid']))
 	                                       or (.//ft:word[@path='refeid'] and not(.//ft:word[@path!='refeid']))
