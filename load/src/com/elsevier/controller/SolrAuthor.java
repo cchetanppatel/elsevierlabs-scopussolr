@@ -125,7 +125,8 @@ public class SolrAuthor {
 
 						// Process Add/Update
 						System.out.println("** Adding/Update '" + contentKey + "' to the index.");
-												
+						System.out.flush();
+						
 						// Get the record from S3
 						s3is = SimpleStorageService.getObject(contentBucket, contentKey);
 						
@@ -176,7 +177,8 @@ public class SolrAuthor {
 							fieldValues.put("id", contentKey); 
 							fieldValues.put("epoch", Long.toString(epoch, 10) );   // Put the XFab epoch in the index
 							fieldValues.put("epoch-rs", Long.toString(epoch, 10) ); // actual version control value is the epoch for adds
-							fieldValues.put("count", "-1");   // Dummy value for count until Redshift job values comes back with one.  Value of -1 will make non-updated records easy to find 
+							//fieldValues.put("count", "-1");   // Dummy value for count until Redshift job values comes back with one.  Value of -1 will make non-updated records easy to find 
+							fieldValues.put("count", "1");
 							Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);
 						} else {  // Must be an update...
 							fieldValues.put("epoch", Long.toString(epoch, 10) );
@@ -185,12 +187,16 @@ public class SolrAuthor {
 						
 					}
 					
+					System.out.println("Updating DynamoDB for key: " + contentKey);
+					System.out.flush();
 					// Update DynamoDB
 					DynamoDB.insertRecord(metadata);
-					
+					System.out.println("Back from Updating DynamoDB for key: " + contentKey);
+					System.out.flush();
 					// Delete the message
-					SimpleQueueService.deleteMessage(Variables.SQS_QUEUE_NAME, message);
-					
+					//System.out.println("Deleting SQS for key: " + contentKey);
+					//SimpleQueueService.deleteMessage(Variables.SQS_QUEUE_NAME, message);
+					//System.out.println("Deleted SQS for key: " + contentKey);
 					
 				} else {
 					
@@ -218,12 +224,23 @@ public class SolrAuthor {
 				
 				// Problems encountered
 				problems = true;
-				System.out.println("Exception in mainline..");
+				System.out.println("*** Exception in mainline..  key: " + contentKey);
 				ex.printStackTrace(System.out);
+				System.out.flush();
 							
 			} catch (Throwable e) {
-				System.out.println("Error in mainline..");
+				System.out.println("*** Error in mainline..   key: " + contentKey);
+				// Try to make sure there is some memory available before getting stack trace.
+				System.gc();
+				try {
+					Thread.sleep(5000);
+				}
+				catch (InterruptedException ie) {
+					System.out.println("Interrupted in Throwable catch block.");
+				}
+				
 		        e.printStackTrace(System.out);
+		        System.out.flush();
 		        throw new RuntimeException(e);
 		    }
 			finally {
@@ -248,6 +265,7 @@ public class SolrAuthor {
 				} catch (IOException e) {
 					System.out.println("IOException in main finally block");
 					e.printStackTrace(System.out);
+					System.out.flush();
 					
 				}
 				
@@ -258,6 +276,7 @@ public class SolrAuthor {
 						// Send SNS message
 						String prob = "** Problems processing " + message.getBody() + ".";
 						System.out.println(prob);
+						System.out.flush();
 						//SimpleNotificationService.sendMessage(Variables.SNS_TOPIC_NAME, prob); 
 					
 						// Put message on the problem queue (for later processing)
@@ -274,6 +293,21 @@ public class SolrAuthor {
 							SimpleNotificationService.sendMessage(Variables.SNS_TOPIC_NAME, msg); 
 						
 						}
+						catch (Throwable t) {
+							System.out.println("*** Error in writing SQS error message..   key: " + contentKey);
+							// Try to make sure there is some memory available before getting stack trace.
+							System.gc();
+							try {
+								Thread.sleep(5000);
+							}
+							catch (InterruptedException ie) {
+								System.out.println("Interrupted in finally's write SQS error record catch block.");
+							}
+							
+					        t.printStackTrace(System.out);
+					        System.out.flush();
+					        throw new RuntimeException(t);
+					    }
 						
 					}
 					
@@ -281,6 +315,7 @@ public class SolrAuthor {
 					try {
 						
 						System.out.println("** SQS  Removing " + message.getBody() + " from the queue.");
+						System.out.flush();
 						SimpleQueueService.deleteMessage(Variables.SQS_QUEUE_NAME, message);
 					
 					} catch (Exception ex) {
@@ -288,9 +323,25 @@ public class SolrAuthor {
 						String msg = "** SQS Problems with removing " + message.getBody() + " from the queue.";
 						System.out.println(msg);
 						ex.printStackTrace(System.out);
+						System.out.flush();
 						SimpleNotificationService.sendMessage(Variables.SNS_TOPIC_NAME, msg);
 						
 					}
+					catch (Throwable t) {
+						System.out.println("*** Error in finally..   key: " + contentKey);
+						// Try to make sure there is some memory available before getting stack trace.
+						System.gc();
+						try {
+							Thread.sleep(5000);
+						}
+						catch (InterruptedException ie) {
+							System.out.println("Interrupted in Finally Throwable catch block.");
+						}
+						
+				        t.printStackTrace(System.out);
+				        System.out.flush();
+				        throw new RuntimeException(t);
+				    }
 
 					
 				} 

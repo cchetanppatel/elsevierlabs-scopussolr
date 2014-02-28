@@ -100,6 +100,7 @@ public class ScopusBulkLoad {
     				 }
     				 batch.clear();
     				 System.out.println("Messages = '" + ctr + "'");
+    				 System.out.flush();
     			 }
     		 }
     		 
@@ -119,6 +120,7 @@ public class ScopusBulkLoad {
     	
     	catch (Throwable t) {
     		System.out.println("Throwable Msg: " + t.getMessage());
+    		System.out.flush();
     		throw new RuntimeException(t);
     	}
 		
