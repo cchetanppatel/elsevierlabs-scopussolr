@@ -23,6 +23,12 @@
       "ConstraintDescription" : "must be a valid EC2 instance type."
     },
 
+    "Java6URL" : {
+      "Description" : "URL for the Java 6u37, 64 bit AWS download",
+      "Type" : "String",
+      "Default" : "http://els-ats.s3.amazonaws.com/java/jdk-6u37-linux-x64-rpm.bin?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1393622544&Signature=hqZDThgI4UvPdu9gYuCPVKAvx7g%3D"
+    },
+    
     "SignedJarUrl" : {
       "Description" : "Signed URL for the jar file in S3",
       "Type" : "String",
@@ -87,6 +93,14 @@
                 "yum -y update", "\n",
                 "rm /etc/localtime", "\n",
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Download and install Oracle Java 7", "\n",
+                "curl -o /tmp/jdk-6u37-linux-x64-rpm.bin '", { "Ref" : "Java6URL"}, "'", "\n",
+                "cd /tmp" , "\n",
+                "chmod 755 /tmp/jdk-6u37-linux-x64-rpm.bin", "\n",
+                "echo yes | ./jdk-6u37-linux-x64-rpm.bin", "\n",
+                "/usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_37/bin/java 20000", "\n",
+                "java -version", "\n",
+                "# Set up the indexers", "\n",
                 "mkdir /solr-load", "\n",
 				"# Start up the indexers", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
@@ -106,7 +120,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -132,6 +146,14 @@
                 "yum -y update", "\n",
                 "rm /etc/localtime", "\n",
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Download and install Oracle Java 7", "\n",
+                "curl -o /tmp/jdk-6u37-linux-x64-rpm.bin '", { "Ref" : "Java6URL"}, "'", "\n",
+                "cd /tmp" , "\n",
+                "chmod 755 /tmp/jdk-6u37-linux-x64-rpm.bin", "\n",
+                "echo yes | ./jdk-6u37-linux-x64-rpm.bin", "\n",
+                "/usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_37/bin/java 20000", "\n",
+                "java -version", "\n",
+                "# Set up the indexers", "\n",
                 "mkdir /solr-load", "\n",
 				"# Start up the indexers", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
@@ -151,7 +173,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -177,6 +199,14 @@
                 "yum -y update", "\n",
                 "rm /etc/localtime", "\n",
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Download and install Oracle Java 7", "\n",
+                "curl -o /tmp/jdk-6u37-linux-x64-rpm.bin '", { "Ref" : "Java6URL"}, "'", "\n",
+                "cd /tmp" , "\n",
+                "chmod 755 /tmp/jdk-6u37-linux-x64-rpm.bin", "\n",
+                "echo yes | ./jdk-6u37-linux-x64-rpm.bin", "\n",
+                "/usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_37/bin/java 20000", "\n",
+                "java -version", "\n",
+                "# Set up the indexers", "\n",
                 "mkdir /solr-load", "\n",
 				"# Start up the indexers", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
@@ -196,7 +226,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -222,6 +252,14 @@
                 "yum -y update", "\n",
                 "rm /etc/localtime", "\n",
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Download and install Oracle Java 7", "\n",
+                "curl -o /tmp/jdk-6u37-linux-x64-rpm.bin '", { "Ref" : "Java6URL"}, "'", "\n",
+                "cd /tmp" , "\n",
+                "chmod 755 /tmp/jdk-6u37-linux-x64-rpm.bin", "\n",
+                "echo yes | ./jdk-6u37-linux-x64-rpm.bin", "\n",
+                "/usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_37/bin/java 20000", "\n",
+                "java -version", "\n",
+                "# Set up the indexers", "\n",
                 "mkdir /solr-load", "\n",
 				"# Start up the indexers", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
@@ -241,7 +279,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
@@ -267,6 +305,14 @@
                 "yum -y update", "\n",
                 "rm /etc/localtime", "\n",
                 "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "# Download and install Oracle Java 7", "\n",
+                "curl -o /tmp/jdk-6u37-linux-x64-rpm.bin '", { "Ref" : "Java6URL"}, "'", "\n",
+                "cd /tmp" , "\n",
+                "chmod 755 /tmp/jdk-6u37-linux-x64-rpm.bin", "\n",
+                "echo yes | ./jdk-6u37-linux-x64-rpm.bin", "\n",
+                "/usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_37/bin/java 20000", "\n",
+                "java -version", "\n",
+                "# Set up the indexers", "\n",
                 "mkdir /solr-load", "\n",
 				"# Start up the indexers", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
@@ -286,7 +332,7 @@
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
                 "sleep 30", "\n",
-                "java -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null 2>&1 | tee -a logfile$i.log &", "\n",
+                "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
             }
