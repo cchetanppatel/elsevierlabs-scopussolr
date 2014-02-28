@@ -1,5 +1,6 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\fnil\fcharset0 Calibri;
+}
 {\colortbl;\red255\green255\blue255;}
 \margl1440\margr1440\vieww17640\viewh16600\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
@@ -33,6 +34,7 @@
  - Tombstone queries\
  - Dummy records\
  - Patents\
+ - adjustmentGroup queries (filter a request based on a selected navigator)\
 \
 \
 
@@ -110,7 +112,11 @@
    - Daily Add, Update, Delete\
    - Daily Publication Count impacts\
 \
-\
+Change the code for Surround Query Parser\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 /Users/mcbeathd/Downloads/solr-4.6.0/lucene/queryparser/src/java/org/apache/lucene/queryparser/surround/parser/QueryParser.java (change from 3 to 1)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 
 \b Scopus Queries\
 
@@ -124,16 +130,39 @@
       - 299,084 queries\
       - 176,547 only query on authid\
 \
-      - Navigator Counts (49,892)\
-        - autactivenav - 38,451\
-        - autaffilcitynav - 49,754\
-        - autaffilctrynav - 49,734\
-        - autafidnav - 0\
-        - autafnameidnav - 49,789\
-        - autsrctitle - 49227\
-        - autsubjclus - 49745\
+      - Navigator User Counts \
+	Total specified viaParamsList  - 41260 Total specified in reqDimension  - 41289\
+	autactivenav - 31596 specified viaParamsList  - 31596 specified in reqDimension\
+	autaffilcitynav - 41170 specified viaParamsList  - 41173 specified in reqDimension\
+	autaffilctrynav - 41147 specified viaParamsList  - 41157 specified in reqDimension\
+	autafidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autafnameidnav - 41200 specified viaParamsList  - 41203 specified in reqDimension\
+	autsrctitlenav - 40956 specified viaParamsList  - 40956 specified in reqDimension\
+	autsubjclusnav - 41160 specified viaParamsList  - 41165 specified in reqDimension\
+\
+      - Navigator Auid Counts\
+	Total specified viaParamsList  - 642 Total specified in reqDimension  - 643 \
+	autactivenav - 377 specified viaParamsList  - 377 specified in reqDimension\
+	autaffilcitynav - 641 specified viaParamsList  - 641 specified in reqDimension\
+	autaffilctrynav - 642 specified viaParamsList  - 642 specified in reqDimension\
+	autafidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autafnameidnav - 642 specified viaParamsList  - 642 specified in reqDimension\
+	autsrctitlenav - 391 specified viaParamsList  - 391 specified in reqDimension\
+	autsubjclusnav - 641 specified viaParamsList  - 641 specified in reqDimension\
+\
+      - Navigator AuidAfid Counts\
+	Total specified viaParamsList  - 0 Total specified in reqDimension  - 0\
+	autactivenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autaffilcitynav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autaffilctrynav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autafidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autafnameidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autsrctitlenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	autsubjclusnav - 0 specified viaParamsList  - 0 specified in reqDimension\
 \
       - Navigator Selected (588)\
+\
+      - Highlight (0)\
 \
       - Query Analysis\
 \
@@ -292,13 +321,23 @@
       - 91,548 queries\
       - 90,508 queries only contain afid\
 \
-      - Navigator Counts (1,041)\
-        - instaffilcitynav - 1,041\
-        - instaffilctrynav - 1,039\
-        - instcertscorenav - 117\
-        - insttoplevelnav - 0\
+      - Navigator User Counts\
+	Total specified viaParamsList  - 1016 Total specified in reqDimension  - 1018 \
+	instaffilcitynav - 1016 specified viaParamsList  - 1016 specified in reqDimension\
+	instaffilctrynav - 1014 specified viaParamsList  - 1015 specified in reqDimension\
+	instcertscorenav - 114 specified viaParamsList  - 114 specified in reqDimension\
+	insttoplevelnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+\
+      - Navigator Afid Counts \
+	Total specified viaParamsList  - 14 Total specified in reqDimension  - 14\
+	instaffilcitynav - 14 specified viaParamsList  - 14 specified in reqDimension\
+	instaffilctrynav - 14 specified viaParamsList  - 14 specified in reqDimension\
+	instcertscorenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	insttoplevelnav - 0 specified viaParamsList  - 0 specified in reqDimension\
 \
       - Navigator Selected (36)\
+\
+      - Highlight (0)\
 \
       - Query Analysis\
 \
@@ -447,7 +486,196 @@
 \
       - Tombstone Queries (3,755)\
 \
-      - Navigator Counts (277,994)\
+      - Navigator Afid Counts\
+	Total specified viaParamsList  - 2901 Total specified in reqDimension  - 4134\
+	scoaucitenav - 2 specified viaParamsList  - 2 specified in reqDimension\
+	scoaffilctrynav - 1509 specified viaParamsList  - 1524 specified in reqDimension\
+	scoafidnav - 2208 specified viaParamsList  - 2281 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 342 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 2009 specified viaParamsList  - 2157 specified in reqDimension\
+	scolangnav - 1503 specified viaParamsList  - 1509 specified in reqDimension\
+	scoprefnameauidnav - 1623 specified viaParamsList  - 1623 specified in reqDimension\
+	scopubyrnav - 1606 specified viaParamsList  - 2576 specified in reqDimension\
+	scosrctypenav - 1503 specified viaParamsList  - 1543 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 2449 specified viaParamsList  - 2999 specified in reqDimension\
+	scosubtypenav - 1505 specified viaParamsList  - 1718 specified in reqDimension\
+\
+      - Navigator Auid Counts\
+	Total specified viaParamsList  - 42213 Total specified in reqDimension  - 43940\
+	scoaucitenav - 0 specified viaParamsList  - 14 specified in reqDimension\
+	scoaffilctrynav - 30268 specified viaParamsList  - 30294 specified in reqDimension\
+	scoafidnav - 31922 specified viaParamsList  - 32081 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 64343 specified viaParamsList  - 64914 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 31866 specified viaParamsList  - 32177 specified in reqDimension\
+	scolangnav - 30267 specified viaParamsList  - 30276 specified in reqDimension\
+	scoprefnameauidnav - 30472 specified viaParamsList  - 30476 specified in reqDimension\
+	scopubyrnav - 40291 specified viaParamsList  - 41557 specified in reqDimension\
+	scosrctypenav - 30267 specified viaParamsList  - 30286 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 31817 specified viaParamsList  - 31951 specified in reqDimension\
+	scosubtypenav - 31811 specified viaParamsList  - 32248 specified in reqDimension\
+\
+      - Navigator Collecid Counts\
+	Total specified viaParamsList  - 41 Total specified in reqDimension  - 41\
+	scoaucitenav - 6 specified viaParamsList  - 6 specified in reqDimension\
+	scoaffilctrynav - 39 specified viaParamsList  - 39 specified in reqDimension\
+	scoafidnav - 35 specified viaParamsList  - 35 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 39 specified viaParamsList  - 39 specified in reqDimension\
+	scolangnav - 33 specified viaParamsList  - 33 specified in reqDimension\
+	scoprefnameauidnav - 33 specified viaParamsList  - 33 specified in reqDimension\
+	scopubyrnav - 39 specified viaParamsList  - 39 specified in reqDimension\
+	scosrctypenav - 33 specified viaParamsList  - 33 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 33 specified viaParamsList  - 33 specified in reqDimension\
+	scosubtypenav - 33 specified viaParamsList  - 33 specified in reqDimension\
+\
+      - Navigator Doi Counts\
+	Total specified viaParamsList  - 382 Total specified in reqDimension  - 382\
+	scoaucitenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoaffilctrynav - 361 specified viaParamsList  - 361 specified in reqDimension\
+	scoafidnav - 381 specified viaParamsList  - 381 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 2 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 361 specified viaParamsList  - 362 specified in reqDimension\
+	scolangnav - 361 specified viaParamsList  - 361 specified in reqDimension\
+	scoprefnameauidnav - 361 specified viaParamsList  - 361 specified in reqDimension\
+	scopubyrnav - 362 specified viaParamsList  - 362 specified in reqDimension\
+	scosrctypenav - 361 specified viaParamsList  - 361 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 361 specified viaParamsList  - 361 specified in reqDimension\
+	scosubtypenav - 361 specified viaParamsList  - 361 specified in reqDimension\
+\
+      - Navigator Eid Counts\
+	Total specified viaParamsList  - 1862 Total specified in reqDimension  - 1910\
+	scoaucitenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoaffilctrynav - 1173 specified viaParamsList  - 1173 specified in reqDimension\
+	scoafidnav - 1742 specified viaParamsList  - 1767 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 13 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 1172 specified viaParamsList  - 1210 specified in reqDimension\
+	scolangnav - 1171 specified viaParamsList  - 1175 specified in reqDimension\
+	scoprefnameauidnav - 1177 specified viaParamsList  - 1177 specified in reqDimension\
+	scopubyrnav - 1286 specified viaParamsList  - 1305 specified in reqDimension\
+	scosrctypenav - 1171 specified viaParamsList  - 1171 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 1172 specified viaParamsList  - 1174 specified in reqDimension\
+	scosubtypenav - 1171 specified viaParamsList  - 1178 specified in reqDimension\
+\
+      - Navigator Issnisbn Counts\
+	Total specified viaParamsList  - 659 Total specified in reqDimension  - 2415\
+	scoaucitenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoaffilctrynav - 617 specified viaParamsList  - 633 specified in reqDimension\
+	scoafidnav - 631 specified viaParamsList  - 632 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 7 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 616 specified viaParamsList  - 627 specified in reqDimension\
+	scolangnav - 615 specified viaParamsList  - 615 specified in reqDimension\
+	scoprefnameauidnav - 619 specified viaParamsList  - 619 specified in reqDimension\
+	scopubyrnav - 639 specified viaParamsList  - 2390 specified in reqDimension\
+	scosrctypenav - 615 specified viaParamsList  - 615 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 617 specified viaParamsList  - 643 specified in reqDimension\
+	scosubtypenav - 616 specified viaParamsList  - 666 specified in reqDimension\
+\
+      - Navigator Refeid Counts\
+	Total specified viaParamsList  - 19443 Total specified in reqDimension  - 20475\
+	scoaucitenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoaffilctrynav - 18453 specified viaParamsList  - 18458 specified in reqDimension\
+	scoafidnav - 19161 specified viaParamsList  - 19162 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 77 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 18455 specified viaParamsList  - 18531 specified in reqDimension\
+	scolangnav - 18448 specified viaParamsList  - 18452 specified in reqDimension\
+	scoprefnameauidnav - 18647 specified viaParamsList  - 18647 specified in reqDimension\
+	scopubyrnav - 18673 specified viaParamsList  - 19666 specified in reqDimension\
+	scosrctypenav - 18448 specified viaParamsList  - 18448 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 18602 specified viaParamsList  - 18610 specified in reqDimension\
+	scosubtypenav - 18448 specified viaParamsList  - 18494 specified in reqDimension
+\f2\fs20 \
+
+\f0\fs24 \
+      - Navigator Refeidneid Counts\
+	Total specified viaParamsList  - 570 Total specified in reqDimension  - 607\
+	scoaucitenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoaffilctrynav - 528 specified viaParamsList  - 529 specified in reqDimension\
+	scoafidnav - 561 specified viaParamsList  - 561 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 3 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 531 specified viaParamsList  - 536 specified in reqDimension\
+	scolangnav - 528 specified viaParamsList  - 562 specified in reqDimension\
+	scoprefnameauidnav - 530 specified viaParamsList  - 530 specified in reqDimension\
+	scopubyrnav - 532 specified viaParamsList  - 537 specified in reqDimension\
+	scosrctypenav - 528 specified viaParamsList  - 529 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 528 specified viaParamsList  - 539 specified in reqDimension\
+	scosubtypenav - 528 specified viaParamsList  - 563 specified in reqDimension\
+\
+      - Navigator Sdeid Counts\
+	Total specified viaParamsList  - 0 Total specified in reqDimension  - 0\
+	scoaucitenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoaffilctrynav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoafidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scolangnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoprefnameauidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scopubyrnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosrctypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubtypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+\
+      - Navigator Srcid Counts\
+	Total specified viaParamsList  - 14717 Total specified in reqDimension  - 14865\
+	scoaucitenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoaffilctrynav - 14522 specified viaParamsList  - 14540 specified in reqDimension\
+	scoafidnav - 14640 specified viaParamsList  - 14644 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 0 specified viaParamsList  - 49 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 14519 specified viaParamsList  - 14526 specified in reqDimension\
+	scolangnav - 14516 specified viaParamsList  - 14523 specified in reqDimension\
+	scoprefnameauidnav - 14581 specified viaParamsList  - 14584 specified in reqDimension\
+	scopubyrnav - 14532 specified viaParamsList  - 14652 specified in reqDimension\
+	scosrctypenav - 14516 specified viaParamsList  - 14519 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 14519 specified viaParamsList  - 14530 specified in reqDimension\
+	scosubtypenav - 14516 specified viaParamsList  - 14546 specified in reqDimension\
+\
+      - Navigator User Counts\
+	Total specified viaParamsList  - 111972 Total specified in reqDimension  - 138030\
+	scoaucitenav - 579 specified viaParamsList  - 626 specified in reqDimension\
+	scoaffilctrynav - 103351 specified viaParamsList  - 105215 specified in reqDimension\
+	scoafidnav - 107197 specified viaParamsList  - 108028 specified in reqDimension\
+	scoauthgrpidnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoauthidnav - 368 specified viaParamsList  - 4373 specified in reqDimension\
+	scoexactkeywordnav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scoexactsrctitlenav - 103628 specified viaParamsList  - 108259 specified in reqDimension\
+	scolangnav - 102619 specified viaParamsList  - 106043 specified in reqDimension\
+	scoprefnameauidnav - 103748 specified viaParamsList  - 103804 specified in reqDimension\
+	scopubyrnav - 105332 specified viaParamsList  - 115655 specified in reqDimension\
+	scosrctypenav - 102606 specified viaParamsList  - 103509 specified in reqDimension\
+	scostatustypenav - 0 specified viaParamsList  - 0 specified in reqDimension\
+	scosubjabbrnav - 102924 specified viaParamsList  - 114803 specified in reqDimension\
+	scosubtypenav - 102630 specified viaParamsList  - 109821 specified in reqDimension\
+\
+      - Navigator Counts (277,994) ORIGINAL ANALYSIS\
         - scoaucite - 1,125\
         - scoaffilctry - 187,636\
         - scoafid - 195,488\
@@ -463,7 +691,9 @@
         - scosubjabbr - 188,862\
         - scosubtype - 187,916\
 \
-     - Navigator Selected (61,399)\
+     - Navigator Selected (61,399).  \
+\
+      - Highlight (1,097,131).  Seems *very* High.\
 \
      - Query Analysis\
 \
