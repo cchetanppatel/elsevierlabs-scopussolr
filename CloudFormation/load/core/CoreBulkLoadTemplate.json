@@ -26,7 +26,7 @@
     "Java6URL" : {
       "Description" : "URL for the Java 6u37, 64 bit AWS download",
       "Type" : "String",
-      "Default" : "http://els-ats.s3.amazonaws.com/java/jdk-6u37-linux-x64-rpm.bin?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1393622544&Signature=hqZDThgI4UvPdu9gYuCPVKAvx7g%3D"
+      "Default" : "https://els-ats.s3.amazonaws.com/java/jdk-6u37-linux-x64-rpm.bin?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1429631512&Signature=sKF%2BdQlLVAlt2Ia3hJ6nBmQxlec%3D"
     },
     
     "SignedJarUrl" : {
