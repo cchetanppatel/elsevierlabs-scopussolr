@@ -183,7 +183,7 @@ public class SolrCore {
 						
 						if (Variables.AWS_REDSHIFT_INTEGRATE_REDSHIFT.equals("true")) {
 							// Get core id
-							String key = (String)fieldValues.get("intid");
+							String key = (String)fieldValues.get("id");
 							// Get author ids
 							if (fieldValues.containsKey("authid") == true) {
 								Object vals = fieldValues.get("authid");
