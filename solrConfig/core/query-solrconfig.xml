@@ -512,8 +512,9 @@
          Caches results of searches - ordered lists of document ids
          (DocList) based on a query, a sort, and the range of documents requested.  
       -->
+    <!-- Store about a minutes worth of queries -->
     <queryResultCache class="solr.LRUCache"
-                     size="512"
+                     size="2000"
                      initialSize="512"
                      autowarmCount="0"/>
    
@@ -528,6 +529,14 @@
                    initialSize="512"
                    autowarmCount="0"/>
 
+
+    <!-- Field Data Cache
+
+      -->
+    <fieldValueCache class="solr.LRUCache"
+                   size="50000"
+                   initialSize="5000"
+                   autowarmCount="0"/>
 
     <!-- Lazy Field Loading
 
@@ -597,8 +606,31 @@
     </listener>
     <listener event="firstSearcher" class="solr.QuerySenderListener">
       <arr name="queries">
+        <!-- seed common asc sort fields -->
         <lst>
-          <str name="q">static firstSearcher warming in solrconfig.xml</str>
+          <str name="q">blood</str>
+          <str name="sort">auth-s asc,  datesort-s asc, fastloaddate-s asc, itemtitle-s asc, numcitedby-s asc, pubyr asc</str>
+        </lst>
+        <!-- seed common desc sort fields -->
+        <lst>
+          <str name="q">blood</str>
+          <str name="sort">auth-s desc,  datesort-s desc, fastloaddate-s desc, itemtitle-s desc, numcitedby-s desc, pubyr desc</str>
+        </lst>
+        <!-- common facets and filters -->
+        <lst>
+          <str name="q">all:blood</str>
+          <str name="facet.field">aucite-f</str>
+          <str name="facet.field">affilctry-f</str>
+          <str name="facet.field">afid-f</str>
+          <str name="facet.field">authid-f</str>
+          <str name="facet.field">lang-f</str>
+          <str name="facet.field">prefnameauid-f</str>
+          <str name="facet.field">pubyr-f</str>
+          <str name="facet.field">srctype-f</str>
+          <str name="facet.field">statustype-f</str>
+          <str name="facet.field">subjabbr-f</str>
+          <str name="facet.field">subtype-f</str>
+          <str name="fq">statustype:core</str>
         </lst>
       </arr>
     </listener>
