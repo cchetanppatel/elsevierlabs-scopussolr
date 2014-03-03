@@ -1548,7 +1548,7 @@ public class AbstractTransform {
 		
 		// Change short refeids into full length eids.
 		Object val = fieldValues.get(fieldValueKey);
-		String prefix = "2.s2.0-";
+		String prefix = "2-s2.0-";
 		if (val instanceof String) {
 			String newEid = prefix + (String)val;
 			fieldValues.put(fieldValueKey, newEid);
