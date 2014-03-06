@@ -609,12 +609,12 @@
         <!-- seed common asc sort fields -->
         <lst>
           <str name="q">blood</str>
-          <str name="sort">auth-s asc,  datesort-s asc, fastloaddate-s asc, itemtitle-s asc, numcitedby-s asc, pubyr asc</str>
+          <str name="sort">auth-s asc,  datesort-s asc, fastloaddate-s asc, itemtitle-s asc, numcitedby-s asc, pubyr-s asc</str>
         </lst>
         <!-- seed common desc sort fields -->
         <lst>
           <str name="q">blood</str>
-          <str name="sort">auth-s desc,  datesort-s desc, fastloaddate-s desc, itemtitle-s desc, numcitedby-s desc, pubyr desc</str>
+          <str name="sort">auth-s desc,  datesort-s desc, fastloaddate-s desc, itemtitle-s desc, numcitedby-s desc, pubyr-s desc</str>
         </lst>
         <!-- common facets and filters -->
         <lst>
