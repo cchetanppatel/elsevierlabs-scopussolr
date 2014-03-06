@@ -313,6 +313,7 @@
 <field name="srctype-f" type="abs_facet" multiValued="false" indexed="true" stored="false"/>
 <field name="srctype-s" type="abs_sort" multiValued="false" indexed="true" stored="false"/>
 <field name="statustype" type="abs_std" multiValued="false" indexed="true" stored="true"/>
+<field name="statustype-f" type="abs_facet" multiValued="false" indexed="true" stored="false"/>
 <field name="subjabbr" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="subjabbr-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="subjmain" type="abs_std" multiValued="true" indexed="true" stored="true"/>
@@ -423,6 +424,7 @@
 <copyField source="srctitleabbr" dest="srctitleabbr-p"/>
 <copyField source="srctype" dest="srctype-f"/>
 <copyField source="srctype" dest="srctype-s"/>
+<copyField source="statustype" dest="statustype-f"/>
 <copyField source="subjabbr" dest="subjabbr-f"/>
 <copyField source="subjterms" dest="subjterms-p"/>
 <copyField source="subtype" dest="subtype-f"/>
