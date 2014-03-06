@@ -107,7 +107,7 @@
                 "AvailabilityZones" : [ "us-east-1b"],
                 "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
                  "Tags" : [
-          					{ "Key" : "Name", "Value" :  "solr-scopus-core-s", "PropagateAtLaunch" : true }
+          					{ "Key" : "Name", "Value" :  "solr-auth-s", "PropagateAtLaunch" : true }
         		],
                 "MinSize" : { "Ref" : "NodeCount" },
                 "MaxSize" : { "Ref" : "NodeCount" }
@@ -171,7 +171,7 @@
                 "sed -i -e 's/collection1/", { "Ref" : "SolrClusterName"}, "/' ./example/solr/", { "Ref" : "SolrClusterName" },"/core.properties", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
-                "nohup java -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}  , "::default -jar start.jar > /dev/null 2>error.log&",   "\n"
+                "nohup java -Djetty.port=8080 -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}  , "::default -jar start.jar > /dev/null 2>error.log&",   "\n"
                 ]]}}
             }
         },
@@ -188,8 +188,8 @@
                 },
                 {
                     "IpProtocol" : "tcp",
-                    "FromPort" : "8983",
-                    "ToPort" : "8983",
+                    "FromPort" : "8080",
+                    "ToPort" : "8080",
                     "CidrIp" : "0.0.0.0/0"
                 }]
            }
