@@ -3,10 +3,16 @@ How to backup an index easily on Solr
 
      http://_master_host_:_port_/solr/<corename>/replication?command=backup
 
-     compress the snapshot created in the data subdir for the core
+     // compress the snapshot created in the data subdir for the core
      tar -zcvf archive-name.tar.gz directory-name
-
-     uncompress the snapshot created in the data subdir for the core
+    
+     //  Put the file to S3
+	 s3cmd put archive-name.tar.gz  s3://els-ats/scopusSolr/solrSnapshots/
+	
+	 // Get the file from S3
+	 s3cmd get s3://els-ats/scopusSolr/solrSnapshots/archive-name.tar.gz
+	 
+     // uncompress the snapshot created in the data subdir for the core
      tar -zxvf archive-name.tar.gz
      
      
