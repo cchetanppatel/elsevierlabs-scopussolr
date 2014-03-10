@@ -208,14 +208,30 @@ public class SolrCore {
 								}
 							}
 							// Get reference ids
-							
-							// Update the author counts
-							
-							
-							// Update the affilliation counts
-							
-							
-							// Update the reference counts
+							if (fieldValues.containsKey("refeid") == true) {
+								Object vals = fieldValues.get("refeid");
+								//
+								// Note: all of the unique keys for records in solr are based on the EID suffix and not the complete eid.
+								//       Since refeid has the complete eid, we will strip off the prefix when we put them into Redshift so
+								//       the record keys will align when we generate counts and create records for the docs to update 
+								//       refnumcnt and citeid
+								if (vals instanceof String) {
+									String tmpVal = (String)vals;
+									tmpVal = tmpVal.substring(tmpVal.lastIndexOf('-')+1);
+									ArrayList<String> tmpVals = new ArrayList<String>();
+									tmpVals.add(tmpVal);
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_REF_TABLE, key, epoch, tmpVals);
+								} else if (vals instanceof ArrayList<?>) {
+									ArrayList<String> tmpVals = new ArrayList<String>();
+									Iterator<String> iter = ((ArrayList<String>)vals).iterator();
+									while (iter.hasNext()) {
+										String tmpVal = iter.next();
+										tmpVal = tmpVal.substring(tmpVal.lastIndexOf('-')+1);
+										tmpVals.add(tmpVal);
+									}
+									RedshiftService.replaceRecord(Variables.AWS_REDSHIFT_REF_TABLE, key, epoch, tmpVals);
+								}
+							}
 							
 						}
 					}
