@@ -10,12 +10,14 @@ for cores.
 create table corestoauthors1(
 	eid varchar(20),
 	auid varchar(15) sortkey,
+	epoch bigint,
 	primary key(eid,auid));
 
 # authors (set 2 ... core eid to author id mappings)
 create table corestoauthors2(
 	eid varchar(20),
 	auid varchar(15) sortkey,
+	epoch bigint,
 	primary key(eid,auid));
 	
 
@@ -23,12 +25,14 @@ create table corestoauthors2(
 create table corestoaffiliations1(
 	eid varchar(20),
 	afid varchar(15) sortkey,
+	epoch bigint,
 	primary key(eid,afid));
 
 # affiliations (set2 ... core eid to affiliation id mappings)
 create table corestoaffiliations2(
 	eid varchar(20),
 	afid varchar(15) sortkey,
+	epoch bigint,
 	primary key(eid,afid));
 	
 	
@@ -36,12 +40,14 @@ create table corestoaffiliations2(
 create table corestoreferences1(
 	eid varchar(20),
 	refid varchar(20) sortkey,
+	epoch bigint,
 	primary key(eid,refid));
 	
 # references (set 2 ... core eid to reference eid mappings)
 create table corestoreferences2(
 	eid varchar(20),
 	refid varchar(20) sortkey,
+	epoch bigint,
 	primary key(eid,refid));
 	
 		
