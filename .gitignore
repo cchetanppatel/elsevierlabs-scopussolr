@@ -3,3 +3,5 @@
 load/curt-author.properties
 
 load/src/com/elsevier/controller/DummyCntUpdateTest.java
+
+load/curt-core.properties
