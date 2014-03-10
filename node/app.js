@@ -12,7 +12,8 @@ var express = require('express')
   , winston = require('winston')
   , sns = require('winston-sns').SNS
   , cfg = require('./helpers/config')
-  , loadTest = require('./routes/loadTest') 
+  , loadTest = require('./routes/loadTest')
+  , facetTest = require('./routes/facetTest')   
   , http = require('http')
   , path = require('path');
 
@@ -30,7 +31,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   //app.use(express.logger('default'));
-  app.use(express.logger('QUERY_STATS :res[rType] :status TS :date RES_TIME :response-time SOLR_TIME :res[solrRspTim] LEN :res[content-length] SOLR_LEN :res[solrRspLen] DTYPE :res[dType] DSET :res[dSet] DIDX :res[dIdx] HITS :res[dHits] :method'));
+  app.use(express.logger('QUERY_STATS :res[rType] :status TS :date RES_TIME :response-time SOLR_TIME :res[solrRspTim] LEN :res[content-length] SOLR_LEN :res[solrRspLen] DTYPE :res[dType] DSET :res[dSet] DSETNAV :res[dSetNav] DIDX :res[dIdx] HITS :res[dHits] :method'));
   app.use(app.router);
 });
 
@@ -78,6 +79,10 @@ app.get('/loadTest', loadTest.form);
 app.get('/loadTest/form', loadTest.form);
 app.post('/loadTest', loadTest.submit);
 
+// facet
+app.get('/facetTest', facetTest.form);
+app.get('/facetTest/form', facetTest.form);
+app.post('/facetTest', facetTest.submit);
 
 /**
  *  Create the server and listen on the specified port.

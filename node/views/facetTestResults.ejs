@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Scopus - SOLR - Facet Test</title>
+	</head>	
+	<body>
+		<div id="header">
+			<p>
+				<b>Cluster:</b>&#160;&#160;<%= cluster %><br/>
+				<b>Query:</b>&#160;&#160;<%= query %><br/>
+				<b>Count:</b>&#160;&#160;<%= numFound %><br/>
+			</p>
+		</div>
+		<div id="results">
+			<table border="1">
+				<tr>
+					<th>Facet Name</th>
+					<th>Facet Value</th>
+					<th>Facet Count</th>
+					<th>Search Count</th>
+				</tr>
+				<!-- 
+					Add previous to prevent always outputting facetName
+				-->
+				<% if (facets.length) { %>
+					<% var prevFacetName = '' %>
+					<% facets.forEach(function(facet) { %>
+					<tr>
+						<% if (prevFacetName === facet.facetName) { %>
+							<td>&#160;</td>
+						<% } else { %>
+							<td><%= facet.facetName %></td>
+							<% prevFacetName = facet.facetName %>
+						<% } %>
+						<td><%= facet.facetValue %></td>
+						<td><%= facet.facetCount %></td>
+						<% if (facet.facetCount !== facet.searchCount) { %>
+							<td bgcolor="red"><%= facet.searchCount %></td>
+						<% } else { %>
+							<td><%= facet.searchCount %></td>
+						<% } %>
+					</tr>
+					<% }); %>
+				<% } %>
+			</table>
+		</div>	
+	</body>
+</html>

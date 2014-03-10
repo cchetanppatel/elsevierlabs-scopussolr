@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Facet Test Search Form — Scopus — Elsevier</title>  
+	</head>
+	<body>
+		<b>Facet Test Form</b>
+		<p>The input should be in Lucene sytanx something like all:dog OR all:cat</p>
+		<form action="/facetTest" method="post">
+			<input id="facetSearch" type="text" name="query" size="125" maxlength="64000" value=""/>
+			<select name="cluster" size="3">
+				<option value="affil" selected>Affiliation</option>
+				<option value="auth">Author</option>
+				<option value="core">Core</option>
+			</select>
+			<input id="facetLimit" type="text" name="limit" size="5" maxlength="5" value="10"/>
+			<input type="submit" value="Submit"/>
+		</form>
+	</body>
+</html>

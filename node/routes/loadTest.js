@@ -60,8 +60,9 @@ exports.submit = function(req, res){
     if (typeof freeFormQuery !== 'undefined') {
 
         searchParameters.dType = req.param('cluster');
-        searchParameters.dSet = '1';
+        searchParameters.dSet = 'z';
         searchParameters.dIdx = '1';
+        searchParameters.dSetNav = 'unknown';
         
     } else {
     
@@ -70,14 +71,16 @@ exports.submit = function(req, res){
         searchParameters.dType = keyToks[0];
         searchParameters.dSet = keyToks[1];
         searchParameters.dIdx = keyToks[2];
+        searchParameters.dSetNav = 'unknown';
         
     }
     //console.log(searchParameters);
 
     // Get the query from DDB
     ddb.getQuery(key, freeFormQuery, function(err,query) {
-        
-        //console.log(query);
+
+//console.log(searchParameters);
+//console.log(query);
               
         if (err) {
      
@@ -87,15 +90,22 @@ exports.submit = function(req, res){
                     .set('rType', 'loadQuery')
                     .set('dType', searchParameters.dType)
                     .set('dSet',searchParameters.dSet)
-                    .set('dIdx',searchParameters.dIdx)
+                    .set('dSetNav',searchParameters.dSetNav)
+                    .set('dIdx',searchParameters.dIdx)                   
                     .set('dHits', -1)
                     .set('solrRspLen', -1)
                     .set('solrRspTim', -1)
 	                .send();
          
         } else {
-                       
-    
+
+           // Indicate if query contains navigators
+           if (query.indexOf('facet=true') !== -1) {
+               searchParameters.dSetNav = searchParameters.dSet + 'nav';
+           } else {
+               searchParameters.dSetNav = searchParameters.dSet + 'nonav';
+           }
+           
            // Set the HTTP Headers
            var headers = {
                             'Content-Type' : 'application/x-www-form-urlencoded', 
@@ -151,7 +161,8 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
-                                        .set('dIdx',searchParameters.dIdx)
+                                        .set('dSetNav',searchParameters.dSetNav)
+                                        .set('dIdx',searchParameters.dIdx)                                        
                                         .set('dHits', -1)
                                         .set('solrRspLen', -1)
                                         .set('solrRspTim', -1)
@@ -167,7 +178,8 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
-                                        .set('dIdx',searchParameters.dIdx)
+                                        .set('dSetNav',searchParameters.dSetNav)
+                                        .set('dIdx',searchParameters.dIdx)                                        
                                         .set('dHits', results.response.numFound)
                                         .set('solrRspLen', solrRspLen)
                                         .set('solrRspTim', results.responseHeader.QTime)
@@ -188,7 +200,8 @@ exports.submit = function(req, res){
                                     .set('rType', 'loadQuery')
                                     .set('dType', searchParameters.dType)
                                     .set('dSet',searchParameters.dSet)
-                                    .set('dIdx',searchParameters.dIdx)
+                                    .set('dSetNav',searchParameters.dSetNav)
+                                    .set('dIdx',searchParameters.dIdx)                                 
                                     .set('dHits', results.response.numFound)
                                     .set('solrRspLen', solrRspLen)
                                     .set('solrRspTim', results.responseHeader.QTime)
@@ -213,7 +226,8 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
-                                        .set('dIdx',searchParameters.dIdx)
+                                        .set('dSetNav',searchParameters.dSetNav)
+                                        .set('dIdx',searchParameters.dIdx)                                       
                                         .set('dHits',-1)
                                         .set('solrRspLen', -1)
                                         .set('solrRspTim', -1)
@@ -225,6 +239,7 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
+                                        .set('dSetNav',searchParameters.dSetNav)
                                         .set('dIdx',searchParameters.dIdx)
                                         .set('dHits',-1)
                                         .set('solrRspLen', -1)                                       
@@ -245,6 +260,7 @@ exports.submit = function(req, res){
                                     .set('rType', 'loadQuery')
                                     .set('dType', searchParameters.dType)
                                     .set('dSet',searchParameters.dSet)
+                                    .set('dSetNav',searchParameters.dSetNav)
                                     .set('dIdx',searchParameters.dIdx)
                                     .set('dHits', -1)
                                     .set('solrRspLen', -1)
@@ -266,6 +282,7 @@ exports.submit = function(req, res){
                     .set('rType', 'loadQuery')
                     .set('dType', searchParameters.dType)
                     .set('dSet',searchParameters.dSet)
+                    .set('dSetNav',searchParameters.dSetNav)
                     .set('dIdx',searchParameters.dIdx)
                     .set('dHits', -1)
                     .set('solrRspLen', -1)
