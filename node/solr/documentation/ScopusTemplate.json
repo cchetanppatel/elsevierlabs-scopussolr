@@ -50,7 +50,7 @@
     "kibanalogtype" : {
       "Description" : "Kibana log type on the ec2 instance",
       "Type" : "String",
-      "Default" : "s-aff",
+      "Default" : "s-core",
       "AllowedValues" : ["s-auth","s-aff","s-core"]
      },
 
@@ -150,6 +150,12 @@
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreSrcidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210761&Signature=3FCyx0cxdgjFqVzwUNroGNYpkKI%3D"
      },
 
+    "corescopoutkeyset" : {
+      "Description" : "corescopoutkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreScopoutLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1430552406&Signature=raMyArMuWkq39RZBCseQ27Rg0bo%3D"
+     },
+     
     "coreuserkeyset" : {
       "Description" : "coreuserkeyset",
       "Type" : "String",
@@ -274,6 +280,8 @@
                 "gunzip coreRefeidneidKeys.gz","\n",                 
                 "curl -o coreSrcidKeys.gz '", { "Ref" : "coresrcidkeyset"}, "'", "\n",
                 "gunzip coreSrcidKeys.gz","\n", 
+                "curl -o coreScopoutKeys.gz '", { "Ref" : "corescopoutkeyset"}, "'", "\n",
+                "gunzip coreScopoutKeys.gz","\n",                            
                 "curl -o coreUserKeys.gz '", { "Ref" : "coreuserkeyset"}, "'", "\n",
                 "gunzip coreUserKeys.gz","\n", 
                 "cd /hothouse","\n",
@@ -310,6 +318,12 @@
                     "FromPort" : "22",
                     "ToPort" : "22",
                     "CidrIp" : "24.123.6.131/32"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "24.209.101.86/32"
                 },                
                 {
                     "IpProtocol" : "tcp",

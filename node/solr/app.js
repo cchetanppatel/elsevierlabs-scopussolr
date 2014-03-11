@@ -31,7 +31,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   //app.use(express.logger('default'));
-  app.use(express.logger('QUERY_STATS :res[rType] :status TS :date RES_TIME :response-time SOLR_TIME :res[solrRspTim] LEN :res[content-length] SOLR_LEN :res[solrRspLen] DTYPE :res[dType] DSET :res[dSet] DSETNAV :res[dSetNav] DIDX :res[dIdx] HITS :res[dHits] :method'));
+  app.use(express.logger('QUERY_STATS :res[rType] :status TS :date RES_TIME :response-time SOLR_TIME :res[solrRspTim] LEN :res[content-length] SOLR_LEN :res[solrRspLen] DTYPE :res[dType] DSET :res[dSet] DNAV :res[dNav] DIDX :res[dIdx] HITS :res[dHits] :method'));
   app.use(app.router);
 });
 

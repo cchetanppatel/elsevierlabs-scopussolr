@@ -62,7 +62,7 @@ exports.submit = function(req, res){
         searchParameters.dType = req.param('cluster');
         searchParameters.dSet = 'z';
         searchParameters.dIdx = '1';
-        searchParameters.dSetNav = 'unknown';
+        searchParameters.dNav = 'unknown';
         
     } else {
     
@@ -71,7 +71,7 @@ exports.submit = function(req, res){
         searchParameters.dType = keyToks[0];
         searchParameters.dSet = keyToks[1];
         searchParameters.dIdx = keyToks[2];
-        searchParameters.dSetNav = 'unknown';
+        searchParameters.dNav = 'unknown';
         
     }
     //console.log(searchParameters);
@@ -90,7 +90,7 @@ exports.submit = function(req, res){
                     .set('rType', 'loadQuery')
                     .set('dType', searchParameters.dType)
                     .set('dSet',searchParameters.dSet)
-                    .set('dSetNav',searchParameters.dSetNav)
+                    .set('dNav',searchParameters.dNav)
                     .set('dIdx',searchParameters.dIdx)                   
                     .set('dHits', -1)
                     .set('solrRspLen', -1)
@@ -101,9 +101,9 @@ exports.submit = function(req, res){
 
            // Indicate if query contains navigators
            if (query.indexOf('facet=true') !== -1) {
-               searchParameters.dSetNav = searchParameters.dSet + 'nav';
+               searchParameters.dNav = 'nav';
            } else {
-               searchParameters.dSetNav = searchParameters.dSet + 'nonav';
+               searchParameters.dNav = 'nonav';
            }
            
            // Set the HTTP Headers
@@ -161,7 +161,7 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
-                                        .set('dSetNav',searchParameters.dSetNav)
+                                        .set('dNav',searchParameters.dNav)
                                         .set('dIdx',searchParameters.dIdx)                                        
                                         .set('dHits', -1)
                                         .set('solrRspLen', -1)
@@ -178,7 +178,7 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
-                                        .set('dSetNav',searchParameters.dSetNav)
+                                        .set('dNav',searchParameters.dNav)
                                         .set('dIdx',searchParameters.dIdx)                                        
                                         .set('dHits', results.response.numFound)
                                         .set('solrRspLen', solrRspLen)
@@ -200,7 +200,7 @@ exports.submit = function(req, res){
                                     .set('rType', 'loadQuery')
                                     .set('dType', searchParameters.dType)
                                     .set('dSet',searchParameters.dSet)
-                                    .set('dSetNav',searchParameters.dSetNav)
+                                    .set('dNav',searchParameters.dNav)
                                     .set('dIdx',searchParameters.dIdx)                                 
                                     .set('dHits', results.response.numFound)
                                     .set('solrRspLen', solrRspLen)
@@ -226,7 +226,7 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
-                                        .set('dSetNav',searchParameters.dSetNav)
+                                        .set('dNav',searchParameters.dNav)
                                         .set('dIdx',searchParameters.dIdx)                                       
                                         .set('dHits',-1)
                                         .set('solrRspLen', -1)
@@ -239,7 +239,7 @@ exports.submit = function(req, res){
                                         .set('rType', 'loadQuery')
                                         .set('dType', searchParameters.dType)
                                         .set('dSet',searchParameters.dSet)
-                                        .set('dSetNav',searchParameters.dSetNav)
+                                        .set('dNav',searchParameters.dNav)
                                         .set('dIdx',searchParameters.dIdx)
                                         .set('dHits',-1)
                                         .set('solrRspLen', -1)                                       
@@ -260,7 +260,7 @@ exports.submit = function(req, res){
                                     .set('rType', 'loadQuery')
                                     .set('dType', searchParameters.dType)
                                     .set('dSet',searchParameters.dSet)
-                                    .set('dSetNav',searchParameters.dSetNav)
+                                    .set('dNav',searchParameters.dNav)
                                     .set('dIdx',searchParameters.dIdx)
                                     .set('dHits', -1)
                                     .set('solrRspLen', -1)
@@ -282,7 +282,7 @@ exports.submit = function(req, res){
                     .set('rType', 'loadQuery')
                     .set('dType', searchParameters.dType)
                     .set('dSet',searchParameters.dSet)
-                    .set('dSetNav',searchParameters.dSetNav)
+                    .set('dNav',searchParameters.dNav)
                     .set('dIdx',searchParameters.dIdx)
                     .set('dHits', -1)
                     .set('solrRspLen', -1)
