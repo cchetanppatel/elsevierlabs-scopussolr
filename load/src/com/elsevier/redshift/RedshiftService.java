@@ -24,6 +24,12 @@ public class RedshiftService {
 	private static String redshiftPswd = Variables.AWS_REDSHIFT_PSWD;
 	private static String redshiftConnectURL = Variables.AWS_REDSHIFT_CONNECT_URL;
 
+	private static String corestoaffiliationsInsertStmt = "INSERT INTO corestoaffiliations (eid, afid, epoch) values(? , ?, ?)";
+	private static String corestoaffiliationsDeleteStmt = "DELETE FROM corestoaffiliations WHERE eid = ?";	
+	private static String corestoauthorsInsertStmt = "INSERT INTO corestoauthors (eid, auid, epoch) values(? , ?, ?)";
+	private static String corestoauthorsDeleteStmt = "DELETE FROM corestoauthors WHERE eid = ?";
+	private static String corestoreferencesInsertStmt = "INSERT INTO corestoreferences (eid, refid, epoch) values(? , ?, ?)";
+	private static String corestoreferencesDeleteStmt = "DELETE FROM corestoreferences WHERE eid = ?";
 	
 	// Static block to prime the JDBC driver for Redshift
 	static{
@@ -45,17 +51,21 @@ public class RedshiftService {
 	 */
 	public static void main(String[] args) {
         
+		String test = "2-1s-1.1234";
+		
+		System.out.println(test.substring(test.lastIndexOf('.') + 1));
 		
 		ArrayList<String> values = new ArrayList<String>();
-        values.add("456");
-        values.add("10");
-		replaceRecord("corestoauthors", "1", 1L, values);
+        values.add("0077");
+        values.add("0071");
+		replaceRecord("corestoreferences", "0001", 1L, values);
 		
 		ArrayList<String> values2 = new ArrayList<String>();
-		values2.add("5");
-		replaceRecord("corestoauthors", "1", 2L, values2);
+		values2.add("005");
+		values2.add("006");
+		replaceRecord("corestoreferences", "0001", 2L, values2);
 
-		//deleteRecord("corestoauthors", "1");
+		//deleteRecord("corestoreferences", "1");
 		
 		System.out.println("Done!!");
 	}
@@ -94,12 +104,26 @@ public class RedshiftService {
 		try {
 			Connection db = DriverManager.getConnection(redshiftConnectURL, redshiftId, redshiftPswd);
 			db.setAutoCommit(false);
-			Statement st = db.createStatement();	
+			PreparedStatement pst = null;
+			if (tableName.equalsIgnoreCase("corestoaffiliations")) {
+				pst = db.prepareStatement(corestoaffiliationsInsertStmt);	
+			} else if (tableName.equalsIgnoreCase("corestoauthors")) {
+				pst = db.prepareStatement(corestoauthorsInsertStmt);
+			} else if (tableName.equalsIgnoreCase("corestoreferences")) {
+				pst = db.prepareStatement(corestoreferencesInsertStmt);
+			} else {
+				System.out.println("Invalid RedShift insert table value specified!!:  Value: " + tableName);
+				return false;
+			}
 			for (int x = 0; x < values.size(); x++) {
 				String value = values.get(x);
-				int rowsInserted = st.executeUpdate("INSERT INTO  " +  tableName + " values(" + key + "," + value + "," + epoch + ")");
+				pst.setString(1, key);
+				pst.setString(2,  value);
+				pst.setLong(3, epoch);
+				int rowsInserted = pst.executeUpdate();
+				//int rowsInserted = pst.executeUpdate("INSERT INTO  " +  tableName + " values(" + key + "," + value + "," + epoch + ")");
 			}
-			st.close();
+			pst.close();
 			db.commit();
 			db.close();
 		}
@@ -122,10 +146,22 @@ public class RedshiftService {
 		try {
 			Connection db = DriverManager.getConnection(redshiftConnectURL, redshiftId, redshiftPswd);
 			db.setAutoCommit(false);
-			Statement st = db.createStatement();
-			int rowsDeleted = st.executeUpdate("DELETE FROM " +  tableName + " WHERE eid = " + key);
+			PreparedStatement pst = null;
+			if (tableName.equalsIgnoreCase("corestoaffiliations")) {
+				pst = db.prepareStatement(corestoaffiliationsDeleteStmt);	
+			} else if (tableName.equalsIgnoreCase("corestoauthors")) {
+				pst = db.prepareStatement(corestoauthorsDeleteStmt);
+			} else if (tableName.equalsIgnoreCase("corestoreferences")) {
+				pst = db.prepareStatement(corestoreferencesDeleteStmt);
+			} else {
+				System.out.println("Invalid Redshift delete table value specified!!:  Value: " + tableName);
+				return false;
+			}
+			pst.setString(1, key);
+			int rowsDeleted = pst.executeUpdate();
+			//int rowsDeleted = st.executeUpdate("DELETE FROM " +  tableName + " WHERE eid = " + key);
 			System.out.println("Deleted " + rowsDeleted + " rows.");
-			st.close();
+			pst.close();
 			db.commit();
 			db.close();
 		}
