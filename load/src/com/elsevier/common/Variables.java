@@ -88,7 +88,7 @@ public class Variables {
 	public static final String AWS_REDSHIFT_CONNECT_URL = prop.getProperty("AWS_REDSHIFT_CONNECT_URL", "jdbc:postgresql://scopussolr.cx3c0gtqjf0o.us-east-1.redshift.amazonaws.com:5439/counts?tcpKeepAlive=true");
 	public static final String AWS_REDSHIFT_AFFIL_CNT_TABLE = prop.getProperty("AWS_REDSHIFT_AFFIL_CNT_TABLE","corestoaffiliations");
 	public static final String AWS_REDSHIFT_AUTH_CNT_TABLE = prop.getProperty("AWS_REDSHIFT_AUTH_CNT_TABLE","corestoauthors");
-	public static final String AWS_REDSHIFT_REF_CNT_TABLE = prop.getProperty("AWS_REDSHIFT_REF_CNT_TABLE","corestoreferences");
+	public static final String AWS_REDSHIFT_REF_TABLE = prop.getProperty("AWS_REDSHIFT_REF_TABLE","corestoreferences");
 	
 	// SNS topic name
 	public static final String SNS_TOPIC_NAME = prop.getProperty("SNS_TOPIC_NAME","arn:aws:sns:us-east-1:545957204479:solr-scopus");
