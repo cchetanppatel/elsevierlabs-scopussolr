@@ -1,0 +1,18 @@
+{
+  "name": "hothouse",
+  "description": "Solr investigation into Scopus",
+  "author": "Darin McBeath <d.mcbeath@elsevier.com>",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.0rc4",
+    "ejs": "0.8.3",
+    "winston": "0.6.2",
+    "winston-sns" : "0.1.0",
+    "aws-sdk" : "1.2.0"
+  },
+  "engine": "node >= 0.10.3"
+}
