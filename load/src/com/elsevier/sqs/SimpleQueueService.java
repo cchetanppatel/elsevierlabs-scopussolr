@@ -123,7 +123,7 @@ public class SimpleQueueService {
 		// from a single XMLInputFactory (basically what happens in the AWS client). It becomes a 
 		// problem for long running processes with a static client that do a lot of calls. In order 
 		// to get around it, we create now the client new for each request even though it is less efficient for now.
-		AmazonSQS sqsClient = new AmazonSQSClient(awsCredentials, cCfg);
+		//AmazonSQS sqsClient = new AmazonSQSClient(awsCredentials, cCfg);
 		
 		//System.out.println("** Reading one message from the '" + qName + "' queue.\n");
         ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(getQueueUrl(qName));
