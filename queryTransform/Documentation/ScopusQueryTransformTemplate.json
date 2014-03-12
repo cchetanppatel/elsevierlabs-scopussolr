@@ -148,6 +148,12 @@
       "Type" : "String",
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainSrcid.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400207304&Signature=bmtyInTzjKnSR/QNlDuCxcCcHcQ%3D"
      },
+     
+     "CoreScopoutQuerySetSignedUrl" : {
+      "Description" : "Signed URL for the core srcid query set file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/querysets/dec052013/slimMainScopout.txt.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1430637777&Signature=F3nsAV9xcB0DLK4zBkNKO%2BfJRuE%3D"
+     },
 
     "CoreUserQuerySetSignedUrl" : {
       "Description" : "Signed URL for the core user query set file in S3",
@@ -224,7 +230,9 @@
                 "curl -o coreRefeidneidSet.gz '", { "Ref" : "CoreRefeidneidQuerySetSignedUrl"}, "'", "\n",
                 "gunzip coreRefeidneidSet.gz", "\n",  
                 "curl -o coreSrcidSet.gz '", { "Ref" : "CoreSrcidQuerySetSignedUrl"}, "'", "\n",
-                "gunzip coreSrcidSet.gz", "\n", 
+                "gunzip coreSrcidSet.gz", "\n",
+                "curl -o coreScopoutSet.gz '", { "Ref" : "CoreScopoutQuerySetSignedUrl"}, "'", "\n",
+                "gunzip coreScopoutSet.gz", "\n",                              
                 "curl -o coreUserSet.gz '", { "Ref" : "CoreUserQuerySetSignedUrl"}, "'", "\n",
                 "gunzip coreUserSet.gz", "\n",
                 "mkdir /stylesheets", "\n",
@@ -257,6 +265,12 @@
                     "ToPort" : "22",
                     "CidrIp" : "198.185.25.0/24"
                 },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "24.209.101.86/32"
+                },                
                 {
                     "IpProtocol" : "tcp",
                     "FromPort" : "22",
