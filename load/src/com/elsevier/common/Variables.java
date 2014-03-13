@@ -90,6 +90,24 @@ public class Variables {
 	public static final String AWS_REDSHIFT_AUTH_CNT_TABLE = prop.getProperty("AWS_REDSHIFT_AUTH_CNT_TABLE","corestoauthors");
 	public static final String AWS_REDSHIFT_REF_TABLE = prop.getProperty("AWS_REDSHIFT_REF_TABLE","corestoreferences");
 	
+	public static final String AWS_REDSHIFT_RESULTS_BUCKET = prop.getProperty("AWS_REDSHIFT_RESULTS_BUCKET","els-ats");
+	//public static final String AWS_REDSHIFT_RESULTS_MANIFEST = prop.getProperty("AWS_REDSHIFT_RESULTS_MANIFEST","els-ats");
+	public static final String AWS_REDSHIFT_RESULTS_MANIFEST = prop.getProperty("AWS_REDSHIFT_RESULTS_MANIFEST","scopuscnts/curt/author/results/diff/auth-manifest");
+	//public static final String AWS_REDSHIFT_RESULTS_MANIFEST = prop.getProperty("AWS_REDSHIFT_RESULTS_MANIFEST","els-ats");
+	
+	//public static final String AWS_REDSHIFT_PARTS_QUEUE = prop.getProperty("AWS_REDSHIFT_PARTS_QUEUE","solr-affil-rs-parts");
+	public static final String AWS_REDSHIFT_MANIFEST_PARTS_QUEUE = prop.getProperty("AWS_REDSHIFT_MANIFEST_PARTS_QUEUE","solr-author-rs-parts");
+	//public static final String AWS_REDSHIFT_PARTS_QUEUE = prop.getProperty("AWS_REDSHIFT_PARTS_QUEUE","solr-core-rs-parts");
+	
+	//public static final String AWS_REDSHIFT_UPDATE_TYPE = prop.getProperty("AWS_REDSHIFT_UPDATE_TYPE","affil");
+	public static final String AWS_REDSHIFT_UPDATE_TYPE = prop.getProperty("AWS_REDSHIFT_UPDATE_TYPE","author");
+	//public static final String AWS_REDSHIFT_UPDATE_TYPE = prop.getProperty("AWS_REDSHIFT_UPDATE_TYPE","core");
+
+	//public static final String AWS_REDSHIFT_UPDATE_QUEUE = prop.getProperty("AWS_REDSHIFT_UPDATE_QUEUE","solr-affil-rs-updates");
+	public static final String AWS_REDSHIFT_UPDATE_QUEUE = prop.getProperty("AWS_REDSHIFT_UPDATE_QUEUE","solr-author-rs-updates");
+	//public static final String AWS_REDSHIFT_UPDATE_QUEUE = prop.getProperty("AWS_REDSHIFT_UPDATE_QUEUE","solr-core-rs-updates");
+	
+	
 	// SNS topic name
 	public static final String SNS_TOPIC_NAME = prop.getProperty("SNS_TOPIC_NAME","arn:aws:sns:us-east-1:545957204479:solr-scopus");
 	
