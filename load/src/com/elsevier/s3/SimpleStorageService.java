@@ -2,6 +2,7 @@ package com.elsevier.s3;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import java.util.Map;
@@ -9,10 +10,12 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 
 import com.amazonaws.ClientConfiguration;
+import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
@@ -92,5 +95,29 @@ public class SimpleStorageService {
 		}
 
 	}
+	
+	/**
+	 * Get a presigned URL object for the specified bucket/objectkey.
+	 * 
+	 * @param bucketName S3 bucket name
+	 * @param key S3 key value
+	 * @param duration milliseconds for URL to be valid
+	 */
+	public static URL getPresignedURL(String bucketName, String key, long duration) {
+		
+		java.util.Date expiration = new java.util.Date();
+		long msec = expiration.getTime();
+		msec += duration;
+		expiration.setTime(msec);
+		
+		GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName, key);
+		generatePresignedUrlRequest.setMethod(HttpMethod.GET); // Default.
+		generatePresignedUrlRequest.setExpiration(expiration);
+
+		URL s = s3Client.generatePresignedUrl(generatePresignedUrlRequest); 
+		
+		return s;
+	}
+	
 
 }
