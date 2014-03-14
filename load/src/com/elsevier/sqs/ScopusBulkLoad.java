@@ -83,7 +83,7 @@ public class ScopusBulkLoad {
 				 String jsonEntry = MessageForXMLProcessing.toJson(Variables.S3_XML_BUCKET_NAME, entry);
 				 SendMessageBatchRequestEntry messageEntry = new SendMessageBatchRequestEntry()
 				 													.withMessageBody(jsonEntry)
-				 													.withId(Integer.toString(batch.size()));
+				 													.withId(key);
 				 batch.add(messageEntry);
 				 ctr++;
 				 
@@ -106,7 +106,15 @@ public class ScopusBulkLoad {
     		 
     		 // Output the last batch if necessary
     		 if (batch.size() > 0) {
-    			 SimpleQueueService.addMessageBatch(Variables.SQS_QUEUE_NAME, batch);
+    			 SendMessageBatchResult res = SimpleQueueService.addMessageBatch(Variables.SQS_QUEUE_NAME, batch);
+    			 List<BatchResultErrorEntry> failed = res.getFailed();
+				 if (failed.isEmpty() == false) {
+					 Iterator<BatchResultErrorEntry> iter = failed.iterator();
+					 while (iter.hasNext()) {
+						 BatchResultErrorEntry error = iter.next();
+						 System.out.println("*** SQS batch add error: ID: " + error.getId() + ", Code: " + error.getCode() + ", SenderFault: " + error.getSenderFault() + ", Msg: " + error.getMessage());
+					 }
+				 }
     		 }
 
     		 System.out.println("Total Messages = '" + ctr + "'");
