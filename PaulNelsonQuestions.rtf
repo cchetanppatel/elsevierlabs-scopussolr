@@ -1,17 +1,39 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Calibri;\f2\fmodern\fcharset0 Courier;
-\f3\froman\fcharset0 Times-Roman;}
-{\colortbl;\red255\green255\blue255;}
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Cambria;\f2\fnil\fcharset0 Calibri;
+\f3\fmodern\fcharset0 Courier;\f4\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red6\green6\blue6;\red131\green56\blue0;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
-\margl1440\margr1440\vieww24980\viewh21520\viewkind0
+\margl1440\margr1440\vieww24980\viewh16600\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
 \f0\fs24 \cf0 Questions for Paul for March 17th\
 \
-Share/Discuss the Scopus POC requirements document.\
+Current FAST Configuration\
+\
+\pard\pardeftab720
+\cf2 SCOPUS CORES: 4 rows x 23 columns\
+SCOPUS DUMMIES: 4 rows x 9 columns\
+SCOPUS AI: 2 rows x 10 columns\
+\'a0\
+HW: HP Proliant Mach 1 R2\
+	8 x 300 GB (RAID6)\
+	Windows Server 2008 R2 SP1 Enterprise Edition\
+	 24 GB RAM\
+	Dual CPU\'92s\
+	Intel L5520 2.7GH (Quad core)
+\f1\fs30 \cf3 \
+\pard\pardeftab720\li960\fi-480
+
+\f0\fs24 \cf0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 Share/Discuss the Scopus POC requirements document.\
 \
 Share/Discuss Big picture (explanation)\
+\
+Share Load Test (real-time) for cores.\
+\
 \
 Assumptions:\
  - Index will be updated offline and 'flipped' once per day (every 24 hours).\
@@ -19,13 +41,12 @@ Assumptions:\
  - Focus primarily on core cluster\
 \
 \
-\
 Which version of SOLR (and differences between 4.6, 4.7, and 4.8).  Currently targeting 4.6.\
 \
 \pard\tx220\tx720\pardeftab720\li720\fi-720
 \ls1\ilvl0
-\f1\fs28 \cf0 Input on deploying and scaling Solr clusters to meet online query performance requirements. \'a0Includes not only the query but also  large (and accurate)\
-deep navigators. Pros/Cons of Solr vs. SolrCloud.  Number of shards (replicas).  Warmers for facets, algorithms for facets, sampling of facets.\
+\f2\fs28 \cf0 Input on deploying and scaling Solr clusters to meet online query performance requirements. \'a0Includes not only the query but also  large (and accurate)\
+deep navigators. Pros/Cons of Solr vs. SolrCloud.  Number of shards (replicas).  Warmers in general and for facets, algorithms for facets, sampling of facets.\
 \
 Suggested deployment architecture for  indexing  including best approach to replicate index to online cluster in AWS. Should we have a dedicated 'index' cluster that is \
 always 'offline' and being updated and replicated to N 'online' clusters.  Or, should we 'swap' and reuse online clusters (think rotation).  What are the pros/cons with each approach.\
@@ -45,6 +66,10 @@ Can a cluster be brought up 'read only'.  What are some best practices for confi
 Understand pros/cons of atomic updates in our specific use case (about a 3x slow down we think)\
 \
 Is it better to use xml or json interface for indexing (and querying) or does it matter.\
+\
+Thoughts on Tomcat/Jetty.\
+\
+Thoughts on security.\
 \
 Any thoughts for Apache Tika for transforming content int Solr indexing format.\
 \
@@ -72,8 +97,8 @@ Search Technologies software library, what it has that we might leverage beyond 
 \cf0 \
 \pard\pardeftab720
 
-\f2 \cf0 \
+\f3 \cf0 \
 \pard\pardeftab720
 
-\f3 \cf0 \
+\f4 \cf0 \
 }
