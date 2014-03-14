@@ -144,7 +144,7 @@
                 "bash /opt/spm/bin/spm-client-setup-conf.sh " , { "Ref" : "SematextCfgId"}, " solrcloud javaagent", "\n",
                 "# Set up the ephemeral drives and mount them", "\n",
                 "# ", "\n",
-                "# Get rid of the default mount for drive 1 from Amazon", "\n",
+                "# Get rid of the default mount for drive 1 from Amazon on non- hi1 boxes (Comment out for hi1.4xlarge boxes)", "\n",
                 "umount /media/ephemeral0", "\n",
                 "# Create the raid device from the ephemeral drives", "\n",
                 " yes | mdadm --create /dev/md0 --level=0 -c256 --raid-devices=2 /dev/sdk /dev/sdl", "\n",
