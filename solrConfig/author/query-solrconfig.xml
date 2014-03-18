@@ -620,7 +620,7 @@
         </lst>
         <!-- common facets and filters -->
         <lst>
-          <str name="q">all:blood</str>
+          <str name="q">authname:*</str>
           <str name="facet.field">active-f</str>
           <str name="facet.field">affilcity-f</str>
           <str name="facet.field">affilctry-f</str>
