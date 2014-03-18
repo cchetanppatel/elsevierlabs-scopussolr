@@ -187,12 +187,9 @@ public class SolrAuthor {
 						
 					}
 					
-					System.out.println("Updating DynamoDB for key: " + contentKey);
-					System.out.flush();
 					// Update DynamoDB
 					DynamoDB.insertRecord(metadata);
-					System.out.println("Back from Updating DynamoDB for key: " + contentKey);
-					System.out.flush();
+
 					// Delete the message
 					//System.out.println("Deleting SQS for key: " + contentKey);
 					//SimpleQueueService.deleteMessage(Variables.SQS_QUEUE_NAME, message);
