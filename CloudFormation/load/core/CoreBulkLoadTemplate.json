@@ -119,7 +119,7 @@
                 "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
-                "sleep 30", "\n",
+                "sleep 5", "\n",
                 "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
@@ -172,7 +172,7 @@
                 "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
-                "sleep 30", "\n",
+                "sleep 5", "\n",
                 "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
@@ -225,7 +225,7 @@
                 "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
-                "sleep 30", "\n",
+                "sleep 5", "\n",
                 "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
@@ -278,7 +278,7 @@
                 "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
-                "sleep 30", "\n",
+                "sleep 5", "\n",
                 "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
@@ -331,7 +331,7 @@
                 "curl -o CoreLoader.jar '", { "Ref" : "SignedJarUrl"}, "'", "\n",
                 "curl -o /home/ec2-user/solr.properties '", { "Ref" : "SignedPropertiesUrl"}, "'", "\n",
                 "for ((i = 1; i <= ", { "Ref" : "NumberOfProcesses" } ,"; i++)) do", "\n",
-                "sleep 30", "\n",
+                "sleep 5", "\n",
                 "nohup java -XX:+HeapDumpOnOutOfMemoryError  -Xmx512M -Dlog4j.configuration='file:///solr-load/log4j.xml' -Djdk.xml.entityExpansionLimit=0 -jar CoreLoader.jar /solr-load </dev/null > logfile$i.log 2> errfile$i.log &", "\n",
                 "done"                
                 ]]}}   
@@ -367,8 +367,8 @@
                 },
                 {
                     "IpProtocol" : "tcp",
-                    "FromPort" : "8983",
-                    "ToPort" : "8983",
+                    "FromPort" : "8080",
+                    "ToPort" : "8080",
                     "CidrIp" : "0.0.0.0/0"
                 }]
            }
