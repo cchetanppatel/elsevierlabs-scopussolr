@@ -182,7 +182,7 @@
 <field name="corres-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="datecompletedtxt" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="datecompletedtxt-p" type="abs_ex_phrase"  multiValued="false" indexed="true" stored="false"/>
-<field name="dateloaded" type="date"  multiValued="true" indexed="true" stored="true"/>
+<field name="dateloaded" type="long"  multiValued="true" indexed="true" stored="true"/>
 <field name="daterevised" type="date"  multiValued="true" indexed="true" stored="true"/>
 <field name="datesort" type="integer"  multiValued="false" indexed="true" stored="true"/>
 <field name="datesort-s" type="integer"  multiValued="false" indexed="true" stored="false"/>

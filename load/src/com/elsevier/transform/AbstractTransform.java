@@ -796,7 +796,7 @@ public class AbstractTransform {
 					
 			createSingleDateField("datecompletedtxt", datecompletedtxtMappings);
 			
-			createArrayDateField("dateloaded", dateloadedArrayMappings, "(.//text())");
+			createArray("dateloaded", dateloadedArrayMappings, "(.//text())");
 			
 			createArrayDateField("daterevised", daterevisedArrayMappings, "(.//text())");
 
