@@ -85,7 +85,7 @@
                         "AMI"
                     ]
                 },
-                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" }, "solrload-redshift" ],
                 "KeyName" : { "Ref" : "KeyName" },     
                 "InstanceType" : { "Ref" : "InstanceType" },
                 "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
