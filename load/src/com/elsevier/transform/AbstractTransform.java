@@ -679,6 +679,7 @@ public class AbstractTransform {
 	private static String[] confallMappings =  ArrayConcat.concatAll(confnameMappings, confsponsorMappings, conflocMappings, confcodeMappings);
 	private static String[] edMappings =  ArrayConcat.concatAll(edlastMappings, edfirstiniMappings);
 	private static String[] keywordsMappings =  ArrayConcat.concatAll(authkeywordsMappings, idxtermsMappings, tradenamesMappings, chemnameMappings);
+	private static String[] keywordsArrayMappings =  ArrayConcat.concatAll(authkeywordsArrayMappings, idxtermsArrayMappings, tradenamesArrayMappings, chemnameArrayMappings);
 	private static String[] pgMappings =  ArrayConcat.concatAll(pgfirstMappings, pglastMappings, pginfoMappings);
 	private static String[] refMappings =  ArrayConcat.concatAll(refeidMappings, reftitleMappings, langreftitleMappings,refsrctitleMappings, refpubyrMappings, refpgMappings, refpgfirstMappings, refartnumMappings,refscpMappings, refauidMappings, websiteMappings  );
 	
@@ -796,7 +797,7 @@ public class AbstractTransform {
 					
 			createSingleDateField("datecompletedtxt", datecompletedtxtMappings);
 			
-			createArray("dateloaded", dateloadedArrayMappings, "(.//text())");
+			createArrayDateField("dateloaded", dateloadedArrayMappings, "(.//text())");
 			
 			createArrayDateField("daterevised", daterevisedArrayMappings, "(.//text())");
 
@@ -1017,7 +1018,7 @@ public class AbstractTransform {
 			createSortFieldFromArrayField("auth-s", "auth");
 			createCompositeSingleField("confall", confallMappings);
 			createCompositeSingleField("ed", edMappings);
-			createCompositeSingleField("keywords", keywordsMappings);
+			createArray("keywords", keywordsArrayMappings, "(.//text())");
 			createCompositeSingleField("pg", pgMappings);
 			createArray("ref", refArrayMappings, "  ./refd-itemcitation/article-number//text() | ./refd-itemcitation/author-group/author/@auid | ./refd-itemcitation/eid//text() " +
 					                             "| ./refd-itemcitation/oeid//text() | ./refd-itemcitation/volisspag/pages//text() | ./ref-info/ref-volisspag/pages//text() " +
