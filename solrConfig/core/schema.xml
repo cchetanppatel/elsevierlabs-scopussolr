@@ -119,7 +119,7 @@
 <field name="affilorg" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="affilorg-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="afid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
-<field name="afid-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="afid-f" type="abs_facet" multiValued="true" indexed="true" stored="false" docValues="true"     />
 <field name="all" type="abs_std_stem" multiValued="false" indexed="true" stored="true"/>
 <field name="all-p" type="abs_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="allmed" type="abs_std_stem" multiValued="false" indexed="true" stored="true"/>
@@ -143,7 +143,7 @@
 <field name="authgrpid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="authgrpid-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="authid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
-<field name="authid-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="authid-f" type="abs_facet" multiValued="true" indexed="true" stored="false" docValues="true"              />
 <field name="authidxname" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="authidxname-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="authkeywords" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
@@ -160,7 +160,7 @@
 <field name="cheminfo-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="chemname" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="chemname-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
-<field name="citeid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="citeid" type="long" multiValued="true" indexed="true" stored="true"/>
 <field name="coden" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="collab" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="collab-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
@@ -182,9 +182,9 @@
 <field name="corres-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="datecompletedtxt" type="date"  multiValued="false" indexed="true" stored="true"/>
 <field name="datecompletedtxt-p" type="abs_ex_phrase"  multiValued="false" indexed="true" stored="false"/>
-<field name="dateloaded" type="long"  multiValued="true" indexed="true" stored="true"/>
+<field name="dateloaded" type="date"  multiValued="true" indexed="true" stored="true"/>
 <field name="daterevised" type="date"  multiValued="true" indexed="true" stored="true"/>
-<field name="datesort" type="integer"  multiValued="false" indexed="true" stored="true"/>
+<field name="datesort" type="long"  multiValued="false" indexed="true" stored="true"/>
 <field name="datesort-s" type="integer"  multiValued="false" indexed="true" stored="false"/>
 <field name="db" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="dbdocid" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
@@ -207,9 +207,9 @@
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="eissn" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="exactkeyword" type="abs_std" multiValued="true" indexed="true" stored="false"/>
-<field name="exactkeyword-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="exactkeyword-f" type="abs_facet" multiValued="true" indexed="true" stored="false" docValues="true"               />
 <field name="exactsrctitle" type="abs_std" multiValued="false" indexed="true" stored="false"/>
-<field name="exactsrctitle-f" type="abs_facet" multiValued="false" indexed="true" stored="false"/>
+<field name="exactsrctitle-f" type="abs_facet" multiValued="false" indexed="true" stored="false" docValues="true"             />
 <field name="fastloaddate" type="long"  multiValued="false" indexed="true" stored="true"/>
 <field name="fastloaddate-s" type="long"  multiValued="false" indexed="true" stored="false"/>
 <field name="firstauth" type="abs_std" multiValued="true" indexed="true" stored="true"/>
@@ -226,7 +226,7 @@
 <field name="idxterms" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
 <field name="idxterms-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="idxtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
-<field name="intid" type="keyword_lc" indexed="true" stored="true"/>
+<field name="intid" type="long" indexed="true" stored="true"/>
 <field name="isbn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issnp" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
@@ -267,7 +267,7 @@
 <field name="pii" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="pmid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="prefnameauid" type="abs_std" multiValued="true" indexed="true" stored="true"/>
-<field name="prefnameauid-f" type="abs_facet" multiValued="true" indexed="true" stored="false"/>
+<field name="prefnameauid-f" type="abs_facet" multiValued="true" indexed="true" stored="false" docValues="true"          />
 <field name="prefnameauid-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="pub" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="pub-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
@@ -503,18 +503,12 @@
   <!-- 
   abs_facet analyzer:
   
-  Analyzer applies simpler keywording tokenizer only to the content and removes leading/trailing whitespace in the field data.
-  
-  This analyzer is typically used on fields that will have facets generated from them.  They do minimal 
-  cleansing of the input data.
+  Note: Using StrField as the type.  This precludes an tokenization or filter processing and will just
+  index and store the value(s) we receive verbatim in the index. Should be what we want for facets. Note:
+  it also needs to be a StrField type so we can use DocValues for the facets.
   
  -->
- <fieldType name="abs_facet" class="solr.TextField">
-  <analyzer>
-   <tokenizer class="solr.KeywordTokenizerFactory"/>
-   <filter class="solr.TrimFilterFactory"/>
-  </analyzer>
- </fieldType>
+ <fieldType name="abs_facet" class="solr.StrField"/>
  
 <!-- 
   abs_sort analyzer:
@@ -551,7 +545,8 @@
  keyword_lc analyzer:
  
  Analyzer applies keyword tokenizer to the text and then applies lowercasing and leading/trailing 
- whitespace removal filters to the generated tokens. 
+ whitespace removal filters to the generated tokens. Note: Using TextField as we want to lowercase
+ the values we get.
  
  This analyzer is typcially used on fields that are atomic values or case insensitive keys to other entities.
 -->
