@@ -26,15 +26,15 @@ exports.init = function(environment) {
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
                                 
                                 'solr-host-port-public' : { 'affil': ['23.22.65.28:8080'],
-                                                            'auth' : ['54.197.153.53:8080'],
+                                                            'auth' : ['54.224.74.192:8080'],
                                                             'core' : ['54.197.171.116:8080'] },
                                                            
                                 'solr-host-port-private' : { 'affil': ['10.207.53.181:8080'],
-                                                             'auth' : ['10.236.147.81:8080'],
+                                                             'auth' : ['10.79.131.225:8080'],
                                                              'core' : ['10.148.196.70:8080'] },
                                                                                                                         
                                 'solr-host-port' : { 'affil': ['23.22.65.28:8080'],
-                                                     'auth' : ['54.197.153.53:8080'],
+                                                     'auth' : ['54.224.74.192:8080'],
                                                      'core' : ['54.197.171.116:8080'] },
                                                      
                                 'solr-cluster' : { 'auth'  : 'auth',
@@ -48,6 +48,10 @@ exports.init = function(environment) {
                                                   
                                                   
                                 'task-limit' : 5,
+                                
+                                'facets-disabled' : true,
+                                
+                                'rewrite-query' : true,
                                 
                                 'mode' : 'development'
                                 
@@ -72,15 +76,15 @@ exports.init = function(environment) {
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          
                                                            
                                 'solr-host-port-public' : { 'affil': ['23.22.65.28:8080'],
-                                                            'auth' : ['54.197.153.53:8080'],
+                                                            'auth' : ['54.224.74.192:8080'],
                                                             'core' : ['54.197.171.116:8080'] },
                                                            
                                 'solr-host-port-private' : { 'affil': ['10.207.53.181:8080'],
-                                                             'auth' : ['10.236.147.81:8080'],
+                                                             'auth' : ['10.79.131.225:8080'],
                                                              'core' : ['10.148.196.70:8080'] },
                                                                                                                         
                                 'solr-host-port' : { 'affil': ['10.207.53.181:8080'],
-                                                     'auth' : ['10.236.147.81:8080'],
+                                                     'auth' : ['10.79.131.225:8080'],
                                                      'core' : ['10.148.196.70:8080'] },
                                                      
                                 'solr-cluster' : { 'auth'  : 'auth',
@@ -94,6 +98,10 @@ exports.init = function(environment) {
                                                   
                                                   
                                 'task-limit' : 5,
+
+                                'facets-disabled' : true,
+                                
+                                'rewrite-query' : true,
                                 
                                 'mode' : 'production'                          
                                 

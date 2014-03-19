@@ -79,9 +79,9 @@ exports.submit = function(req, res){
     // Get the query from DDB
     ddb.getQuery(key, freeFormQuery, function(err,query) {
 
-//console.log(searchParameters);
-//console.log(query);
-              
+        //console.log(searchParameters);
+        //console.log(query);      
+        
         if (err) {
      
             console.log(err);
@@ -96,9 +96,165 @@ exports.submit = function(req, res){
                     .set('solrRspLen', -1)
                     .set('solrRspTim', -1)
 	                .send();
-         
-        } else {
+	                
+        } else if (cfg.INIT_PARMS['facets-disabled'] && query.indexOf('facet=') > 0) {
+        
+            /* Begin Disable Facets */        
+            res.status(500)
+                    .set('rType', 'loadQuery')
+                    .set('dType', searchParameters.dType)
+                    .set('dSet',searchParameters.dSet)
+                    .set('dNav',searchParameters.dNav)
+                    .set('dIdx',searchParameters.dIdx)                   
+                    .set('dHits', -1)
+                    .set('solrRspLen', -1)
+                    .set('solrRspTim', -1)
+	                .send();
+            /* End Disable Facets */
 
+        } else {
+            
+            if (cfg.INIT_PARMS['rewrite-query']) {
+
+                /* Begin Rewrite Query */
+          
+                // search for an 'AND pubyr: range clause in the query (greater than, greater than equal)
+                var pubyrbegoffset = query.indexOf('AND pubyr:[');
+                if (pubyrbegoffset == -1) {
+                    pubyrbegoffset = query.indexOf('AND pubyr:{');
+                } 
+                var pubyrendoffset = 0;
+                var fq = query.indexOf('&fq=');
+                
+                // Check for clause but make sure it's not part of the filter query
+                while (pubyrbegoffset > -1 && (fq < 0 || pubyrbegoffset < fq)) {
+                    // Check if the end is less than or less than equal
+                    var pubyrendoffset1 = query.substring(pubyrbegoffset).indexOf(']');
+                    var pubyrendoffset2 = query.substring(pubyrbegoffset).indexOf('}');
+                    if (pubyrendoffset1 > -1 && pubyrendoffset2 > -1) {
+                        if (pubyrendoffset1 < pubyrendoffset2) {
+                            pubyrendoffset = pubyrendoffset1;
+                        } else {
+                            pubyrendoffset = pubyrendoffset2;
+                        }
+                    } else if (pubyrendoffset1 > -1) {
+                        pubyrendoffset = pubyrendoffset1;
+                    }  else if (pubyrendoffset2 > -1){
+                        pubyrendoffset = pubyrendoffset2;
+                    }
+                    
+                    // Adjust the end to point to beyond the enclosing bracket (we need to keep copy along the bracket)
+                    pubyrendoffset = pubyrbegoffset + pubyrendoffset + 1
+                    // Get the pubyr clause without the AND
+                    var pubyrclause = query.substring(pubyrbegoffset + 4,pubyrendoffset);
+                    //Remove the AND pubyr clause from the original query and add as a filter instead
+                    query = query.replace(query.substring(pubyrbegoffset,pubyrendoffset),'');
+                    if (query.indexOf('&fq=') > -1) {
+                        query = query.replace('&fq=','&fq=' + pubyrclause + ' AND ')
+                    } else {
+                        query = query + '&fq=' + pubyrclause;
+                    }              
+                    // search for next 'AND pubyr: range clause in the query (greater than or greater than equal)
+                    pubyrbegoffset = query.indexOf('AND pubyr:[');
+                    if (pubyrbegoffset == -1) {
+                        pubyrbegoffset = query.indexOf('AND pubyr:{');
+                    }
+                    pubyrendoffset = 0;
+                    fq = query.indexOf('&fq=');
+                }
+      
+                // Now check for pubyr equal clause
+                pubyrbegoffset = query.indexOf('AND pubyr:');         
+                pubyrendoffset = 0;
+                fq = query.indexOf('&fq=');
+                
+                // Check for clause but make sure it's not part of the filter query
+                while (pubyrbegoffset > -1 && (fq < 0 || pubyrbegoffset < fq)) {
+                    // Check if the end is less than or less than equal
+                    var pubyrendoffset1 = query.substring(pubyrbegoffset + 4).indexOf(' ');
+                    var pubyrendoffset2 = query.substring(pubyrbegoffset + 4).indexOf(')');
+                    if (pubyrendoffset1 > -1 && pubyrendoffset2 > -1) {
+                        if (pubyrendoffset1 < pubyrendoffset2) {
+                            pubyrendoffset = pubyrendoffset1;
+                        } else {
+                            pubyrendoffset = pubyrendoffset2;
+                        }
+                    } else if (pubyrendoffset1 > -1) {
+                        pubyrendoffset = pubyrendoffset1;
+                    }  else if (pubyrendoffset2 > -1){
+                        pubyrendoffset = pubyrendoffset2;
+                    }
+                    
+                    // adjust end by 4 because we stepped over the 'AND ' when looking for it
+                    pubyrendoffset = pubyrbegoffset + pubyrendoffset + 4;
+                    // Get the pubyr clause without the AND
+                    var pubyrclause = query.substring(pubyrbegoffset + 4,pubyrendoffset);
+                    //Remove the AND pubyr clause from the original query and add as a filter instead
+                    query = query.replace(query.substring(pubyrbegoffset,pubyrendoffset),'');
+                    if (query.indexOf('&fq=') > -1) {
+                        query = query.replace('&fq=','&fq=' + pubyrclause + ' AND ')
+                    } else {
+                        query = query + '&fq=' + pubyrclause;
+                    }              
+                    // search for next 'AND pubyr: range clause in the query (greater than or greater than equal)
+                    pubyrbegoffset = query.indexOf('AND pubyr:');
+                    pubyrendoffset = 0;
+                    fq = query.indexOf('&fq=');
+                }  
+           
+                // search for an 'AND fastloaddate: range clause in the query (greater than, greater than equal)
+                var fastloaddatebegoffset = query.indexOf('AND fastloaddate:[');
+                if (fastloaddatebegoffset == -1) {
+                    fastloaddatebegoffset = query.indexOf('AND fastloaddate:{');
+                } 
+                var fastloaddateendoffset = 0;
+                fq = query.indexOf('&fq=');
+                
+                // Check for clause but make sure it's not part of the filter query
+                while (fastloaddatebegoffset > -1 && (fq < 0 || fastloaddatebegoffset < fq)) {
+                    // Check if the end is less than or less than equal
+                    var fastloaddateendoffset1 = query.substring(fastloaddatebegoffset).indexOf(']');
+                    var fastloaddateendoffset2 = query.substring(fastloaddatebegoffset).indexOf('}');
+                    if (fastloaddateendoffset1 > -1 && fastloaddateendoffset2 > -1) {
+                        if (fastloaddateendoffset1 < fastloaddateendoffset2) {
+                            fastloaddateendoffset = fastloaddateendoffset1;
+                        } else {
+                            fastloaddateendoffset = fastloaddateendoffset2;
+                        }
+                    } else if (fastloaddateendoffset1 > -1) {
+                        fastloaddateendoffset = fastloaddateendoffset1;
+                    }  else if (fastloaddateendoffset2 > -1){
+                        fastloaddateendoffset = fastloaddateendoffset2;
+                    }
+                
+                    // Adjust the end to point to beyond the enclosing bracket (we need to keep copy along the bracket)
+                    fastloaddateendoffset = fastloaddatebegoffset + fastloaddateendoffset + 1
+                    // Get the fastloaddate clause without the AND
+                    var fastloaddateclause = query.substring(fastloaddatebegoffset + 4,fastloaddateendoffset);
+                    //Remove the AND fastloaddate clause from the original query and add as a filter instead
+                    query = query.replace(query.substring(fastloaddatebegoffset,fastloaddateendoffset),'');
+                    if (query.indexOf('&fq=') > -1) {
+                        query = query.replace('&fq=','&fq=' + fastloaddateclause + ' AND ')
+                    } else {
+                        query = query + '&fq=' + fastloaddateclause;
+                    }
+               
+                    // search for next 'AND fastloaddate: range clause in the query (greater than or greater than equal)
+                    fastloaddatebegoffset = query.indexOf('AND fastloaddate:[');
+                    if (fastloaddatebegoffset == -1) {
+                        fastloaddatebegoffset = query.indexOf('AND fastloaddate:{');
+                    }
+                    fastloaddateendoffset = 0;
+                    fq = query.indexOf('&fq=');
+                } 
+                
+           /* End Rewrite Query */
+           
+           } 
+           
+
+           
+           
            // Indicate if query contains navigators
            if (query.indexOf('facet=true') !== -1) {
                searchParameters.dNav = 'nav';
@@ -117,12 +273,10 @@ exports.submit = function(req, res){
            var solrHostPortToks = solrHostPort.split(':');
     
            // Prepare the HTTP options
-           // TODO this is not really a POST as nothing is sent in the body
 	       var options = {
                             host: solrHostPortToks[0],
                             port: solrHostPortToks[1],
                             method: 'POST',
-                            //path: '/solr/' + cfg.INIT_PARMS['solr-cluster'][searchParameters.dType] + '/select?' + encodeURI(query) + '&wt=json&indent=true',
                             path: '/solr/' + cfg.INIT_PARMS['solr-cluster'][searchParameters.dType] + '/select',
                             headers: headers
             };
@@ -292,6 +446,7 @@ exports.submit = function(req, res){
             });
                  
             // Send the request
+            //console.log(query);
             req2.write(query + '&wt=json&indent=true');
             req2.end();                              
                                 
