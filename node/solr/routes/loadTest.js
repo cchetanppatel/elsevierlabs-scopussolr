@@ -246,12 +246,28 @@ exports.submit = function(req, res){
                     }
                     fastloaddateendoffset = 0;
                     fq = query.indexOf('&fq=');
+
+                    /* End Rewrite Query */
+                    
                 } 
                 
-           /* End Rewrite Query */
+           
+           
+                if (cfg.INIT_PARMS['slim-edismax']) {
+                
+                    /* Begin slim edismax */
+                    
+                    query = query.replace(cfg.INIT_PARMS['solr-small']['old'],cfg.INIT_PARMS['solr-small']['new']);
+                    query = query.replace(cfg.INIT_PARMS['solr-medium']['old'],cfg.INIT_PARMS['solr-medium']['new']);
+                    query = query.replace(cfg.INIT_PARMS['solr-all']['old'],cfg.INIT_PARMS['solr-all']['new']);
+                    
+                    /* End slim edismax */      
+                    
+                }
            
            } 
            
+           //console.log(query);
 
            
            

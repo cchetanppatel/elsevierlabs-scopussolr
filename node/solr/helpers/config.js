@@ -46,12 +46,22 @@ exports.init = function(environment) {
                                                   //'core'   : ['affilctry-f','afid-f','aucite-f','authgrpid-f','authid-f','exactkeyword-f','exactsrctitle-f','lang-f','prefnameauid-f','pubyr-f','srctype-f','statustype-f','subjabbr-f','subtype-f']},
                                                   'core'   : ['affilctry-f','afid-f','aucite-f','authgrpid-f','authid-f','exactsrctitle-f','lang-f','prefnameauid-f','pubyr-f','srctype-f','subjabbr-f','subtype-f']},
                                                   
-                                                  
+                                'solr-all' : { 'old' : "qf='all itemtitle^12 keywords^8 abs^8 auth^8 srctitle^2 issn^2 coden^2 doi^2 isbn^2 lang^2 pub^2 chemname^2 affil^2 ed^2 corres^2 collab^2 confall^2'",
+                                               'new' : "qf='all itemtitle^12 keywords^8 abs^8 auth^8'"},
+                                    
+                                'solr-medium' : { 'old' : "qf='allmed itemtitle^12 keywords^8 abs^8 auth^8'",
+                                                  'new' : "qf='allmed itemtitle^12 abs^8 auth^8'"},
+
+                                'solr-small' : { 'old' : "qf='allsmall itemtitle^12 keywords^8 abs^8'",
+                                                 'new' : "qf='allsmall itemtitle^12 abs^8'"},
+                                
                                 'task-limit' : 5,
                                 
                                 'facets-disabled' : true,
                                 
                                 'rewrite-query' : true,
+                                
+                                'slim-edismax' : false,
                                 
                                 'mode' : 'development'
                                 
@@ -95,13 +105,23 @@ exports.init = function(environment) {
                                                   'affil'  : ['affilcity-f','affilctry-f'],
                                                   //'core'   : ['affilctry-f','afid-f','aucite-f','authgrpid-f','authid-f','exactkeyword-f','exactsrctitle-f','lang-f','prefnameauid-f','pubyr-f','srctype-f','statustype-f','subjabbr-f','subtype-f']},
                                                   'core'   : ['affilctry-f','afid-f','aucite-f','authgrpid-f','authid-f','exactsrctitle-f','lang-f','prefnameauid-f','pubyr-f','srctype-f','subjabbr-f','subtype-f']},
-                                                  
+
+                                'solr-all' : { 'old' : "qf='all itemtitle^12 keywords^8 abs^8 auth^8 srctitle^2 issn^2 coden^2 doi^2 isbn^2 lang^2 pub^2 chemname^2 affil^2 ed^2 corres^2 collab^2 confall^2'",
+                                               'new' : "qf='all itemtitle^12 keywords^8 abs^8 auth^8'"},
+                                    
+                                'solr-medium' : { 'old' : "qf='allmed itemtitle^12 keywords^8 abs^8 auth^8'",
+                                                  'new' : "qf='allmed itemtitle^12 abs^8 auth^8'"},
+
+                                'solr-small' : { 'old' : "qf='allsmall itemtitle^12 keywords^8 abs^8'",
+                                                 'new' : "qf='allsmall itemtitle^12 abs^8'"},
                                                   
                                 'task-limit' : 5,
 
                                 'facets-disabled' : true,
                                 
                                 'rewrite-query' : true,
+                                
+                                'slim-edismax' : false,                                
                                 
                                 'mode' : 'production'                          
                                 
