@@ -50,8 +50,8 @@
     "kibanalogtype" : {
       "Description" : "Kibana log type on the ec2 instance",
       "Type" : "String",
-      "Default" : "s-core",
-      "AllowedValues" : ["s-auth","s-aff","s-core"]
+      "Default" : "m-core",
+      "AllowedValues" : ["m-auth","m-aff","m-core"]
      },
 
     "kibanahost" : {
@@ -190,14 +190,6 @@
   },
 
  "Resources": {
-         
-       "IPAssoc" : {
-            "Type" : "AWS::EC2::EIPAssociation",
-            "Properties" : {
-                "InstanceId" : { "Ref" : "Ec2Instance" },
-                "EIP" : "54.225.95.152"
-            }
-        },
         
         "Ec2Instance": {
             "Type": "AWS::EC2::Instance",
