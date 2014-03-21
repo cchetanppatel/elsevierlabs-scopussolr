@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:search xmlns:ns2="http://webservices.elsevier.com/schemas/search/fast/types/v4"
+    xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
+    <ns2:searchReqPayload>
+        <ns2:xQueryX>
+            <ft:fullTextQuery xmlns:ft="http://www.elsevier.com/2003/01/xqueryxFT-schema"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
+                <ft:query>
+                    <ft:andQuery>
+                        <ft:word path="abs">blood</ft:word>
+                    </ft:andQuery>
+                </ft:query>
+            </ft:fullTextQuery>
+        </ns2:xQueryX>
+        <ns2:orderByList>
+            <ns2:orderByAttributes path="datesort" sortOrder="descending"/>
+            <ns2:orderByAttributes path="relevancy" sortOrder="descending"/>
+        </ns2:orderByList>
+        <ns2:returnAttributes maxResults="10" start="0"/>
+        <ns2:elsfilter>
+            <ft:fullTextQuery xmlns:ft="http://www.elsevier.com/2003/01/xqueryxFT-schema"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
+                <ft:query>
+                    <ft:word path="statustype">core</ft:word>
+                </ft:query>
+            </ft:fullTextQuery>
+        </ns2:elsfilter>
+    </ns2:searchReqPayload>
+</ns2:search>
