@@ -100,6 +100,7 @@ exports.submit = function(req, res){
         res2.on('end', function() {
                    
             var buf = Buffer.concat(chunks);
+            console.log(buf.toString());
             mlRspLen = buf.length;
                        
             if (res2.statusCode == 200) {
@@ -129,7 +130,7 @@ exports.submit = function(req, res){
                         } else {
                                  
                             // Not even sure we need to worr about gzip ???     
-                            var results = JSON.parse(decoded);
+                            var results = decoded.toString();
                             results.query = searchParameters.dType + '_' + searchParameters.dSet + '_' + searchParameters.dIdx;
 
                             res.status(200)
@@ -249,11 +250,11 @@ exports.submit = function(req, res){
                 } else {
                                  
                     //console.log(buf.toString());
-                    var results = JSON.parse(buf);
-                    results.query = searchParameters.dType + '_' + searchParameters.dSet + '_' + searchParameters.dIdx;
+                    //var results = JSON.parse(buf);
+                    //results.query = searchParameters.dType + '_' + searchParameters.dSet + '_' + searchParameters.dIdx;
                                  
                     res.status(res2.statusCode)
-                        .set('Content-Type', 'application/json; charset=UTF-8')
+                        .set('Content-Type', 'application/xml; charset=UTF-8')
                         .set('rType', 'loadQuery')
                         .set('dType', searchParameters.dType)
                         .set('dSet',searchParameters.dSet)
@@ -262,7 +263,7 @@ exports.submit = function(req, res){
                         .set('dHits', -1)
                         .set('mlRspLen', -1)
                         .set('mlRspTim', -1)
-                        .send(results);
+                        .send(buf.toString());
 	                                                             
                 }                                
     
