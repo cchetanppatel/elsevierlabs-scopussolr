@@ -4,6 +4,7 @@ package com.elsevier.solr;
 import com.elsevier.common.Variables;
 import com.elsevier.transform.NestedObjectHelper;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,24 +12,43 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.CloudSolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.impl.LBHttpSolrServer;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
 
 public class Document {
 
-	private static HttpSolrServer solrServer = null;
+	// Note: We'll cast the appropriate subclass to this once we decide if we are SolrCloud or not and build the correct class
+	private static SolrServer solrServer = null;
 	
 	
 	/**
 	 * Initialization
 	 */
 	public static void init() {
-		// Set up to talk to the configured Solr instance
-		solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
-		System.out.println("SolrServer Base URL: " + solrServer.getBaseURL());
-
+		
+		// Are we running a single Solr instance without a ZooKeeper (Ususal for local development 
+		if (Variables.ZOOKEEPER_ENDPOINT.equalsIgnoreCase("")) {
+			// Set up to talk to the configured Solr instance
+			solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
+			System.out.println("SolrHttpServer Base URL: " + ((HttpSolrServer)solrServer).getBaseURL());
+		} else {
+			// We are running a Zookeeper which will have all the available nodes to talk to for a particular collection 
+			// as specified by Variables.SOLR_COLLECTION.
+			try {
+				solrServer =  new CloudSolrServer(Variables.ZOOKEEPER_ENDPOINT);
+				((CloudSolrServer)solrServer).setDefaultCollection(Variables.SOLR_COLLECTION);
+				System.out.println("CloudSolrServer Using ZooKeeper: '" + Variables.ZOOKEEPER_ENDPOINT + "'");
+			} catch (MalformedURLException e) {
+				System.out.println("Invalid ZOOKEEPER_ENDPOINT configuration specified. Value:'" + Variables.ZOOKEEPER_ENDPOINT +"'");
+				e.printStackTrace();
+				System.exit(-1);
+			}
+		} 
 	}
 	
 	

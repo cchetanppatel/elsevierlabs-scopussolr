@@ -46,6 +46,9 @@ public class Variables {
 	//public static final String SOLR_COLLECTION = "auth";
 	public static final String SOLR_COLLECTION = "core";
 	
+	// ZooKeeper endpoint if running SolrCloud for auto-discovery of Solr nodes when used with SOLR_COLLECTION. Set to "" to use single Variables.SOLR_ENDPOINT
+	public static final String ZOOKEEPER_ENDPOINT = prop.getProperty("ZOOKEEPER_ENDPOINT","");
+	
 	public static final int SOLR_AUTOCOMMIT_DELAY_MS = Integer.parseInt(prop.getProperty("SOLR_AUTOCOMMIT_DELAY_MS","-1"));   // -1 will use the autocommit delay defined in core's solrconfig.xml
 	
 	// SQS Endpoint
