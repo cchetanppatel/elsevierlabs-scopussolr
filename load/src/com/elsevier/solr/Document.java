@@ -29,8 +29,8 @@ public class Document {
 	/**
 	 * Initialization
 	 */
-	public static void init() {
-		
+	//public static void init() {
+	static {	
 		// Are we running a single Solr instance without a ZooKeeper (Ususal for local development 
 		if (Variables.ZOOKEEPER_ENDPOINT.equalsIgnoreCase("")) {
 			// Set up to talk to the configured Solr instance
@@ -63,8 +63,6 @@ public class Document {
 	 * @param epoch version for the document
 	 */
 	public static void add(String index, HashMap<String,Object> map, String id, long epoch) throws Exception {
-
-		HttpSolrServer solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
 		
 		SolrInputDocument solrDoc = new SolrInputDocument();
 		
@@ -157,9 +155,7 @@ public class Document {
 	 * @param epoch version for the document
 	 */
 	public static void update(String index, HashMap<String,Object> map, String idFieldName, String id, String versionFieldName, long epoch) throws Exception {
-		
-		HttpSolrServer solrServer = new HttpSolrServer(Variables.SOLR_ENDPOINT);
-		
+				
 		SolrInputDocument solrDoc = new SolrInputDocument();
 		
 		//
