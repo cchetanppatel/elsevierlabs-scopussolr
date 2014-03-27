@@ -10,5 +10,5 @@ mv x07 x7
 mv x08 x8
 mv x09 x9
 for ((i = 0; i <= 24; i++)) do
-nohup java -Xms250M -Xmx250M -Djdk.xml.entityExpansionLimit=0 -jar AuthorQueuePopulator.jar  /home/ec2-user/x$i a 0 > /home/ec2-user/x$i.out &
+nohup java -Xms250M -Xmx250M -Djdk.xml.entityExpansionLimit=0 -jar ScopusBulkLoad.jar  /home/ec2-user/x$i a 0 > /home/ec2-user/x$i.out &
 done
