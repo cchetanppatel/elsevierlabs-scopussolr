@@ -100,7 +100,7 @@ exports.submit = function(req, res){
         res2.on('end', function() {
                    
             var buf = Buffer.concat(chunks);
-            console.log(buf.toString());
+            //console.log(buf.toString());
             mlRspLen = buf.length;
                        
             if (res2.statusCode == 200) {
