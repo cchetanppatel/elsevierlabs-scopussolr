@@ -19,17 +19,17 @@ exports.init = function(environment) {
   
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
 
-                                'ml-host-port-public' : { 'affil': ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                            'auth' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                            'core' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-public' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                            'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                            'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
                                                            
-                                'ml-host-port-private' : { 'affil': ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                             'auth' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                             'core' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-private' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                             'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                             'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
                                                                                                                         
-                                'ml-host-port' : { 'affil': ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                     'auth' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                     'core' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'] },                                                  
+                                'ml-host-port' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                     'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                     'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },                                                  
                                 
                                 'mode' : 'development'
                                 
@@ -47,17 +47,17 @@ exports.init = function(environment) {
                                 
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          
                                                            
-                                'ml-host-port-public' : { 'affil': ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                            'auth' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                            'core' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-public' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                            'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                            'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
                                                            
-                                'ml-host-port-private' : { 'affil': ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                             'auth' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                             'core' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-private' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                             'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                             'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
                                                                                                                         
-                                'ml-host-port' : { 'affil': ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                     'auth' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'],
-                                                     'core' : ['scopus-mb-ElasticL-TQ4RGVVX3YXZ-631946484.us-east-1.elb.amazonaws.com:8008'] },      
+                                'ml-host-port' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                     'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
+                                                     'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },      
                                 
                                 'mode' : 'production'                          
                                 
