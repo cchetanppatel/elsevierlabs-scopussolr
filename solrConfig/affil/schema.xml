@@ -120,7 +120,7 @@
 <field name="certscore-f" type="affil_facet" multiValued="true" indexed="true" stored="false"/>
 <field name="certscore-s" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="count" type="integer" multiValued="false" indexed="true" stored="true"/>
-<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="true"/>
+<field name="datecompletedtxt" type="affil_std" multiValued="true" indexed="true" stored="false"/>
 <field name="datecompletedtxt-p" type="affil_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="eid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="fastloaddate" type="date"  multiValued="false" indexed="true" stored="true"/>
@@ -133,9 +133,9 @@
 <field name="prefname-p" type="affil_ex_phrase" multiValued="false" indexed="true" stored="false"/>
 <field name="prefparname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
 <field name="prefparname-p" type="affil_ex_phrase" multiValued="false" indexed="true" stored="false"/>
-<field name="quality" type="integer" multiValued="false" indexed="true" stored="true"/>
+<field name="quality" type="integer" multiValued="false" indexed="true" stored="false"/>
 <field name="sortname" type="affil_std" multiValued="false" indexed="true" stored="true"/>
-<field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
+<field name="status" type="keyword_lc" multiValued="false" indexed="true" stored="false"/>
 <field name="toplevel" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="transid" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 
@@ -199,21 +199,18 @@
   </analyzer>
  </fieldType>
  
-  <!-- 
+<!-- 
   affil_facet analyzer:
   
-  Analyzer applies simpler keywording tokenizer only to the content and removes leading/trailing whitespace in the field data.
+  This analyzer is typically used on fields that will have facets generated from them.
   
-  This analyzer is typically used on fields that will have facets generated from them.  They do minimal 
-  cleansing of the input data.
+  Note: Using StrField as the type.  This precludes any tokenization or filter processing and will just
+  index and store the value(s) we receive verbatim in the index. Should be what we want for facets. Note:
+  it also needs to be a StrField type so we can use DocValues for the facets if necessary.
   
  -->
- <fieldType name="affil_facet" class="solr.TextField">
-  <analyzer>
-   <tokenizer class="solr.KeywordTokenizerFactory"/>
-   <filter class="solr.TrimFilterFactory"/>
-  </analyzer>
- </fieldType>
+ <fieldType name="affil_facet" class="solr.StrField"/>
+ 
  
 <!-- 
  affil_ex_phrase analyzer:

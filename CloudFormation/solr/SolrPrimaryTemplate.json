@@ -59,10 +59,16 @@
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solr/solr-4.6.0.tgz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426235662&Signature=qxLo7T85tsw3PNBzlzCmdgASebc%3D"
     },
          
-   "SolrConfigURL" : {
+   "SolrIndexConfigURL" : {
       "Description" : "Solr Config File URL.",
       "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340520&Signature=51fFLpQMxgJGxPKZAhxMzgJopSE%3D"
+      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/index-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1396440302&Signature=kuOwWjNLJNcYk87uYGmXw8tGqko%3D"
+    },
+    
+    "SolrQueryConfigURL" : {
+      "Description" : "Solr Config File URL.",
+      "Type" : "String",
+      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/query-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1396440258&Signature=npcqX1SJaCGZmI2DZtUZm%2B9LIwM%3D"
     },
     
     "SolrSchemaURL" : {
@@ -197,7 +203,9 @@
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/stopwords.txt '", { "Ref" : "SolrStopwordsURL"}, "'", "\n",
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/synonyms.txt '", { "Ref" : "SolrSynonymsURL"}, "'", "\n",
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/schema.xml '", { "Ref" : "SolrSchemaURL"}, "'", "\n",
-                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/solrconfig.xml '", { "Ref" : "SolrConfigURL"}, "'", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/solrconfig.xml '", { "Ref" : "SolrIndexConfigURL"}, "'", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/index-solrconfig.xml '", { "Ref" : "SolrIndexConfigURL"}, "'", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/query-solrconfig.xml '", { "Ref" : "SolrQueryConfigURL"}, "'", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
                 "nohup java -Djetty.port=8080 -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
