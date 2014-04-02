@@ -8,13 +8,23 @@
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
                     <ft:andQuery>
-                        <ft:word path="affilcity">london</ft:word>
+                        <ft:word path="authlast">Smith</ft:word>
+                        <ft:word path="authfirst">J*</ft:word>
+                        <ft:word path="affilcity">Philadelphia</ft:word>
+                        <ft:word path="affilctry" phrase="true">United States</ft:word>
+                        <ft:word path="srctitle" phrase="true">Journal of the American Medical Association</ft:word>
+                        <ft:word path="afid">60097308</ft:word>
+                        <ft:orQuery>
+                            <ft:word path="subjclus">ENGI</ft:word>
+                            <ft:word path="subjclus">MEDI</ft:word>
+                            <ft:word path="subjclus">BIOC</ft:word>
+                        </ft:orQuery>
                     </ft:andQuery>
                 </ft:query>
             </ft:fullTextQuery>
         </ns2:xQueryX>
         <ns2:orderByList>
-            <ns2:orderByAttributes path="sortname" sortOrder="ascending"/>
+            <ns2:orderByAttributes path="authid" sortOrder="ascending"/>
         </ns2:orderByList>
         <ns2:returnAttributes maxResults="10" start="0"/>
         <ns2:elsfilter>
@@ -22,22 +32,10 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
-                    <ft:andQuery>
-                        <ft:numericCompare comparator="greaterThan">
-                            <ft:clause path="count"/>
-                            <ft:decimal>1</ft:decimal>
-                        </ft:numericCompare>
-                        <ft:numericCompare comparator="lessThan">
-                            <ft:clause path="quality"/>
-                            <ft:decimal>100</ft:decimal>
-                        </ft:numericCompare>
-                        <ft:notQuery>
-                            <ft:numericCompare comparator="greaterThan">
-                                <ft:clause path="parafid"/>
-                                <ft:decimal>0</ft:decimal>
-                            </ft:numericCompare>
-                        </ft:notQuery>
-                    </ft:andQuery>
+                    <ft:numericCompare comparator="greaterThan">
+                        <ft:clause path="count"/>
+                        <ft:decimal>0</ft:decimal>
+                    </ft:numericCompare>
                 </ft:query>
             </ft:fullTextQuery>
         </ns2:elsfilter>

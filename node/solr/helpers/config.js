@@ -22,20 +22,21 @@ exports.init = function(environment) {
                                 //'ddb-load-query-table' : 'scopus-solr-load-institution-query',
                                 //'ddb-load-query-table' : 'scopus-solr-load-author-query',
                                 'ddb-load-query-table' : 'scopus-solr-load-core-query',
-   
+                                //'ddb-load-query-table' : 'scopus-solr-count-features-query',
+                                
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
                                 
-                                'solr-host-port-public' : { 'affil': ['23.22.65.28:8080'],
+                                'solr-host-port-public' : { 'affil': ['54.82.2.85:8080'],
                                                             'auth' : ['54.224.74.192:8080'],
-                                                            'core' : ['54.197.171.116:8080'] },
+                                                            'core' : ['54.197.171.116:8080','54.221.76.76:8080'] },
                                                            
-                                'solr-host-port-private' : { 'affil': ['10.207.53.181:8080'],
+                                'solr-host-port-private' : { 'affil': ['10.9.186.16:8080'],
                                                              'auth' : ['10.79.131.225:8080'],
-                                                             'core' : ['10.148.196.70:8080'] },
+                                                             'core' : ['10.148.196.70:8080','10.148.144.220:8080'] },
                                                                                                                         
-                                'solr-host-port' : { 'affil': ['23.22.65.28:8080'],
+                                'solr-host-port' : { 'affil': ['54.82.2.85:8080'],
                                                      'auth' : ['54.224.74.192:8080'],
-                                                     'core' : ['54.197.171.116:8080'] },
+                                                     'core' : ['54.197.171.116:8080','54.221.76.76:8080'] },
                                                      
                                 'solr-cluster' : { 'auth'  : 'auth',
                                                    'affil' : 'affil',
@@ -85,17 +86,17 @@ exports.init = function(environment) {
                                 
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          
                                                            
-                                'solr-host-port-public' : { 'affil': ['23.22.65.28:8080'],
+                                'solr-host-port-public' : { 'affil': ['54.82.2.85:8080'],
                                                             'auth' : ['54.224.74.192:8080'],
-                                                            'core' : ['54.197.171.116:8080'] },
+                                                            'core' : ['54.197.171.116:8080','54.221.76.76:8080'] },
                                                            
-                                'solr-host-port-private' : { 'affil': ['10.207.53.181:8080'],
+                                'solr-host-port-private' : { 'affil': ['10.9.186.16:8080'],
                                                              'auth' : ['10.79.131.225:8080'],
-                                                             'core' : ['10.148.196.70:8080'] },
+                                                             'core' : ['10.148.196.70:8080','10.148.144.220:8080'] },
                                                                                                                         
-                                'solr-host-port' : { 'affil': ['10.207.53.181:8080'],
+                                'solr-host-port' : { 'affil': ['10.9.186.16:8080'],
                                                      'auth' : ['10.79.131.225:8080'],
-                                                     'core' : ['10.148.196.70:8080'] },
+                                                     'core' : ['10.148.196.70:8080','10.148.144.220:8080'] },
                                                      
                                 'solr-cluster' : { 'auth'  : 'auth',
                                                    'affil' : 'affil',
