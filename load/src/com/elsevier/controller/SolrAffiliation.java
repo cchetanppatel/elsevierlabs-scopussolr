@@ -179,7 +179,7 @@ public class SolrAffiliation {
 								fieldValues.put("epoch", Long.toString(epoch, 10) );   // Put the XFab epoch in the index
 								fieldValues.put("epoch-rs", Long.toString(epoch, 10) ); // actual version control value is the epoch for adds
 								// fieldValues.put("count", "1");  Note: we are putting "1" now to make sure our searches work until we get Redshift working.
-								fieldValues.put("count", "1");   // Dummy value for count until Redshift job values comes back with one.  Value of -1 will make non-updated records easy to find 
+								fieldValues.put("count", "5");   // Dummy value for count until Redshift job values comes back with one.  Value of -1 will make non-updated records easy to find 
 								Document.add(Variables.SOLR_COLLECTION, fieldValues, contentKey, epoch);
 							} else {  // Must be an update...
 								fieldValues.put("epoch", Long.toString(epoch, 10) );
