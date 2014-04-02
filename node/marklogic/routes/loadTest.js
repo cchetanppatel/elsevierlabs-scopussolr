@@ -184,7 +184,7 @@ exports.submit = function(req, res){
                     //console.log('msTime is ' + msTime);
                     
                     // Indicate if query contains navigators
-                    if (results.indexOf('<search:facet-value ') !== -1) {
+                    if (results.indexOf('<search:facet ') !== -1) {
                         searchParameters.dNav = 'nav';
                     } else {
                         searchParameters.dNav = 'nonav';

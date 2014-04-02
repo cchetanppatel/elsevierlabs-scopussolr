@@ -12,24 +12,24 @@ exports.init = function(environment) {
     
         // Development settings
         exports.INIT_PARMS = {
-        
+
                                 'aws-access-key-id' : 'AKIAJC674WSBSYUQYJLQ',
                                 'aws-secret-access-key' : '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',
                                 'aws-account-id' : '5459-5720-4479',
   
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
 
-                                'ml-host-port-public' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                            'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                            'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-public' : { 'affil': ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'],
+                                                            'auth' : ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'],
+                                                            'core' : ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'] },
                                                            
-                                'ml-host-port-private' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                             'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                             'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-private' : { 'affil': ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'],
+                                                             'auth' : ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'],
+                                                             'core' : ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'] },
                                                                                                                         
-                                'ml-host-port' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                     'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                     'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },                                                  
+                                'ml-host-port' : { 'affil': ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'],
+                                                     'auth' : ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'],
+                                                     'core' : ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'] },                                                  
                                 
                                 'mode' : 'development'
                                 
@@ -47,17 +47,17 @@ exports.init = function(environment) {
                                 
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          
                                                            
-                                'ml-host-port-public' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                            'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                            'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-public' : { 'affil': ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'],
+                                                            'auth' : ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'],
+                                                            'core' : ['54.80.174.35:8008','54.221.96.91:8008','107.20.23.99:8008','54.198.247.9:8008'] },
                                                            
-                                'ml-host-port-private' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                             'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                             'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },
+                                'ml-host-port-private' : { 'affil': ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'],
+                                                             'auth' : ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'],
+                                                             'core' : ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'] },
                                                                                                                         
-                                'ml-host-port' : { 'affil': ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                     'auth' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'],
-                                                     'core' : ['scopus-mb-ElasticL-1L1TKU4E08R7K-1931175144.us-east-1.elb.amazonaws.com:8008'] },      
+                                'ml-host-port' : { 'affil': ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'],
+                                                             'auth' : ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'],
+                                                             'core' : ['10.146.144.208:8008','10.146.145.154:8008','10.146.149.175:8008','10.146.145.170:8008'] },   
                                 
                                 'mode' : 'production'                          
                                 
