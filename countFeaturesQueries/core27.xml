@@ -13,7 +13,7 @@
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
                     <ft:andQuery>
-                        <ft:word path="title" phrase="true">the end</ft:word>
+                        <ft:word path="itemtitle" phrase="true">the end</ft:word>
                     </ft:andQuery>
                 </ft:query>
             </ft:fullTextQuery>

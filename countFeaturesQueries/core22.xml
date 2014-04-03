@@ -13,7 +13,7 @@
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
                     <ft:andQuery>
-                        <ft:word path="title">blood</ft:word>   
+                        <ft:word path="itemtitle">blood</ft:word>   
                         <ft:numericCompare comparator="greaterThan">
                             <ft:clause path="pubyr"/>
                             <ft:decimal>2003</ft:decimal>

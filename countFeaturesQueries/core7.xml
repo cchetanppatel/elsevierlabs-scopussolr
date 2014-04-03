@@ -13,9 +13,9 @@
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
                     <ft:orQuery>
-                        <ft:word path="issn">2090-4649</ft:word>
-                        <ft:word path="issn">0301-0538</ft:word>
-                        <ft:word path="issn">004-2675-X</ft:word>
+                        <ft:word path="issn">20904649</ft:word>
+                        <ft:word path="issn">03010538</ft:word>
+                        <ft:word path="issn">0042675X</ft:word>
                     </ft:orQuery>
                 </ft:query>
             </ft:fullTextQuery>
