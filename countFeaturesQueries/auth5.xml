@@ -3,8 +3,8 @@
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
     <!-- 
         Query ID - AUTH5
-        Query -    AUTH-LAST-NAME(smith) AND AUTH-FIRST(j*) AND AFFIL(oxford) AND SUBJABBR(envi or agri or chem)
-        Description - Author and affiliationn and subject area  
+        Query -    AUTH-LAST-NAME(smith) AND AUTH-FIRST(j*) AND SRCTITLE(Nuclear) AND SUBJABBR(envi or agri or chem)
+        Description - Author and Srctitle and subject area  
     -->
     <ns2:searchReqPayload>
         <ns2:xQueryX>
@@ -15,7 +15,7 @@
                     <ft:andQuery>
                         <ft:word path="authlast">Smith</ft:word>
                         <ft:word path="authfirst">J*</ft:word>
-                        <ft:word path="affil">Oxford</ft:word>
+                        <ft:word path="srctitle">Nuclear</ft:word>
                         <ft:orQuery>
                             <ft:word path="subjabbr">envi</ft:word>
                             <ft:word path="subjabbr">agri</ft:word>

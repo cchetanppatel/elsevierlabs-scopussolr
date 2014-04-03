@@ -3,8 +3,8 @@
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
     <!-- 
         Query ID - AUTH8
-        Query -    AUTH-LAST-NAME(smith) AND AUTH-FIRST(j*) and LIMIT-TO(AFFILCITY, "Philadelphia") AND (LIMIT-TO(AFFILCOUNTRY, "United States") AND (LIMIT-TO(AUTH-SUBCLUS, "ENGI") OR LIMIT-TO(AUTH-SUBCLUS, "MEDI") OR LIMIT-TO(AUTH-SUBCLUS, "BIOC") AND (LIMIT-TO(SRCTITLE, "Journal of the American Medical Association") AND (LIMIT-TO(AF-ID, "GlaxoSmithKline, USA" 60097308)
-        Description - Facets in search: Author search containing multiple Facets on auth/affil cluster (simulated)
+        Query -    AUTH-LAST-NAME(smith) AND AUTH-FIRST(j*)  AND (LIMIT-TO(AUTH-SUBJABBR, "ENGI") OR LIMIT-TO(AUTH-SUBJABBR, "MEDI") OR LIMIT-TO(AUTH-SUBJABBR, "BIOC") AND (LIMIT-TO(AF-ID, "Some Affiliation, USA" 60031944)
+        Description - Facets in search: Author search containing multiple Facets on auth cluster (simulated)
     -->
     <ns2:searchReqPayload>
         <ns2:xQueryX>
@@ -15,14 +15,11 @@
                     <ft:andQuery>
                         <ft:word path="authlast">Smith</ft:word>
                         <ft:word path="authfirst">J*</ft:word>
-                        <ft:word path="affilcity">Philadelphia</ft:word>
-                        <ft:word path="affilctry" phrase="true">United States</ft:word>
-                        <ft:word path="srctitle" phrase="true">Journal of the American Medical Association</ft:word>
-                        <ft:word path="afid">60097308</ft:word>
+                        <ft:word path="afid">60031944</ft:word>
                         <ft:orQuery>
-                            <ft:word path="subjclus">ENGI</ft:word>
-                            <ft:word path="subjclus">MEDI</ft:word>
-                            <ft:word path="subjclus">BIOC</ft:word>
+                            <ft:word path="subjabbr">ENGI</ft:word>
+                            <ft:word path="subjabbr">MEDI</ft:word>
+                            <ft:word path="subjabbr">BIOC</ft:word>
                         </ft:orQuery>
                     </ft:andQuery>
                 </ft:query>

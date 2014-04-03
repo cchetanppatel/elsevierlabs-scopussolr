@@ -3,8 +3,8 @@
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
     <!-- 
         Query ID - AUTH4
-        Query -   AUTH-LAST-NAME(smith) AND AUTH-FIRST(j*) AND AFFIL(oxford)
-        Description - Author and affiliation 
+        Query -   AUTH-LAST-NAME(smith) AND AUTH-FIRST(j*) AND SRCTITLE(Nuclear)
+        Description - Author and srctitle 
     -->
     <ns2:searchReqPayload>
         <ns2:xQueryX>
@@ -15,7 +15,7 @@
                     <ft:andQuery>
                         <ft:word path="authlast">Smith</ft:word>
                         <ft:word path="authfirst">J*</ft:word>
-                        <ft:word path="affil">Oxford</ft:word>
+                        <ft:word path="srctitle">Nuclear</ft:word>
                     </ft:andQuery>
                 </ft:query>
             </ft:fullTextQuery>

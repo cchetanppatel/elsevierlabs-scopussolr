@@ -1,0 +1,187 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authid:(10038760900))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 1
+  },
+  "query": "auth_count_1"
+}
+
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 115,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authlast:(smith) AND authfirst:(j*))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 11479
+  },
+  "query": "auth_count_2"
+}
+
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 136,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authlast-m:(smith) AND authfirst-m:(j**))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 4599
+  },
+  "query": "auth_count_3"
+}
+
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 173,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authlast:(smith) AND authfirst:(j*) AND srctitle:(nuclear))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 231
+  },
+  "query": "auth_count_4"
+}    
+    
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 96,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authlast:(smith) AND authfirst:(j*) AND srctitle:(nuclear) AND (subjabbr:(envi) OR subjabbr:(agri) OR subjabbr:(chem)))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 90
+  },
+  "query": "auth_count_5"
+}    
+        
+        
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 7,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authlast:(smith))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 58304
+  },
+  "query": "auth_count_6"
+}
+
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 39,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(srctitle:(nuclear))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 495383
+  },
+  "query": "auth_count_7"
+}    
+    
+    
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 103,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authlast:(smith) AND authfirst:(j*) AND afid:(60031944) AND (subjabbr:(engi) OR subjabbr:(medi) OR subjabbr:(bioc)))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 2
+  },
+  "query": "auth_count_8"
+}
+
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 17,
+    "params": {
+      "sort": "authid asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(authlast-m:(wang))",
+      "wt": "json",
+      "fq": "count:{0 TO *]",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 199549
+  },
+  "query": "auth_count_9"
+}

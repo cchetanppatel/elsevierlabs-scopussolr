@@ -3,8 +3,8 @@
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
     <!-- 
         Query ID - AUTH7
-        Query -    AFFIL(oxford) 
-        Description - Affil only on author search  
+        Query -    SRCTITLE(Nuclear) 
+        Description - Srctitle only on author search  
     -->
     <ns2:searchReqPayload>
         <ns2:xQueryX>
@@ -13,7 +13,7 @@
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
                     <ft:andQuery>
-                        <ft:word path="affil">Oxford</ft:word>
+                        <ft:word path="srctitle">Nuclear</ft:word>
                     </ft:andQuery>
                 </ft:query>
             </ft:fullTextQuery>
