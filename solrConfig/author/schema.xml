@@ -136,7 +136,7 @@
 <field name="afhistdispname" type="auth_std" multiValued="true" indexed="true" stored="true"/>
 <field name="afhistdispname-s" type="auth_std" multiValued="false" indexed="true" stored="false"/>
 <field name="afhistid" type="auth_std" multiValued="true" indexed="true" stored="false"/>
-<field name="afid" type="integer" multiValued="true" indexed="true" stored="true"/>
+<field name="afid" type="long" multiValued="true" indexed="true" stored="true"/>
 <field name="afid-f" type="auth_facet_high_card" multiValued="true" indexed="true" stored="false" docValues="true"/>
 <field name="afnameid" type="auth_std_stopwords" multiValued="true" indexed="true" stored="false"/>
 <field name="afnameid-f" type="auth_facet_high_card" multiValued="true" indexed="true" stored="false" docValues="true"/>
