@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns2:search xmlns:ns2="http://webservices.elsevier.com/schemas/search/fast/types/v4"
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
+    <!-- 
+        Query ID - CORE10
+        Query - all(blood)
+        Description - composite field (verify all field mappings)
+    --> 
     <ns2:searchReqPayload>
         <ns2:xQueryX>
             <ft:fullTextQuery xmlns:ft="http://www.elsevier.com/2003/01/xqueryxFT-schema"

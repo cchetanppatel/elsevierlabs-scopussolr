@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns2:search xmlns:ns2="http://webservices.elsevier.com/schemas/search/fast/types/v4"
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
+    <!-- 
+        Query ID - AUTH8
+        Query -    AUTH-LAST-NAME(smith) AND AUTH-FIRST(j*) and LIMIT-TO(AFFILCITY, "Philadelphia") AND (LIMIT-TO(AFFILCOUNTRY, "United States") AND (LIMIT-TO(AUTH-SUBCLUS, "ENGI") OR LIMIT-TO(AUTH-SUBCLUS, "MEDI") OR LIMIT-TO(AUTH-SUBCLUS, "BIOC") AND (LIMIT-TO(SRCTITLE, "Journal of the American Medical Association") AND (LIMIT-TO(AF-ID, "GlaxoSmithKline, USA" 60097308)
+        Description - Facets in search: Author search containing multiple Facets on auth/affil cluster (simulated)
+    -->
     <ns2:searchReqPayload>
         <ns2:xQueryX>
             <ft:fullTextQuery xmlns:ft="http://www.elsevier.com/2003/01/xqueryxFT-schema"

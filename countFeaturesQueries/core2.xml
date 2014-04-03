@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns2:search xmlns:ns2="http://webservices.elsevier.com/schemas/search/fast/types/v4"
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
+    <!-- 
+        Query - ID CORE2
+        Query - eid(2-s2.0-84861409323 OR 2-s2.0-0032977045 OR 2-s2.0-84871047622)
+        Description - eid query
+    --> 
     <ns2:searchReqPayload>
         <ns2:xQueryX>
             <ft:fullTextQuery xmlns:ft="http://www.elsevier.com/2003/01/xqueryxFT-schema"

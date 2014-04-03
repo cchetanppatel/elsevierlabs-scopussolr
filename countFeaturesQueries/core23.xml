@@ -2,9 +2,9 @@
 <ns2:search xmlns:ns2="http://webservices.elsevier.com/schemas/search/fast/types/v4"
     xmlns:ns3="http://webservices.elsevier.com/schemas/easi/headers/types/v1">
     <!-- 
-        Query ID - AUTH6
-        Query -    AUTH-LAST-NAME (smith)
-        Description - Author name last only  
+        Query ID - CORE23
+        Query - pubyear AFT 2000 AND pubyear BEF 2014
+        Description - verify pubyr field date range
     -->
     <ns2:searchReqPayload>
         <ns2:xQueryX>
@@ -13,13 +13,21 @@
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
                     <ft:andQuery>
-                        <ft:word path="authlast">Smith</ft:word>
+                        <ft:numericCompare comparator="greaterThan">
+                            <ft:clause path="pubyr"/>
+                            <ft:decimal>2000</ft:decimal>
+                        </ft:numericCompare>
+                        <ft:numericCompare comparator="lessThan">
+                            <ft:clause path="pubyr"/>
+                            <ft:decimal>2014</ft:decimal>
+                        </ft:numericCompare>
                     </ft:andQuery>
                 </ft:query>
             </ft:fullTextQuery>
         </ns2:xQueryX>
         <ns2:orderByList>
-            <ns2:orderByAttributes path="authid" sortOrder="ascending"/>
+            <ns2:orderByAttributes path="datesort" sortOrder="descending"/>
+            <ns2:orderByAttributes path="relevancy" sortOrder="descending"/>
         </ns2:orderByList>
         <ns2:returnAttributes maxResults="10" start="0"/>
         <ns2:elsfilter>
@@ -27,10 +35,7 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xsi:schemaLocation="http://www.elsevier.com/2003/01/xqueryxFT-schema eql.xsd">
                 <ft:query>
-                    <ft:numericCompare comparator="greaterThan">
-                        <ft:clause path="count"/>
-                        <ft:decimal>0</ft:decimal>
-                    </ft:numericCompare>
+                    <ft:word path="statustype">core</ft:word>
                 </ft:query>
             </ft:fullTextQuery>
         </ns2:elsfilter>
