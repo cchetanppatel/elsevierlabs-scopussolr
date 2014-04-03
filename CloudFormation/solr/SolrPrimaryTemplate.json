@@ -209,7 +209,7 @@
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/query-solrconfig.xml '", { "Ref" : "SolrQueryConfigURL"}, "'", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
-                "nohup java -Djetty.port=8080 -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
+                "nohup java -Djetty.port=8080 -XX:+UseParallelGC -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
                 ]]}}
             }
         },

@@ -173,7 +173,7 @@
                 "sed -i -e 's/collection1/", { "Ref" : "SolrClusterName"}, "/' ./example/solr/", { "Ref" : "SolrClusterName" },"/core.properties", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
-                "nohup java -Djetty.port=8080 -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}  , "::default -jar start.jar > /dev/null 2>error.log&",   "\n"
+                "nohup java -Djetty.port=8080 -XX: +UseParallelGC -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}  , "::default -jar start.jar > /dev/null 2>error.log&",   "\n"
                 ]]}}
             }
         },
