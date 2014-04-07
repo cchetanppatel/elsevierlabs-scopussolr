@@ -905,7 +905,7 @@ public class AbstractTransform {
 			// Commented out because this in now populated by Redshift job and we don't want to overwrite good values on record updates.
 			//fieldValues.put("numcitedby", "10");
 			fieldValues.put("numpatcites", "5");
-			fieldValues.put("numwebcites", "1");
+			fieldValues.put("numwebcites", "5");
 			
 			createSingleField("oeid", oeidMappings);
 			
