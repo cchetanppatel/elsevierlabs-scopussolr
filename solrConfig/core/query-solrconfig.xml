@@ -503,8 +503,8 @@
                and old cache.  
       -->
     <filterCache class="solr.FastLRUCache"
-                 size="512"
-                 initialSize="512"
+                 size="65535"
+                 initialSize="65535"
                  autowarmCount="0"/>
 
     <!-- Query Result Cache
@@ -514,8 +514,8 @@
       -->
     <!-- Store about a minutes worth of queries -->
     <queryResultCache class="solr.LRUCache"
-                     size="2000"
-                     initialSize="512"
+                     size="65535"
+                     initialSize="65535"
                      autowarmCount="0"/>
    
     <!-- Document Cache
@@ -525,8 +525,8 @@
          this cache will not be autowarmed.  
       -->
     <documentCache class="solr.LRUCache"
-                   size="512"
-                   initialSize="512"
+                   size="65535"
+                   initialSize="65535"
                    autowarmCount="0"/>
 
 
@@ -534,8 +534,8 @@
 
       -->
     <fieldValueCache class="solr.LRUCache"
-                   size="50000"
-                   initialSize="5000"
+                   size="65535"
+                   initialSize="65535"
                    autowarmCount="0"/>
 
     <!-- Lazy Field Loading
