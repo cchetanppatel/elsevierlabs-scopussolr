@@ -1,0 +1,60 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 5,
+    "params": {
+      "sort": "sortname asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(afid:(60030162))",
+      "wt": "json",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 1,
+  },
+  "query": "affil_count_1"
+}
+
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 4,
+    "params": {
+      "sort": "sortname asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(affilcity:(london))",
+      "wt": "json",
+      "fq": "(count:{1 TO *] AND quality:[* TO 100} AND NOT(parafid:{0 TO *]))",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 17835,
+  },
+  "query": "affil_count_2"
+}
+
+
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1,
+    "params": {
+      "sort": "sortname asc",
+      "indent": "true",
+      "start": "0",
+      "q": "(affil:(\"university of york\"))",
+      "wt": "json",
+      "fq": "(count:{1 TO *] AND quality:[* TO 100} AND NOT(parafid:{0 TO *]))",
+      "rows": "10"
+    }
+  },
+  "response": {
+    "numFound": 4,
+  },
+  "query": "affil_count_3"
+}

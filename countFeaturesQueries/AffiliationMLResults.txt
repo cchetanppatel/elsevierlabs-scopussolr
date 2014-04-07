@@ -1,0 +1,26 @@
+<search:response snippet-format="snippet" total="1" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000082S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.004447S</search:total-time>
+<search:key>affil_count_1</search:key>
+</search:metrics>
+</search:response>
+
+<search:response snippet-format="snippet" total="10155" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000199S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.093672S</search:total-time>
+<search:key>affil_count_2</search:key>
+</search:metrics>
+</search:response>
+
+<search:response snippet-format="snippet" total="0" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000124S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.039478S</search:total-time>
+<search:key>affil_count_3</search:key>
+</search:metrics>
+</search:response>

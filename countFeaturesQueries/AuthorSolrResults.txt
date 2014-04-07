@@ -1,7 +1,7 @@
 {
   "responseHeader": {
     "status": 0,
-    "QTime": 1,
+    "QTime": 4,
     "params": {
       "sort": "authid asc",
       "indent": "true",
@@ -13,8 +13,7 @@
     }
   },
   "response": {
-    "numFound": 1
-  },
+    "numFound": 1,
   "query": "auth_count_1"
 }
 
@@ -22,7 +21,7 @@
 {
   "responseHeader": {
     "status": 0,
-    "QTime": 115,
+    "QTime": 87,
     "params": {
       "sort": "authid asc",
       "indent": "true",
@@ -34,7 +33,7 @@
     }
   },
   "response": {
-    "numFound": 11479
+    "numFound": 11479,
   },
   "query": "auth_count_2"
 }
@@ -43,7 +42,7 @@
 {
   "responseHeader": {
     "status": 0,
-    "QTime": 136,
+    "QTime": 97,
     "params": {
       "sort": "authid asc",
       "indent": "true",
@@ -55,7 +54,7 @@
     }
   },
   "response": {
-    "numFound": 4599
+    "numFound": 4599,
   },
   "query": "auth_count_3"
 }
@@ -64,7 +63,7 @@
 {
   "responseHeader": {
     "status": 0,
-    "QTime": 173,
+    "QTime": 169,
     "params": {
       "sort": "authid asc",
       "indent": "true",
@@ -76,7 +75,7 @@
     }
   },
   "response": {
-    "numFound": 231
+    "numFound": 231,
   },
   "query": "auth_count_4"
 }    
@@ -85,7 +84,7 @@
 {
   "responseHeader": {
     "status": 0,
-    "QTime": 96,
+    "QTime": 90,
     "params": {
       "sort": "authid asc",
       "indent": "true",
@@ -97,7 +96,7 @@
     }
   },
   "response": {
-    "numFound": 90
+    "numFound": 90,
   },
   "query": "auth_count_5"
 }    
@@ -118,7 +117,7 @@
     }
   },
   "response": {
-    "numFound": 58304
+    "numFound": 58304,
   },
   "query": "auth_count_6"
 }
@@ -127,7 +126,7 @@
 {
   "responseHeader": {
     "status": 0,
-    "QTime": 39,
+    "QTime": 37,
     "params": {
       "sort": "authid asc",
       "indent": "true",
@@ -139,7 +138,7 @@
     }
   },
   "response": {
-    "numFound": 495383
+    "numFound": 495384,
   },
   "query": "auth_count_7"
 }    
@@ -148,7 +147,7 @@
 {
   "responseHeader": {
     "status": 0,
-    "QTime": 103,
+    "QTime": 82,
     "params": {
       "sort": "authid asc",
       "indent": "true",
@@ -160,7 +159,7 @@
     }
   },
   "response": {
-    "numFound": 2
+    "numFound": 2,
   },
   "query": "auth_count_8"
 }
@@ -181,7 +180,7 @@
     }
   },
   "response": {
-    "numFound": 199549
+    "numFound": 199549,
   },
   "query": "auth_count_9"
 }
