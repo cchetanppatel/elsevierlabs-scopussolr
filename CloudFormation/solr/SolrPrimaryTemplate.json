@@ -62,13 +62,13 @@
    "SolrIndexConfigURL" : {
       "Description" : "Solr Config File URL.",
       "Type" : "String",
-      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/index-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1396440302&Signature=kuOwWjNLJNcYk87uYGmXw8tGqko%3D"
+      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/index-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1432969547&Signature=W7LMnCZ4K6INbs7dF/bpEH0J/gc%3D"
     },
     
     "SolrQueryConfigURL" : {
       "Description" : "Solr Config File URL.",
       "Type" : "String",
-      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/query-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1396440258&Signature=npcqX1SJaCGZmI2DZtUZm%2B9LIwM%3D"
+      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/query-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1432969572&Signature=J8nqgxhNSBlQKqywicYFwdpJpao%3D"
     },
     
     "SolrSchemaURL" : {
@@ -104,7 +104,14 @@
       "Description" : "Number of shards for the cluster.",
       "Type" : "Number",
       "MinValue" : "1",
-      "Default" : "2"
+      "Default" : "1"
+    },
+    
+    "MaxShardsPerNode" : {
+      "Description" : "Max number of shards per node.  In multi-shard deployments, this should equal the number of shards. As multiple machines join the cluster, shards will migrate off the primary to the secondary boxes",
+      "Type" : "Number",
+      "MinValue" : "1",
+      "Default" : "1"
     },
     
     "SematextCfgId" : {
@@ -139,7 +146,7 @@
                 "AvailabilityZones" : [ "us-east-1b"],
                 "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
                  "Tags" : [
-          					{ "Key" : "Name", "Value" :  "solr-auth-p", "PropagateAtLaunch" : true }
+          					{ "Key" : "Name", "Value" :  "solr-core-p", "PropagateAtLaunch" : true }
         		],
                 "MinSize" : 1,
                 "MaxSize" : 1
@@ -209,7 +216,7 @@
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/query-solrconfig.xml '", { "Ref" : "SolrQueryConfigURL"}, "'", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
-                "nohup java -Djetty.port=8080 -XX:+UseParallelGC -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
+                "nohup java -Djetty.port=8080 -XX:+UseParallelGC -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -DmaxShardsPerNode=", { "Ref" : "MaxShardsPerNode"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
                 ]]}}
             }
         },

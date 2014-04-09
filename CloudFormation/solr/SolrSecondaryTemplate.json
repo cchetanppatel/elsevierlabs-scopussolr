@@ -109,7 +109,7 @@
                 "AvailabilityZones" : [ "us-east-1b"],
                 "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
                  "Tags" : [
-          					{ "Key" : "Name", "Value" :  "solr-auth-s", "PropagateAtLaunch" : true }
+          					{ "Key" : "Name", "Value" :  "solr-core-s", "PropagateAtLaunch" : true }
         		],
                 "MinSize" : { "Ref" : "NodeCount" },
                 "MaxSize" : { "Ref" : "NodeCount" }
