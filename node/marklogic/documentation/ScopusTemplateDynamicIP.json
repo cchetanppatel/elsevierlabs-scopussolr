@@ -194,7 +194,7 @@
         "Ec2Instance": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
-                "AvailabilityZone" : "us-east-1b",
+                "AvailabilityZone" : "us-east-1c",
                 "ImageId": {
                     "Fn::FindInMap": [
                         "AWSInstanceType2AMI",

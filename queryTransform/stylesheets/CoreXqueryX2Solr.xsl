@@ -85,11 +85,18 @@
     <xsl:if test="exists($fields)">
       <xsl:text>&amp;fl=</xsl:text>
       <xsl:for-each select="$fields">
-        <!-- TODO may need to adjust values for return field -->
-        <xsl:value-of select="./text()"/>
-        <xsl:if test="position() != last()">
-          <xsl:text>,</xsl:text>
-        </xsl:if>
+       	<xsl:choose>
+        	<!-- numcitedby (replace with external file field named cbc) -->
+      		<xsl:when test="matches(.,'numcitedby')">
+        		<xsl:text>field(cbc)</xsl:text>
+      		</xsl:when>  
+          	<xsl:otherwise>
+          		<xsl:value-of select="./text()"/>
+          	</xsl:otherwise>
+		</xsl:choose>
+		<xsl:if test="position() != last()">
+            <xsl:text>,</xsl:text>
+		</xsl:if>      
       </xsl:for-each>
     </xsl:if>
 
@@ -177,7 +184,7 @@
   <xsl:template match="ft:andQuery">
     <xsl:text>(</xsl:text>
     <xsl:for-each
-      select="ft:word[empty(index-of($stopwords,lower-case(.)))] | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
+      select="ft:word[empty(index-of($stopwords,lower-case(.))) or @phrase='true'] | ft:andQuery | ft:orQuery | ft:notQuery | ft:numericCompare">
       <xsl:if test="position() != 1">
         <xsl:text> AND </xsl:text>
       </xsl:if>
@@ -894,7 +901,8 @@
 
       <!-- Number Cited By (141814) -->
       <xsl:when test="matches($f,'^numcitedby$')">
-        <xsl:text>numcitedby-s</xsl:text>
+        <!--  <xsl:text>numcitedby-s</xsl:text> -->
+        <xsl:text>field(cbc)</xsl:text>
       </xsl:when>
 
       <!-- Page Count (0) -->

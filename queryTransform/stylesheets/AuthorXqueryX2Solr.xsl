@@ -65,11 +65,18 @@
       <xsl:if test="exists($fields)">
         <xsl:text>&amp;fl=</xsl:text>
         <xsl:for-each select="$fields">
-          <!-- TODO may need to adjust values for return field -->
-          <xsl:value-of select="./text()"/>
-          <xsl:if test="position() != last()">
-            <xsl:text>,</xsl:text>
-          </xsl:if>
+        	<xsl:choose>
+        		<!-- Count (replace with external file field named pc) -->
+      			<xsl:when test="matches(.,'^count$')">
+        			<xsl:text>field(pc)</xsl:text>
+      			</xsl:when>  
+          		<xsl:otherwise>
+          			<xsl:value-of select="./text()"/>
+          		</xsl:otherwise>
+          	</xsl:choose>
+          	<xsl:if test="position() != last()">
+            	<xsl:text>,</xsl:text>
+          	</xsl:if>
         </xsl:for-each>
       </xsl:if>
  
@@ -204,34 +211,41 @@
   <!-- NUMERIC queryclause -->
   <!-- TODO may need to adjust the values for the field -->
   <!-- TODO need to check if a date value may need to be adjusted (but date is never used) -->
-  <xsl:template match="ft:numericCompare">  
-    <xsl:value-of select="ft:clause/@path"/>
-    <xsl:text>:</xsl:text>
-    <xsl:choose>
-      <xsl:when test="./@comparator='lessThan'">
-        <xsl:text>[* TO </xsl:text>
-        <xsl:value-of select="ft:decimal | ft:date"/>
-        <xsl:text>}</xsl:text>
-      </xsl:when>   
-      <xsl:when test="./@comparator='lessThanOrEqual'">
-        <xsl:text>[* TO </xsl:text>
-        <xsl:value-of select="ft:decimal | ft:date"/>
-        <xsl:text>]</xsl:text>
-      </xsl:when> 
-      <xsl:when test="./@comparator='greaterThan'">
-        <xsl:text>{</xsl:text>
-        <xsl:value-of select="ft:decimal | ft:date"/>
-        <xsl:text> TO *]</xsl:text>
-      </xsl:when>
-      <xsl:when test="./@comparator='greaterThanOrEqual'">
-        <xsl:text>[</xsl:text>
-        <xsl:value-of select="ft:decimal | ft:date"/>
-        <xsl:text> TO *]</xsl:text>        
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="ft:decimal | ft:date"/>
-      </xsl:otherwise>
-    </xsl:choose>
+  <xsl:template match="ft:numericCompare"> 
+  	<xsl:choose>
+  		<xsl:when test="matches(ft:clause/@path,'^count$')">
+  			<xsl:text>{!frange l=1}field(pc)</xsl:text>
+  		</xsl:when>
+  		<xsl:otherwise>
+    		<xsl:value-of select="ft:clause/@path"/>
+    		<xsl:text>:</xsl:text>
+    		<xsl:choose>
+      			<xsl:when test="./@comparator='lessThan'">
+        			<xsl:text>[* TO </xsl:text>
+        			<xsl:value-of select="ft:decimal | ft:date"/>
+        			<xsl:text>}</xsl:text>
+      			</xsl:when>   
+      			<xsl:when test="./@comparator='lessThanOrEqual'">
+        			<xsl:text>[* TO </xsl:text>
+        			<xsl:value-of select="ft:decimal | ft:date"/>
+        			<xsl:text>]</xsl:text>
+      			</xsl:when> 
+      			<xsl:when test="./@comparator='greaterThan'">
+        			<xsl:text>{</xsl:text>
+        			<xsl:value-of select="ft:decimal | ft:date"/>
+        			<xsl:text> TO *]</xsl:text>
+      			</xsl:when>
+      			<xsl:when test="./@comparator='greaterThanOrEqual'">
+        			<xsl:text>[</xsl:text>
+        			<xsl:value-of select="ft:decimal | ft:date"/>
+        			<xsl:text> TO *]</xsl:text>        
+      			</xsl:when>
+      			<xsl:otherwise>
+        			<xsl:value-of select="ft:decimal | ft:date"/>
+      			</xsl:otherwise>
+    		</xsl:choose>
+    	</xsl:otherwise>
+    </xsl:choose> 
   </xsl:template>
  
   
@@ -277,6 +291,11 @@
       <xsl:when test="matches($f,'^relevancy$')">
         <xsl:text>score</xsl:text>
       </xsl:when>
+
+      <!-- Count (replace with external file field named pc) -->
+      <xsl:when test="matches($f,'^count$')">
+        <xsl:text>field(pc)</xsl:text>
+      </xsl:when>      
       
       <!-- Assume we use the specified name as the field  -->   
       <!--  This would include 

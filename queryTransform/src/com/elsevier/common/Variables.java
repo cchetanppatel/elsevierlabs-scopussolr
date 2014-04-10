@@ -15,9 +15,11 @@ public class Variables {
 	// Dynamo Endpoint
 	public static final String DYNAMO_ENDPOINT = "https://dynamodb.us-east-1.amazonaws.com/";
 		
-	// DynamoDB table name	
-	public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-core-query";
+	// DynamoDB table name
+	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-core-query";
+	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-count-features-query";
 	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-author-query";
+	public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-core-query-extfile";
 	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-institution-query";
 	
 	// AWS access key
