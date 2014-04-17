@@ -1,0 +1,33 @@
+import module namespace q="com.blakeley.els.query" at "lib-query.xqm";
+import module namespace req="com.blakeley.els.request" at "lib-request.xqm" ;
+
+let $req as element(q:request) :=
+<m:request type="core" start="1" page-length="1" xmlns:m="com.blakeley.els.query">
+    <m:query>
+        <cts:and-query xmlns:cts="http://marklogic.com/cts">
+            <cts:directory-query depth="infinity">
+                <cts:uri>/core/</cts:uri>
+            </cts:directory-query>
+            <cts:element-word-query>
+                <cts:element xmlns:xocs="http://www.elsevier.com/xml/xocs/dtd">xocs:fulltext-eid</cts:element>
+                <cts:text xml:lang="en">1-s2.0-S0168365913004069</cts:text>
+            </cts:element-word-query>
+        </cts:and-query>
+    </m:query>
+    <search:options xmlns:search="http://marklogic.com/appservices/search">
+        <search:search-option>unfiltered</search:search-option>
+        <search:return-results>true</search:return-results>
+        <search:search-option>score-zero</search:search-option>
+        <search:search-option>faceted</search:search-option>
+        <search:transform-results apply="result" ns="com.blakeley.els.request" at="/lib-request.xqm" highlight="false">
+            <req:request-field xmlns:req="com.blakeley.els.request">doi</req:request-field>
+            <req:request-field xmlns:req="com.blakeley.els.request">sdeid</req:request-field>
+            <req:request-field xmlns:req="com.blakeley.els.request">collecid</req:request-field>
+            <req:request-field xmlns:req="com.blakeley.els.request">pmid</req:request-field>
+            <req:request-field xmlns:req="com.blakeley.els.request">pii</req:request-field>
+            <req:request-field xmlns:req="com.blakeley.els.request">eid</req:request-field>
+        </search:transform-results>
+    </search:options>
+</m:request>
+
+return req:search('test', false(), $req)

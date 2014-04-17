@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 215,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:man",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 273243,
+    "start": 0,
+    "maxScore": 2.1843805,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2011",
+        12235,
+        "2012",
+        12228,
+        "2010",
+        11680
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        494,
+        "36041960700 S. Kohno",
+        108,
+        "35411645300 M. Mori",
+        86
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        170183,
+        "BIOC",
+        31541,
+        "ENGI",
+        24505
+      ],
+      "subtype-f": [
+        "ar",
+        211623,
+        "cp",
+        17770,
+        "re",
+        17759
+      ],
+      "exactsrctitle-f": [
+        "Japanese Journal of Gastroenterological Surgery",
+        1467,
+        "Clinical Nuclear Medicine",
+        1339,
+        "Acta Urologica Japonica",
+        1265
+      ],
+      "exactkeyword-f": [
+        "human",
+        151864,
+        "article",
+        137553,
+        "Male",
+        121163
+      ],
+      "afid-f": [
+        "60014232",
+        2491,
+        "60022148",
+        875,
+        "60011047",
+        838
+      ],
+      "affilctry-f": [
+        "United States",
+        58303,
+        "Japan",
+        32323,
+        "United Kingdom",
+        19564
+      ],
+      "srctype-f": [
+        "j",
+        253713,
+        "p",
+        11492,
+        "d",
+        4315
+      ],
+      "lang-f": [
+        "eng",
+        209087,
+        "jpn",
+        19809,
+        "fre",
+        10716
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 5347,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:human",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 17735532,
+    "start": 0,
+    "maxScore": 0.90658164,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        933333,
+        "2011",
+        905866,
+        "2010",
+        849762
+      ],
+      "prefnameauid-f": [
+        "36040636300 E. Ernst",
+        1813,
+        "36049464300 D. Lester",
+        1580,
+        "36067404600 K. Sugimachi",
+        1574
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        12169469,
+        "BIOC",
+        2975647,
+        "IMMU",
+        943347
+      ],
+      "subtype-f": [
+        "ar",
+        12749862,
+        "re",
+        1702022,
+        "cp",
+        935156
+      ],
+      "exactsrctitle-f": [
+        "Lancet",
+        96554,
+        "Journal of Biological Chemistry",
+        70468,
+        "New England Journal of Medicine",
+        53022
+      ],
+      "exactkeyword-f": [
+        "human",
+        13155997,
+        "article",
+        10520033,
+        "Humans",
+        7233483
+      ],
+      "afid-f": [
+        "60014232",
+        139363,
+        "60023691",
+        81120,
+        "60016849",
+        73669
+      ],
+      "affilctry-f": [
+        "United States",
+        4671687,
+        "United Kingdom",
+        1298139,
+        "Germany",
+        972596
+      ],
+      "srctype-f": [
+        "j",
+        17225029,
+        "p",
+        339540,
+        "k",
+        146090
+      ],
+      "lang-f": [
+        "eng",
+        14294773,
+        "ger",
+        710743,
+        "fre",
+        578383
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

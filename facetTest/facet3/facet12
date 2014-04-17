@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 320,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:chicago",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 510713,
+    "start": 0,
+    "maxScore": 2.345885,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        29677,
+        "2011",
+        28734,
+        "2010",
+        27338
+      ],
+      "prefnameauid-f": [
+        "34875550900 H.A. Neal",
+        811,
+        "1 Anon",
+        800,
+        "35226976800 A. Bodek",
+        800
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        178637,
+        "ENGI",
+        92819,
+        "BIOC",
+        62100
+      ],
+      "subtype-f": [
+        "ar",
+        314730,
+        "cp",
+        96935,
+        "re",
+        43668
+      ],
+      "exactsrctitle-f": [
+        "Proceedings of the American Power Conference",
+        3871,
+        "Journal of the American Chemical Society",
+        3318,
+        "The Journal of Chemical Physics",
+        2889
+      ],
+      "exactkeyword-f": [
+        "article",
+        150305,
+        "human",
+        146983,
+        "Humans",
+        110895
+      ],
+      "afid-f": [
+        "60029278",
+        89273,
+        "60027561",
+        60510,
+        "60013227",
+        30050
+      ],
+      "affilctry-f": [
+        "United States",
+        369995,
+        "United Kingdom",
+        17739,
+        "Canada",
+        16017
+      ],
+      "srctype-f": [
+        "j",
+        412212,
+        "p",
+        86459,
+        "k",
+        5870
+      ],
+      "lang-f": [
+        "eng",
+        492736,
+        "fre",
+        1738,
+        "ger",
+        1270
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

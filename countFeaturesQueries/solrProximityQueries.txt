@@ -8,8 +8,8 @@ Core21 - abs(brain W/5 cancer)
 q={!surround}abs:(brain 5n cancer)
 
 
-Core22 - abs (practice W/5 "neurological letter")
-q={!surround}abs:(practice 5n (neurological w letter))
+Core22 - itemtitle (practice W/5 "letter")
+q={!surround}itemtitle:(practice 5n "letter")
 
 
 Core23 - title(neuro* W/3 letter)
@@ -17,7 +17,7 @@ q={!surround}itemtitle:(neuro* 3n letter)
 
 
 Core24 - title(neurological) AND NOT title(neurological W/5 letter)
-q=itemtitle:neurological AND NOT {!surround}itemtitle:(neurological 5n letter)
+q=itemtitle:neurological AND NOT ({!surround}itemtitle:(neurological 5n letter))
 
 
 Core25 - title((neurological OR letter) w/5 practice)

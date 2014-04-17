@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 366,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:brain AND all:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 409332,
+    "start": 0,
+    "maxScore": 1.8785226,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        42730,
+        "2011",
+        38560,
+        "2010",
+        34485
+      ],
+      "prefnameauid-f": [
+        "35397775800 D.D. Bigner",
+        354,
+        "35391936300 H.S. Friedman",
+        346,
+        "7404268112 M.S. Berger",
+        313
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        238928,
+        "BIOC",
+        180855,
+        "NEUR",
+        56491
+      ],
+      "subtype-f": [
+        "ar",
+        296010,
+        "re",
+        83221,
+        "cp",
+        14189
+      ],
+      "exactsrctitle-f": [
+        "PLoS ONE",
+        5087,
+        "Cancer Research",
+        4262,
+        "Journal of Neuro-Oncology",
+        3562
+      ],
+      "exactkeyword-f": [
+        "article",
+        271655,
+        "human",
+        264659,
+        "Humans",
+        231062
+      ],
+      "afid-f": [
+        "60015023",
+        5900,
+        "60014232",
+        4734,
+        "60023691",
+        4574
+      ],
+      "affilctry-f": [
+        "United States",
+        166117,
+        "Japan",
+        34461,
+        "Germany",
+        33058
+      ],
+      "srctype-f": [
+        "j",
+        398096,
+        "k",
+        7746,
+        "p",
+        3299
+      ],
+      "lang-f": [
+        "eng",
+        385833,
+        "chi",
+        4325,
+        "fre",
+        4180
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

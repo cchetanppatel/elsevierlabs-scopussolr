@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1288,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:rat",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 2719679,
+    "start": 0,
+    "maxScore": 1.4882396,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        129007,
+        "2011",
+        124578,
+        "2010",
+        118654
+      ],
+      "prefnameauid-f": [
+        "7403334992 W.J. Malaisse",
+        983,
+        "36014564800 J.A. Gustafsson",
+        798,
+        "36037094600 G. Burnstock",
+        716
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        1264789,
+        "BIOC",
+        1109966,
+        "PHAR",
+        471050
+      ],
+      "subtype-f": [
+        "ar",
+        2210755,
+        "re",
+        238617,
+        "cp",
+        97749
+      ],
+      "exactsrctitle-f": [
+        "Brain Research",
+        35966,
+        "Journal of Biological Chemistry",
+        25669,
+        "Endocrinology",
+        22053
+      ],
+      "exactkeyword-f": [
+        "article",
+        1841742,
+        "nonhuman",
+        1494105,
+        "rat",
+        1448704
+      ],
+      "afid-f": [
+        "60014232",
+        33760,
+        "60000905",
+        23841,
+        "60023691",
+        15867
+      ],
+      "affilctry-f": [
+        "United States",
+        912909,
+        "Japan",
+        262926,
+        "United Kingdom",
+        176134
+      ],
+      "srctype-f": [
+        "j",
+        2675797,
+        "k",
+        30881,
+        "p",
+        12048
+      ],
+      "lang-f": [
+        "eng",
+        2471078,
+        "rus",
+        57607,
+        "chi",
+        49403
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

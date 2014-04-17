@@ -1,0 +1,53 @@
+import module namespace q="com.blakeley.els.query" at "lib-query.xqm";
+import module namespace req="com.blakeley.els.request" at "lib-request.xqm" ;
+
+let $req as element(q:request) :=
+<m:request type="core" start="1" page-length="1" xmlns:m="com.blakeley.els.query">
+    <m:query>
+        <cts:and-query xmlns:cts="http://marklogic.com/cts">
+            <cts:directory-query depth="infinity">
+                <cts:uri>/core/</cts:uri>
+            </cts:directory-query>
+            <cts:element-query xmlns:cts="http://marklogic.com/cts">
+                <cts:element>author-group</cts:element>
+                <cts:element-query xmlns:cts="http://marklogic.com/cts">
+                    <cts:element>affiliation</cts:element>
+                    <cts:and-query>
+                        <cts:element-query>
+                            <cts:element>organization</cts:element>
+                            <cts:word-query>
+                                <cts:text xml:lang="en">university</cts:text>
+                            </cts:word-query>
+                        </cts:element-query>
+                        <cts:element-query>
+                            <cts:element>organization</cts:element>
+                            <cts:word-query>
+                                <cts:text xml:lang="en">california</cts:text>
+                            </cts:word-query>
+                        </cts:element-query>                        
+                        <cts:element-query>
+                            <cts:element>city-group</cts:element>
+                            <cts:word-query>
+                                <cts:text xml:lang="en">san</cts:text>                         
+                            </cts:word-query>
+                        </cts:element-query>
+                        <cts:element-query>
+                            <cts:element>city-group</cts:element>
+                            <cts:word-query>
+                                <cts:text xml:lang="en">diego</cts:text>                         
+                            </cts:word-query>
+                        </cts:element-query>                        
+                    </cts:and-query>
+                </cts:element-query>
+            </cts:element-query>
+        </cts:and-query>
+    </m:query>
+    <search:options xmlns:search="http://marklogic.com/appservices/search">
+        <search:search-option>unfiltered</search:search-option>
+        <search:return-results>false</search:return-results>
+        <search:search-option>score-zero</search:search-option>
+        <search:search-option>faceted</search:search-option>
+    </search:options>
+</m:request>
+
+return req:search('test', false(), $req)            

@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 3978,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:hea*",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 12115438,
+    "start": 0,
+    "maxScore": 1,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        847322,
+        "2011",
+        805379,
+        "2010",
+        742786
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        9319,
+        "36042830300 W.C. Willett",
+        1292,
+        "36048731400 A. Hofman",
+        1282
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        6288074,
+        "BIOC",
+        1677878,
+        "ENGI",
+        1237458
+      ],
+      "subtype-f": [
+        "ar",
+        8770880,
+        "re",
+        1060128,
+        "cp",
+        961221
+      ],
+      "exactsrctitle-f": [
+        "PLoS ONE",
+        36243,
+        "Proceedings of SPIE - The International Society for Optical Engineering",
+        36212,
+        "Circulation",
+        33966
+      ],
+      "exactkeyword-f": [
+        "article",
+        5817647,
+        "human",
+        5606883,
+        "Humans",
+        3974515
+      ],
+      "afid-f": [
+        "60014232",
+        92407,
+        "60016849",
+        61024,
+        "60023691",
+        51631
+      ],
+      "affilctry-f": [
+        "United States",
+        3530676,
+        "United Kingdom",
+        929493,
+        "Germany",
+        651783
+      ],
+      "srctype-f": [
+        "j",
+        11298587,
+        "p",
+        554808,
+        "k",
+        138862
+      ],
+      "lang-f": [
+        "eng",
+        10621614,
+        "ger",
+        286954,
+        "chi",
+        199796
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

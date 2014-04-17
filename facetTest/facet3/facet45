@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 112,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:daniel",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 57698,
+    "start": 0,
+    "maxScore": 3.365191,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        3013,
+        "2010",
+        2732,
+        "2011",
+        2649
+      ],
+      "prefnameauid-f": [
+        "35474017600 E.E. Daniel",
+        603,
+        "7201946192 W.G. Daniel",
+        419,
+        "7102014576 A.M.M. Eggermont",
+        300
+      ],
+      "subjabbr-f": [
+        "ENGI",
+        16704,
+        "MEDI",
+        13368,
+        "SOCI",
+        6470
+      ],
+      "subtype-f": [
+        "ar",
+        33867,
+        "cp",
+        12608,
+        "re",
+        4342
+      ],
+      "exactsrctitle-f": [
+        "Proceedings of SPIE - The International Society for Optical Engineering",
+        1456,
+        "Notes and Queries",
+        435,
+        "Journal of the American Chemical Society",
+        224
+      ],
+      "exactkeyword-f": [
+        "article",
+        13628,
+        "human",
+        11368,
+        "priority journal",
+        8173
+      ],
+      "afid-f": [
+        "60032114",
+        3163,
+        "60000745",
+        1003,
+        "60005290",
+        801
+      ],
+      "affilctry-f": [
+        "United States",
+        19807,
+        "Netherlands",
+        3674,
+        "France",
+        3521
+      ],
+      "srctype-f": [
+        "j",
+        43546,
+        "p",
+        12127,
+        "d",
+        1164
+      ],
+      "lang-f": [
+        "eng",
+        51069,
+        "fre",
+        1749,
+        "ger",
+        1032
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

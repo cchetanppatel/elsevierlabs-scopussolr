@@ -1,0 +1,128 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 106,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:kravetz",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 429,
+    "start": 0,
+    "maxScore": 3.4988737,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2002",
+        28,
+        "2000",
+        21,
+        "2003",
+        19
+      ],
+      "prefnameauid-f": [
+        "7004441492 R.E. Kravetz",
+        70,
+        "7003927799 S. Kravetz",
+        69,
+        "7003770134 D. Kravetz",
+        65
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        297,
+        "BIOC",
+        35,
+        "PSYC",
+        32
+      ],
+      "subtype-f": [
+        "ar",
+        325,
+        "re",
+        20,
+        "cp",
+        12
+      ],
+      "exactsrctitle-f": [
+        "American Journal of Gastroenterology",
+        55,
+        "The American journal of gastroenterology",
+        21,
+        "Hepatology",
+        16
+      ],
+      "exactkeyword-f": [
+        "article",
+        216,
+        "human",
+        201,
+        "Humans",
+        144
+      ],
+      "afid-f": [
+        "60002765",
+        65,
+        "100400268",
+        30,
+        "60014232",
+        29
+      ],
+      "affilctry-f": [
+        "United States",
+        148,
+        "Israel",
+        70,
+        "Argentina",
+        33
+      ],
+      "srctype-f": [
+        "j",
+        422,
+        "p",
+        7
+      ],
+      "lang-f": [
+        "eng",
+        393,
+        "spa",
+        23,
+        "fre",
+        5
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

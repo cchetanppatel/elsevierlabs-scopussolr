@@ -1,0 +1,108 @@
+import module namespace q="com.blakeley.els.query" at "lib-query.xqm";
+import module namespace req="com.blakeley.els.request" at "lib-request.xqm" ;
+
+let $req as element(q:request) :=
+<m:request type="core" start="1" page-length="1" xmlns:m="com.blakeley.els.query">
+    <m:query>
+        <cts:and-query xmlns:cts="http://marklogic.com/cts">
+            <cts:directory-query depth="infinity">
+                <cts:uri>/core/</cts:uri>
+            </cts:directory-query>
+            <cts:field-word-query>
+                <cts:field>core.allsmall</cts:field>
+                <cts:text xml:lang="en">water</cts:text>
+            </cts:field-word-query>
+        </cts:and-query>
+    </m:query>
+    <search:options xmlns:search="http://marklogic.com/appservices/search">
+        <search:search-option>unfiltered</search:search-option>
+        <search:return-results>false</search:return-results>
+        <search:search-option>score-zero</search:search-option>
+        <search:search-option>faceted</search:search-option>
+        <search:constraint name="core.scopubyrnav">
+            <search:range facet="true" type="xs:int" property="false">
+                <search:facet-option>item-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:path-index xmlns:ait="http://www.elsevier.com/xml/ani/ait" xmlns:ce="http://www.elsevier.com/xml/ani/common" xmlns:cto="http://www.elsevier.com/xml/cto/dtd" xmlns:xocs="http://www.elsevier.com/xml/xocs/dtd" xmlns:cbee="com.blakeley.els.enrichment">/cbee:doc/xocs:doc/xocs:item/item/ait:process-info/ait:date-sort/@year</search:path-index>
+            </search:range>
+        </search:constraint>
+        <search:constraint name="core.scoprefnameauidnav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:element ns="com.blakeley.els.enrichment" name="core-prefnameauid"/>
+            </search:range>
+        </search:constraint> 
+        <search:constraint name="core.scosubjabbrnav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:element ns="com.blakeley.els.enrichment" name="core-subjabbr"/>
+            </search:range>
+        </search:constraint>       
+        <search:constraint name="core.scosubtypenav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:element ns="" name="citation-type"/>
+                <search:attribute ns="" name="code"/>
+            </search:range>
+        </search:constraint>       
+        <search:constraint name="core.scosrctitlenav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:path-index xmlns:ait="http://www.elsevier.com/xml/ani/ait" xmlns:ce="http://www.elsevier.com/xml/ani/common" xmlns:cto="http://www.elsevier.com/xml/cto/dtd" xmlns:xocs="http://www.elsevier.com/xml/xocs/dtd" xmlns:cbee="com.blakeley.els.enrichment">/cbee:doc/xocs:doc/xocs:item/item/bibrecord/head/source/sourcetitle</search:path-index>
+            </search:range>
+        </search:constraint>
+        <search:constraint name="core.scokeywordsnav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:path-index xmlns:ait="http://www.elsevier.com/xml/ani/ait" xmlns:ce="http://www.elsevier.com/xml/ani/common" xmlns:cto="http://www.elsevier.com/xml/cto/dtd" xmlns:xocs="http://www.elsevier.com/xml/xocs/dtd" xmlns:cbee="com.blakeley.els.enrichment">/cbee:doc/xocs:doc/xocs:item/item/bibrecord/head/citation-info/author-keywords/author-keyword</search:path-index>
+            </search:range>
+        </search:constraint>   
+        <search:constraint name="core.scoafidnav">
+            <search:range facet="true" type="xs:long" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:path-index xmlns:ait="http://www.elsevier.com/xml/ani/ait" xmlns:ce="http://www.elsevier.com/xml/ani/common" xmlns:cto="http://www.elsevier.com/xml/cto/dtd" xmlns:xocs="http://www.elsevier.com/xml/xocs/dtd" xmlns:cbee="com.blakeley.els.enrichment">/cbee:doc/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/@afid</search:path-index>
+            </search:range>
+        </search:constraint>   
+        <search:constraint name="core.scocntrynav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:path-index xmlns:ait="http://www.elsevier.com/xml/ani/ait" xmlns:ce="http://www.elsevier.com/xml/ani/common" xmlns:cto="http://www.elsevier.com/xml/cto/dtd" xmlns:xocs="http://www.elsevier.com/xml/xocs/dtd" xmlns:cbee="com.blakeley.els.enrichment">/cbee:doc/xocs:doc/xocs:item/item/bibrecord/head/author-group/affiliation/@country</search:path-index>
+            </search:range>
+        </search:constraint>    
+        <search:constraint name="core.scosrctypenav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:element ns="" name="source"/>
+                <search:attribute ns="" name="type"/>
+            </search:range>
+        </search:constraint>   
+        <search:constraint name="core.scolangnav">
+            <search:range facet="true" type="xs:string" property="false">
+                <search:facet-option>frequency-order</search:facet-option>
+                <search:facet-option>descending</search:facet-option>
+                <search:facet-option>limit=200</search:facet-option>
+                <search:element ns="" name="citation-language"/>
+                <search:attribute ns="http://www.w3.org/XML/1998/namespace" name="lang"/>
+            </search:range>
+        </search:constraint>  
+    </search:options>
+</m:request>
+
+return req:search('test', false(), $req)            

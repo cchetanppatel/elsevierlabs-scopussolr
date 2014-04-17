@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1033,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:heart",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 2455495,
+    "start": 0,
+    "maxScore": 2.0144157,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        151367,
+        "2011",
+        144093,
+        "2010",
+        135465
+      ],
+      "prefnameauid-f": [
+        "35375508300 E. Braunwald",
+        1167,
+        "36064679400 P.J. Barnes",
+        1141,
+        "7201461358 R. Erbel",
+        1131
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        1817796,
+        "BIOC",
+        485854,
+        "PHAR",
+        178554
+      ],
+      "subtype-f": [
+        "ar",
+        1756382,
+        "re",
+        288399,
+        "cp",
+        113053
+      ],
+      "exactsrctitle-f": [
+        "Circulation",
+        32912,
+        "American Heart Journal",
+        25846,
+        "American Journal of Cardiology",
+        23470
+      ],
+      "exactkeyword-f": [
+        "human",
+        1536439,
+        "article",
+        1448620,
+        "Humans",
+        1026312
+      ],
+      "afid-f": [
+        "60014232",
+        28870,
+        "60016782",
+        17013,
+        "60005281",
+        14688
+      ],
+      "affilctry-f": [
+        "United States",
+        761484,
+        "United Kingdom",
+        183310,
+        "Germany",
+        154619
+      ],
+      "srctype-f": [
+        "j",
+        2399610,
+        "p",
+        34555,
+        "k",
+        17383
+      ],
+      "lang-f": [
+        "eng",
+        2056166,
+        "ger",
+        82424,
+        "fre",
+        58559
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

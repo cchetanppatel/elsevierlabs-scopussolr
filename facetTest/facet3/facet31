@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 92,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:kentucky",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 8106,
+    "start": 0,
+    "maxScore": 3.401435,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2010",
+        410,
+        "2007",
+        386,
+        "2011",
+        385
+      ],
+      "prefnameauid-f": [
+        "7102699526 J.C. Hower",
+        122,
+        "16166855200 E.T. Lyons",
+        46,
+        "7005306082 C.G. Leukefeld",
+        44
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        1839,
+        "AGRI",
+        1805,
+        "ENGI",
+        1358
+      ],
+      "subtype-f": [
+        "ar",
+        5552,
+        "cp",
+        928,
+        "re",
+        356
+      ],
+      "exactsrctitle-f": [
+        "Federal Register",
+        132,
+        "Crop Science",
+        120,
+        "The Journal of the Kentucky Medical Association",
+        84
+      ],
+      "exactkeyword-f": [
+        "article",
+        2106,
+        "Kentucky",
+        1930,
+        "United States",
+        1927
+      ],
+      "afid-f": [
+        "60015941",
+        1927,
+        "60020633",
+        300,
+        "60014611",
+        173
+      ],
+      "affilctry-f": [
+        "United States",
+        5240,
+        "Canada",
+        216,
+        "China",
+        85
+      ],
+      "srctype-f": [
+        "j",
+        6794,
+        "p",
+        772,
+        "d",
+        367
+      ],
+      "lang-f": [
+        "eng",
+        7699,
+        "fre",
+        20,
+        "ger",
+        17
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

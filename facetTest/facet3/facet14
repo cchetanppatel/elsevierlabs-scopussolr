@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 282,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:arm",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 349466,
+    "start": 0,
+    "maxScore": 2.5895205,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        28260,
+        "2011",
+        26341,
+        "2010",
+        23962
+      ],
+      "prefnameauid-f": [
+        "7103125898 S.P. Armes",
+        487,
+        "35227923400 P. Robmann",
+        349,
+        "7003889515 C. Grab",
+        346
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        181996,
+        "BIOC",
+        68980,
+        "ENGI",
+        51078
+      ],
+      "subtype-f": [
+        "ar",
+        255563,
+        "cp",
+        41128,
+        "re",
+        33644
+      ],
+      "exactsrctitle-f": [
+        "Proceedings of SPIE - The International Society for Optical Engineering",
+        2435,
+        "Experimental Brain Research",
+        2281,
+        "Journal of Neurophysiology",
+        1516
+      ],
+      "exactkeyword-f": [
+        "human",
+        184290,
+        "article",
+        176920,
+        "Humans",
+        137692
+      ],
+      "afid-f": [
+        "60070851",
+        2967,
+        "60014232",
+        2704,
+        "60070862",
+        2507
+      ],
+      "affilctry-f": [
+        "United States",
+        108261,
+        "United Kingdom",
+        30626,
+        "Germany",
+        25774
+      ],
+      "srctype-f": [
+        "j",
+        310737,
+        "p",
+        30238,
+        "k",
+        5957
+      ],
+      "lang-f": [
+        "eng",
+        314187,
+        "ger",
+        7794,
+        "fre",
+        5771
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

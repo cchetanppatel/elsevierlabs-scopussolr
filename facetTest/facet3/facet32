@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 95,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:chicago",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 23676,
+    "start": 0,
+    "maxScore": 3.838618,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2011",
+        2082,
+        "2010",
+        1608,
+        "2006",
+        1603
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        224,
+        "16651170600 N. Rashevsky",
+        128,
+        "7201521272 J. Stamler",
+        95
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        5663,
+        "SOCI",
+        5205,
+        "AGRI",
+        3656
+      ],
+      "subtype-f": [
+        "ar",
+        17173,
+        "cp",
+        2363,
+        "re",
+        1828
+      ],
+      "exactsrctitle-f": [
+        "American Naturalist",
+        1403,
+        "International Journal of Plant Sciences",
+        823,
+        "Physiological and Biochemical Zoology",
+        686
+      ],
+      "exactkeyword-f": [
+        "article",
+        6545,
+        "human",
+        4718,
+        "Humans",
+        3608
+      ],
+      "afid-f": [
+        "60029278",
+        1505,
+        "60027561",
+        1174,
+        "60007363",
+        458
+      ],
+      "affilctry-f": [
+        "United States",
+        13956,
+        "United Kingdom",
+        1012,
+        "Canada",
+        958
+      ],
+      "srctype-f": [
+        "j",
+        19605,
+        "d",
+        1863,
+        "p",
+        1839
+      ],
+      "lang-f": [
+        "eng",
+        22734,
+        "fre",
+        115,
+        "ger",
+        91
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

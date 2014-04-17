@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 109,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:soutar",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 786,
+    "start": 0,
+    "maxScore": 3.9369931,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1993",
+        37,
+        "2004",
+        35,
+        "2008",
+        34
+      ],
+      "prefnameauid-f": [
+        "7006356285 A.K. Soutar",
+        130,
+        "7005436791 I. Soutar",
+        114,
+        "7004787094 D.S. Soutar",
+        95
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        361,
+        "BIOC",
+        119,
+        "MATE",
+        90
+      ],
+      "subtype-f": [
+        "ar",
+        597,
+        "re",
+        46,
+        "cp",
+        37
+      ],
+      "exactsrctitle-f": [
+        "British Journal of Plastic Surgery",
+        20,
+        "Atherosclerosis",
+        19,
+        "Thorax",
+        17
+      ],
+      "exactkeyword-f": [
+        "human",
+        367,
+        "priority journal",
+        283,
+        "article",
+        268
+      ],
+      "afid-f": [
+        "60020416",
+        102,
+        "60017489",
+        63,
+        "60031806",
+        56
+      ],
+      "affilctry-f": [
+        "United Kingdom",
+        494,
+        "United States",
+        76,
+        "Australia",
+        67
+      ],
+      "srctype-f": [
+        "j",
+        753,
+        "p",
+        20,
+        "k",
+        6
+      ],
+      "lang-f": [
+        "eng",
+        759,
+        "rus",
+        4,
+        "spa",
+        2
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

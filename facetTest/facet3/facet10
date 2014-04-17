@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 296,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:ohio",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 265839,
+    "start": 0,
+    "maxScore": 2.3918984,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        14392,
+        "2011",
+        13767,
+        "2010",
+        13131
+      ],
+      "prefnameauid-f": [
+        "35502069800 L.A. Paquette",
+        1105,
+        "35227380900 H. Kagan",
+        996,
+        "35226923400 M.S. Alam",
+        860
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        78192,
+        "ENGI",
+        35801,
+        "BIOC",
+        31577
+      ],
+      "subtype-f": [
+        "ar",
+        193261,
+        "cp",
+        29803,
+        "re",
+        18819
+      ],
+      "exactsrctitle-f": [
+        "Journal of the American Chemical Society",
+        2565,
+        "Ohio medicine : journal of the Ohio State Medical Association",
+        1810,
+        "Physical Review Letters",
+        1622
+      ],
+      "exactkeyword-f": [
+        "article",
+        79292,
+        "human",
+        60626,
+        "Humans",
+        45561
+      ],
+      "afid-f": [
+        "60003500",
+        112003,
+        "60011132",
+        13374,
+        "60000305",
+        5587
+      ],
+      "affilctry-f": [
+        "United States",
+        201298,
+        "Canada",
+        9021,
+        "United Kingdom",
+        8371
+      ],
+      "srctype-f": [
+        "j",
+        235978,
+        "p",
+        23814,
+        "k",
+        3102
+      ],
+      "lang-f": [
+        "eng",
+        261101,
+        "ger",
+        585,
+        "spa",
+        509
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

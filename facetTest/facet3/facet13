@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 830,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:\"new york\"",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1722116,
+    "start": 0,
+    "maxScore": 2.5579505,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        90989,
+        "2011",
+        84130,
+        "2010",
+        74167
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        3155,
+        "7102167246 M.A. Taverna",
+        1131,
+        "35225688100 S. Banerjee",
+        1042
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        504251,
+        "ENGI",
+        452860,
+        "BIOC",
+        248311
+      ],
+      "subtype-f": [
+        "ar",
+        990491,
+        "cp",
+        390026,
+        "re",
+        137225
+      ],
+      "exactsrctitle-f": [
+        "Annals of the New York Academy of Sciences",
+        52428,
+        "Aviation Week and Space Technology (New York)",
+        16337,
+        "American Society of Mechanical Engineers (Paper)",
+        14303
+      ],
+      "exactkeyword-f": [
+        "article",
+        483797,
+        "human",
+        455663,
+        "Humans",
+        340880
+      ],
+      "afid-f": [
+        "60030162",
+        75653,
+        "60021784",
+        47421,
+        "60032083",
+        43219
+      ],
+      "affilctry-f": [
+        "United States",
+        948811,
+        "United Kingdom",
+        63390,
+        "Germany",
+        54061
+      ],
+      "srctype-f": [
+        "j",
+        1308156,
+        "p",
+        340283,
+        "k",
+        38086
+      ],
+      "lang-f": [
+        "eng",
+        1636593,
+        "ger",
+        10684,
+        "fre",
+        5808
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

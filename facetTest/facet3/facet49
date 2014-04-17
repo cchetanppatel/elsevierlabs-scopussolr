@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 86,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:fulford",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1145,
+    "start": 0,
+    "maxScore": 4.419742,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2011",
+        63,
+        "2009",
+        60,
+        "2012",
+        57
+      ],
+      "prefnameauid-f": [
+        "7003535112 M. Hughes-Fulford",
+        57,
+        "7003346926 A.J.C. Fulford",
+        54,
+        "7004691363 K.W.M. Fulford",
+        53
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        463,
+        "ENGI",
+        158,
+        "BIOC",
+        144
+      ],
+      "subtype-f": [
+        "ar",
+        723,
+        "cp",
+        133,
+        "re",
+        104
+      ],
+      "exactsrctitle-f": [
+        "Queens Quarterly",
+        31,
+        "Current Opinion in Psychiatry",
+        20,
+        "Journal of Bone and Joint Surgery - Series B",
+        20
+      ],
+      "exactkeyword-f": [
+        "human",
+        423,
+        "article",
+        401,
+        "Humans",
+        309
+      ],
+      "afid-f": [
+        "60031331",
+        61,
+        "60022020",
+        43,
+        "60014232",
+        42
+      ],
+      "affilctry-f": [
+        "United Kingdom",
+        443,
+        "United States",
+        306,
+        "Canada",
+        84
+      ],
+      "srctype-f": [
+        "j",
+        1019,
+        "p",
+        103,
+        "k",
+        10
+      ],
+      "lang-f": [
+        "eng",
+        1110,
+        "ger",
+        6,
+        "spa",
+        4
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

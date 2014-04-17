@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 303,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:lung",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 436214,
+    "start": 0,
+    "maxScore": 2.0371747,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        25051,
+        "2011",
+        23008,
+        "2010",
+        21537
+      ],
+      "prefnameauid-f": [
+        "35380041500 J.D. Minna",
+        417,
+        "35402857300 J.A. Whitsett",
+        408,
+        "7201883290 N. Saijo",
+        387
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        321995,
+        "BIOC",
+        121876,
+        "PHAR",
+        36936
+      ],
+      "subtype-f": [
+        "ar",
+        358188,
+        "re",
+        38664,
+        "cp",
+        17016
+      ],
+      "exactsrctitle-f": [
+        "Chest",
+        5862,
+        "Cancer Research",
+        4220,
+        "Journal of Applied Physiology",
+        4119
+      ],
+      "exactkeyword-f": [
+        "article",
+        289692,
+        "human",
+        263929,
+        "priority journal",
+        189026
+      ],
+      "afid-f": [
+        "60014232",
+        5398,
+        "60015023",
+        3587,
+        "60013409",
+        3378
+      ],
+      "affilctry-f": [
+        "United States",
+        142927,
+        "Japan",
+        41569,
+        "United Kingdom",
+        27975
+      ],
+      "srctype-f": [
+        "j",
+        429085,
+        "p",
+        4864,
+        "k",
+        1727
+      ],
+      "lang-f": [
+        "eng",
+        364323,
+        "jpn",
+        15964,
+        "chi",
+        12260
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

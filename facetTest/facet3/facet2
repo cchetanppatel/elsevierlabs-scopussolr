@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1262,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:brain",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 2644044,
+    "start": 0,
+    "maxScore": 1.9549148,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        182990,
+        "2011",
+        172893,
+        "2010",
+        158459
+      ],
+      "prefnameauid-f": [
+        "35406091300 S.H. Snyder",
+        756,
+        "35355682300 B.S. McEwen",
+        737,
+        "7202268530 M. Filippi",
+        734
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        1396815,
+        "NEUR",
+        771095,
+        "BIOC",
+        711671
+      ],
+      "subtype-f": [
+        "ar",
+        2003490,
+        "re",
+        303225,
+        "cp",
+        140310
+      ],
+      "exactsrctitle-f": [
+        "Brain Research",
+        55809,
+        "Journal of Neuroscience",
+        23312,
+        "Neuroscience Letters",
+        20763
+      ],
+      "exactkeyword-f": [
+        "article",
+        1663576,
+        "human",
+        1322905,
+        "priority journal",
+        1200617
+      ],
+      "afid-f": [
+        "60014232",
+        31671,
+        "60000905",
+        19844,
+        "60023691",
+        18493
+      ],
+      "affilctry-f": [
+        "United States",
+        911023,
+        "United Kingdom",
+        210584,
+        "Japan",
+        209743
+      ],
+      "srctype-f": [
+        "j",
+        2544039,
+        "p",
+        53992,
+        "k",
+        43858
+      ],
+      "lang-f": [
+        "eng",
+        2364927,
+        "ger",
+        48895,
+        "fre",
+        41993
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

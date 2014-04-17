@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 976,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:human",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 2158402,
+    "start": 0,
+    "maxScore": 2.0792677,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        142439,
+        "2011",
+        136207,
+        "2010",
+        126393
+      ],
+      "prefnameauid-f": [
+        "35399610800 E. De Clercq",
+        649,
+        "1 Anon",
+        630,
+        "7202975031 C.M. Croce",
+        523
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        898649,
+        "BIOC",
+        735199,
+        "IMMU",
+        233451
+      ],
+      "subtype-f": [
+        "ar",
+        1679652,
+        "cp",
+        203635,
+        "re",
+        186895
+      ],
+      "exactsrctitle-f": [
+        "Journal of Biological Chemistry",
+        33474,
+        "Proceedings of the National Academy of Sciences of the United States of America",
+        21424,
+        "Journal of Immunology",
+        17001
+      ],
+      "exactkeyword-f": [
+        "article",
+        1218696,
+        "human",
+        1188478,
+        "Humans",
+        908722
+      ],
+      "afid-f": [
+        "60014232",
+        19258,
+        "60000905",
+        16893,
+        "60002746",
+        13819
+      ],
+      "affilctry-f": [
+        "United States",
+        770080,
+        "United Kingdom",
+        169567,
+        "Japan",
+        163171
+      ],
+      "srctype-f": [
+        "j",
+        1981301,
+        "p",
+        128470,
+        "k",
+        35489
+      ],
+      "lang-f": [
+        "eng",
+        2005413,
+        "chi",
+        39775,
+        "ger",
+        22523
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

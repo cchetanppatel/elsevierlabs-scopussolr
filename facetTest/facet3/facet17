@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 2298,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:brain OR all:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 5714523,
+    "start": 0,
+    "maxScore": 1.8785226,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        406544,
+        "2011",
+        379127,
+        "2010",
+        349504
+      ],
+      "prefnameauid-f": [
+        "36063266200 C. La Vecchia",
+        1356,
+        "36067404600 K. Sugimachi",
+        1158,
+        "7201823908 S. Franceschi",
+        1037
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        3505241,
+        "BIOC",
+        1780529,
+        "NEUR",
+        799821
+      ],
+      "subtype-f": [
+        "ar",
+        4257879,
+        "re",
+        648103,
+        "cp",
+        269268
+      ],
+      "exactsrctitle-f": [
+        "Brain Research",
+        55809,
+        "Cancer Research",
+        44922,
+        "Journal of Biological Chemistry",
+        41385
+      ],
+      "exactkeyword-f": [
+        "article",
+        3567048,
+        "human",
+        3367824,
+        "priority journal",
+        2504199
+      ],
+      "afid-f": [
+        "60014232",
+        57488,
+        "60013409",
+        56968,
+        "60015023",
+        51221
+      ],
+      "affilctry-f": [
+        "United States",
+        1913890,
+        "Japan",
+        457427,
+        "United Kingdom",
+        431351
+      ],
+      "srctype-f": [
+        "j",
+        5553613,
+        "p",
+        85621,
+        "k",
+        69485
+      ],
+      "lang-f": [
+        "eng",
+        5007270,
+        "ger",
+        121774,
+        "fre",
+        114124
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

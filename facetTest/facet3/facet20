@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 725,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:water",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1869229,
+    "start": 0,
+    "maxScore": 1.9003546,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        117525,
+        "2011",
+        116062,
+        "2010",
+        106337
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        4340,
+        "1 ANON",
+        692,
+        "35498072700 S.W. Ng",
+        420
+      ],
+      "subjabbr-f": [
+        "ENGI",
+        401407,
+        "ENVI",
+        348728,
+        "CHEM",
+        313991
+      ],
+      "subtype-f": [
+        "ar",
+        1378041,
+        "cp",
+        236614,
+        "re",
+        47200
+      ],
+      "exactsrctitle-f": [
+        "Journal of the American Chemical Society",
+        10937,
+        "Proceedings of SPIE - The International Society for Optical Engineering",
+        9609,
+        "Langmuir",
+        9107
+      ],
+      "exactkeyword-f": [
+        "article",
+        407443,
+        "priority journal",
+        169615,
+        "nonhuman",
+        154101
+      ],
+      "afid-f": [
+        "60021331",
+        10253,
+        "60019499",
+        9378,
+        "60025272",
+        8268
+      ],
+      "affilctry-f": [
+        "United States",
+        432088,
+        "China",
+        185779,
+        "Japan",
+        116300
+      ],
+      "srctype-f": [
+        "j",
+        1594931,
+        "p",
+        172452,
+        "d",
+        46883
+      ],
+      "lang-f": [
+        "eng",
+        1641526,
+        "chi",
+        69887,
+        "ger",
+        29740
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

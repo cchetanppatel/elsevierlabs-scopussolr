@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 147,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:brain AND abs:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 18617,
+    "start": 0,
+    "maxScore": 1.9473579,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        1787,
+        "2011",
+        1570,
+        "2009",
+        1370
+      ],
+      "prefnameauid-f": [
+        "7202016361 M. Katoh",
+        49,
+        "35405586600 R. Sawaya",
+        48,
+        "7202570005 K.L. Black",
+        38
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        13305,
+        "BIOC",
+        8493,
+        "NEUR",
+        1767
+      ],
+      "subtype-f": [
+        "ar",
+        13648,
+        "re",
+        3324,
+        "cp",
+        904
+      ],
+      "exactsrctitle-f": [
+        "Cancer",
+        507,
+        "Cancer Research",
+        449,
+        "Journal of Neuro-Oncology",
+        327
+      ],
+      "exactkeyword-f": [
+        "human",
+        14403,
+        "article",
+        12133,
+        "Humans",
+        11119
+      ],
+      "afid-f": [
+        "60015023",
+        530,
+        "60013409",
+        408,
+        "60009343",
+        325
+      ],
+      "affilctry-f": [
+        "United States",
+        7453,
+        "Japan",
+        1649,
+        "Germany",
+        1169
+      ],
+      "srctype-f": [
+        "j",
+        18010,
+        "p",
+        309,
+        "k",
+        242
+      ],
+      "lang-f": [
+        "eng",
+        16521,
+        "jpn",
+        745,
+        "fre",
+        301
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

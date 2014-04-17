@@ -178,22 +178,92 @@
 </search:metrics>
 </search:response>
 
-<search:response snippet-format="snippet" total="0" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000088S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.030589S</search:total-time><search:key>core_count_21</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="0" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000088S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.030589S</search:total-time>
+<search:key>core_count_21</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="103273" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000166S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.148942S</search:total-time><search:key>core_count_22</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="103273" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000166S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.148942S</search:total-time>
+<search:key>core_count_22</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="23647208" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000162S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.082447S</search:total-time><search:key>core_count_23</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="23647208" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000162S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.082447S</search:total-time>
+<search:key>core_count_23</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="3697" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000087S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.015036S</search:total-time><search:key>core_count_24</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="3697" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000087S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.015036S</search:total-time>
+<search:key>core_count_24</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="3697" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000079S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.008412S</search:total-time><search:key>core_count_25</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="3697" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000079S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.008412S</search:total-time>
+<search:key>core_count_25</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="46629775" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000139S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.431171S</search:total-time><search:key>core_count_26</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="46629775" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000139S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.431171S</search:total-time>
+<search:key>core_count_26</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="16318" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000084S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.012923S</search:total-time><search:key>core_count_27</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="16318" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000084S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.012923S</search:total-time>
+<search:key>core_count_27</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="235628" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000194S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT2.797277S</search:total-time><search:key>core_count_28</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="235628" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000194S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT2.797277S</search:total-time>
+<search:key>core_count_28</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="5290" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000156S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT1.021893S</search:total-time><search:key>core_count_29</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="5290" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000156S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT1.021893S</search:total-time>
+<search:key>core_count_29</search:key>
+</search:metrics>
+</search:response>
 
-<search:response snippet-format="snippet" total="3628" start="1" page-length="10"><search:metrics><search:facet-resolution-time>PT0.000163S</search:facet-resolution-time><search:snippet-resolution-time>PT0S</search:snippet-resolution-time><search:total-time>PT0.124223S</search:total-time><search:key>core_count_30</search:key></search:metrics></search:response>
+<search:response snippet-format="snippet" total="3628" start="1" page-length="10">
+<search:metrics>
+<search:facet-resolution-time>PT0.000163S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT0.124223S</search:total-time>
+<search:key>core_count_30</search:key>
+</search:metrics>
+</search:response>

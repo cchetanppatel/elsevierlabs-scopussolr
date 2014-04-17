@@ -1,0 +1,50 @@
+all:water
+all:blood
+all:brain
+all:heart
+all:head
+all:cancer
+all:lung
+all:world
+all:human
+all:man
+all:ohio
+all:kentucky
+all:chicago
+all:"new york"
+all:arm
+all:rat
+all:brain AND all:cancer
+all:brain OR all:cancer
+all:hea*
+all:hea?t
+abs:water
+abs:blood
+abs:brain
+abs:heart
+abs:head
+abs:cancer
+abs:lung
+abs:world
+abs:human
+abs:man
+abs:ohio
+abs:kentucky
+abs:chicago
+abs:"new york"
+abs:arm
+abs:rat
+abs:brain AND abs:cancer
+abs:brain OR abs:cancer
+abs:hea*
+abs:hea?t
+all:mcbeath
+all:soutar
+all:gregory
+all:kohler
+all:corkum
+all:daniel
+all:keith
+all:kravetz
+all:marques
+all:fulford

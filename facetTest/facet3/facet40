@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 107,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:mcbeath",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 385,
+    "start": 0,
+    "maxScore": 4.9218426,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2006",
+        25,
+        "2007",
+        19,
+        "2008",
+        19
+      ],
+      "prefnameauid-f": [
+        "7004241229 A.A. McBeath",
+        47,
+        "7003747133 M.K. McBeath",
+        37,
+        "6602936114 D.G. McBeath",
+        20
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        114,
+        "SOCI",
+        63,
+        "AGRI",
+        59
+      ],
+      "subtype-f": [
+        "ar",
+        271,
+        "cp",
+        36,
+        "re",
+        20
+      ],
+      "exactsrctitle-f": [
+        "British Journal of Social Work",
+        15,
+        "Veterinary Record",
+        11,
+        "Issues in Educational Research",
+        9
+      ],
+      "exactkeyword-f": [
+        "article",
+        122,
+        "human",
+        118,
+        "Human",
+        69
+      ],
+      "afid-f": [
+        "60003892",
+        30,
+        "60009512",
+        23,
+        "60011976",
+        20
+      ],
+      "affilctry-f": [
+        "United States",
+        180,
+        "United Kingdom",
+        74,
+        "Australia",
+        33
+      ],
+      "srctype-f": [
+        "j",
+        344,
+        "p",
+        32,
+        "d",
+        4
+      ],
+      "lang-f": [
+        "eng",
+        374,
+        "ger",
+        1,
+        "ita",
+        1
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

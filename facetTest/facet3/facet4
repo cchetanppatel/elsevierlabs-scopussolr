@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 560,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:head",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1162108,
+    "start": 0,
+    "maxScore": 2.0888705,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        89572,
+        "2011",
+        84795,
+        "2010",
+        78797
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        1150,
+        "7202619351 J.W. Head",
+        495,
+        "35378571700 W.K. Hong",
+        411
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        619399,
+        "BIOC",
+        212797,
+        "ENGI",
+        125946
+      ],
+      "subtype-f": [
+        "ar",
+        866914,
+        "re",
+        118755,
+        "cp",
+        99588
+      ],
+      "exactsrctitle-f": [
+        "Otolaryngology - Head and Neck Surgery",
+        9601,
+        "Laryngoscope",
+        8460,
+        "Archives of Otolaryngology - Head and Neck Surgery",
+        6255
+      ],
+      "exactkeyword-f": [
+        "article",
+        604141,
+        "human",
+        571273,
+        "Humans",
+        442593
+      ],
+      "afid-f": [
+        "60014232",
+        8086,
+        "60015023",
+        6890,
+        "60016849",
+        6230
+      ],
+      "affilctry-f": [
+        "United States",
+        368167,
+        "United Kingdom",
+        88215,
+        "Japan",
+        85462
+      ],
+      "srctype-f": [
+        "j",
+        1070124,
+        "p",
+        61479,
+        "k",
+        16214
+      ],
+      "lang-f": [
+        "eng",
+        1036233,
+        "ger",
+        26456,
+        "chi",
+        20286
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

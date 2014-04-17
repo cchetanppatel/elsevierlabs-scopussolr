@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 2021,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:blood",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 4779881,
+    "start": 0,
+    "maxScore": 1.6813753,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        261369,
+        "2011",
+        249126,
+        "2010",
+        234569
+      ],
+      "prefnameauid-f": [
+        "36039693200 G. Mancia",
+        1080,
+        "36038519800 P.M. Mannucci",
+        954,
+        "7202254882 R. Storb",
+        896
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        3298650,
+        "BIOC",
+        1197904,
+        "PHAR",
+        426339
+      ],
+      "subtype-f": [
+        "ar",
+        3636818,
+        "re",
+        480260,
+        "cp",
+        175089
+      ],
+      "exactsrctitle-f": [
+        "Blood",
+        43883,
+        "Journal of Immunology",
+        25848,
+        "Journal of Biological Chemistry",
+        21201
+      ],
+      "exactkeyword-f": [
+        "article",
+        3017670,
+        "human",
+        2945996,
+        "Humans",
+        1948715
+      ],
+      "afid-f": [
+        "60014232",
+        49043,
+        "60000905",
+        28365,
+        "60023691",
+        24739
+      ],
+      "affilctry-f": [
+        "United States",
+        1363904,
+        "Japan",
+        338420,
+        "United Kingdom",
+        332946
+      ],
+      "srctype-f": [
+        "j",
+        4704013,
+        "p",
+        39186,
+        "k",
+        33077
+      ],
+      "lang-f": [
+        "eng",
+        4032082,
+        "ger",
+        145617,
+        "fre",
+        103767
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

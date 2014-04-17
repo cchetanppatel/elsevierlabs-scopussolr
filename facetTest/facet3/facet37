@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 813,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:brain OR abs:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1597394,
+    "start": 0,
+    "maxScore": 1.9473579,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        122679,
+        "2011",
+        109229,
+        "2010",
+        100206
+      ],
+      "prefnameauid-f": [
+        "36063266200 C. La Vecchia",
+        880,
+        "7202399346 G.N. Hortobagyi",
+        716,
+        "7201823908 S. Franceschi",
+        714
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        1017173,
+        "BIOC",
+        568754,
+        "NEUR",
+        239604
+      ],
+      "subtype-f": [
+        "ar",
+        1245129,
+        "re",
+        201049,
+        "cp",
+        80952
+      ],
+      "exactsrctitle-f": [
+        "Cancer Research",
+        20130,
+        "Cancer",
+        17543,
+        "Brain Research",
+        15928
+      ],
+      "exactkeyword-f": [
+        "article",
+        1050075,
+        "human",
+        1027114,
+        "Humans",
+        774746
+      ],
+      "afid-f": [
+        "60015023",
+        19734,
+        "60014232",
+        19116,
+        "60013409",
+        17548
+      ],
+      "affilctry-f": [
+        "United States",
+        554957,
+        "Japan",
+        141285,
+        "United Kingdom",
+        109249
+      ],
+      "srctype-f": [
+        "j",
+        1548210,
+        "p",
+        30461,
+        "k",
+        16140
+      ],
+      "lang-f": [
+        "eng",
+        1410938,
+        "jpn",
+        37841,
+        "chi",
+        35129
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

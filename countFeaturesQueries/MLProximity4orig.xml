@@ -1,0 +1,34 @@
+import module namespace q="com.blakeley.els.query" at "lib-query.xqm";
+import module namespace req="com.blakeley.els.request" at "lib-request.xqm" ;
+
+let $req as element(q:request) :=
+<m:request type="core" start="1" page-length="1" xmlns:m="com.blakeley.els.query">
+    <m:query>
+        <cts:and-query xmlns:cts="http://marklogic.com/cts">
+            <cts:directory-query depth="infinity">
+                <cts:uri>/core/</cts:uri>
+            </cts:directory-query>
+            <cts:near-query distance="3">
+                <cts:element-word-query>
+                    <cts:element>titletext</cts:element>
+                    <cts:text xml:lang="en">neuro*</cts:text>
+                    <cts:option>wildcarded</cts:option>
+                    <cts:option>lexicon-expand=heuristic</cts:option>
+                </cts:element-word-query>
+                <cts:element-word-query>
+                    <cts:element>titletext</cts:element>
+                    <cts:text xml:lang="en">letter</cts:text>
+                </cts:element-word-query>
+                <cts:option>unordered</cts:option>                
+            </cts:near-query>
+        </cts:and-query>
+    </m:query>
+    <search:options xmlns:search="http://marklogic.com/appservices/search">
+        <search:search-option>unfiltered</search:search-option>
+        <search:return-results>true</search:return-results>
+        <search:search-option>score-zero</search:search-option>
+        <search:search-option>faceted</search:search-option>
+    </search:options>
+</m:request>
+
+return req:search('test', false(), $req)

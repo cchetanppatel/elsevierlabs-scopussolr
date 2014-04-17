@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1147,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:world",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 3369178,
+    "start": 0,
+    "maxScore": 1.8416286,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        345546,
+        "2011",
+        334593,
+        "2010",
+        303725
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        5253,
+        "1 ANON",
+        774,
+        "7005079212 D. Savastano",
+        465
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        919830,
+        "ENGI",
+        530672,
+        "SOCI",
+        522447
+      ],
+      "subtype-f": [
+        "ar",
+        2225808,
+        "cp",
+        556261,
+        "re",
+        384935
+      ],
+      "exactsrctitle-f": [
+        "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+        31262,
+        "SAE Technical Papers",
+        20340,
+        "Proceedings of SPIE - The International Society for Optical Engineering",
+        13069
+      ],
+      "exactkeyword-f": [
+        "human",
+        853509,
+        "article",
+        850912,
+        "Humans",
+        699601
+      ],
+      "afid-f": [
+        "60016849",
+        15548,
+        "60008088",
+        14070,
+        "60025038",
+        12999
+      ],
+      "affilctry-f": [
+        "United States",
+        898438,
+        "United Kingdom",
+        302645,
+        "China",
+        241632
+      ],
+      "srctype-f": [
+        "j",
+        2766557,
+        "p",
+        400152,
+        "d",
+        101682
+      ],
+      "lang-f": [
+        "eng",
+        3113527,
+        "chi",
+        50266,
+        "fre",
+        46591
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

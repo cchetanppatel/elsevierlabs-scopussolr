@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 140,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:kentucky",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 106123,
+    "start": 0,
+    "maxScore": 2.330823,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2009",
+        6684,
+        "2011",
+        6657,
+        "2012",
+        6540
+      ],
+      "prefnameauid-f": [
+        "35428634300 D.A. Butterfield",
+        416,
+        "36043712200 B.H. Davis",
+        409,
+        "26643429500 P.A. Crooks",
+        390
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        32593,
+        "AGRI",
+        14795,
+        "BIOC",
+        13238
+      ],
+      "subtype-f": [
+        "ar",
+        78541,
+        "cp",
+        11693,
+        "re",
+        8172
+      ],
+      "exactsrctitle-f": [
+        "Journal of the Kentucky Medical Association",
+        1960,
+        "2009 1st International Conference on Information Science and Engineering, ICISE 2009",
+        1351,
+        "University of Kentucky, Office of Engineering Services, (Bulletin) UKY BU",
+        1067
+      ],
+      "exactkeyword-f": [
+        "article",
+        36821,
+        "human",
+        27150,
+        "Humans",
+        20415
+      ],
+      "afid-f": [
+        "60015941",
+        49500,
+        "60005099",
+        5017,
+        "60007677",
+        3446
+      ],
+      "affilctry-f": [
+        "United States",
+        78936,
+        "China",
+        4845,
+        "Canada",
+        3045
+      ],
+      "srctype-f": [
+        "j",
+        94243,
+        "p",
+        8657,
+        "k",
+        2196
+      ],
+      "lang-f": [
+        "eng",
+        104502,
+        "chi",
+        289,
+        "spa",
+        251
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

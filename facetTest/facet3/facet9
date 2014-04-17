@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 613,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:man",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1375350,
+    "start": 0,
+    "maxScore": 2.0369377,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        92996,
+        "2011",
+        91200,
+        "2010",
+        86193
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        722,
+        "36078272300 J.J. Holst",
+        435,
+        "35597198100 W. Pedrycz",
+        420
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        590590,
+        "BIOC",
+        205224,
+        "ENGI",
+        198963
+      ],
+      "subtype-f": [
+        "ar",
+        964970,
+        "cp",
+        183828,
+        "re",
+        152645
+      ],
+      "exactsrctitle-f": [
+        "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+        10662,
+        "Proceedings of the IEEE International Conference on Systems, Man and Cybernetics",
+        8967,
+        "Conference Proceedings - IEEE International Conference on Systems, Man and Cybernetics",
+        6772
+      ],
+      "exactkeyword-f": [
+        "human",
+        582124,
+        "article",
+        581078,
+        "Humans",
+        449276
+      ],
+      "afid-f": [
+        "60009697",
+        19418,
+        "60014232",
+        10120,
+        "60016849",
+        6939
+      ],
+      "affilctry-f": [
+        "United States",
+        371583,
+        "United Kingdom",
+        120788,
+        "Japan",
+        89727
+      ],
+      "srctype-f": [
+        "j",
+        1196684,
+        "p",
+        134614,
+        "k",
+        31679
+      ],
+      "lang-f": [
+        "eng",
+        1229750,
+        "ger",
+        28938,
+        "fre",
+        26143
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 374,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:rat",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 610731,
+    "start": 0,
+    "maxScore": 1.6939547,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1996",
+        22594,
+        "1997",
+        21566,
+        "1998",
+        20876
+      ],
+      "prefnameauid-f": [
+        "7403334992 W.J. Malaisse",
+        424,
+        "36043600900 G.G. Nussdorfer",
+        340,
+        "36014564800 J.A. Gustafsson",
+        323
+      ],
+      "subjabbr-f": [
+        "BIOC",
+        286210,
+        "MEDI",
+        241808,
+        "PHAR",
+        118631
+      ],
+      "subtype-f": [
+        "ar",
+        562246,
+        "cp",
+        16963,
+        "re",
+        10062
+      ],
+      "exactsrctitle-f": [
+        "Brain Research",
+        13386,
+        "Journal of Biological Chemistry",
+        13260,
+        "Biochemical and Biophysical Research Communications",
+        9161
+      ],
+      "exactkeyword-f": [
+        "rat",
+        501570,
+        "Rats",
+        488366,
+        "article",
+        422964
+      ],
+      "afid-f": [
+        "60014232",
+        8058,
+        "60000905",
+        6146,
+        "60012311",
+        3634
+      ],
+      "affilctry-f": [
+        "United States",
+        216219,
+        "Japan",
+        70398,
+        "United Kingdom",
+        40706
+      ],
+      "srctype-f": [
+        "j",
+        604229,
+        "p",
+        3973,
+        "k",
+        2315
+      ],
+      "lang-f": [
+        "eng",
+        574666,
+        "chi",
+        15476,
+        "rus",
+        6867
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 91,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:keith",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 18840,
+    "start": 0,
+    "maxScore": 3.8629718,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2011",
+        884,
+        "2012",
+        859,
+        "2010",
+        785
+      ],
+      "prefnameauid-f": [
+        "7005847983 G. Keith",
+        185,
+        "7102038649 L. Keith",
+        176,
+        "7102787615 T.G. Keith",
+        161
+      ],
+      "subjabbr-f": [
+        "ENGI",
+        5689,
+        "MEDI",
+        4589,
+        "SOCI",
+        1884
+      ],
+      "subtype-f": [
+        "ar",
+        10233,
+        "cp",
+        4156,
+        "re",
+        1285
+      ],
+      "exactsrctitle-f": [
+        "Developmental Medicine and Child Neurology",
+        956,
+        "Proceedings of SPIE - The International Society for Optical Engineering",
+        629,
+        "Digest - International Geoscience and Remote Sensing Symposium (IGARSS)",
+        282
+      ],
+      "exactkeyword-f": [
+        "article",
+        4046,
+        "human",
+        3600,
+        "priority journal",
+        2660
+      ],
+      "afid-f": [
+        "60016849",
+        154,
+        "60001490",
+        132,
+        "60014232",
+        125
+      ],
+      "affilctry-f": [
+        "United States",
+        7083,
+        "United Kingdom",
+        1735,
+        "Canada",
+        995
+      ],
+      "srctype-f": [
+        "j",
+        13673,
+        "p",
+        4028,
+        "d",
+        527
+      ],
+      "lang-f": [
+        "eng",
+        17591,
+        "fre",
+        123,
+        "ger",
+        67
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

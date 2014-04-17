@@ -1,0 +1,43 @@
+import module namespace q="com.blakeley.els.query" at "lib-query.xqm";
+import module namespace req="com.blakeley.els.request" at "lib-request.xqm" ;
+
+let $req as element(q:request) :=
+<m:request type="core" start="1" page-length="1" xmlns:m="com.blakeley.els.query">
+    <m:query>
+        <cts:and-query xmlns:cts="http://marklogic.com/cts">
+            <cts:directory-query depth="infinity">
+                <cts:uri>/core/</cts:uri>
+            </cts:directory-query>
+            <cts:element-query xmlns:cts="http://marklogic.com/cts">
+                <cts:element>reference</cts:element>
+                <cts:and-query>
+                    <cts:element-query>
+                        <cts:element>author</cts:element>
+                        <cts:word-query>
+                            <cts:text xml:lang="en">darwin</cts:text>
+                        </cts:word-query>
+                    </cts:element-query>
+                    <cts:element-query>
+                        <cts:element>ref-sourcetitle</cts:element>
+                        <cts:word-query>
+                            <cts:text xml:lang="en">species</cts:text>
+                        </cts:word-query>
+                    </cts:element-query> 
+                    <cts:element-attribute-value-query>
+                        <cts:element>ref-publicationyear</cts:element>
+                        <cts:attribute>first</cts:attribute>
+                        <cts:text xml:lang="en">1859</cts:text>                       
+                    </cts:element-attribute-value-query> 
+                </cts:and-query>
+            </cts:element-query>
+        </cts:and-query>
+    </m:query>
+    <search:options xmlns:search="http://marklogic.com/appservices/search">
+        <search:search-option>unfiltered</search:search-option>
+        <search:return-results>false</search:return-results>
+        <search:search-option>score-zero</search:search-option>
+        <search:search-option>faceted</search:search-option>
+    </search:options>
+</m:request>
+
+return req:search('test', false(), $req)            

@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 181,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:\"new york\"",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 126367,
+    "start": 0,
+    "maxScore": 3.6799488,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2013",
+        23734,
+        "2012",
+        14399,
+        "2011",
+        8286
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        282,
+        "7006024584 S. Galea",
+        157,
+        "7005779022 E.L. Hannan",
+        120
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        46575,
+        "BIOC",
+        21706,
+        "ENGI",
+        14113
+      ],
+      "subtype-f": [
+        "ar",
+        84123,
+        "ip",
+        17221,
+        "cp",
+        11605
+      ],
+      "exactsrctitle-f": [
+        "Annals of the New York Academy of Sciences",
+        7771,
+        "Synlett",
+        1729,
+        "Economic Botany",
+        1270
+      ],
+      "exactkeyword-f": [
+        "article",
+        42099,
+        "human",
+        41012,
+        "Humans",
+        31745
+      ],
+      "afid-f": [
+        "60007776",
+        2057,
+        "60030162",
+        1469,
+        "60021784",
+        1189
+      ],
+      "affilctry-f": [
+        "United States",
+        54747,
+        "Germany",
+        11470,
+        "China",
+        6332
+      ],
+      "srctype-f": [
+        "j",
+        109791,
+        "k",
+        9535,
+        "d",
+        3778
+      ],
+      "lang-f": [
+        "eng",
+        118185,
+        "ger",
+        5876,
+        "fre",
+        322
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

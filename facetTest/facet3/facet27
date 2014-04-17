@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 395,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:world",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 802103,
+    "start": 0,
+    "maxScore": 2.2759864,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        74532,
+        "2011",
+        72538,
+        "2010",
+        66735
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        2729,
+        "1 ANON",
+        257,
+        "36063266200 C. La Vecchia",
+        139
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        191466,
+        "ENGI",
+        151661,
+        "SOCI",
+        109077
+      ],
+      "subtype-f": [
+        "ar",
+        485414,
+        "cp",
+        152386,
+        "re",
+        99649
+      ],
+      "exactsrctitle-f": [
+        "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+        9046,
+        "Proceedings of SPIE - The International Society for Optical Engineering",
+        5173,
+        "International Journal of Modern Physics B",
+        4729
+      ],
+      "exactkeyword-f": [
+        "human",
+        176363,
+        "article",
+        162744,
+        "Humans",
+        133947
+      ],
+      "afid-f": [
+        "60016849",
+        3248,
+        "60008088",
+        3171,
+        "60025038",
+        3045
+      ],
+      "affilctry-f": [
+        "United States",
+        203666,
+        "United Kingdom",
+        65456,
+        "China",
+        48566
+      ],
+      "srctype-f": [
+        "j",
+        622661,
+        "p",
+        108618,
+        "d",
+        41676
+      ],
+      "lang-f": [
+        "eng",
+        724839,
+        "ger",
+        14577,
+        "fre",
+        14562
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

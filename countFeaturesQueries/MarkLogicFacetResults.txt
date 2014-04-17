@@ -1,0 +1,1312 @@
+<search:response snippet-format="snippet" total="2371785" start="1" page-length="1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="" xmlns:search="http://marklogic.com/appservices/search">
+<search:facet name="core.scopubyrnav" type="xs:int">
+<search:facet-value name="2014" count="1">2014</search:facet-value>
+<search:facet-value name="2013" count="60462">2013</search:facet-value>
+<search:facet-value name="2012" count="138122">2012</search:facet-value>
+<search:facet-value name="2011" count="138562">2011</search:facet-value>
+<search:facet-value name="2010" count="128794">2010</search:facet-value>
+<search:facet-value name="2009" count="120763">2009</search:facet-value>
+<search:facet-value name="2008" count="113535">2008</search:facet-value>
+<search:facet-value name="2007" count="106805">2007</search:facet-value>
+<search:facet-value name="2006" count="99896">2006</search:facet-value>
+<search:facet-value name="2005" count="95106">2005</search:facet-value>
+<search:facet-value name="2004" count="86354">2004</search:facet-value>
+<search:facet-value name="2003" count="75321">2003</search:facet-value>
+<search:facet-value name="2002" count="70620">2002</search:facet-value>
+<search:facet-value name="2001" count="65413">2001</search:facet-value>
+<search:facet-value name="2000" count="62986">2000</search:facet-value>
+<search:facet-value name="1999" count="59285">1999</search:facet-value>
+<search:facet-value name="1998" count="58682">1998</search:facet-value>
+<search:facet-value name="1997" count="57819">1997</search:facet-value>
+<search:facet-value name="1996" count="54393">1996</search:facet-value>
+<search:facet-value name="1995" count="41458">1995</search:facet-value>
+<search:facet-value name="1994" count="39495">1994</search:facet-value>
+<search:facet-value name="1993" count="38208">1993</search:facet-value>
+<search:facet-value name="1992" count="34838">1992</search:facet-value>
+<search:facet-value name="1991" count="36311">1991</search:facet-value>
+<search:facet-value name="1990" count="33076">1990</search:facet-value>
+<search:facet-value name="1989" count="33224">1989</search:facet-value>
+<search:facet-value name="1988" count="31648">1988</search:facet-value>
+<search:facet-value name="1987" count="31080">1987</search:facet-value>
+<search:facet-value name="1986" count="32999">1986</search:facet-value>
+<search:facet-value name="1985" count="35199">1985</search:facet-value>
+<search:facet-value name="1984" count="34013">1984</search:facet-value>
+<search:facet-value name="1983" count="31433">1983</search:facet-value>
+<search:facet-value name="1982" count="28725">1982</search:facet-value>
+<search:facet-value name="1981" count="26748">1981</search:facet-value>
+<search:facet-value name="1980" count="24458">1980</search:facet-value>
+<search:facet-value name="1979" count="24203">1979</search:facet-value>
+<search:facet-value name="1978" count="21438">1978</search:facet-value>
+<search:facet-value name="1977" count="20111">1977</search:facet-value>
+<search:facet-value name="1976" count="19486">1976</search:facet-value>
+<search:facet-value name="1975" count="20616">1975</search:facet-value>
+<search:facet-value name="1974" count="19954">1974</search:facet-value>
+<search:facet-value name="1973" count="16893">1973</search:facet-value>
+<search:facet-value name="1972" count="10975">1972</search:facet-value>
+<search:facet-value name="1971" count="10568">1971</search:facet-value>
+<search:facet-value name="1970" count="10232">1970</search:facet-value>
+<search:facet-value name="1969" count="9022">1969</search:facet-value>
+<search:facet-value name="1968" count="6495">1968</search:facet-value>
+<search:facet-value name="1967" count="5270">1967</search:facet-value>
+<search:facet-value name="1966" count="6464">1966</search:facet-value>
+<search:facet-value name="1965" count="3836">1965</search:facet-value>
+<search:facet-value name="1964" count="3725">1964</search:facet-value>
+<search:facet-value name="1963" count="3076">1963</search:facet-value>
+<search:facet-value name="1962" count="2486">1962</search:facet-value>
+<search:facet-value name="1961" count="2281">1961</search:facet-value>
+<search:facet-value name="1960" count="2039">1960</search:facet-value>
+<search:facet-value name="1959" count="1873">1959</search:facet-value>
+<search:facet-value name="1958" count="1551">1958</search:facet-value>
+<search:facet-value name="1957" count="1558">1957</search:facet-value>
+<search:facet-value name="1956" count="1353">1956</search:facet-value>
+<search:facet-value name="1955" count="1317">1955</search:facet-value>
+<search:facet-value name="1954" count="1354">1954</search:facet-value>
+<search:facet-value name="1953" count="1259">1953</search:facet-value>
+<search:facet-value name="1952" count="1218">1952</search:facet-value>
+<search:facet-value name="1951" count="1194">1951</search:facet-value>
+<search:facet-value name="1950" count="1152">1950</search:facet-value>
+<search:facet-value name="1949" count="697">1949</search:facet-value>
+<search:facet-value name="1948" count="563">1948</search:facet-value>
+<search:facet-value name="1947" count="446">1947</search:facet-value>
+<search:facet-value name="1946" count="408">1946</search:facet-value>
+<search:facet-value name="1945" count="284">1945</search:facet-value>
+<search:facet-value name="1944" count="211">1944</search:facet-value>
+<search:facet-value name="1943" count="248">1943</search:facet-value>
+<search:facet-value name="1942" count="291">1942</search:facet-value>
+<search:facet-value name="1941" count="347">1941</search:facet-value>
+<search:facet-value name="1940" count="350">1940</search:facet-value>
+<search:facet-value name="1939" count="359">1939</search:facet-value>
+<search:facet-value name="1938" count="392">1938</search:facet-value>
+<search:facet-value name="1937" count="393">1937</search:facet-value>
+<search:facet-value name="1936" count="363">1936</search:facet-value>
+<search:facet-value name="1935" count="355">1935</search:facet-value>
+<search:facet-value name="1934" count="395">1934</search:facet-value>
+<search:facet-value name="1933" count="351">1933</search:facet-value>
+<search:facet-value name="1932" count="303">1932</search:facet-value>
+<search:facet-value name="1931" count="321">1931</search:facet-value>
+<search:facet-value name="1930" count="291">1930</search:facet-value>
+<search:facet-value name="1929" count="266">1929</search:facet-value>
+<search:facet-value name="1928" count="200">1928</search:facet-value>
+<search:facet-value name="1927" count="186">1927</search:facet-value>
+<search:facet-value name="1926" count="207">1926</search:facet-value>
+<search:facet-value name="1925" count="190">1925</search:facet-value>
+<search:facet-value name="1924" count="157">1924</search:facet-value>
+<search:facet-value name="1923" count="179">1923</search:facet-value>
+<search:facet-value name="1922" count="218">1922</search:facet-value>
+<search:facet-value name="1921" count="148">1921</search:facet-value>
+<search:facet-value name="1920" count="93">1920</search:facet-value>
+<search:facet-value name="1919" count="62">1919</search:facet-value>
+<search:facet-value name="1918" count="80">1918</search:facet-value>
+<search:facet-value name="1917" count="69">1917</search:facet-value>
+<search:facet-value name="1916" count="99">1916</search:facet-value>
+<search:facet-value name="1915" count="93">1915</search:facet-value>
+<search:facet-value name="1914" count="107">1914</search:facet-value>
+<search:facet-value name="1913" count="89">1913</search:facet-value>
+<search:facet-value name="1912" count="81">1912</search:facet-value>
+<search:facet-value name="1911" count="123">1911</search:facet-value>
+<search:facet-value name="1910" count="101">1910</search:facet-value>
+<search:facet-value name="1909" count="88">1909</search:facet-value>
+<search:facet-value name="1908" count="102">1908</search:facet-value>
+<search:facet-value name="1907" count="72">1907</search:facet-value>
+<search:facet-value name="1906" count="59">1906</search:facet-value>
+<search:facet-value name="1905" count="57">1905</search:facet-value>
+<search:facet-value name="1904" count="73">1904</search:facet-value>
+<search:facet-value name="1903" count="84">1903</search:facet-value>
+<search:facet-value name="1902" count="81">1902</search:facet-value>
+<search:facet-value name="1901" count="94">1901</search:facet-value>
+<search:facet-value name="1900" count="50">1900</search:facet-value>
+<search:facet-value name="1899" count="86">1899</search:facet-value>
+<search:facet-value name="1898" count="106">1898</search:facet-value>
+<search:facet-value name="1897" count="115">1897</search:facet-value>
+<search:facet-value name="1896" count="85">1896</search:facet-value>
+<search:facet-value name="1895" count="69">1895</search:facet-value>
+<search:facet-value name="1894" count="66">1894</search:facet-value>
+<search:facet-value name="1893" count="61">1893</search:facet-value>
+<search:facet-value name="1892" count="50">1892</search:facet-value>
+<search:facet-value name="1891" count="69">1891</search:facet-value>
+<search:facet-value name="1890" count="82">1890</search:facet-value>
+<search:facet-value name="1889" count="61">1889</search:facet-value>
+<search:facet-value name="1888" count="45">1888</search:facet-value>
+<search:facet-value name="1887" count="50">1887</search:facet-value>
+<search:facet-value name="1886" count="42">1886</search:facet-value>
+<search:facet-value name="1885" count="33">1885</search:facet-value>
+<search:facet-value name="1884" count="49">1884</search:facet-value>
+<search:facet-value name="1883" count="26">1883</search:facet-value>
+<search:facet-value name="1882" count="36">1882</search:facet-value>
+<search:facet-value name="1881" count="74">1881</search:facet-value>
+<search:facet-value name="1880" count="51">1880</search:facet-value>
+<search:facet-value name="1879" count="36">1879</search:facet-value>
+<search:facet-value name="1878" count="42">1878</search:facet-value>
+<search:facet-value name="1877" count="28">1877</search:facet-value>
+<search:facet-value name="1876" count="40">1876</search:facet-value>
+<search:facet-value name="1875" count="34">1875</search:facet-value>
+<search:facet-value name="1874" count="31">1874</search:facet-value>
+<search:facet-value name="1873" count="17">1873</search:facet-value>
+<search:facet-value name="1872" count="48">1872</search:facet-value>
+<search:facet-value name="1871" count="31">1871</search:facet-value>
+<search:facet-value name="1870" count="30">1870</search:facet-value>
+<search:facet-value name="1869" count="19">1869</search:facet-value>
+<search:facet-value name="1868" count="21">1868</search:facet-value>
+<search:facet-value name="1867" count="20">1867</search:facet-value>
+<search:facet-value name="1866" count="25">1866</search:facet-value>
+<search:facet-value name="1865" count="19">1865</search:facet-value>
+<search:facet-value name="1864" count="15">1864</search:facet-value>
+<search:facet-value name="1863" count="18">1863</search:facet-value>
+<search:facet-value name="1862" count="15">1862</search:facet-value>
+<search:facet-value name="1861" count="12">1861</search:facet-value>
+<search:facet-value name="1860" count="12">1860</search:facet-value>
+<search:facet-value name="1859" count="7">1859</search:facet-value>
+<search:facet-value name="1858" count="9">1858</search:facet-value>
+<search:facet-value name="1857" count="13">1857</search:facet-value>
+<search:facet-value name="1856" count="10">1856</search:facet-value>
+<search:facet-value name="1855" count="19">1855</search:facet-value>
+<search:facet-value name="1854" count="22">1854</search:facet-value>
+<search:facet-value name="1853" count="8">1853</search:facet-value>
+<search:facet-value name="1852" count="16">1852</search:facet-value>
+<search:facet-value name="1851" count="16">1851</search:facet-value>
+<search:facet-value name="1850" count="22">1850</search:facet-value>
+<search:facet-value name="1849" count="13">1849</search:facet-value>
+<search:facet-value name="1848" count="6">1848</search:facet-value>
+<search:facet-value name="1847" count="6">1847</search:facet-value>
+<search:facet-value name="1846" count="9">1846</search:facet-value>
+<search:facet-value name="1845" count="9">1845</search:facet-value>
+<search:facet-value name="1844" count="8">1844</search:facet-value>
+<search:facet-value name="1843" count="12">1843</search:facet-value>
+<search:facet-value name="1842" count="11">1842</search:facet-value>
+<search:facet-value name="1841" count="1">1841</search:facet-value>
+<search:facet-value name="1840" count="5">1840</search:facet-value>
+<search:facet-value name="1839" count="4">1839</search:facet-value>
+<search:facet-value name="1838" count="6">1838</search:facet-value>
+<search:facet-value name="1837" count="9">1837</search:facet-value>
+<search:facet-value name="1835" count="6">1835</search:facet-value>
+<search:facet-value name="1834" count="2">1834</search:facet-value>
+<search:facet-value name="1833" count="4">1833</search:facet-value>
+<search:facet-value name="1832" count="12">1832</search:facet-value>
+<search:facet-value name="1831" count="5">1831</search:facet-value>
+<search:facet-value name="1830" count="3">1830</search:facet-value>
+<search:facet-value name="1829" count="6">1829</search:facet-value>
+<search:facet-value name="1828" count="11">1828</search:facet-value>
+<search:facet-value name="1827" count="9">1827</search:facet-value>
+<search:facet-value name="1826" count="8">1826</search:facet-value>
+<search:facet-value name="1825" count="1">1825</search:facet-value>
+<search:facet-value name="1823" count="1">1823</search:facet-value>
+</search:facet>
+<search:facet name="core.scoprefnameauidnav" type="xs:string">
+<search:facet-value name="Anon 1" count="5734">Anon 1</search:facet-value>
+<search:facet-value name="ANON 1" count="809">ANON 1</search:facet-value>
+<search:facet-value name="Barceló D. 36013249500" count="472">Barceló D. 36013249500</search:facet-value>
+<search:facet-value name="Ng S.W. 35498072700" count="433">Ng S.W. 35498072700</search:facet-value>
+<search:facet-value name="Frost R.L. 7202424546" count="413">Frost R.L. 7202424546</search:facet-value>
+<search:facet-value name="Verstraete W. 35235601700" count="363">Verstraete W. 35235601700</search:facet-value>
+<search:facet-value name="Verkman A.S. 35450635600" count="361">Verkman A.S. 35450635600</search:facet-value>
+<search:facet-value name="Li W. 36066858500" count="344">Li W. 36066858500</search:facet-value>
+<search:facet-value name="Wood C.M. 35474729900" count="334">Wood C.M. 35474729900</search:facet-value>
+<search:facet-value name="Gerba C.P. 7102899689" count="313">Gerba C.P. 7102899689</search:facet-value>
+<search:facet-value name="Giesy J.P. 35459135300" count="307">Giesy J.P. 35459135300</search:facet-value>
+<search:facet-value name="Makrlík E. 7005174069" count="302">Makrlík E. 7005174069</search:facet-value>
+<search:facet-value name="Singh V.P. 36065263500" count="288">Singh V.P. 36065263500</search:facet-value>
+<search:facet-value name="Colwell R.R. 7203000370" count="277">Colwell R.R. 7203000370</search:facet-value>
+<search:facet-value name="Vaňura P. 7007012246" count="272">Vaňura P. 7007012246</search:facet-value>
+<search:facet-value name="Neal C. 7202912675" count="270">Neal C. 7202912675</search:facet-value>
+<search:facet-value name="Wang W. 36072896000" count="265">Wang W. 36072896000</search:facet-value>
+<search:facet-value name="Skaggs R.W. 7101743779" count="263">Skaggs R.W. 7101743779</search:facet-value>
+<search:facet-value name="McClements D.J. 7005216193" count="262">McClements D.J. 7005216193</search:facet-value>
+<search:facet-value name="Möhwald H. 35511455300" count="255">Möhwald H. 35511455300</search:facet-value>
+<search:facet-value name="Lal R. 7202951669" count="254">Lal R. 7202951669</search:facet-value>
+<search:facet-value name="Domen K. 35401845700" count="249">Domen K. 35401845700</search:facet-value>
+<search:facet-value name="Millero F.J. 35459562600" count="245">Millero F.J. 35459562600</search:facet-value>
+<search:facet-value name="Maibach H.I. 36066921500" count="241">Maibach H.I. 36066921500</search:facet-value>
+<search:facet-value name="Abraham M.H. 7202901240" count="239">Abraham M.H. 7202901240</search:facet-value>
+<search:facet-value name="Tiwari G.N. 14062706500" count="239">Tiwari G.N. 14062706500</search:facet-value>
+<search:facet-value name="Wang T. 36079778200" count="239">Wang T. 36079778200</search:facet-value>
+<search:facet-value name="Ma J. 36078057800" count="238">Ma J. 36078057800</search:facet-value>
+<search:facet-value name="Driscoll C.T. 7202046491" count="235">Driscoll C.T. 7202046491</search:facet-value>
+<search:facet-value name="Nielsen S. 35446941200" count="235">Nielsen S. 35446941200</search:facet-value>
+<search:facet-value name="Lester J.N. 35551354800" count="234">Lester J.N. 35551354800</search:facet-value>
+<search:facet-value name="Steenhuis T.S. 35584506900" count="234">Steenhuis T.S. 35584506900</search:facet-value>
+<search:facet-value name="Zhang L. 8349134300" count="229">Zhang L. 8349134300</search:facet-value>
+<search:facet-value name="Tanabe S. 7401677757" count="228">Tanabe S. 7401677757</search:facet-value>
+<search:facet-value name="Goncharuk V.V. 7006597578" count="227">Goncharuk V.V. 7006597578</search:facet-value>
+<search:facet-value name="Li N. 36065390000" count="227">Li N. 36065390000</search:facet-value>
+<search:facet-value name="Pashley D.H. 35448600800" count="227">Pashley D.H. 35448600800</search:facet-value>
+<search:facet-value name="Lee D.J. 7406667455" count="224">Lee D.J. 7406667455</search:facet-value>
+<search:facet-value name="Drioli E. 24533001300" count="223">Drioli E. 24533001300</search:facet-value>
+<search:facet-value name="Kevan L. 35546952600" count="223">Kevan L. 35546952600</search:facet-value>
+<search:facet-value name="Li P. 35069715100" count="223">Li P. 35069715100</search:facet-value>
+<search:facet-value name="Vanrolleghem P.A. 7004281378" count="222">Vanrolleghem P.A. 7004281378</search:facet-value>
+<search:facet-value name="Lettinga G. 7103269261" count="221">Lettinga G. 7103269261</search:facet-value>
+<search:facet-value name="Parlange J.Y. 7103323474" count="220">Parlange J.Y. 7103323474</search:facet-value>
+<search:facet-value name="Fun H.K. 34975048300" count="219">Fun H.K. 34975048300</search:facet-value>
+<search:facet-value name="Knepper M.A. 35478273500" count="216">Knepper M.A. 35478273500</search:facet-value>
+<search:facet-value name="Zhang W. 36066941200" count="215">Zhang W. 36066941200</search:facet-value>
+<search:facet-value name="Zhang L. 36063274500" count="213">Zhang L. 36063274500</search:facet-value>
+<search:facet-value name="Brinkman U.A.T. 35494145900" count="212">Brinkman U.A.T. 35494145900</search:facet-value>
+<search:facet-value name="Mackay D. 7402241797" count="212">Mackay D. 7402241797</search:facet-value>
+<search:facet-value name="Soylak M. 7006488616" count="212">Soylak M. 7006488616</search:facet-value>
+<search:facet-value name="Kulmala M. 35461255500" count="209">Kulmala M. 35461255500</search:facet-value>
+<search:facet-value name="Schrier R.W. 7202684977" count="206">Schrier R.W. 7202684977</search:facet-value>
+<search:facet-value name="Frimmel F.H. 7005383238" count="205">Frimmel F.H. 7005383238</search:facet-value>
+<search:facet-value name="Ruckenstein E. 7202970312" count="205">Ruckenstein E. 7202970312</search:facet-value>
+<search:facet-value name="Friberg S.E. 35512996300" count="204">Friberg S.E. 35512996300</search:facet-value>
+<search:facet-value name="Li N. 36014373300" count="202">Li N. 36014373300</search:facet-value>
+<search:facet-value name="Smol J.P. 7005505365" count="201">Smol J.P. 7005505365</search:facet-value>
+<search:facet-value name="Vigneswaran S. 35518614300" count="201">Vigneswaran S. 35518614300</search:facet-value>
+<search:facet-value name="Wang P. 36038733700" count="199">Wang P. 36038733700</search:facet-value>
+<search:facet-value name="Li B. 36072005200" count="198">Li B. 36072005200</search:facet-value>
+<search:facet-value name="Viraraghavan T. 8901092200" count="198">Viraraghavan T. 8901092200</search:facet-value>
+<search:facet-value name="Miller R. 8091118200" count="197">Miller R. 8091118200</search:facet-value>
+<search:facet-value name="Nasr-El-Din H.A. 7006757358" count="196">Nasr-El-Din H.A. 7006757358</search:facet-value>
+<search:facet-value name="Kettrup A. 36045996300" count="195">Kettrup A. 36045996300</search:facet-value>
+<search:facet-value name="Liu W. 36078712200" count="195">Liu W. 36078712200</search:facet-value>
+<search:facet-value name="Wang L. 36068534900" count="195">Wang L. 36068534900</search:facet-value>
+<search:facet-value name="Matsuura T. 36048717100" count="191">Matsuura T. 36048717100</search:facet-value>
+<search:facet-value name="Rittmann B.E. 7102480077" count="191">Rittmann B.E. 7102480077</search:facet-value>
+<search:facet-value name="Stefan H.G. 7201596294" count="191">Stefan H.G. 7201596294</search:facet-value>
+<search:facet-value name="Lindman B. 35478309200" count="189">Lindman B. 35478309200</search:facet-value>
+<search:facet-value name="Thomas R.K. 35467064400" count="189">Thomas R.K. 35467064400</search:facet-value>
+<search:facet-value name="Orhon D. 7005731328" count="188">Orhon D. 7005731328</search:facet-value>
+<search:facet-value name="Blust R. 7006892003" count="187">Blust R. 7006892003</search:facet-value>
+<search:facet-value name="Iguchi M. 35417130200" count="186">Iguchi M. 35417130200</search:facet-value>
+<search:facet-value name="Ishihara K. 36048071500" count="186">Ishihara K. 36048071500</search:facet-value>
+<search:facet-value name="Tay F.R. 7102091962" count="186">Tay F.R. 7102091962</search:facet-value>
+<search:facet-value name="Zhang J. 36067089700" count="185">Zhang J. 36067089700</search:facet-value>
+<search:facet-value name="Bunton C.A. 7005505878" count="183">Bunton C.A. 7005505878</search:facet-value>
+<search:facet-value name="Dillon P.J. 7103005266" count="183">Dillon P.J. 7103005266</search:facet-value>
+<search:facet-value name="Lettenmaier D.P. 7006616050" count="182">Lettenmaier D.P. 7006616050</search:facet-value>
+<search:facet-value name="Li Y. 36078298200" count="180">Li Y. 36078298200</search:facet-value>
+<search:facet-value name="Reddy K.R. 7402390661" count="179">Reddy K.R. 7402390661</search:facet-value>
+<search:facet-value name="Wong M.H. 7403908633" count="179">Wong M.H. 7403908633</search:facet-value>
+<search:facet-value name="Tay J.H. 7102544287" count="178">Tay J.H. 7102544287</search:facet-value>
+<search:facet-value name="Amy G. 16745205400" count="177">Amy G. 16745205400</search:facet-value>
+<search:facet-value name="Baglioni P. 14009931800" count="177">Baglioni P. 14009931800</search:facet-value>
+<search:facet-value name="Chung T.S. 7401571059" count="176">Chung T.S. 7401571059</search:facet-value>
+<search:facet-value name="Garti N. 7005289095" count="176">Garti N. 7005289095</search:facet-value>
+<search:facet-value name="Li J. 36078695800" count="176">Li J. 36078695800</search:facet-value>
+<search:facet-value name="Aime S. 7006357833" count="174">Aime S. 7006357833</search:facet-value>
+<search:facet-value name="Scheraga H.A. 7202725971" count="174">Scheraga H.A. 7202725971</search:facet-value>
+<search:facet-value name="Ito Y. 36049929100" count="173">Ito Y. 36049929100</search:facet-value>
+<search:facet-value name="Kannan K. 7101630491" count="173">Kannan K. 7101630491</search:facet-value>
+<search:facet-value name="Smith D.W. 7410353724" count="173">Smith D.W. 7410353724</search:facet-value>
+<search:facet-value name="Jiang L. 34975075800" count="172">Jiang L. 34975075800</search:facet-value>
+<search:facet-value name="Muir D.C.G. 7202872916" count="172">Muir D.C.G. 7202872916</search:facet-value>
+<search:facet-value name="Van Loosdrecht M.C.M. 7004463801" count="172">Van Loosdrecht M.C.M. 7004463801</search:facet-value>
+<search:facet-value name="Clark R.M. 7406318139" count="171">Clark R.M. 7406318139</search:facet-value>
+<search:facet-value name="Liu P.L.F. 7404618275" count="171">Liu P.L.F. 7404618275</search:facet-value>
+<search:facet-value name="Ahuja L.R. 7006152782" count="170">Ahuja L.R. 7006152782</search:facet-value>
+<search:facet-value name="Borrull F. 35595650000" count="170">Borrull F. 35595650000</search:facet-value>
+<search:facet-value name="Howell T.A. 7102454805" count="170">Howell T.A. 7102454805</search:facet-value>
+<search:facet-value name="Sjöblom J. 7006017538" count="170">Sjöblom J. 7006017538</search:facet-value>
+<search:facet-value name="Vereecken H. 7004082452" count="170">Vereecken H. 7004082452</search:facet-value>
+<search:facet-value name="Ehleringer J.R. 7005417981" count="168">Ehleringer J.R. 7005417981</search:facet-value>
+<search:facet-value name="Huo L.H. 8876988900" count="168">Huo L.H. 8876988900</search:facet-value>
+<search:facet-value name="Julve M. 7004287677" count="168">Julve M. 7004287677</search:facet-value>
+<search:facet-value name="Lloret F. 7005128351" count="168">Lloret F. 7005128351</search:facet-value>
+<search:facet-value name="Binks B.P. 7006231265" count="167">Binks B.P. 7006231265</search:facet-value>
+<search:facet-value name="Rose J.B. 35427522400" count="167">Rose J.B. 35427522400</search:facet-value>
+<search:facet-value name="Feyen J. 35564638500" count="166">Feyen J. 35564638500</search:facet-value>
+<search:facet-value name="Logan B.E. 7202196555" count="165">Logan B.E. 7202196555</search:facet-value>
+<search:facet-value name="Penfold J. 7103266162" count="165">Penfold J. 7103266162</search:facet-value>
+<search:facet-value name="Sobsey M.D. 7005538244" count="165">Sobsey M.D. 7005538244</search:facet-value>
+<search:facet-value name="Zeng G.M. 7202802803" count="165">Zeng G.M. 7202802803</search:facet-value>
+<search:facet-value name="Agre P. 7102695643" count="164">Agre P. 7102695643</search:facet-value>
+<search:facet-value name="Lam P.K.S. 7202365776" count="164">Lam P.K.S. 7202365776</search:facet-value>
+<search:facet-value name="Suffet I.H. 6506202694" count="164">Suffet I.H. 6506202694</search:facet-value>
+<search:facet-value name="Suidan M.T. 7103239373" count="164">Suidan M.T. 7103239373</search:facet-value>
+<search:facet-value name="Zhang J. 16148295400" count="164">Zhang J. 16148295400</search:facet-value>
+<search:facet-value name="Zhang L. 8061982400" count="164">Zhang L. 8061982400</search:facet-value>
+<search:facet-value name="Johnston K.P. 7202814438" count="163">Johnston K.P. 7202814438</search:facet-value>
+<search:facet-value name="Rode B.M. 7006844782" count="162">Rode B.M. 7006844782</search:facet-value>
+<search:facet-value name="Wang J. 36078440500" count="161">Wang J. 36078440500</search:facet-value>
+<search:facet-value name="Westerhoff P. 7004688700" count="161">Westerhoff P. 7004688700</search:facet-value>
+<search:facet-value name="Bayona J.M. 7005640213" count="160">Bayona J.M. 7005640213</search:facet-value>
+<search:facet-value name="Mattiasson B. 7102980428" count="160">Mattiasson B. 7102980428</search:facet-value>
+<search:facet-value name="Wang L. 36066093100" count="160">Wang L. 36066093100</search:facet-value>
+<search:facet-value name="Cooper W.J. 24568166500" count="159">Cooper W.J. 24568166500</search:facet-value>
+<search:facet-value name="Fane A.G. 35593963600" count="159">Fane A.G. 35593963600</search:facet-value>
+<search:facet-value name="Horton R. 7403066268" count="159">Horton R. 7403066268</search:facet-value>
+<search:facet-value name="Jeppesen E. 7005087752" count="159">Jeppesen E. 7005087752</search:facet-value>
+<search:facet-value name="Schoeller D.A. 7102930963" count="159">Schoeller D.A. 7102930963</search:facet-value>
+<search:facet-value name="Tagami J. 7005967527" count="158">Tagami J. 7005967527</search:facet-value>
+<search:facet-value name="Klein M.L. 36012563200" count="157">Klein M.L. 36012563200</search:facet-value>
+<search:facet-value name="Acree W.E. 35496753700" count="156">Acree W.E. 35496753700</search:facet-value>
+<search:facet-value name="Dincer I. 7102697759" count="156">Dincer I. 7102697759</search:facet-value>
+<search:facet-value name="Duarte C.M. 7202476632" count="156">Duarte C.M. 7202476632</search:facet-value>
+<search:facet-value name="Rivas B.L. 7102103268" count="156">Rivas B.L. 7102103268</search:facet-value>
+<search:facet-value name="Sharpley A.N. 7103109511" count="156">Sharpley A.N. 7103109511</search:facet-value>
+<search:facet-value name="Sinninghe Damsté J.S. 35518370600" count="156">Sinninghe Damsté J.S. 35518370600</search:facet-value>
+<search:facet-value name="Solomon K.R. 7101719761" count="156">Solomon K.R. 7101719761</search:facet-value>
+<search:facet-value name="Effler S.W. 7005175506" count="155">Effler S.W. 7005175506</search:facet-value>
+<search:facet-value name="Liu B. 7408693699" count="154">Liu B. 7408693699</search:facet-value>
+<search:facet-value name="Namieśnik J. 7007063399" count="154">Namieśnik J. 7007063399</search:facet-value>
+<search:facet-value name="Reedijk J. 7103016042" count="154">Reedijk J. 7103016042</search:facet-value>
+<search:facet-value name="Arai K. 7403965625" count="153">Arai K. 7403965625</search:facet-value>
+<search:facet-value name="Janssen C.R. 26642872500" count="153">Janssen C.R. 26642872500</search:facet-value>
+<search:facet-value name="Kanwar R.S. 7005787316" count="153">Kanwar R.S. 7005787316</search:facet-value>
+<search:facet-value name="McCormick C.L. 35546258000" count="153">McCormick C.L. 35546258000</search:facet-value>
+<search:facet-value name="Poesen J. 7005958201" count="153">Poesen J. 7005958201</search:facet-value>
+<search:facet-value name="Wang J. 7701307866" count="153">Wang J. 7701307866</search:facet-value>
+<search:facet-value name="Aminabhavi T.M. 36048422400" count="152">Aminabhavi T.M. 36048422400</search:facet-value>
+<search:facet-value name="Hunt W.F. 36710987800" count="152">Hunt W.F. 36710987800</search:facet-value>
+<search:facet-value name="Ikada Y. 36051326600" count="152">Ikada Y. 36051326600</search:facet-value>
+<search:facet-value name="Kumar A. 36063155900" count="152">Kumar A. 36063155900</search:facet-value>
+<search:facet-value name="Yang Z. 7405433398" count="152">Yang Z. 7405433398</search:facet-value>
+<search:facet-value name="Fallick A.E. 7101636411" count="151">Fallick A.E. 7101636411</search:facet-value>
+<search:facet-value name="Fukushima S. 36047037200" count="151">Fukushima S. 36047037200</search:facet-value>
+<search:facet-value name="Maurer G. 7101985636" count="151">Maurer G. 7101985636</search:facet-value>
+<search:facet-value name="Santschi P.H. 7006327962" count="151">Santschi P.H. 7006327962</search:facet-value>
+<search:facet-value name="Stanley H.E. 35375959000" count="151">Stanley H.E. 35375959000</search:facet-value>
+<search:facet-value name="Van Gunsteren W.F. 25935439000" count="151">Van Gunsteren W.F. 25935439000</search:facet-value>
+<search:facet-value name="Li L. 36064664900" count="150">Li L. 36064664900</search:facet-value>
+<search:facet-value name="Li L. 36067133800" count="150">Li L. 36067133800</search:facet-value>
+<search:facet-value name="Liu P. 36065603800" count="150">Liu P. 36065603800</search:facet-value>
+<search:facet-value name="Moldrup P. 7005741989" count="150">Moldrup P. 7005741989</search:facet-value>
+<search:facet-value name="Chanson H. 7004495961" count="149">Chanson H. 7004495961</search:facet-value>
+<search:facet-value name="Guo L. 35109029000" count="149">Guo L. 35109029000</search:facet-value>
+<search:facet-value name="Potter I.C. 7102695010" count="149">Potter I.C. 7102695010</search:facet-value>
+<search:facet-value name="Jekel M. 7007001209" count="148">Jekel M. 7007001209</search:facet-value>
+<search:facet-value name="Niessner R. 7101793845" count="148">Niessner R. 7101793845</search:facet-value>
+<search:facet-value name="Stenstrom M.K. 7005311075" count="148">Stenstrom M.K. 7005311075</search:facet-value>
+<search:facet-value name="Guiochon G. 7201907353" count="147">Guiochon G. 7201907353</search:facet-value>
+<search:facet-value name="Elias P.M. 35406734600" count="146">Elias P.M. 35406734600</search:facet-value>
+<search:facet-value name="Guedes Soares C. 7006468458" count="146">Guedes Soares C. 7006468458</search:facet-value>
+<search:facet-value name="Lai J.Y. 26643223500" count="146">Lai J.Y. 26643223500</search:facet-value>
+<search:facet-value name="Magan N. 7005107262" count="146">Magan N. 7005107262</search:facet-value>
+<search:facet-value name="Wang W.X. 9733945000" count="146">Wang W.X. 9733945000</search:facet-value>
+<search:facet-value name="Barry D.A. 7202480447" count="145">Barry D.A. 7202480447</search:facet-value>
+<search:facet-value name="Kunieda H. 7102539108" count="145">Kunieda H. 7102539108</search:facet-value>
+<search:facet-value name="Langevin D. 7006236161" count="145">Langevin D. 7006236161</search:facet-value>
+<search:facet-value name="Tennyson J. 7101645601" count="145">Tennyson J. 7101645601</search:facet-value>
+<search:facet-value name="Yu H.Q. 35202335200" count="145">Yu H.Q. 35202335200</search:facet-value>
+<search:facet-value name="Abe M. 35376869500" count="144">Abe M. 35376869500</search:facet-value>
+<search:facet-value name="Keller J. 7403487529" count="144">Keller J. 7403487529</search:facet-value>
+<search:facet-value name="Olsson U. 35481547500" count="144">Olsson U. 35481547500</search:facet-value>
+<search:facet-value name="Shamsipur M. 35501461500" count="144">Shamsipur M. 35501461500</search:facet-value>
+<search:facet-value name="Duarte A.C. 7102601994" count="143">Duarte A.C. 7102601994</search:facet-value>
+<search:facet-value name="Hoffmann M.R. 35396625400" count="143">Hoffmann M.R. 35396625400</search:facet-value>
+<search:facet-value name="Huck P.M. 7006407790" count="143">Huck P.M. 7006407790</search:facet-value>
+<search:facet-value name="Meinzer F.C. 7005375794" count="143">Meinzer F.C. 7005375794</search:facet-value>
+<search:facet-value name="Qu J. 7201535076" count="143">Qu J. 7201535076</search:facet-value>
+<search:facet-value name="Walling D.E. 7103220530" count="143">Walling D.E. 7103220530</search:facet-value>
+<search:facet-value name="Wang R.Z. 7405338489" count="143">Wang R.Z. 7405338489</search:facet-value>
+<search:facet-value name="Elimelech M. 7005459559" count="142">Elimelech M. 7005459559</search:facet-value>
+<search:facet-value name="Engberts J.B.F.N. 7006185635" count="142">Engberts J.B.F.N. 7006185635</search:facet-value>
+<search:facet-value name="Girault H.H. 7102360867" count="142">Girault H.H. 7102360867</search:facet-value>
+<search:facet-value name="Soper A.K. 35518058500" count="142">Soper A.K. 35518058500</search:facet-value>
+</search:facet>
+<search:facet name="core.scosubjabbrnav" type="xs:string">
+<search:facet-value name="ENGI" count="501277">ENGI</search:facet-value>
+<search:facet-value name="ENVI" count="486160">ENVI</search:facet-value>
+<search:facet-value name="CHEM" count="362569">CHEM</search:facet-value>
+<search:facet-value name="AGRI" count="359723">AGRI</search:facet-value>
+<search:facet-value name="EART" count="355787">EART</search:facet-value>
+<search:facet-value name="MEDI" count="279346">MEDI</search:facet-value>
+<search:facet-value name="BIOC" count="243995">BIOC</search:facet-value>
+<search:facet-value name="MATE" count="226511">MATE</search:facet-value>
+<search:facet-value name="CENG" count="217123">CENG</search:facet-value>
+<search:facet-value name="PHYS" count="182960">PHYS</search:facet-value>
+<search:facet-value name="ENER" count="115743">ENER</search:facet-value>
+<search:facet-value name="PHAR" count="97276">PHAR</search:facet-value>
+<search:facet-value name="IMMU" count="65800">IMMU</search:facet-value>
+<search:facet-value name="SOCI" count="43475">SOCI</search:facet-value>
+<search:facet-value name="COMP" count="41271">COMP</search:facet-value>
+<search:facet-value name="MATH" count="28157">MATH</search:facet-value>
+<search:facet-value name="MULT" count="27026">MULT</search:facet-value>
+<search:facet-value name="NEUR" count="26846">NEUR</search:facet-value>
+<search:facet-value name="HEAL" count="15315">HEAL</search:facet-value>
+<search:facet-value name="VETE" count="14253">VETE</search:facet-value>
+<search:facet-value name="BUSI" count="12871">BUSI</search:facet-value>
+<search:facet-value name="DENT" count="10901">DENT</search:facet-value>
+<search:facet-value name="NURS" count="6943">NURS</search:facet-value>
+<search:facet-value name="DECI" count="6936">DECI</search:facet-value>
+<search:facet-value name="ARTS" count="6229">ARTS</search:facet-value>
+<search:facet-value name="PSYC" count="6187">PSYC</search:facet-value>
+<search:facet-value name="ECON" count="4751">ECON</search:facet-value>
+</search:facet>
+<search:facet name="core.scosubtypenav" type="xs:string">
+<search:facet-value name="ar" count="1698885">ar</search:facet-value>
+<search:facet-value name="cp" count="307899">cp</search:facet-value>
+<search:facet-value name="re" count="67932">re</search:facet-value>
+<search:facet-value name="no" count="13754">no</search:facet-value>
+<search:facet-value name="ip" count="13536">ip</search:facet-value>
+<search:facet-value name="le" count="9865">le</search:facet-value>
+<search:facet-value name="sh" count="8734">sh</search:facet-value>
+<search:facet-value name="cr" count="5050">cr</search:facet-value>
+<search:facet-value name="ed" count="4463">ed</search:facet-value>
+<search:facet-value name="er" count="2386">er</search:facet-value>
+<search:facet-value name="bk" count="1973">bk</search:facet-value>
+<search:facet-value name="rp" count="1964">rp</search:facet-value>
+<search:facet-value name="bz" count="1771">bz</search:facet-value>
+<search:facet-value name="ab" count="411">ab</search:facet-value>
+<search:facet-value name="pa" count="81">pa</search:facet-value>
+</search:facet>
+<search:facet name="core.scosrctitlenav" type="xs:string">
+<search:facet-value name="Water Science and Technology" count="17014">Water Science and Technology</search:facet-value>
+<search:facet-value name="Environmental Science and Technology" count="13014">Environmental Science and Technology</search:facet-value>
+<search:facet-value name="Journal of the American Chemical Society" count="12748">Journal of the American Chemical Society</search:facet-value>
+<search:facet-value name="Water Research" count="12498">Water Research</search:facet-value>
+<search:facet-value name="Proceedings of SPIE - The International Society for Optical Engineering" count="10723">Proceedings of SPIE - The International Society for Optical Engineering</search:facet-value>
+<search:facet-value name="Langmuir" count="10084">Langmuir</search:facet-value>
+<search:facet-value name="Nature" count="8228">Nature</search:facet-value>
+<search:facet-value name="Journal of Physical Chemistry B" count="8036">Journal of Physical Chemistry B</search:facet-value>
+<search:facet-value name="Advanced Materials Research" count="8025">Advanced Materials Research</search:facet-value>
+<search:facet-value name="Chemosphere" count="7956">Chemosphere</search:facet-value>
+<search:facet-value name="Desalination" count="7821">Desalination</search:facet-value>
+<search:facet-value name="Hydrobiologia" count="7481">Hydrobiologia</search:facet-value>
+<search:facet-value name="Journal of Hydrology" count="7223">Journal of Hydrology</search:facet-value>
+<search:facet-value name="Water Resources Research" count="6896">Water Resources Research</search:facet-value>
+<search:facet-value name="Journal of Chromatography A" count="6829">Journal of Chromatography A</search:facet-value>
+<search:facet-value name="Journal of Hazardous Materials" count="6791">Journal of Hazardous Materials</search:facet-value>
+<search:facet-value name="Science of the Total Environment" count="6733">Science of the Total Environment</search:facet-value>
+<search:facet-value name="Journal of Applied Polymer Science" count="6687">Journal of Applied Polymer Science</search:facet-value>
+<search:facet-value name="Journal of Physical Chemistry" count="6572">Journal of Physical Chemistry</search:facet-value>
+<search:facet-value name="Analytica Chimica Acta" count="5672">Analytica Chimica Acta</search:facet-value>
+<search:facet-value name="Applied and Environmental Microbiology" count="5667">Applied and Environmental Microbiology</search:facet-value>
+<search:facet-value name="Science" count="5431">Science</search:facet-value>
+<search:facet-value name="Analytical Chemistry" count="5343">Analytical Chemistry</search:facet-value>
+<search:facet-value name="Journal of Agricultural and Food Chemistry" count="5233">Journal of Agricultural and Food Chemistry</search:facet-value>
+<search:facet-value name="Marine Pollution Bulletin" count="4984">Marine Pollution Bulletin</search:facet-value>
+<search:facet-value name="Bulletin of Environmental Contamination and Toxicology" count="4945">Bulletin of Environmental Contamination and Toxicology</search:facet-value>
+<search:facet-value name="Journal of Chemical Physics" count="4936">Journal of Chemical Physics</search:facet-value>
+<search:facet-value name="Acta Crystallographica Section E: Structure Reports Online" count="4833">Acta Crystallographica Section E: Structure Reports Online</search:facet-value>
+<search:facet-value name="Water, Air, and Soil Pollution" count="4828">Water, Air, and Soil Pollution</search:facet-value>
+<search:facet-value name="Environmental Toxicology and Chemistry" count="4820">Environmental Toxicology and Chemistry</search:facet-value>
+<search:facet-value name="Journal of Colloid and Interface Science" count="4801">Journal of Colloid and Interface Science</search:facet-value>
+<search:facet-value name="Biochemistry" count="4517">Biochemistry</search:facet-value>
+<search:facet-value name="Journal of Membrane Science" count="4513">Journal of Membrane Science</search:facet-value>
+<search:facet-value name="Geochimica et Cosmochimica Acta" count="4485">Geochimica et Cosmochimica Acta</search:facet-value>
+<search:facet-value name="Bioresource Technology" count="4390">Bioresource Technology</search:facet-value>
+<search:facet-value name="Inorganic Chemistry" count="4364">Inorganic Chemistry</search:facet-value>
+<search:facet-value name="Journal of Environmental Quality" count="4246">Journal of Environmental Quality</search:facet-value>
+<search:facet-value name="Geophysical Research Letters" count="4186">Geophysical Research Letters</search:facet-value>
+<search:facet-value name="Industrial and Engineering Chemistry Research" count="4170">Industrial and Engineering Chemistry Research</search:facet-value>
+<search:facet-value name="IAHS-AISH Publication" count="4059">IAHS-AISH Publication</search:facet-value>
+<search:facet-value name="SAE Technical Papers" count="3851">SAE Technical Papers</search:facet-value>
+<search:facet-value name="Environmental Monitoring and Assessment" count="3748">Environmental Monitoring and Assessment</search:facet-value>
+<search:facet-value name="Colloids and Surfaces A: Physicochemical and Engineering Aspects" count="3738">Colloids and Surfaces A: Physicochemical and Engineering Aspects</search:facet-value>
+<search:facet-value name="Talanta" count="3697">Talanta</search:facet-value>
+<search:facet-value name="Marine Ecology Progress Series" count="3680">Marine Ecology Progress Series</search:facet-value>
+<search:facet-value name="Macromolecules" count="3639">Macromolecules</search:facet-value>
+<search:facet-value name="Journal of Physical Chemistry A" count="3589">Journal of Physical Chemistry A</search:facet-value>
+<search:facet-value name="Journal / American Water Works Association" count="3501">Journal / American Water Works Association</search:facet-value>
+<search:facet-value name="Environmental Pollution" count="3497">Environmental Pollution</search:facet-value>
+<search:facet-value name="Hydrological Processes" count="3417">Hydrological Processes</search:facet-value>
+<search:facet-value name="Proceedings of the National Academy of Sciences of the United States of America" count="3408">Proceedings of the National Academy of Sciences of the United States of America</search:facet-value>
+<search:facet-value name="Proceedings of the International Offshore and Polar Engineering Conference" count="3267">Proceedings of the International Offshore and Polar Engineering Conference</search:facet-value>
+<search:facet-value name="Gigiena i sanitariia" count="3264">Gigiena i sanitariia</search:facet-value>
+<search:facet-value name="Journal of Chemical and Engineering Data" count="3227">Journal of Chemical and Engineering Data</search:facet-value>
+<search:facet-value name="Marine Biology" count="3214">Marine Biology</search:facet-value>
+<search:facet-value name="The Journal of Chemical Physics" count="3206">The Journal of Chemical Physics</search:facet-value>
+<search:facet-value name="International Geoscience and Remote Sensing Symposium (IGARSS)" count="3199">International Geoscience and Remote Sensing Symposium (IGARSS)</search:facet-value>
+<search:facet-value name="Soil Science Society of America Journal" count="3199">Soil Science Society of America Journal</search:facet-value>
+<search:facet-value name="International Journal of Pharmaceutics" count="3188">International Journal of Pharmaceutics</search:facet-value>
+<search:facet-value name="Journal of Geophysical Research C: Oceans" count="3164">Journal of Geophysical Research C: Oceans</search:facet-value>
+<search:facet-value name="Chemical Physics Letters" count="3161">Chemical Physics Letters</search:facet-value>
+<search:facet-value name="Journal of Geophysical Research D: Atmospheres" count="3101">Journal of Geophysical Research D: Atmospheres</search:facet-value>
+<search:facet-value name="Estuarine, Coastal and Shelf Science" count="3075">Estuarine, Coastal and Shelf Science</search:facet-value>
+<search:facet-value name="Nuclear Engineering and Design" count="3015">Nuclear Engineering and Design</search:facet-value>
+<search:facet-value name="Ground Water" count="2964">Ground Water</search:facet-value>
+<search:facet-value name="Aquaculture" count="2948">Aquaculture</search:facet-value>
+<search:facet-value name="Applied Mechanics and Materials" count="2922">Applied Mechanics and Materials</search:facet-value>
+<search:facet-value name="Agricultural Water Management" count="2885">Agricultural Water Management</search:facet-value>
+<search:facet-value name="Journal of Organic Chemistry" count="2863">Journal of Organic Chemistry</search:facet-value>
+<search:facet-value name="Journal of Colloid And Interface Science" count="2798">Journal of Colloid And Interface Science</search:facet-value>
+<search:facet-value name="International Journal of Hydrogen Energy" count="2797">International Journal of Hydrogen Energy</search:facet-value>
+<search:facet-value name="Physical Chemistry Chemical Physics" count="2787">Physical Chemistry Chemical Physics</search:facet-value>
+<search:facet-value name="Acta Horticulturae" count="2773">Acta Horticulturae</search:facet-value>
+<search:facet-value name="Journal of the Water Pollution Control Federation" count="2708">Journal of the Water Pollution Control Federation</search:facet-value>
+<search:facet-value name="Proceedings - SPE Annual Technical Conference and Exhibition" count="2679">Proceedings - SPE Annual Technical Conference and Exhibition</search:facet-value>
+<search:facet-value name="Journal of Physical Chemistry C" count="2655">Journal of Physical Chemistry C</search:facet-value>
+<search:facet-value name="Food Chemistry" count="2592">Food Chemistry</search:facet-value>
+<search:facet-value name="Plant and Soil" count="2592">Plant and Soil</search:facet-value>
+<search:facet-value name="Journal of Biological Chemistry" count="2581">Journal of Biological Chemistry</search:facet-value>
+<search:facet-value name="Proceedings of the International Conference on Offshore Mechanics and Arctic Engineering - OMAE" count="2581">Proceedings of the International Conference on Offshore Mechanics and Arctic Engineering - OMAE</search:facet-value>
+<search:facet-value name="Biophysical Journal" count="2558">Biophysical Journal</search:facet-value>
+<search:facet-value name="Archives of Environmental Contamination and Toxicology" count="2514">Archives of Environmental Contamination and Toxicology</search:facet-value>
+<search:facet-value name="Polymer" count="2489">Polymer</search:facet-value>
+<search:facet-value name="Huanjing Kexue/Environmental Science" count="2432">Huanjing Kexue/Environmental Science</search:facet-value>
+<search:facet-value name="Chemical Engineering Science" count="2415">Chemical Engineering Science</search:facet-value>
+<search:facet-value name="ASTM Special Technical Publication" count="2399">ASTM Special Technical Publication</search:facet-value>
+<search:facet-value name="Journal of Fluid Mechanics" count="2393">Journal of Fluid Mechanics</search:facet-value>
+<search:facet-value name="Water Supply" count="2391">Water Supply</search:facet-value>
+<search:facet-value name="Journal of Pharmaceutical Sciences" count="2386">Journal of Pharmaceutical Sciences</search:facet-value>
+<search:facet-value name="Water Environment Research" count="2371">Water Environment Research</search:facet-value>
+<search:facet-value name="Ecotoxicology and Environmental Safety" count="2366">Ecotoxicology and Environmental Safety</search:facet-value>
+<search:facet-value name="Journal of Experimental Marine Biology and Ecology" count="2351">Journal of Experimental Marine Biology and Ecology</search:facet-value>
+<search:facet-value name="PLoS ONE" count="2351">PLoS ONE</search:facet-value>
+<search:facet-value name="Earth and Planetary Science Letters" count="2349">Earth and Planetary Science Letters</search:facet-value>
+<search:facet-value name="Palaeogeography, Palaeoclimatology, Palaeoecology" count="2344">Palaeogeography, Palaeoclimatology, Palaeoecology</search:facet-value>
+<search:facet-value name="International Journal of Heat and Mass Transfer" count="2326">International Journal of Heat and Mass Transfer</search:facet-value>
+<search:facet-value name="Aquatic Toxicology" count="2316">Aquatic Toxicology</search:facet-value>
+<search:facet-value name="Journal of Environmental Engineering" count="2308">Journal of Environmental Engineering</search:facet-value>
+<search:facet-value name="Journal of the Acoustical Society of America" count="2276">Journal of the Acoustical Society of America</search:facet-value>
+<search:facet-value name="Oil and Gas Journal" count="2257">Oil and Gas Journal</search:facet-value>
+<search:facet-value name="Marine Geology" count="2238">Marine Geology</search:facet-value>
+<search:facet-value name="Carbohydrate Polymers" count="2237">Carbohydrate Polymers</search:facet-value>
+<search:facet-value name="Electrochimica Acta" count="2222">Electrochimica Acta</search:facet-value>
+<search:facet-value name="Journal of Electroanalytical Chemistry" count="2214">Journal of Electroanalytical Chemistry</search:facet-value>
+<search:facet-value name="Environmental Technology" count="2211">Environmental Technology</search:facet-value>
+<search:facet-value name="Journal of the Electrochemical Society" count="2202">Journal of the Electrochemical Society</search:facet-value>
+<search:facet-value name="Thermochimica Acta" count="2197">Thermochimica Acta</search:facet-value>
+<search:facet-value name="Nuclear Technology" count="2189">Nuclear Technology</search:facet-value>
+<search:facet-value name="Oecologia" count="2186">Oecologia</search:facet-value>
+<search:facet-value name="AIP Conference Proceedings" count="2146">AIP Conference Proceedings</search:facet-value>
+<search:facet-value name="Physiology and Behavior" count="2126">Physiology and Behavior</search:facet-value>
+<search:facet-value name="Chemical Communications" count="2124">Chemical Communications</search:facet-value>
+<search:facet-value name="Proceedings of the Coastal Engineering Conference" count="2114">Proceedings of the Coastal Engineering Conference</search:facet-value>
+<search:facet-value name="Continental Shelf Research" count="2106">Continental Shelf Research</search:facet-value>
+<search:facet-value name="Inorganica Chimica Acta" count="2102">Inorganica Chimica Acta</search:facet-value>
+<search:facet-value name="Chemical Geology" count="2087">Chemical Geology</search:facet-value>
+<search:facet-value name="Limnology and Oceanography" count="2081">Limnology and Oceanography</search:facet-value>
+<search:facet-value name="Transactions of the American Society of Agricultural Engineers" count="2047">Transactions of the American Society of Agricultural Engineers</search:facet-value>
+<search:facet-value name="Atmospheric Environment" count="2040">Atmospheric Environment</search:facet-value>
+<search:facet-value name="Nongye Gongcheng Xuebao/Transactions of the Chinese Society of Agricultural Engineering" count="2032">Nongye Gongcheng Xuebao/Transactions of the Chinese Society of Agricultural Engineering</search:facet-value>
+<search:facet-value name="Journal of Experimental Botany" count="2025">Journal of Experimental Botany</search:facet-value>
+<search:facet-value name="Oceans Conference Record (IEEE)" count="2022">Oceans Conference Record (IEEE)</search:facet-value>
+<search:facet-value name="Deep-Sea Research Part II: Topical Studies in Oceanography" count="2018">Deep-Sea Research Part II: Topical Studies in Oceanography</search:facet-value>
+<search:facet-value name="Journal of Applied Physics" count="2018">Journal of Applied Physics</search:facet-value>
+<search:facet-value name="Journal of Environmental Science and Health - Part A Toxic/Hazardous Substances and Environmental Engineering" count="2006">Journal of Environmental Science and Health - Part A Toxic/Hazardous Substances and Environmental Engineering</search:facet-value>
+<search:facet-value name="Journal of Radioanalytical and Nuclear Chemistry" count="2004">Journal of Radioanalytical and Nuclear Chemistry</search:facet-value>
+<search:facet-value name="American Society of Mechanical Engineers (Paper)" count="1991">American Society of Mechanical Engineers (Paper)</search:facet-value>
+<search:facet-value name="Applied Geochemistry" count="1969">Applied Geochemistry</search:facet-value>
+<search:facet-value name="Journal of Power Sources" count="1969">Journal of Power Sources</search:facet-value>
+<search:facet-value name="Journal of Environmental Management" count="1954">Journal of Environmental Management</search:facet-value>
+<search:facet-value name="Cement and Concrete Research" count="1950">Cement and Concrete Research</search:facet-value>
+<search:facet-value name="AIChE Annual Meeting, Conference Proceedings" count="1933">AIChE Annual Meeting, Conference Proceedings</search:facet-value>
+<search:facet-value name="Environmental Geology" count="1927">Environmental Geology</search:facet-value>
+<search:facet-value name="Canadian Journal of Fisheries and Aquatic Sciences" count="1923">Canadian Journal of Fisheries and Aquatic Sciences</search:facet-value>
+<search:facet-value name="American Society of Mechanical Engineers, Pressure Vessels and Piping Division (Publication) PVP" count="1922">American Society of Mechanical Engineers, Pressure Vessels and Piping Division (Publication) PVP</search:facet-value>
+<search:facet-value name="Marine Chemistry" count="1915">Marine Chemistry</search:facet-value>
+<search:facet-value name="Journal of Geophysical Research" count="1903">Journal of Geophysical Research</search:facet-value>
+<search:facet-value name="Journal of Contaminant Hydrology" count="1897">Journal of Contaminant Hydrology</search:facet-value>
+<search:facet-value name="Journal of Materials Chemistry" count="1882">Journal of Materials Chemistry</search:facet-value>
+<search:facet-value name="ACS National Meeting Book of Abstracts" count="1877">ACS National Meeting Book of Abstracts</search:facet-value>
+<search:facet-value name="Journal of Fish Biology" count="1877">Journal of Fish Biology</search:facet-value>
+<search:facet-value name="Chemical Engineering Journal" count="1871">Chemical Engineering Journal</search:facet-value>
+<search:facet-value name="Thin Solid Films" count="1870">Thin Solid Films</search:facet-value>
+<search:facet-value name="Tetrahedron Letters" count="1866">Tetrahedron Letters</search:facet-value>
+<search:facet-value name="Journal of Food Engineering" count="1865">Journal of Food Engineering</search:facet-value>
+<search:facet-value name="Journal of Materials Science" count="1865">Journal of Materials Science</search:facet-value>
+<search:facet-value name="Environmental Health Perspectives" count="1860">Environmental Health Perspectives</search:facet-value>
+<search:facet-value name="Applied Surface Science" count="1859">Applied Surface Science</search:facet-value>
+<search:facet-value name="Fluid Phase Equilibria" count="1819">Fluid Phase Equilibria</search:facet-value>
+<search:facet-value name="Asian Journal of Chemistry" count="1758">Asian Journal of Chemistry</search:facet-value>
+<search:facet-value name="Journal of Molecular Biology" count="1753">Journal of Molecular Biology</search:facet-value>
+<search:facet-value name="Journal of the American Water Resources Association" count="1744">Journal of the American Water Resources Association</search:facet-value>
+<search:facet-value name="Chinese Journal of Applied Ecology" count="1740">Chinese Journal of Applied Ecology</search:facet-value>
+<search:facet-value name="Journal of Physical Oceanography" count="1735">Journal of Physical Oceanography</search:facet-value>
+<search:facet-value name="Key Engineering Materials" count="1724">Key Engineering Materials</search:facet-value>
+<search:facet-value name="Journal of Experimental Biology" count="1720">Journal of Experimental Biology</search:facet-value>
+<search:facet-value name="Marine Environmental Research" count="1696">Marine Environmental Research</search:facet-value>
+<search:facet-value name="Water Resources" count="1689">Water Resources</search:facet-value>
+<search:facet-value name="Paper - American Society of Agricultural Engineers" count="1679">Paper - American Society of Agricultural Engineers</search:facet-value>
+<search:facet-value name="Freshwater Biology" count="1676">Freshwater Biology</search:facet-value>
+<search:facet-value name="Geotechnical Special Publication" count="1671">Geotechnical Special Publication</search:facet-value>
+<search:facet-value name="Journal of Hydraulic Engineering" count="1659">Journal of Hydraulic Engineering</search:facet-value>
+<search:facet-value name="International Journal of Remote Sensing" count="1647">International Journal of Remote Sensing</search:facet-value>
+<search:facet-value name="Analytical and Bioanalytical Chemistry" count="1644">Analytical and Bioanalytical Chemistry</search:facet-value>
+<search:facet-value name="Shengtai Xuebao/ Acta Ecologica Sinica" count="1636">Shengtai Xuebao/ Acta Ecologica Sinica</search:facet-value>
+<search:facet-value name="Applied Physics Letters" count="1633">Applied Physics Letters</search:facet-value>
+<search:facet-value name="Chromatographia" count="1633">Chromatographia</search:facet-value>
+<search:facet-value name="Geology" count="1619">Geology</search:facet-value>
+<search:facet-value name="GWF, Wasser - Abwasser" count="1609">GWF, Wasser - Abwasser</search:facet-value>
+<search:facet-value name="Chemistry - A European Journal" count="1606">Chemistry - A European Journal</search:facet-value>
+<search:facet-value name="Journal of Polymer Science, Part A: Polymer Chemistry" count="1606">Journal of Polymer Science, Part A: Polymer Chemistry</search:facet-value>
+<search:facet-value name="Brain Research" count="1605">Brain Research</search:facet-value>
+<search:facet-value name="Journal of Molecular Structure" count="1602">Journal of Molecular Structure</search:facet-value>
+<search:facet-value name="Journal of Chemical Technology and Biotechnology" count="1582">Journal of Chemical Technology and Biotechnology</search:facet-value>
+<search:facet-value name="Materials Science Forum" count="1574">Materials Science Forum</search:facet-value>
+<search:facet-value name="Journal of the Chemical Society (Resumed)" count="1570">Journal of the Chemical Society (Resumed)</search:facet-value>
+<search:facet-value name="Journal of Nuclear Materials" count="1569">Journal of Nuclear Materials</search:facet-value>
+<search:facet-value name="Chemistry of Materials" count="1552">Chemistry of Materials</search:facet-value>
+<search:facet-value name="Carbohydrate Research" count="1544">Carbohydrate Research</search:facet-value>
+<search:facet-value name="Water Science and Technology: Water Supply" count="1542">Water Science and Technology: Water Supply</search:facet-value>
+<search:facet-value name="Water Resources Management" count="1539">Water Resources Management</search:facet-value>
+<search:facet-value name="Journal of Food Science" count="1538">Journal of Food Science</search:facet-value>
+<search:facet-value name="Geoderma" count="1527">Geoderma</search:facet-value>
+<search:facet-value name="Separation Science and Technology" count="1525">Separation Science and Technology</search:facet-value>
+<search:facet-value name="Biotechnology and Bioengineering" count="1522">Biotechnology and Bioengineering</search:facet-value>
+<search:facet-value name="Ecological Modelling" count="1518">Ecological Modelling</search:facet-value>
+<search:facet-value name="American Journal of Physiology - Regulatory Integrative and Comparative Physiology" count="1516">American Journal of Physiology - Regulatory Integrative and Comparative Physiology</search:facet-value>
+<search:facet-value name="Journal of Plankton Research" count="1515">Journal of Plankton Research</search:facet-value>
+<search:facet-value name="Water Resources Bulletin" count="1514">Water Resources Bulletin</search:facet-value>
+<search:facet-value name="Medical Physics" count="1484">Medical Physics</search:facet-value>
+<search:facet-value name="Ocean Engineering" count="1467">Ocean Engineering</search:facet-value>
+<search:facet-value name="Desalination and Water Treatment" count="1459">Desalination and Water Treatment</search:facet-value>
+<search:facet-value name="Environmental Management" count="1449">Environmental Management</search:facet-value>
+<search:facet-value name="Journal of Catalysis" count="1449">Journal of Catalysis</search:facet-value>
+<search:facet-value name="Fresenius Environmental Bulletin" count="1446">Fresenius Environmental Bulletin</search:facet-value>
+<search:facet-value name="Physics in Medicine and Biology" count="1441">Physics in Medicine and Biology</search:facet-value>
+<search:facet-value name="Geological Society Special Publication" count="1439">Geological Society Special Publication</search:facet-value>
+<search:facet-value name="Analyst" count="1434">Analyst</search:facet-value>
+<search:facet-value name="Proceedings of the Annual Offshore Technology Conference" count="1425">Proceedings of the Annual Offshore Technology Conference</search:facet-value>
+<search:facet-value name="The Lancet" count="1422">The Lancet</search:facet-value>
+</search:facet>
+<search:facet name="core.scokeywordsnav" type="xs:string">
+<search:facet-value name="Water" count="12691">Water</search:facet-value>
+<search:facet-value name="Adsorption" count="9477">Adsorption</search:facet-value>
+<search:facet-value name="Water quality" count="9425">Water quality</search:facet-value>
+<search:facet-value name="Groundwater" count="6530">Groundwater</search:facet-value>
+<search:facet-value name="Temperature" count="6043">Temperature</search:facet-value>
+<search:facet-value name="Heavy metals" count="5737">Heavy metals</search:facet-value>
+<search:facet-value name="Climate change" count="5558">Climate change</search:facet-value>
+<search:facet-value name="Wastewater" count="4880">Wastewater</search:facet-value>
+<search:facet-value name="Kinetics" count="4728">Kinetics</search:facet-value>
+<search:facet-value name="Nitrogen" count="4573">Nitrogen</search:facet-value>
+<search:facet-value name="Sediment" count="4542">Sediment</search:facet-value>
+<search:facet-value name="Phosphorus" count="4355">Phosphorus</search:facet-value>
+<search:facet-value name="Drinking water" count="4269">Drinking water</search:facet-value>
+<search:facet-value name="Remote sensing" count="4138">Remote sensing</search:facet-value>
+<search:facet-value name="Irrigation" count="4091">Irrigation</search:facet-value>
+<search:facet-value name="Modeling" count="4083">Modeling</search:facet-value>
+<search:facet-value name="Salinity" count="4002">Salinity</search:facet-value>
+<search:facet-value name="Wastewater treatment" count="3987">Wastewater treatment</search:facet-value>
+<search:facet-value name="Copper" count="3824">Copper</search:facet-value>
+<search:facet-value name="Fish" count="3824">Fish</search:facet-value>
+<search:facet-value name="Growth" count="3790">Growth</search:facet-value>
+<search:facet-value name="Toxicity" count="3710">Toxicity</search:facet-value>
+<search:facet-value name="Simulation" count="3638">Simulation</search:facet-value>
+<search:facet-value name="Modelling" count="3630">Modelling</search:facet-value>
+<search:facet-value name="HPLC" count="3548">HPLC</search:facet-value>
+<search:facet-value name="Nutrients" count="3512">Nutrients</search:facet-value>
+<search:facet-value name="Eutrophication" count="3451">Eutrophication</search:facet-value>
+<search:facet-value name="Crystal structure" count="3426">Crystal structure</search:facet-value>
+<search:facet-value name="Arsenic" count="3397">Arsenic</search:facet-value>
+<search:facet-value name="Soil" count="3346">Soil</search:facet-value>
+<search:facet-value name="Numerical simulation" count="3232">Numerical simulation</search:facet-value>
+<search:facet-value name="Photosynthesis" count="3193">Photosynthesis</search:facet-value>
+<search:facet-value name="Pollution" count="3159">Pollution</search:facet-value>
+<search:facet-value name="Rat" count="3155">Rat</search:facet-value>
+<search:facet-value name="Biodegradation" count="3144">Biodegradation</search:facet-value>
+<search:facet-value name="Nitrate" count="3083">Nitrate</search:facet-value>
+<search:facet-value name="Drought" count="3079">Drought</search:facet-value>
+<search:facet-value name="Phytoplankton" count="3070">Phytoplankton</search:facet-value>
+<search:facet-value name="Optimization" count="3062">Optimization</search:facet-value>
+<search:facet-value name="Cadmium" count="3050">Cadmium</search:facet-value>
+<search:facet-value name="Stability" count="3030">Stability</search:facet-value>
+<search:facet-value name="Diffusion" count="2990">Diffusion</search:facet-value>
+<search:facet-value name="Water treatment" count="2961">Water treatment</search:facet-value>
+<search:facet-value name="Nanoparticles" count="2850">Nanoparticles</search:facet-value>
+<search:facet-value name="Monitoring" count="2834">Monitoring</search:facet-value>
+<search:facet-value name="GIS" count="2771">GIS</search:facet-value>
+<search:facet-value name="Oxidation" count="2728">Oxidation</search:facet-value>
+<search:facet-value name="Denitrification" count="2694">Denitrification</search:facet-value>
+<search:facet-value name="Bacteria" count="2666">Bacteria</search:facet-value>
+<search:facet-value name="Mechanical properties" count="2647">Mechanical properties</search:facet-value>
+<search:facet-value name="Corrosion" count="2638">Corrosion</search:facet-value>
+<search:facet-value name="Water stress" count="2636">Water stress</search:facet-value>
+<search:facet-value name="Chitosan" count="2619">Chitosan</search:facet-value>
+<search:facet-value name="Degradation" count="2613">Degradation</search:facet-value>
+<search:facet-value name="Biomass" count="2565">Biomass</search:facet-value>
+<search:facet-value name="Environment" count="2558">Environment</search:facet-value>
+<search:facet-value name="Runoff" count="2526">Runoff</search:facet-value>
+<search:facet-value name="Oxidative stress" count="2523">Oxidative stress</search:facet-value>
+<search:facet-value name="Evapotranspiration" count="2520">Evapotranspiration</search:facet-value>
+<search:facet-value name="Lead" count="2516">Lead</search:facet-value>
+<search:facet-value name="Mercury" count="2513">Mercury</search:facet-value>
+<search:facet-value name="Pesticides" count="2488">Pesticides</search:facet-value>
+<search:facet-value name="Hydrology" count="2458">Hydrology</search:facet-value>
+<search:facet-value name="Sorption" count="2455">Sorption</search:facet-value>
+<search:facet-value name="Solubility" count="2433">Solubility</search:facet-value>
+<search:facet-value name="pH" count="2410">pH</search:facet-value>
+<search:facet-value name="Ethanol" count="2378">Ethanol</search:facet-value>
+<search:facet-value name="Fluorescence" count="2368">Fluorescence</search:facet-value>
+<search:facet-value name="Microstructure" count="2334">Microstructure</search:facet-value>
+<search:facet-value name="Sediments" count="2304">Sediments</search:facet-value>
+<search:facet-value name="Model" count="2284">Model</search:facet-value>
+<search:facet-value name="Precipitation" count="2242">Precipitation</search:facet-value>
+<search:facet-value name="Water management" count="2235">Water management</search:facet-value>
+<search:facet-value name="Carbon dioxide" count="2224">Carbon dioxide</search:facet-value>
+<search:facet-value name="Morphology" count="2224">Morphology</search:facet-value>
+<search:facet-value name="Permeability" count="2212">Permeability</search:facet-value>
+<search:facet-value name="Zinc" count="2203">Zinc</search:facet-value>
+<search:facet-value name="Stable isotopes" count="2187">Stable isotopes</search:facet-value>
+<search:facet-value name="Photocatalysis" count="2179">Photocatalysis</search:facet-value>
+<search:facet-value name="NMR" count="2178">NMR</search:facet-value>
+<search:facet-value name="Hydrogen" count="2151">Hydrogen</search:facet-value>
+<search:facet-value name="Ozone" count="2140">Ozone</search:facet-value>
+<search:facet-value name="Distribution" count="2127">Distribution</search:facet-value>
+<search:facet-value name="Synthesis" count="2117">Synthesis</search:facet-value>
+<search:facet-value name="Activated sludge" count="2111">Activated sludge</search:facet-value>
+<search:facet-value name="Nitrification" count="2104">Nitrification</search:facet-value>
+<search:facet-value name="Surfactant" count="2098">Surfactant</search:facet-value>
+<search:facet-value name="Iron" count="2094">Iron</search:facet-value>
+<search:facet-value name="Ultrafiltration" count="2077">Ultrafiltration</search:facet-value>
+<search:facet-value name="Hydration" count="2075">Hydration</search:facet-value>
+<search:facet-value name="Viscosity" count="2039">Viscosity</search:facet-value>
+<search:facet-value name="Biofilm" count="2028">Biofilm</search:facet-value>
+<search:facet-value name="Metals" count="2017">Metals</search:facet-value>
+<search:facet-value name="Heat transfer" count="2000">Heat transfer</search:facet-value>
+<search:facet-value name="Risk assessment" count="1989">Risk assessment</search:facet-value>
+<search:facet-value name="Soil moisture" count="1986">Soil moisture</search:facet-value>
+<search:facet-value name="Water content" count="1945">Water content</search:facet-value>
+<search:facet-value name="Water resources" count="1921">Water resources</search:facet-value>
+<search:facet-value name="Cyanobacteria" count="1888">Cyanobacteria</search:facet-value>
+<search:facet-value name="Hydrogen peroxide" count="1882">Hydrogen peroxide</search:facet-value>
+<search:facet-value name="Bioavailability" count="1876">Bioavailability</search:facet-value>
+<search:facet-value name="Extraction" count="1874">Extraction</search:facet-value>
+<search:facet-value name="China" count="1869">China</search:facet-value>
+<search:facet-value name="Rats" count="1862">Rats</search:facet-value>
+<search:facet-value name="Molecular dynamics" count="1843">Molecular dynamics</search:facet-value>
+<search:facet-value name="Dehydration" count="1829">Dehydration</search:facet-value>
+<search:facet-value name="Rheology" count="1814">Rheology</search:facet-value>
+<search:facet-value name="Hydrolysis" count="1813">Hydrolysis</search:facet-value>
+<search:facet-value name="Desalination" count="1809">Desalination</search:facet-value>
+<search:facet-value name="Agriculture" count="1807">Agriculture</search:facet-value>
+<search:facet-value name="Reverse osmosis" count="1799">Reverse osmosis</search:facet-value>
+<search:facet-value name="Leaching" count="1797">Leaching</search:facet-value>
+<search:facet-value name="Stress" count="1781">Stress</search:facet-value>
+<search:facet-value name="Erosion" count="1776">Erosion</search:facet-value>
+<search:facet-value name="Water analysis" count="1766">Water analysis</search:facet-value>
+<search:facet-value name="Water balance" count="1764">Water balance</search:facet-value>
+<search:facet-value name="Activated carbon" count="1752">Activated carbon</search:facet-value>
+<search:facet-value name="Yield" count="1751">Yield</search:facet-value>
+<search:facet-value name="Biodiversity" count="1743">Biodiversity</search:facet-value>
+<search:facet-value name="Water use efficiency" count="1743">Water use efficiency</search:facet-value>
+<search:facet-value name="Wetlands" count="1743">Wetlands</search:facet-value>
+<search:facet-value name="Water pollution" count="1725">Water pollution</search:facet-value>
+<search:facet-value name="Antioxidant" count="1720">Antioxidant</search:facet-value>
+<search:facet-value name="Bioaccumulation" count="1715">Bioaccumulation</search:facet-value>
+<search:facet-value name="Contamination" count="1714">Contamination</search:facet-value>
+<search:facet-value name="Sustainability" count="1705">Sustainability</search:facet-value>
+<search:facet-value name="X-ray diffraction" count="1697">X-ray diffraction</search:facet-value>
+<search:facet-value name="Porosity" count="1680">Porosity</search:facet-value>
+<search:facet-value name="Concrete" count="1676">Concrete</search:facet-value>
+<search:facet-value name="Surface water" count="1667">Surface water</search:facet-value>
+<search:facet-value name="Zooplankton" count="1666">Zooplankton</search:facet-value>
+<search:facet-value name="Speciation" count="1663">Speciation</search:facet-value>
+<search:facet-value name="Seawater" count="1655">Seawater</search:facet-value>
+<search:facet-value name="Calcium" count="1653">Calcium</search:facet-value>
+<search:facet-value name="Water supply" count="1635">Water supply</search:facet-value>
+<search:facet-value name="Wheat" count="1632">Wheat</search:facet-value>
+<search:facet-value name="Heavy metal" count="1601">Heavy metal</search:facet-value>
+<search:facet-value name="Mass transfer" count="1589">Mass transfer</search:facet-value>
+<search:facet-value name="Land use" count="1561">Land use</search:facet-value>
+<search:facet-value name="Membrane" count="1560">Membrane</search:facet-value>
+<search:facet-value name="Nitric oxide" count="1560">Nitric oxide</search:facet-value>
+<search:facet-value name="Structure" count="1556">Structure</search:facet-value>
+<search:facet-value name="Evaporation" count="1555">Evaporation</search:facet-value>
+<search:facet-value name="Phenol" count="1532">Phenol</search:facet-value>
+<search:facet-value name="Protein" count="1528">Protein</search:facet-value>
+<search:facet-value name="Reproduction" count="1524">Reproduction</search:facet-value>
+<search:facet-value name="Organic matter" count="1511">Organic matter</search:facet-value>
+<search:facet-value name="Hippocampus" count="1500">Hippocampus</search:facet-value>
+<search:facet-value name="Starch" count="1500">Starch</search:facet-value>
+<search:facet-value name="Emulsion" count="1493">Emulsion</search:facet-value>
+<search:facet-value name="Methane" count="1492">Methane</search:facet-value>
+<search:facet-value name="Swelling" count="1492">Swelling</search:facet-value>
+<search:facet-value name="Self-assembly" count="1483">Self-assembly</search:facet-value>
+<search:facet-value name="Algae" count="1478">Algae</search:facet-value>
+<search:facet-value name="Bioremediation" count="1470">Bioremediation</search:facet-value>
+<search:facet-value name="Diatoms" count="1467">Diatoms</search:facet-value>
+<search:facet-value name="Contact angle" count="1460">Contact angle</search:facet-value>
+<search:facet-value name="Transpiration" count="1455">Transpiration</search:facet-value>
+<search:facet-value name="Germination" count="1454">Germination</search:facet-value>
+<search:facet-value name="Mass spectrometry" count="1441">Mass spectrometry</search:facet-value>
+<search:facet-value name="Fly ash" count="1440">Fly ash</search:facet-value>
+<search:facet-value name="Absorption" count="1437">Absorption</search:facet-value>
+<search:facet-value name="Ammonia" count="1437">Ammonia</search:facet-value>
+<search:facet-value name="Pharmacokinetics" count="1437">Pharmacokinetics</search:facet-value>
+<search:facet-value name="Coagulation" count="1429">Coagulation</search:facet-value>
+<search:facet-value name="Aging" count="1426">Aging</search:facet-value>
+<search:facet-value name="Management" count="1424">Management</search:facet-value>
+<search:facet-value name="Surface modification" count="1418">Surface modification</search:facet-value>
+<search:facet-value name="Climate" count="1409">Climate</search:facet-value>
+<search:facet-value name="Oxygen" count="1404">Oxygen</search:facet-value>
+<search:facet-value name="Hydrogel" count="1402">Hydrogel</search:facet-value>
+<search:facet-value name="Disinfection" count="1399">Disinfection</search:facet-value>
+<search:facet-value name="Biosorption" count="1398">Biosorption</search:facet-value>
+<search:facet-value name="Geochemistry" count="1394">Geochemistry</search:facet-value>
+<search:facet-value name="Validation" count="1393">Validation</search:facet-value>
+<search:facet-value name="Microemulsion" count="1388">Microemulsion</search:facet-value>
+<search:facet-value name="Rice" count="1388">Rice</search:facet-value>
+<search:facet-value name="Taxonomy" count="1385">Taxonomy</search:facet-value>
+<search:facet-value name="Hydraulic conductivity" count="1379">Hydraulic conductivity</search:facet-value>
+<search:facet-value name="Hydrodynamics" count="1370">Hydrodynamics</search:facet-value>
+<search:facet-value name="Uncertainty" count="1366">Uncertainty</search:facet-value>
+<search:facet-value name="Stomatal conductance" count="1361">Stomatal conductance</search:facet-value>
+<search:facet-value name="Surfactants" count="1361">Surfactants</search:facet-value>
+<search:facet-value name="Performance" count="1353">Performance</search:facet-value>
+<search:facet-value name="Antioxidant activity" count="1345">Antioxidant activity</search:facet-value>
+<search:facet-value name="Thermodynamics" count="1345">Thermodynamics</search:facet-value>
+<search:facet-value name="Density" count="1342">Density</search:facet-value>
+<search:facet-value name="Conservation" count="1340">Conservation</search:facet-value>
+<search:facet-value name="Apoptosis" count="1339">Apoptosis</search:facet-value>
+<search:facet-value name="Ecology" count="1328">Ecology</search:facet-value>
+<search:facet-value name="Ultrasound" count="1327">Ultrasound</search:facet-value>
+<search:facet-value name="Fluoride" count="1320">Fluoride</search:facet-value>
+<search:facet-value name="FTIR" count="1314">FTIR</search:facet-value>
+<search:facet-value name="Nickel" count="1313">Nickel</search:facet-value>
+<search:facet-value name="Antioxidants" count="1311">Antioxidants</search:facet-value>
+<search:facet-value name="Estuary" count="1307">Estuary</search:facet-value>
+<search:facet-value name="Diversity" count="1305">Diversity</search:facet-value>
+<search:facet-value name="Nanofiltration" count="1302">Nanofiltration</search:facet-value>
+<search:facet-value name="Chromium" count="1300">Chromium</search:facet-value>
+<search:facet-value name="Characterization" count="1298">Characterization</search:facet-value>
+</search:facet>
+<search:facet name="core.scoafidnav" type="xs:long">
+<search:facet-value name="60021331" count="12526">60021331</search:facet-value>
+<search:facet-value name="60019499" count="10669">60019499</search:facet-value>
+<search:facet-value name="60025272" count="9731">60025272</search:facet-value>
+<search:facet-value name="60008134" count="8571">60008134</search:facet-value>
+<search:facet-value name="60011001" count="8534">60011001</search:facet-value>
+<search:facet-value name="60011347" count="8433">60011347</search:facet-value>
+<search:facet-value name="60008088" count="8391">60008088</search:facet-value>
+<search:facet-value name="60020547" count="8032">60020547</search:facet-value>
+<search:facet-value name="60013959" count="7964">60013959</search:facet-value>
+<search:facet-value name="60014439" count="7836">60014439</search:facet-value>
+<search:facet-value name="60025038" count="7760">60025038</search:facet-value>
+<search:facet-value name="60015481" count="7318">60015481</search:facet-value>
+<search:facet-value name="60025278" count="7188">60025278</search:facet-value>
+<search:facet-value name="60004156" count="6990">60004156</search:facet-value>
+<search:facet-value name="60032179" count="6808">60032179</search:facet-value>
+<search:facet-value name="60003970" count="6806">60003970</search:facet-value>
+<search:facet-value name="60001439" count="6571">60001439</search:facet-value>
+<search:facet-value name="60021439" count="6456">60021439</search:facet-value>
+<search:facet-value name="60021199" count="6422">60021199</search:facet-value>
+<search:facet-value name="60022195" count="6402">60022195</search:facet-value>
+<search:facet-value name="60014652" count="6156">60014652</search:facet-value>
+<search:facet-value name="60010065" count="6079">60010065</search:facet-value>
+<search:facet-value name="60016849" count="6052">60016849</search:facet-value>
+<search:facet-value name="60010365" count="6031">60010365</search:facet-value>
+<search:facet-value name="60025858" count="6001">60025858</search:facet-value>
+<search:facet-value name="60029445" count="5919">60029445</search:facet-value>
+<search:facet-value name="60013372" count="5912">60013372</search:facet-value>
+<search:facet-value name="60007776" count="5723">60007776</search:facet-value>
+<search:facet-value name="60030835" count="5654">60030835</search:facet-value>
+<search:facet-value name="60001989" count="5599">60001989</search:facet-value>
+<search:facet-value name="60029170" count="5533">60029170</search:facet-value>
+<search:facet-value name="60013402" count="5499">60013402</search:facet-value>
+<search:facet-value name="60011047" count="5453">60011047</search:facet-value>
+<search:facet-value name="60008435" count="5348">60008435</search:facet-value>
+<search:facet-value name="60025778" count="5326">60025778</search:facet-value>
+<search:facet-value name="60027363" count="5082">60027363</search:facet-value>
+<search:facet-value name="60001422" count="5066">60001422</search:facet-value>
+<search:facet-value name="60012708" count="4981">60012708</search:facet-value>
+<search:facet-value name="60009254" count="4979">60009254</search:facet-value>
+<search:facet-value name="60003500" count="4961">60003500</search:facet-value>
+<search:facet-value name="60015150" count="4950">60015150</search:facet-value>
+<search:facet-value name="60031004" count="4891">60031004</search:facet-value>
+<search:facet-value name="60031101" count="4883">60031101</search:facet-value>
+<search:facet-value name="60007457" count="4880">60007457</search:facet-value>
+<search:facet-value name="60004923" count="4813">60004923</search:facet-value>
+<search:facet-value name="60000221" count="4810">60000221</search:facet-value>
+<search:facet-value name="60006288" count="4761">60006288</search:facet-value>
+<search:facet-value name="60020304" count="4759">60020304</search:facet-value>
+<search:facet-value name="60022148" count="4712">60022148</search:facet-value>
+<search:facet-value name="60024322" count="4512">60024322</search:facet-value>
+<search:facet-value name="60005429" count="4503">60005429</search:facet-value>
+<search:facet-value name="60009226" count="4464">60009226</search:facet-value>
+<search:facet-value name="60013609" count="4459">60013609</search:facet-value>
+<search:facet-value name="60033316" count="4424">60033316</search:facet-value>
+<search:facet-value name="60024621" count="4365">60024621</search:facet-value>
+<search:facet-value name="60027550" count="4343">60027550</search:facet-value>
+<search:facet-value name="60031126" count="4301">60031126</search:facet-value>
+<search:facet-value name="60014171" count="4294">60014171</search:facet-value>
+<search:facet-value name="60013682" count="4289">60013682</search:facet-value>
+<search:facet-value name="60027090" count="4283">60027090</search:facet-value>
+<search:facet-value name="60002494" count="4280">60002494</search:facet-value>
+<search:facet-value name="60024266" count="4218">60024266</search:facet-value>
+<search:facet-value name="60017161" count="4210">60017161</search:facet-value>
+<search:facet-value name="60031707" count="4207">60031707</search:facet-value>
+<search:facet-value name="60003771" count="4109">60003771</search:facet-value>
+<search:facet-value name="60026851" count="4096">60026851</search:facet-value>
+<search:facet-value name="60000264" count="4084">60000264</search:facet-value>
+<search:facet-value name="60033100" count="4079">60033100</search:facet-value>
+<search:facet-value name="60007903" count="4017">60007903</search:facet-value>
+<search:facet-value name="60007566" count="4016">60007566</search:facet-value>
+<search:facet-value name="60025084" count="3963">60025084</search:facet-value>
+<search:facet-value name="60032350" count="3937">60032350</search:facet-value>
+<search:facet-value name="60004354" count="3925">60004354</search:facet-value>
+<search:facet-value name="60002952" count="3876">60002952</search:facet-value>
+<search:facet-value name="60001576" count="3848">60001576</search:facet-value>
+<search:facet-value name="60019616" count="3838">60019616</search:facet-value>
+<search:facet-value name="60028333" count="3835">60028333</search:facet-value>
+<search:facet-value name="60023018" count="3825">60023018</search:facet-value>
+<search:facet-value name="60029306" count="3823">60029306</search:facet-value>
+<search:facet-value name="60030623" count="3791">60030623</search:facet-value>
+<search:facet-value name="60026553" count="3778">60026553</search:facet-value>
+<search:facet-value name="60032442" count="3743">60032442</search:facet-value>
+<search:facet-value name="60029747" count="3704">60029747</search:facet-value>
+<search:facet-value name="60019533" count="3698">60019533</search:facet-value>
+<search:facet-value name="60073652" count="3695">60073652</search:facet-value>
+<search:facet-value name="60025111" count="3688">60025111</search:facet-value>
+<search:facet-value name="60014232" count="3640">60014232</search:facet-value>
+<search:facet-value name="60006028" count="3595">60006028</search:facet-value>
+<search:facet-value name="60012070" count="3588">60012070</search:facet-value>
+<search:facet-value name="60029241" count="3588">60029241</search:facet-value>
+<search:facet-value name="60019722" count="3522">60019722</search:facet-value>
+<search:facet-value name="60020650" count="3521">60020650</search:facet-value>
+<search:facet-value name="60004538" count="3520">60004538</search:facet-value>
+<search:facet-value name="60031806" count="3498">60031806</search:facet-value>
+<search:facet-value name="60014966" count="3455">60014966</search:facet-value>
+<search:facet-value name="60025709" count="3447">60025709</search:facet-value>
+<search:facet-value name="60027716" count="3446">60027716</search:facet-value>
+<search:facet-value name="60000745" count="3431">60000745</search:facet-value>
+<search:facet-value name="60015881" count="3431">60015881</search:facet-value>
+<search:facet-value name="60025063" count="3423">60025063</search:facet-value>
+<search:facet-value name="60023004" count="3422">60023004</search:facet-value>
+<search:facet-value name="60007989" count="3373">60007989</search:facet-value>
+<search:facet-value name="60011373" count="3304">60011373</search:facet-value>
+<search:facet-value name="60010851" count="3297">60010851</search:facet-value>
+<search:facet-value name="60016087" count="3297">60016087</search:facet-value>
+<search:facet-value name="60019647" count="3265">60019647</search:facet-value>
+<search:facet-value name="60019702" count="3230">60019702</search:facet-value>
+<search:facet-value name="60013791" count="3221">60013791</search:facet-value>
+<search:facet-value name="60029570" count="3200">60029570</search:facet-value>
+<search:facet-value name="60031777" count="3184">60031777</search:facet-value>
+<search:facet-value name="60008950" count="3135">60008950</search:facet-value>
+<search:facet-value name="60005290" count="3101">60005290</search:facet-value>
+<search:facet-value name="60028218" count="3090">60028218</search:facet-value>
+<search:facet-value name="60014383" count="3076">60014383</search:facet-value>
+<search:facet-value name="60023471" count="3068">60023471</search:facet-value>
+<search:facet-value name="60009839" count="3063">60009839</search:facet-value>
+<search:facet-value name="60017293" count="3046">60017293</search:facet-value>
+<search:facet-value name="60024542" count="3036">60024542</search:facet-value>
+<search:facet-value name="60003269" count="3021">60003269</search:facet-value>
+<search:facet-value name="60002306" count="3019">60002306</search:facet-value>
+<search:facet-value name="60029470" count="2992">60029470</search:facet-value>
+<search:facet-value name="60007363" count="2980">60007363</search:facet-value>
+<search:facet-value name="60019578" count="2972">60019578</search:facet-value>
+<search:facet-value name="60003892" count="2965">60003892</search:facet-value>
+<search:facet-value name="60010348" count="2942">60010348</search:facet-value>
+<search:facet-value name="60031828" count="2894">60031828</search:facet-value>
+<search:facet-value name="60030840" count="2891">60030840</search:facet-value>
+<search:facet-value name="60028609" count="2889">60028609</search:facet-value>
+<search:facet-value name="60032619" count="2878">60032619</search:facet-value>
+<search:facet-value name="60008724" count="2876">60008724</search:facet-value>
+<search:facet-value name="60006164" count="2869">60006164</search:facet-value>
+<search:facet-value name="60002014" count="2864">60002014</search:facet-value>
+<search:facet-value name="60016521" count="2863">60016521</search:facet-value>
+<search:facet-value name="60028378" count="2861">60028378</search:facet-value>
+<search:facet-value name="60013141" count="2859">60013141</search:facet-value>
+<search:facet-value name="60025488" count="2849">60025488</search:facet-value>
+<search:facet-value name="60025225" count="2832">60025225</search:facet-value>
+<search:facet-value name="60005455" count="2821">60005455</search:facet-value>
+<search:facet-value name="60014313" count="2795">60014313</search:facet-value>
+<search:facet-value name="60015658" count="2795">60015658</search:facet-value>
+<search:facet-value name="60012345" count="2787">60012345</search:facet-value>
+<search:facet-value name="60009982" count="2782">60009982</search:facet-value>
+<search:facet-value name="60006019" count="2776">60006019</search:facet-value>
+<search:facet-value name="60029526" count="2738">60029526</search:facet-value>
+<search:facet-value name="60023691" count="2736">60023691</search:facet-value>
+<search:facet-value name="60027272" count="2735">60027272</search:facet-value>
+<search:facet-value name="60006337" count="2724">60006337</search:facet-value>
+<search:facet-value name="60015186" count="2718">60015186</search:facet-value>
+<search:facet-value name="60006297" count="2711">60006297</search:facet-value>
+<search:facet-value name="60007711" count="2709">60007711</search:facet-value>
+<search:facet-value name="60005248" count="2708">60005248</search:facet-value>
+<search:facet-value name="60003858" count="2691">60003858</search:facet-value>
+<search:facet-value name="60030162" count="2687">60030162</search:facet-value>
+<search:facet-value name="60015574" count="2686">60015574</search:facet-value>
+<search:facet-value name="60000036" count="2685">60000036</search:facet-value>
+<search:facet-value name="60014982" count="2684">60014982</search:facet-value>
+<search:facet-value name="60016437" count="2670">60016437</search:facet-value>
+<search:facet-value name="60032280" count="2668">60032280</search:facet-value>
+<search:facet-value name="60029616" count="2651">60029616</search:facet-value>
+<search:facet-value name="60022422" count="2639">60022422</search:facet-value>
+<search:facet-value name="60004708" count="2638">60004708</search:facet-value>
+<search:facet-value name="60027271" count="2621">60027271</search:facet-value>
+<search:facet-value name="60021859" count="2620">60021859</search:facet-value>
+<search:facet-value name="60026306" count="2615">60026306</search:facet-value>
+<search:facet-value name="60001881" count="2614">60001881</search:facet-value>
+<search:facet-value name="60001563" count="2610">60001563</search:facet-value>
+<search:facet-value name="60029622" count="2610">60029622</search:facet-value>
+<search:facet-value name="60015138" count="2603">60015138</search:facet-value>
+<search:facet-value name="60030318" count="2599">60030318</search:facet-value>
+<search:facet-value name="60010884" count="2595">60010884</search:facet-value>
+<search:facet-value name="60009512" count="2586">60009512</search:facet-value>
+<search:facet-value name="60031031" count="2586">60031031</search:facet-value>
+<search:facet-value name="60024652" count="2569">60024652</search:facet-value>
+<search:facet-value name="60000481" count="2568">60000481</search:facet-value>
+<search:facet-value name="60006222" count="2564">60006222</search:facet-value>
+<search:facet-value name="60007278" count="2556">60007278</search:facet-value>
+<search:facet-value name="60015941" count="2554">60015941</search:facet-value>
+<search:facet-value name="60027152" count="2536">60027152</search:facet-value>
+<search:facet-value name="60020661" count="2523">60020661</search:facet-value>
+<search:facet-value name="60023237" count="2516">60023237</search:facet-value>
+<search:facet-value name="60030788" count="2498">60030788</search:facet-value>
+<search:facet-value name="60029311" count="2487">60029311</search:facet-value>
+<search:facet-value name="60011604" count="2483">60011604</search:facet-value>
+<search:facet-value name="60022927" count="2481">60022927</search:facet-value>
+<search:facet-value name="60009037" count="2475">60009037</search:facet-value>
+<search:facet-value name="60015331" count="2468">60015331</search:facet-value>
+<search:facet-value name="60012197" count="2461">60012197</search:facet-value>
+<search:facet-value name="60030718" count="2449">60030718</search:facet-value>
+<search:facet-value name="60025804" count="2441">60025804</search:facet-value>
+<search:facet-value name="60010689" count="2439">60010689</search:facet-value>
+<search:facet-value name="60013551" count="2437">60013551</search:facet-value>
+<search:facet-value name="60000689" count="2431">60000689</search:facet-value>
+<search:facet-value name="60031514" count="2428">60031514</search:facet-value>
+<search:facet-value name="60015913" count="2414">60015913</search:facet-value>
+<search:facet-value name="60030612" count="2411">60030612</search:facet-value>
+<search:facet-value name="60014256" count="2405">60014256</search:facet-value>
+<search:facet-value name="60007249" count="2402">60007249</search:facet-value>
+<search:facet-value name="60007174" count="2395">60007174</search:facet-value>
+<search:facet-value name="60023578" count="2386">60023578</search:facet-value>
+<search:facet-value name="60023131" count="2383">60023131</search:facet-value>
+</search:facet>
+<search:facet name="core.scocntrynav" type="xs:string">
+<search:facet-value name="usa" count="533501">usa</search:facet-value>
+<search:facet-value name="chn" count="213102">chn</search:facet-value>
+<search:facet-value name="jpn" count="135611">jpn</search:facet-value>
+<search:facet-value name="gbr" count="124780">gbr</search:facet-value>
+<search:facet-value name="deu" count="119410">deu</search:facet-value>
+<search:facet-value name="fra" count="90876">fra</search:facet-value>
+<search:facet-value name="can" count="89821">can</search:facet-value>
+<search:facet-value name="ind" count="76863">ind</search:facet-value>
+<search:facet-value name="ita" count="59300">ita</search:facet-value>
+<search:facet-value name="aus" count="56754">aus</search:facet-value>
+<search:facet-value name="esp" count="56263">esp</search:facet-value>
+<search:facet-value name="rus" count="45027">rus</search:facet-value>
+<search:facet-value name="nld" count="41020">nld</search:facet-value>
+<search:facet-value name="bra" count="38188">bra</search:facet-value>
+<search:facet-value name="kor" count="36549">kor</search:facet-value>
+<search:facet-value name="swe" count="31783">swe</search:facet-value>
+<search:facet-value name="pol" count="27507">pol</search:facet-value>
+<search:facet-value name="che" count="25855">che</search:facet-value>
+<search:facet-value name="twn" count="22974">twn</search:facet-value>
+<search:facet-value name="tur" count="21508">tur</search:facet-value>
+<search:facet-value name="irn" count="19809">irn</search:facet-value>
+<search:facet-value name="bel" count="19584">bel</search:facet-value>
+<search:facet-value name="dnk" count="18158">dnk</search:facet-value>
+<search:facet-value name="nor" count="17893">nor</search:facet-value>
+<search:facet-value name="isr" count="16291">isr</search:facet-value>
+<search:facet-value name="fin" count="14966">fin</search:facet-value>
+<search:facet-value name="mex" count="14322">mex</search:facet-value>
+<search:facet-value name="prt" count="13144">prt</search:facet-value>
+<search:facet-value name="zaf" count="13021">zaf</search:facet-value>
+<search:facet-value name="aut" count="12604">aut</search:facet-value>
+<search:facet-value name="nzl" count="12532">nzl</search:facet-value>
+<search:facet-value name="cze" count="12023">cze</search:facet-value>
+<search:facet-value name="arg" count="12006">arg</search:facet-value>
+<search:facet-value name="grc" count="11915">grc</search:facet-value>
+<search:facet-value name="egy" count="10614">egy</search:facet-value>
+<search:facet-value name="mys" count="9549">mys</search:facet-value>
+<search:facet-value name="hun" count="8951">hun</search:facet-value>
+<search:facet-value name="tha" count="8540">tha</search:facet-value>
+<search:facet-value name="hkg" count="8096">hkg</search:facet-value>
+<search:facet-value name="sgp" count="7752">sgp</search:facet-value>
+<search:facet-value name="ukr" count="7384">ukr</search:facet-value>
+<search:facet-value name="rou" count="6511">rou</search:facet-value>
+<search:facet-value name="nga" count="6423">nga</search:facet-value>
+<search:facet-value name="irl" count="6245">irl</search:facet-value>
+<search:facet-value name="sau" count="6068">sau</search:facet-value>
+<search:facet-value name="chl" count="5948">chl</search:facet-value>
+<search:facet-value name="pak" count="5074">pak</search:facet-value>
+<search:facet-value name="sux" count="4328">sux</search:facet-value>
+<search:facet-value name="hrv" count="4270">hrv</search:facet-value>
+<search:facet-value name="bgr" count="4105">bgr</search:facet-value>
+<search:facet-value name="svn" count="4088">svn</search:facet-value>
+<search:facet-value name="svk" count="3845">svk</search:facet-value>
+<search:facet-value name="tun" count="3532">tun</search:facet-value>
+<search:facet-value name="ven" count="3107">ven</search:facet-value>
+<search:facet-value name="bgd" count="2827">bgd</search:facet-value>
+<search:facet-value name="col" count="2591">col</search:facet-value>
+<search:facet-value name="mar" count="2572">mar</search:facet-value>
+<search:facet-value name="idn" count="2557">idn</search:facet-value>
+<search:facet-value name="jor" count="2330">jor</search:facet-value>
+<search:facet-value name="dza" count="2316">dza</search:facet-value>
+<search:facet-value name="yux" count="2033">yux</search:facet-value>
+<search:facet-value name="est" count="1986">est</search:facet-value>
+<search:facet-value name="ken" count="1930">ken</search:facet-value>
+<search:facet-value name="phl" count="1924">phl</search:facet-value>
+<search:facet-value name="srb" count="1919">srb</search:facet-value>
+<search:facet-value name="are" count="1900">are</search:facet-value>
+<search:facet-value name="kwt" count="1881">kwt</search:facet-value>
+<search:facet-value name="ltu" count="1600">ltu</search:facet-value>
+<search:facet-value name="csx" count="1544">csx</search:facet-value>
+<search:facet-value name="vnm" count="1480">vnm</search:facet-value>
+<search:facet-value name="lka" count="1447">lka</search:facet-value>
+<search:facet-value name="ddx" count="1419">ddx</search:facet-value>
+<search:facet-value name="cub" count="1412">cub</search:facet-value>
+<search:facet-value name="blr" count="1267">blr</search:facet-value>
+<search:facet-value name="isl" count="1216">isl</search:facet-value>
+<search:facet-value name="omn" count="1180">omn</search:facet-value>
+<search:facet-value name="eth" count="1084">eth</search:facet-value>
+<search:facet-value name="pri" count="1030">pri</search:facet-value>
+<search:facet-value name="gha" count="997">gha</search:facet-value>
+<search:facet-value name="tza" count="927">tza</search:facet-value>
+<search:facet-value name="lbn" count="921">lbn</search:facet-value>
+<search:facet-value name="irq" count="868">irq</search:facet-value>
+<search:facet-value name="per" count="749">per</search:facet-value>
+<search:facet-value name="ury" count="744">ury</search:facet-value>
+<search:facet-value name="zwe" count="726">zwe</search:facet-value>
+<search:facet-value name="cmr" count="700">cmr</search:facet-value>
+<search:facet-value name="cyp" count="693">cyp</search:facet-value>
+<search:facet-value name="lva" count="653">lva</search:facet-value>
+<search:facet-value name="syr" count="648">syr</search:facet-value>
+<search:facet-value name="uzb" count="636">uzb</search:facet-value>
+<search:facet-value name="uga" count="629">uga</search:facet-value>
+<search:facet-value name="sdn" count="628">sdn</search:facet-value>
+<search:facet-value name="cri" count="615">cri</search:facet-value>
+<search:facet-value name="sen" count="604">sen</search:facet-value>
+<search:facet-value name="npl" count="517">npl</search:facet-value>
+<search:facet-value name="kaz" count="480">kaz</search:facet-value>
+<search:facet-value name="aze" count="478">aze</search:facet-value>
+<search:facet-value name="pan" count="465">pan</search:facet-value>
+<search:facet-value name="bwa" count="461">bwa</search:facet-value>
+<search:facet-value name="civ" count="456">civ</search:facet-value>
+<search:facet-value name="lby" count="451">lby</search:facet-value>
+<search:facet-value name="mco" count="451">mco</search:facet-value>
+<search:facet-value name="mkd" count="449">mkd</search:facet-value>
+<search:facet-value name="tto" count="432">tto</search:facet-value>
+<search:facet-value name="pse" count="420">pse</search:facet-value>
+<search:facet-value name="qat" count="417">qat</search:facet-value>
+<search:facet-value name="arm" count="414">arm</search:facet-value>
+<search:facet-value name="lux" count="405">lux</search:facet-value>
+<search:facet-value name="bfa" count="397">bfa</search:facet-value>
+<search:facet-value name="ncl" count="380">ncl</search:facet-value>
+<search:facet-value name="ecu" count="379">ecu</search:facet-value>
+<search:facet-value name="bol" count="318">bol</search:facet-value>
+<search:facet-value name="mda" count="297">mda</search:facet-value>
+<search:facet-value name="geo" count="293">geo</search:facet-value>
+<search:facet-value name="jam" count="291">jam</search:facet-value>
+<search:facet-value name="bhr" count="275">bhr</search:facet-value>
+<search:facet-value name="bmu" count="247">bmu</search:facet-value>
+<search:facet-value name="zmb" count="238">zmb</search:facet-value>
+<search:facet-value name="ben" count="233">ben</search:facet-value>
+<search:facet-value name="bih" count="228">bih</search:facet-value>
+<search:facet-value name="mwi" count="228">mwi</search:facet-value>
+<search:facet-value name="ner" count="224">ner</search:facet-value>
+<search:facet-value name="nam" count="223">nam</search:facet-value>
+<search:facet-value name="khm" count="215">khm</search:facet-value>
+<search:facet-value name="mng" count="209">mng</search:facet-value>
+<search:facet-value name="mli" count="204">mli</search:facet-value>
+<search:facet-value name="alb" count="201">alb</search:facet-value>
+<search:facet-value name="yem" count="187">yem</search:facet-value>
+<search:facet-value name="lao" count="179">lao</search:facet-value>
+<search:facet-value name="grl" count="175">grl</search:facet-value>
+<search:facet-value name="png" count="168">png</search:facet-value>
+<search:facet-value name="cog" count="166">cog</search:facet-value>
+<search:facet-value name="fji" count="165">fji</search:facet-value>
+<search:facet-value name="moz" count="165">moz</search:facet-value>
+<search:facet-value name="mlt" count="156">mlt</search:facet-value>
+<search:facet-value name="pyf" count="154">pyf</search:facet-value>
+<search:facet-value name="mus" count="146">mus</search:facet-value>
+<search:facet-value name="brn" count="145">brn</search:facet-value>
+<search:facet-value name="mdg" count="143">mdg</search:facet-value>
+<search:facet-value name="gtm" count="128">gtm</search:facet-value>
+<search:facet-value name="nic" count="121">nic</search:facet-value>
+<search:facet-value name="mne" count="108">mne</search:facet-value>
+<search:facet-value name="flk" count="105">flk</search:facet-value>
+<search:facet-value name="glp" count="101">glp</search:facet-value>
+<search:facet-value name="fro" count="94">fro</search:facet-value>
+<search:facet-value name="scg" count="91">scg</search:facet-value>
+<search:facet-value name="gum" count="86">gum</search:facet-value>
+<search:facet-value name="tgo" count="83">tgo</search:facet-value>
+<search:facet-value name="mac" count="80">mac</search:facet-value>
+<search:facet-value name="kgz" count="79">kgz</search:facet-value>
+<search:facet-value name="rwa" count="79">rwa</search:facet-value>
+<search:facet-value name="brb" count="76">brb</search:facet-value>
+<search:facet-value name="guf" count="75">guf</search:facet-value>
+<search:facet-value name="slv" count="74">slv</search:facet-value>
+<search:facet-value name="swz" count="74">swz</search:facet-value>
+<search:facet-value name="tjk" count="73">tjk</search:facet-value>
+<search:facet-value name="hnd" count="72">hnd</search:facet-value>
+<search:facet-value name="prk" count="68">prk</search:facet-value>
+<search:facet-value name="sle" count="62">sle</search:facet-value>
+<search:facet-value name="yug" count="60">yug</search:facet-value>
+<search:facet-value name="lie" count="59">lie</search:facet-value>
+<search:facet-value name="ago" count="57">ago</search:facet-value>
+<search:facet-value name="csk" count="56">csk</search:facet-value>
+<search:facet-value name="mrt" count="56">mrt</search:facet-value>
+<search:facet-value name="gab" count="54">gab</search:facet-value>
+<search:facet-value name="mmr" count="53">mmr</search:facet-value>
+<search:facet-value name="ant" count="50">ant</search:facet-value>
+<search:facet-value name="eri" count="48">eri</search:facet-value>
+<search:facet-value name="gmb" count="47">gmb</search:facet-value>
+<search:facet-value name="bhs" count="45">bhs</search:facet-value>
+<search:facet-value name="hti" count="41">hti</search:facet-value>
+<search:facet-value name="rom" count="40">rom</search:facet-value>
+<search:facet-value name="bdi" count="37">bdi</search:facet-value>
+<search:facet-value name="dom" count="37">dom</search:facet-value>
+<search:facet-value name="pry" count="37">pry</search:facet-value>
+<search:facet-value name="lso" count="34">lso</search:facet-value>
+<search:facet-value name="syc" count="34">syc</search:facet-value>
+<search:facet-value name="guy" count="33">guy</search:facet-value>
+<search:facet-value name="vir" count="33">vir</search:facet-value>
+<search:facet-value name="slb" count="32">slb</search:facet-value>
+<search:facet-value name="sun" count="32">sun</search:facet-value>
+<search:facet-value name="reu" count="31">reu</search:facet-value>
+<search:facet-value name="caf" count="30">caf</search:facet-value>
+<search:facet-value name="cod" count="30">cod</search:facet-value>
+<search:facet-value name="afg" count="29">afg</search:facet-value>
+<search:facet-value name="sur" count="29">sur</search:facet-value>
+<search:facet-value name="tcd" count="29">tcd</search:facet-value>
+<search:facet-value name="gin" count="28">gin</search:facet-value>
+<search:facet-value name="mtq" count="27">mtq</search:facet-value>
+<search:facet-value name="blz" count="25">blz</search:facet-value>
+<search:facet-value name="tkm" count="25">tkm</search:facet-value>
+<search:facet-value name="plw" count="22">plw</search:facet-value>
+<search:facet-value name="grd" count="21">grd</search:facet-value>
+<search:facet-value name="wsm" count="21">wsm</search:facet-value>
+<search:facet-value name="btn" count="20">btn</search:facet-value>
+<search:facet-value name="vut" count="20">vut</search:facet-value>
+<search:facet-value name="mdv" count="19">mdv</search:facet-value>
+<search:facet-value name="cpv" count="17">cpv</search:facet-value>
+<search:facet-value name="asm" count="16">asm</search:facet-value>
+<search:facet-value name="cym" count="15">cym</search:facet-value>
+</search:facet>
+<search:facet name="core.scosrctypenav" type="xs:string">
+<search:facet-value name="j" count="2019973">j</search:facet-value>
+<search:facet-value name="p" count="226306">p</search:facet-value>
+<search:facet-value name="d" count="57873">d</search:facet-value>
+<search:facet-value name="k" count="44671">k</search:facet-value>
+<search:facet-value name="b" count="21050">b</search:facet-value>
+<search:facet-value name="r" count="1910">r</search:facet-value>
+</search:facet>
+<search:facet name="core.scolangnav" type="xs:string">
+<search:facet-value name="eng" count="2062662">eng</search:facet-value>
+<search:facet-value name="chi" count="78030">chi</search:facet-value>
+<search:facet-value name="ger" count="46383">ger</search:facet-value>
+<search:facet-value name="rus" count="31177">rus</search:facet-value>
+<search:facet-value name="fre" count="26328">fre</search:facet-value>
+<search:facet-value name="jpn" count="21627">jpn</search:facet-value>
+<search:facet-value name="spa" count="12292">spa</search:facet-value>
+<search:facet-value name="por" count="9531">por</search:facet-value>
+<search:facet-value name="pol" count="6734">pol</search:facet-value>
+<search:facet-value name="ita" count="6663">ita</search:facet-value>
+<search:facet-value name="dut" count="2435">dut</search:facet-value>
+<search:facet-value name="kor" count="2420">kor</search:facet-value>
+<search:facet-value name="cze" count="2231">cze</search:facet-value>
+<search:facet-value name="hun" count="1599">hun</search:facet-value>
+<search:facet-value name="tur" count="1410">tur</search:facet-value>
+<search:facet-value name="rum" count="981">rum</search:facet-value>
+<search:facet-value name="scr" count="959">scr</search:facet-value>
+<search:facet-value name="bul" count="860">bul</search:facet-value>
+<search:facet-value name="scc" count="750">scc</search:facet-value>
+<search:facet-value name="slo" count="701">slo</search:facet-value>
+<search:facet-value name="swe" count="658">swe</search:facet-value>
+<search:facet-value name="slv" count="522">slv</search:facet-value>
+<search:facet-value name="ukr" count="436">ukr</search:facet-value>
+<search:facet-value name="fin" count="397">fin</search:facet-value>
+<search:facet-value name="dan" count="383">dan</search:facet-value>
+<search:facet-value name="nor" count="369">nor</search:facet-value>
+<search:facet-value name="per" count="368">per</search:facet-value>
+<search:facet-value name="ara" count="211">ara</search:facet-value>
+<search:facet-value name="lit" count="168">lit</search:facet-value>
+<search:facet-value name="heb" count="136">heb</search:facet-value>
+<search:facet-value name="gre" count="127">gre</search:facet-value>
+<search:facet-value name="bos" count="112">bos</search:facet-value>
+<search:facet-value name="tha" count="80">tha</search:facet-value>
+<search:facet-value name="est" count="78">est</search:facet-value>
+<search:facet-value name="may" count="71">may</search:facet-value>
+<search:facet-value name="afr" count="41">afr</search:facet-value>
+<search:facet-value name="cat" count="33">cat</search:facet-value>
+<search:facet-value name="ice" count="19">ice</search:facet-value>
+<search:facet-value name="aze" count="17">aze</search:facet-value>
+<search:facet-value name="ind" count="17">ind</search:facet-value>
+<search:facet-value name="alb" count="9">alb</search:facet-value>
+<search:facet-value name="lav" count="7">lav</search:facet-value>
+<search:facet-value name="mac" count="4">mac</search:facet-value>
+<search:facet-value name="geo" count="3">geo</search:facet-value>
+<search:facet-value name="arm" count="2">arm</search:facet-value>
+<search:facet-value name="gle" count="1">gle</search:facet-value>
+<search:facet-value name="hin" count="1">hin</search:facet-value>
+</search:facet>
+<search:metrics>
+<search:facet-resolution-time>PT4.790935S</search:facet-resolution-time>
+<search:snippet-resolution-time>PT0S</search:snippet-resolution-time>
+<search:total-time>PT4.810189S</search:total-time>
+</search:metrics>
+</search:response>

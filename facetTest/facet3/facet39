@@ -1,0 +1,130 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 372,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:hea?t",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 617590,
+    "start": 0,
+    "maxScore": 1,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "2012",
+        33160,
+        "2011",
+        31771,
+        "2010",
+        29906
+      ],
+      "prefnameauid-f": [
+        "7201970101 R. Hetzer",
+        573,
+        "36043112600 N.S. Dhalla",
+        443,
+        "9533191200 R.H. Anderson",
+        439
+      ],
+      "subjabbr-f": [
+        "MEDI",
+        436742,
+        "BIOC",
+        134821,
+        "PHAR",
+        49109
+      ],
+      "subtype-f": [
+        "ar",
+        490627,
+        "re",
+        58627,
+        "cp",
+        36121
+      ],
+      "exactsrctitle-f": [
+        "Circulation",
+        11563,
+        "American Journal of Physiology - Heart and Circulatory Physiology",
+        6955,
+        "American Heart Journal",
+        6702
+      ],
+      "exactkeyword-f": [
+        "article",
+        379480,
+        "human",
+        347260,
+        "Male",
+        258872
+      ],
+      "afid-f": [
+        "60014232",
+        8252,
+        "60016782",
+        4771,
+        "60023691",
+        3820
+      ],
+      "affilctry-f": [
+        "United States",
+        202300,
+        "Germany",
+        45157,
+        "United Kingdom",
+        43939
+      ],
+      "srctype-f": [
+        "j",
+        594908,
+        "p",
+        16909,
+        "k",
+        3558
+      ],
+      "lang-f": [
+        "eng",
+        532473,
+        "ger",
+        17612,
+        "rus",
+        10184
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}
