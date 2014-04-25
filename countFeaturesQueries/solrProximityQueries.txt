@@ -1,24 +1,32 @@
 Proximity Queries
 
-Core20 - abs(brain PRE/5 cancer)
-q={!surround}abs:(brain 5w cancer)
+Core21 - abs(brain PRE/5 cancer)
+q={!surround}abs:(brain 5w cancer) returns 2960
+q={!surround}abs-p:(brain 5w cancer) returns 1670
+
+Core22 - abs(brain W/5 cancer)
+q={!surround}abs:(brain 5n cancer) returns 4499
+q={!surround}abs-p:(brain 5n cancer) returns 2494
+
+Core23 - itemtitle (practice W/5 "letter")
+q={!surround}itemtitle:(practice 5n letter) returns 141
+q={!surround}itemtitle-p:(practice 5n letter) returns 18
 
 
-Core21 - abs(brain W/5 cancer)
-q={!surround}abs:(brain 5n cancer)
-
-
-Core22 - itemtitle (practice W/5 "letter")
-q={!surround}itemtitle:(practice 5n "letter")
-
-
-Core23 - title(neuro* W/3 letter)
+Core24 - title(neuro* W/3 letter)
 q={!surround}itemtitle:(neuro* 3n letter)
 
 
-Core24 - title(neurological) AND NOT title(neurological W/5 letter)
+Core25 - title(neurological) AND NOT title(neurological W/5 letter)
 q=itemtitle:neurological AND NOT ({!surround}itemtitle:(neurological 5n letter))
 
 
-Core25 - title((neurological OR letter) w/5 practice)
-q={!surround}itemtitle:((neurological OR letter) 5n practice)
+Core26 - title((neurological OR letter) w/5 practice)
+q={!surround}itemtitle:((neurological OR letter) 5n practice) returns 141 (all for letter)
+q={!surround}itemtitle-p:((neurological OR letter) 5n practice) returns 181 (picked up some for neurological)
+q={!surround}itemtitle:((neurology OR letter) 5n practice) returns 697 (changed neurological to the stem neurology)
+
+
+
+CORE37 - title (*snake pre/0 venom).  
+q={!surround}itemtitle:(snake w venom)
