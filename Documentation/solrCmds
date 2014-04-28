@@ -20,3 +20,12 @@ How to backup an index easily on Solr
 Force a soft commit to make data visible to search.
 
     http://_master_host_:_port_/solr/<corename>/update?softCommit=true
+
+    
+Optimize shards without distributing  request across clusters?
+
+http://localhost:8983/solr/update?optimize=true&distrib=false
+
+Push new configs to Zookeeper??
+
+sh zkcli.sh -cmd upconfig -zkhost  127.0.0.1:2181  -collection collection1 -confname myconf -solrhome ../solr -confdir ../solr/collection1/conf
