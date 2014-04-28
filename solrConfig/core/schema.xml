@@ -104,6 +104,7 @@
 <field name="id" type="keyword_lc" multiValued="false" indexed="true" stored="true"/>
 <field name="epoch" type="long" indexed="true" stored="true"/>
 <field name="epoch-rs" type="long" indexed="true" stored="true"/>
+<field name="cbc" type="citedByCount"/>
 <field name="abs" type="abs_std_stem" multiValued="true" indexed="true" stored="true"/>
 <field name="abs-p" type="abs_ex_phrase" multiValued="true" indexed="true" stored="false"/>
 <field name="absavail" type="integer" multiValued="false" indexed="true" stored="true"/>
@@ -568,6 +569,13 @@
  <filter class="solr.TrimFilterFactory"/>
 </analyzer>
 </fieldType>
+
+<!--
+  citedByCount
+  
+  Definition for external file field type for cited by counts
+-->
+<fieldType name="citedByCount" keyField="scpid" defVal="0" stored="false" indexed="false" class="solr.ExternalFileField"/>
 
 </types>
 </schema>

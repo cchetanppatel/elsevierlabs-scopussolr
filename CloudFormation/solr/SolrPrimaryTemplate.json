@@ -89,6 +89,18 @@
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/common/synonyms.txt?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340640&Signature=FbLhSsK4wC3jWdsyuG4aVdNsH3E%3D"
     },
     
+    "ExternalCntFileURL" : {
+      "Description" : "External Count File URL.",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopuscnts/cbc/core/darin/cbc.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1433055552&Signature=zKu0PQeGKJMtyWdFIuioJe2t9gA%3D"
+    },
+    
+    "ExternalCntFieldName" : {
+      "Description" : "Field name in schema.xml for the external count value.",
+      "Type" : "String",
+      "Default" : "cbc"
+    },
+    
     "ZooKeeperIP" : {
       "Description" : "ZooKeeper IP address.",
       "Type" : "String",
@@ -214,6 +226,9 @@
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/solrconfig.xml '", { "Ref" : "SolrIndexConfigURL"}, "'", "\n",
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/index-solrconfig.xml '", { "Ref" : "SolrIndexConfigURL"}, "'", "\n",
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/query-solrconfig.xml '", { "Ref" : "SolrQueryConfigURL"}, "'", "\n",
+                "mkdir ./example/solr/", { "Ref" : "SolrClusterName" },"/data", "\n",
+                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/data/external_", { "Ref" : "ExternalCntFieldName" }, ".txt.gz '", { "Ref" : "ExternalCntFileURL"}, "'", "\n",
+                "gunzip ./example/solr/", { "Ref" : "SolrClusterName" },"/data/external_", { "Ref" : "ExternalCntFieldName" }, ".txt.gz", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
                 "nohup java -Djetty.port=8080 -XX:+UseParallelGC -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -DmaxShardsPerNode=", { "Ref" : "MaxShardsPerNode"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
