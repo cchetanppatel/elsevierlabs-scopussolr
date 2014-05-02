@@ -116,7 +116,7 @@ copy corestoaffiliations2 from 's3://els-ats/scopuscnts/pc/affiliation/set2/' CR
 
 # references (set 1 and set 2).  Took 22m to load set1 (759,190,044 records)
 copy corestoreferences1 from 's3://els-ats/scopuscnts/cbc/core/set1/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
-copy corestoreferences2 from 's3://els-ats/scopuscnts/cbc/core/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+copy corestoreferences2 from 's3://els-ats/scopuscnts/cbc/core/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
 
 
 ###################################
@@ -247,17 +247,20 @@ select * from corecbcnt1') to  's3://els-ats/scopuscnts/cbc/core/results/diff/co
 # Investigating citref
 ######################
 
-# Create the table
-create table citrefcnts(
+# Create the table (will strip the prefix form the eid so it can be stored as a decimal field)
+create table citref(
 	neid decimal,
 	refid varchar(15) sortkey,
 	primary key(neid,refid));
 
+Takes 0.2s
+
 # Insert the records (make a numeric version of the eid)
-# Took about 14m
-insert into citrefcnts(
+insert into citref(
 SELECT cast(substring(eid,8) as decimal) as neid, refid
-FROM corestoreferences1);
+FROM corestoreferences);
+
+
 
 # Table to hold the sum (think of this as a hash)
 create table citrefsum(
@@ -266,7 +269,6 @@ create table citrefsum(
 	primary key(refid));
 	
 # Group and Sum
-# Took about 5 minutes
 insert into citrefsum(
 SELECT refid, SUM(neid) as tot
 FROM citrefcnts
@@ -274,6 +276,11 @@ GROUP BY refid
 ORDER BY refid);
 
 
+# Need to do the same for table 2
+
+# Do the difference
+
+# Go go get the records that have changed
 
 
 ###################################
