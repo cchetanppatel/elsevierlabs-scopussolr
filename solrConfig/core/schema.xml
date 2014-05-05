@@ -229,7 +229,7 @@
 <field name="idxtype" type="abs_std" multiValued="true" indexed="true" stored="true"/>
 <field name="intid" type="long" indexed="true" stored="true"/>
 <field name="isbn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
-<field name="issn" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
+<field name="issn" type="removehyphen" multiValued="true" indexed="true" stored="true"/>
 <field name="issnp" type="keyword_lc" multiValued="true" indexed="true" stored="true"/>
 <field name="issue" type="abs_std" multiValued="false" indexed="true" stored="true"/>
 <field name="issue-s" type="abs_sort" multiValued="false" indexed="true" stored="false"/>
@@ -569,6 +569,31 @@
  <filter class="solr.TrimFilterFactory"/>
 </analyzer>
 </fieldType>
+
+
+<!-- 
+removehyphen analyzer:
+ 
+ Analyzer applies keyword tokenizer to the text and then applies lowercasing and leading/trailing 
+ whitespace removal filters to the generated tokens. Note: Using TextField as we want to lowercase
+ the values we get.
+ 
+ This analyzer is typcially used on fields that are atomic values or case insensitive keys to other entities.
+-->
+<fieldType name="removehyphen" class="solr.TextField">
+<analyzer type="index">
+ <tokenizer class="solr.KeywordTokenizerFactory"/>
+ <filter class="solr.LowerCaseFilterFactory"/>
+ <filter class="solr.TrimFilterFactory"/>
+</analyzer>
+<analyzer type="query">
+<charFilter class="solr.PatternReplaceCharFilterFactory" pattern="-" replacement=""/>
+<tokenizer class="solr.KeywordTokenizerFactory"/>
+<filter class="solr.LowerCaseFilterFactory"/>
+<filter class="solr.TrimFilterFactory"/>
+</analyzer>
+</fieldType>
+
 
 <!--
   citedByCount
