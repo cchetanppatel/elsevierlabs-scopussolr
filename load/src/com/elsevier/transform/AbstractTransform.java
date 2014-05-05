@@ -193,7 +193,7 @@ public class AbstractTransform {
 	};
 	
 	private static String[] collecidMappings = new String[] {
-		"/xocs:doc/xocs:item/item/bibrecord/item-info/itemidlist/itemid[@idtype='SCP']/@idtype"
+		"/xocs:doc/xocs:item/item/bibrecord/item-info/itemidlist/itemid[@idtype='SCP']//text()"
 	};
 	
 	private static String[] confcodeMappings = new String[] {
