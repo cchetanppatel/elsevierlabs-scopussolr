@@ -422,8 +422,8 @@ exports.submit = function(req, res){
                              } else {
                                  
                                  //console.log(buf.toString());
-                                 var results = JSON.parse(buf);
-                                 results.query = searchParameters.dType + '_' + searchParameters.dSet + '_' + searchParameters.dIdx;
+                                 //var results = JSON.parse(buf);
+                                 //results.query = searchParameters.dType + '_' + searchParameters.dSet + '_' + searchParameters.dIdx;
                                  
                                  res.status(res2.statusCode)
                                     .set('Content-Type', 'application/json; charset=UTF-8')

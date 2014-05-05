@@ -117,7 +117,7 @@ function getFacetCount(facetParams,callback) {
                 callback(null,facetResult);
                                    
             } else {
-                  
+                console.log(buf.toString()); 
                 callback('Problems getting the facet counts for ' + JSON.stringify(facetParams));                             
                
             }
@@ -135,7 +135,8 @@ function getFacetCount(facetParams,callback) {
     });
                  
     // Send the request (currently making the facet value as a phrase because it can contain more than one term)
-    req2.write('q=(' + facetParams.query + ') AND ' + facetParams.facetName + ':"' + facetParams.facetValue + '"&wt=json&indent=true&rows=0');
+    console.log('q=(' + facetParams.query + ') AND ' + facetParams.facetName + ':"' + facetParams.facetValue.replace(' & ',' ') + '"&wt=json&indent=true&rows=0');
+    req2.write('q=(' + facetParams.query + ') AND ' + facetParams.facetName + ':"' + facetParams.facetValue.replace(' & ',' ') + '"&wt=json&indent=true&rows=0');
     req2.end();        
     
 };
