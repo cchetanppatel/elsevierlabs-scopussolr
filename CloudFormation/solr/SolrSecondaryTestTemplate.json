@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
   
-  "Description" : "Template to start up a set up a SolrCloud Bootstrap node",
+  "Description" : "Template to start up one or more SolrCloud secondary nodes",
   
   "Parameters" : {
       
@@ -19,7 +19,7 @@
       "Description" : "EC2 instance type",
       "Type" : "String",
       "Default" : "r3.4xlarge",
-      "AllowedValues" : ["m1.large", "m1.xlarge", "m2.xlarge", "m2.4xlarge", "m3.2xlarge", "cr1.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "hi1.4xlarge", "r3.4xlarge" ],
+      "AllowedValues" : [ "m1.large", "m1.xlarge", "m2.xlarge", "m2.4xlarge", "m3.2xlarge", "cr1.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "hi1.4xlarge", "r3.4xlarge" ],
       "ConstraintDescription" : "must be a valid EC2 instance type in the AWSInstanceType2AMI Mappings."
     },
     
@@ -64,36 +64,6 @@
       "Type" : "String",
       "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solr/solr-4.6.0.tgz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1426235662&Signature=qxLo7T85tsw3PNBzlzCmdgASebc%3D"
     },
-         
-   "SolrIndexConfigURL" : {
-      "Description" : "Solr Config File URL.",
-      "Type" : "String",
-      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/index-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1432969547&Signature=W7LMnCZ4K6INbs7dF/bpEH0J/gc%3D"
-    },
-    
-    "SolrQueryConfigURL" : {
-      "Description" : "Solr Config File URL.",
-      "Type" : "String",
-      "Default" : "http://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/query-solrconfig.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1432969572&Signature=J8nqgxhNSBlQKqywicYFwdpJpao%3D"
-    },
-    
-    "SolrSchemaURL" : {
-      "Description" : "Solr Config File URL.",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/core/schema.xml?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340490&Signature=nDjgOn6M0QDP0FmrNtloJJPgfd4%3D"
-    },
-    
-    "SolrStopwordsURL" : {
-      "Description" : "Solr Stopwords File URL.",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/common/stopwords.txt?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340609&Signature=WnTXnCMMJWrAL8a7YXHqmojoOck%3D"
-    },
-    
-    "SolrSynonymsURL" : {
-      "Description" : "Solr Synonyms File URL.",
-      "Type" : "String",
-      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/solrConfig/common/synonyms.txt?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1422340640&Signature=FbLhSsK4wC3jWdsyuG4aVdNsH3E%3D"
-    },
     
     "ExternalCntFileURL" : {
       "Description" : "External Count File URL.",
@@ -108,7 +78,7 @@
     },
     
     "ZooKeeperIP" : {
-      "Description" : "ZooKeeper IP address.",
+      "Description" : "ZooKeeper IP address:port.",
       "Type" : "String",
       "Default" : "10.2.17.250:2181"
     },
@@ -117,16 +87,9 @@
       "Description" : "Solr Cluster Name.",
       "Type" : "String"
     },
-    
-    "NumShards" : {
-      "Description" : "Number of shards for the cluster.",
-      "Type" : "Number",
-      "MinValue" : "1",
-      "Default" : "1"
-    },
-    
-    "MaxShardsPerNode" : {
-      "Description" : "Max number of shards per node.  In multi-shard deployments, this should equal the number of shards. As multiple machines join the cluster, shards will migrate off the primary to the secondary boxes",
+   
+    "NodeCount" : {
+      "Description" : "Number of nodes to add to the cluster.",
       "Type" : "Number",
       "MinValue" : "1",
       "Default" : "1"
@@ -165,10 +128,10 @@
                 "AvailabilityZones" : [ { "Ref" : "AvailabilityZone" } ],
                 "LaunchConfigurationName" : { "Ref" : "Ec2Instance" },
                  "Tags" : [
-          					{ "Key" : "Name", "Value" :  "solr-coreA-p", "PropagateAtLaunch" : true }
+          					{ "Key" : "Name", "Value" :  "solr-coreA-s", "PropagateAtLaunch" : true }
         		],
-                "MinSize" : 1,
-                "MaxSize" : 1
+                "MinSize" : { "Ref" : "NodeCount" },
+                "MaxSize" : { "Ref" : "NodeCount" }
             }
         },
         
@@ -184,7 +147,7 @@
                         "AMI"
                     ]
                 },
-                "BlockDeviceMappings" : [ {"DeviceName" : "/dev/sdk", "VirtualName" : "ephemeral0"} ],
+                "BlockDeviceMappings" : [ {"DeviceName" : "/dev/sdk", "VirtualName" : "ephemeral0"}],
                 "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
                 "KeyName" : { "Ref" : "KeyName" },
                 "InstanceType" : { "Ref" : "InstanceType" },
@@ -204,7 +167,7 @@
                 "# Get rid of the default mount for drive 1 from Amazon on non- hi1 boxes (Comment out for hi1.4xlarge boxes)", "\n",
                 "#umount /media/ephemeral0", "\n",
                 "# Create the raid device from the ephemeral drives", "\n",
-                "#yes | mdadm --create /dev/md0 --level=0 -c256 --raid-devices=2 /dev/sdk /dev/sdl", "\n",
+                "# yes | mdadm --create /dev/md0 --level=0 -c256 --raid-devices=2 /dev/sdk /dev/sdl", "\n",
                 "#echo 'DEVICE /dev/sdk /dev/sdl' > /etc/mdadm.conf", "\n",
                 "#mdadm --detail --scan >> /dev/mdadm.conf", "\n",
                 "# Create the file system on the raid", "\n",
@@ -227,18 +190,12 @@
                 "cd solr-", { "Ref" : "SolrVersion"}, "\n",
                 "mv ./example/solr/collection1 ./example/solr/", { "Ref" : "SolrClusterName" }, "\n",
                 "sed -i -e 's/collection1/", { "Ref" : "SolrClusterName"}, "/' ./example/solr/", { "Ref" : "SolrClusterName" },"/core.properties", "\n",
-                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/stopwords.txt '", { "Ref" : "SolrStopwordsURL"}, "'", "\n",
-                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/synonyms.txt '", { "Ref" : "SolrSynonymsURL"}, "'", "\n",
-                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/schema.xml '", { "Ref" : "SolrSchemaURL"}, "'", "\n",
-                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/solrconfig.xml '", { "Ref" : "SolrIndexConfigURL"}, "'", "\n",
-                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/index-solrconfig.xml '", { "Ref" : "SolrIndexConfigURL"}, "'", "\n",
-                "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/conf/query-solrconfig.xml '", { "Ref" : "SolrQueryConfigURL"}, "'", "\n",
                 "mkdir ./example/solr/", { "Ref" : "SolrClusterName" },"/data", "\n",
                 "curl -o ./example/solr/", { "Ref" : "SolrClusterName" },"/data/external_", { "Ref" : "ExternalCntFieldName" }, ".txt.gz '", { "Ref" : "ExternalCntFileURL"}, "'", "\n",
                 "gunzip ./example/solr/", { "Ref" : "SolrClusterName" },"/data/external_", { "Ref" : "ExternalCntFieldName" }, ".txt.gz", "\n",
                 "# Start solr up with all the right parameters", "\n",
                 "cd example", "\n",
-                "nohup java -Djetty.port=8080 -XX:+UseParallelGC -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DnumShards=", { "Ref" : "NumShards"}, " -DmaxShardsPerNode=", { "Ref" : "MaxShardsPerNode"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}, "::default  -Dbootstrap_confdir=./solr/", { "Ref" : "SolrClusterName"}, "/conf -Dcollection.configName=", { "Ref" : "SolrClusterName"}, "conf -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -jar start.jar > /dev/null 2>error.log&",   "\n"
+                "nohup java -Djetty.port=8080 -XX:+UseParallelGC -Xms", { "Ref" : "JavaHeapMin"},  " -Xmx", { "Ref" : "JavaHeapMax"}, " -DzkHost=", { "Ref" : "ZooKeeperIP"}, " -Dcom.sun.management.jmxremote -javaagent:/opt/spm/spm-monitor/lib/spm-monitor-solrcloud.jar=", { "Ref" : "SematextCfgId"}  , "::default -jar start.jar > /dev/null 2>error.log&",   "\n"
                 ]]}}
             }
         },
