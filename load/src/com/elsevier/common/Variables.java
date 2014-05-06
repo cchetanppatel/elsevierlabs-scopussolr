@@ -44,7 +44,9 @@ public class Variables {
 	public static final String SOLR_ENDPOINT = prop.getProperty("SOLR_ENDPOINT","http://localhost:8983/solr/core/");
 	//public static final String SOLR_COLLECTION = "affil";
 	//public static final String SOLR_COLLECTION = "auth";
-	public static final String SOLR_COLLECTION = "core";
+	public static final String SOLR_COLLECTION = prop.getProperty("SOLR_COLLECTION","core");
+	//public static final String SOLR_UPDATE_ALIAS = prop.getProperty("SOLR_UPDATE_ALIAS","coreUpdate");
+	//public static final String SOLR_QUERY_ALIAS = prop.getProperty("SOLR_QUERY_ALIAS","coreQuery");
 	
 	// ZooKeeper endpoint if running SolrCloud for auto-discovery of Solr nodes when used with SOLR_COLLECTION. Set to "" to use single Variables.SOLR_ENDPOINT
 	public static final String ZOOKEEPER_ENDPOINT = prop.getProperty("ZOOKEEPER_ENDPOINT","");
@@ -80,8 +82,8 @@ public class Variables {
 	//public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-affiliation");
 	//public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-author");
 	public static final String DYNAMO_SOLR_SEARCH_TABLE_NAME = prop.getProperty("DYNAMO_SOLR_SEARCH_TABLE_NAME","solr-core");
-	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_READ_CAPACITY = 100L;
-	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_WRITE_CAPACITY = 100L;
+	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_READ_CAPACITY = 1L;
+	public static final Long  DYNAMO_SOLR_SEARCH_TABLE_WRITE_CAPACITY = 1L;
 	
 	
 	// Redshift variables
