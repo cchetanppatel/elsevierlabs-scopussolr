@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 848,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:heart",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 2455492,
+    "start": 0,
+    "maxScore": 2.0144155,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1824",
+        1,
+        "1826",
+        1,
+        "1827",
+        3
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        1,
+        "1 ANON",
+        19,
+        "1 Anon",
+        233
+      ],
+      "subjabbr-f": [
+        "100",
+        2,
+        "3001",
+        352,
+        "3212",
+        1
+      ],
+      "subtype-f": [
+        "ab",
+        5,
+        "ar",
+        1756379,
+        "bk",
+        344
+      ],
+      "exactsrctitle-f": [
+        "\"Laboratorio;\" análisis clínicos,",
+        1,
+        "\"Laboratorio;\" análisis clínicos, bacteriología, inmunología, parasitología, hematología, anatomía patológica, química clínica",
+        2,
+        "'European' citizenship in practice. Building institutions of a non-state",
+        1
+      ],
+      "exactkeyword-f": [
+        " -597/-572/-174 genotype",
+        1,
+        " . O 2  - ",
+        1,
+        " 1 , - adrenoceptor",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        4,
+        "100307116",
+        54,
+        "100307118",
+        1
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        74,
+        "Afghanistan",
+        29,
+        "Albania",
+        82
+      ],
+      "srctype-f": [
+        "b",
+        521,
+        "d",
+        3415,
+        "j",
+        2399607
+      ],
+      "lang-f": [
+        "afr",
+        131,
+        "alb",
+        3,
+        "ara",
+        289
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

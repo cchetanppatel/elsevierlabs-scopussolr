@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 189,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:chicago",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 510704,
+    "start": 0,
+    "maxScore": 2.345885,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1865",
+        1,
+        "1867",
+        1,
+        "1869",
+        1
+      ],
+      "prefnameauid-f": [
+        " et al",
+        2,
+        "1 ANON",
+        54,
+        "1 Anon",
+        800
+      ],
+      "subjabbr-f": [
+        "3001",
+        22,
+        "AGRI",
+        23603,
+        "ARTS",
+        17194
+      ],
+      "subtype-f": [
+        "ab",
+        10,
+        "ar",
+        314722,
+        "bk",
+        126
+      ],
+      "exactsrctitle-f": [
+        "\"Proceedings of the 33rd ITA-AITES World Tunnel Congress - Underground Space - The 4th Dimension of Metropolises\"",
+        3,
+        "(What is geography?",
+        1,
+        ", 1979",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 -Adrenergic receptors",
+        1,
+        " 1 H",
+        3,
+        " 1 H NMR",
+        3
+      ],
+      "afid-f": [
+        "100307118",
+        3,
+        "100307122",
+        1,
+        "100307125",
+        37
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        11,
+        "Afghanistan",
+        3,
+        "Albania",
+        9
+      ],
+      "srctype-f": [
+        "b",
+        557,
+        "d",
+        5557,
+        "j",
+        412203
+      ],
+      "lang-f": [
+        "afr",
+        6,
+        "ara",
+        7,
+        "bos",
+        5
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 505,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:man",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1375348,
+    "start": 0,
+    "maxScore": 2.0369377,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1827",
+        11,
+        "1828",
+        1,
+        "1829",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 ANON",
+        81,
+        "1 Anon",
+        722,
+        "1 Anonymous",
+        1
+      ],
+      "subjabbr-f": [
+        "100",
+        3,
+        "3001",
+        82,
+        "3212",
+        2
+      ],
+      "subtype-f": [
+        "ab",
+        15,
+        "ar",
+        964968,
+        "bk",
+        747
+      ],
+      "exactsrctitle-f": [
+        "\"2008 26th International Conference on Microelectronics, Proceedings, MIEL 2008\"",
+        1,
+        "\"Proceedings of the 33rd ITA-AITES World Tunnel Congress - Underground Space - The 4th Dimension of Metropolises\"",
+        4,
+        "'Man-made Fiber Year Book' (Chemiefasern/Textilindustrie)",
+        22
+      ],
+      "exactkeyword-f": [
+        " ''FOUNDATION'' sfieldbus",
+        1,
+        " * EI algebra",
+        1,
+        " * EI algebra neighborhood",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        1,
+        "100307116",
+        126,
+        "100307118",
+        2
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        41,
+        "Afghanistan",
+        21,
+        "Albania",
+        55
+      ],
+      "srctype-f": [
+        "b",
+        3050,
+        "d",
+        9158,
+        "j",
+        1196682
+      ],
+      "lang-f": [
+        "afr",
+        77,
+        "alb",
+        1,
+        "ara",
+        111
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

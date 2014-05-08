@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 593,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:\"new york\"",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1722102,
+    "start": 0,
+    "maxScore": 2.557952,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1827",
+        3,
+        "1828",
+        1,
+        "1830",
+        1
+      ],
+      "prefnameauid-f": [
+        " et al",
+        3,
+        "1  Anonymous",
+        2,
+        "1 ANON",
+        104
+      ],
+      "subjabbr-f": [
+        "100",
+        1,
+        "3001",
+        78,
+        "AGRI",
+        80433
+      ],
+      "subtype-f": [
+        "ab",
+        17,
+        "ar",
+        990478,
+        "bk",
+        2522
+      ],
+      "exactsrctitle-f": [
+        "\"2008 26th International Conference on Microelectronics, Proceedings, MIEL 2008\"",
+        1,
+        "\"Dens sapiens\"",
+        1,
+        "\"Proceedings - 15th IFHTSE - International Federation for Heat Treatment and Surface Engineering Congress 2006\"",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 H",
+        6,
+        " 1 H DQ NMR",
+        1,
+        " 1 H MR spectroscopic imaging",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        15,
+        "100307118",
+        50,
+        "100307122",
+        13
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        14,
+        "Afghanistan",
+        35,
+        "Albania",
+        66
+      ],
+      "srctype-f": [
+        "b",
+        7507,
+        "d",
+        27905,
+        "j",
+        1308143
+      ],
+      "lang-f": [
+        "afr",
+        20,
+        "ara",
+        55,
+        "aze",
+        6
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

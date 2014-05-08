@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 31,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:brain AND abs:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 18617,
+    "start": 0,
+    "maxScore": 1.9473579,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1884",
+        1,
+        "1952",
+        1,
+        "1957",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        3,
+        "10038773400 O. Gonzalez-Perez",
+        1,
+        "10038935700 P. Antonioli",
+        1
+      ],
+      "subjabbr-f": [
+        "3001",
+        1,
+        "AGRI",
+        484,
+        "ARTS",
+        29
+      ],
+      "subtype-f": [
+        "ar",
+        13648,
+        "bk",
+        5,
+        "cp",
+        904
+      ],
+      "exactsrctitle-f": [
+        "18th World IMACS Congress and MODSIM09 International Congress on Modelling and Simulation: Interfacing Modelling and Simulation with Mathematical and Computational Sciences, Proceedings",
+        1,
+        "1st Portuguese Meeting in Biomedical Engineering, ENBENG 2011",
+        1,
+        "2006 NSTI Nanotechnology Conference and Trade Show - NSTI Nanotech 2006 Technical Proceedings",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 4C",
+        1,
+        " 1 H MRS",
+        1,
+        " 1 H NMR",
+        1
+      ],
+      "afid-f": [
+        "100310197",
+        1,
+        "100310301",
+        2,
+        "100310333",
+        1
+      ],
+      "affilctry-f": [
+        "Algeria",
+        1,
+        "Argentina",
+        41,
+        "Armenia",
+        2
+      ],
+      "srctype-f": [
+        "b",
+        6,
+        "d",
+        49,
+        "j",
+        18010
+      ],
+      "lang-f": [
+        "ara",
+        1,
+        "bul",
+        13,
+        "chi",
+        231
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

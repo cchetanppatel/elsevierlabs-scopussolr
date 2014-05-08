@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 115,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:man",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 273243,
+    "start": 0,
+    "maxScore": 2.1843772,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1849",
+        1,
+        "1851",
+        2,
+        "1867",
+        2
+      ],
+      "prefnameauid-f": [
+        "1 ANON",
+        73,
+        "1 Anon",
+        494,
+        "10038772700 T. Nakajima",
+        1
+      ],
+      "subjabbr-f": [
+        "100",
+        3,
+        "3001",
+        8,
+        "3212",
+        2
+      ],
+      "subtype-f": [
+        "ab",
+        7,
+        "ar",
+        211623,
+        "bk",
+        156
+      ],
+      "exactsrctitle-f": [
+        "\"Proceedings of the 33rd ITA-AITES World Tunnel Congress - Underground Space - The 4th Dimension of Metropolises\"",
+        2,
+        "'Man-made Fiber Year Book' (Chemiefasern/Textilindustrie)",
+        1,
+        "( Contemporary human and economic geography).",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 H NMR",
+        2,
+        " 1 H NMR spectroscopy",
+        1,
+        " 1 H-MRS",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        80,
+        "100307118",
+        1,
+        "100307119",
+        2
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        5,
+        "Afghanistan",
+        2,
+        "Albania",
+        10
+      ],
+      "srctype-f": [
+        "b",
+        1597,
+        "d",
+        4315,
+        "j",
+        253713
+      ],
+      "lang-f": [
+        "afr",
+        25,
+        "alb",
+        1,
+        "ara",
+        20
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

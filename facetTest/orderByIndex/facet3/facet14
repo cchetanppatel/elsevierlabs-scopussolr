@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 162,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:arm",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 349466,
+    "start": 0,
+    "maxScore": 2.5895202,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1829",
+        1,
+        "1830",
+        1,
+        "1831",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 ANON",
+        36,
+        "1 Anon",
+        204,
+        "10038760900 N.S. Pokrovskiy",
+        4
+      ],
+      "subjabbr-f": [
+        "3001",
+        35,
+        "AGRI",
+        16564,
+        "ARTS",
+        3585
+      ],
+      "subtype-f": [
+        "ab",
+        1,
+        "ar",
+        255563,
+        "bk",
+        101
+      ],
+      "exactsrctitle-f": [
+        "( Geomorphology of the escarpments on the western rim of the Murzuk Basin, central Sahara).",
+        1,
+        "10AIChE - 2010 AIChE Spring Meeting and 6th Global Congress on Process Safety",
+        1,
+        "10th ACIS Conference on Software Engineering, Artificial Intelligence, Networking and Parallel/Distributed Computing, SNPD 2009, In conjunction with IWEA 2009 and WEACR 2009",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 -Adrenoceptor",
+        1,
+        " 1 H",
+        1,
+        " 1 H MR spectroscopy",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        1,
+        "100307116",
+        15,
+        "100307118",
+        3
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        10,
+        "Afghanistan",
+        5,
+        "Albania",
+        13
+      ],
+      "srctype-f": [
+        "b",
+        230,
+        "d",
+        2269,
+        "j",
+        310737
+      ],
+      "lang-f": [
+        "afr",
+        9,
+        "ara",
+        30,
+        "arm",
+        39
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

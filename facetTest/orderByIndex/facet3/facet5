@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1247,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 3479809,
+    "start": 0,
+    "maxScore": 1.8405652,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1825",
+        1,
+        "1826",
+        1,
+        "1827",
+        2
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        2,
+        "1 ANON",
+        1,
+        "1 Anon",
+        63
+      ],
+      "subjabbr-f": [
+        "100",
+        1,
+        "3001",
+        706,
+        "AGRI",
+        139197
+      ],
+      "subtype-f": [
+        "ab",
+        8,
+        "ar",
+        2550397,
+        "bk",
+        525
+      ],
+      "exactsrctitle-f": [
+        "\"Laboratorio;\" análisis clínicos,",
+        3,
+        "\"Laboratorio;\" análisis clínicos, bacteriología, inmunología, parasitología, hematología, anatomía patológica, química clínica",
+        2,
+        "10th IEEE International Conference on Bioinformatics and Bioengineering 2010, BIBE 2010",
+        16
+      ],
+      "exactkeyword-f": [
+        " + T lymphocyte",
+        1,
+        " - antitrypsin deficiency",
+        1,
+        " -597/-572/-174 genotype",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        7,
+        "100307116",
+        109,
+        "100307118",
+        2
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        41,
+        "Afghanistan",
+        28,
+        "Albania",
+        65
+      ],
+      "srctype-f": [
+        "b",
+        998,
+        "d",
+        2822,
+        "j",
+        3407668
+      ],
+      "lang-f": [
+        "afr",
+        56,
+        "ara",
+        310,
+        "aze",
+        65
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

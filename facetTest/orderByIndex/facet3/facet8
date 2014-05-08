@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 4877,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:human",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 17735507,
+    "start": 0,
+    "maxScore": 0.9065808,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1826",
+        1,
+        "1827",
+        3,
+        "1828",
+        1
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        2,
+        "1  Anonyme",
+        1,
+        "1  Anonymous",
+        2
+      ],
+      "subjabbr-f": [
+        "100",
+        6,
+        "3001",
+        2310,
+        "3212",
+        1
+      ],
+      "subtype-f": [
+        "ab",
+        47,
+        "ar",
+        12749842,
+        "bk",
+        2134
+      ],
+      "exactsrctitle-f": [
+        "\"2008 26th International Conference on Microelectronics, Proceedings, MIEL 2008\"",
+        2,
+        "\"Dens sapiens\"",
+        1,
+        "\"Laboratorio;\" analisis clinicos, bacteriologia, inmunologia, parasitologia, hematologia, anatomia patologica, quimica clinica",
+        8
+      ],
+      "exactkeyword-f": [
+        " * BEAST",
+        3,
+        " * EI algebra",
+        1,
+        " * EI algebra neighborhood",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        34,
+        "100307116",
+        1598,
+        "100307117",
+        2
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        253,
+        "Afghanistan",
+        378,
+        "Albania",
+        586
+      ],
+      "srctype-f": [
+        "b",
+        5548,
+        "d",
+        19005,
+        "j",
+        17225004
+      ],
+      "lang-f": [
+        "afr",
+        1889,
+        "alb",
+        2,
+        "ara",
+        1695
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 276,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:world",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 802102,
+    "start": 0,
+    "maxScore": 2.2759864,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1878",
+        1,
+        "1885",
+        1,
+        "1889",
+        1
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        2,
+        "1 %ANON",
+        1,
+        "1 ANON",
+        257
+      ],
+      "subjabbr-f": [
+        "3001",
+        108,
+        "3212",
+        4,
+        "AGRI",
+        63278
+      ],
+      "subtype-f": [
+        "ab",
+        74,
+        "ar",
+        485413,
+        "bk",
+        1250
+      ],
+      "exactsrctitle-f": [
+        "\"2008 26th International Conference on Microelectronics, Proceedings, MIEL 2008\"",
+        1,
+        "\"Of the hut I builded': the archaeology of Australia's history",
+        1,
+        "\"Proceedings - 15th IFHTSE - International Federation for Heat Treatment and Surface Engineering Congress 2006\"",
+        3
+      ],
+      "exactkeyword-f": [
+        " *3 H",
+        1,
+        " 1 H MR spectroscopic imaging",
+        1,
+        " 1 H NMR",
+        6
+      ],
+      "afid-f": [
+        "100307116",
+        10,
+        "100307117",
+        1,
+        "100307118",
+        5
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        57,
+        "Afghanistan",
+        45,
+        "Albania",
+        70
+      ],
+      "srctype-f": [
+        "b",
+        6113,
+        "d",
+        41676,
+        "j",
+        622660
+      ],
+      "lang-f": [
+        "afr",
+        112,
+        "alb",
+        1,
+        "ara",
+        183
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

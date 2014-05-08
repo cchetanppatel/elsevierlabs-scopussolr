@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 1939,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:brain OR all:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 5714514,
+    "start": 0,
+    "maxScore": 1.8785224,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1823",
+        1,
+        "1825",
+        1,
+        "1826",
+        3
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        2,
+        "1 ANON",
+        2,
+        "1 Anon",
+        103
+      ],
+      "subjabbr-f": [
+        "100",
+        2,
+        "3001",
+        817,
+        "AGRI",
+        239095
+      ],
+      "subtype-f": [
+        "ab",
+        11,
+        "ar",
+        4257871,
+        "bk",
+        1086
+      ],
+      "exactsrctitle-f": [
+        "\"Laboratorio;\" análisis clínicos,",
+        3,
+        "\"Laboratorio;\" análisis clínicos, bacteriología, inmunología, parasitología, hematología, anatomía patológica, química clínica",
+        2,
+        "- FIZIOL.ZH.",
+        2
+      ],
+      "exactkeyword-f": [
+        " * I-A-85380",
+        1,
+        " + H-proton-magnetic resonance spectroscopy",
+        1,
+        " + T lymphocyte",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        8,
+        "100307116",
+        269,
+        "100307118",
+        3
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        53,
+        "Afghanistan",
+        39,
+        "Albania",
+        113
+      ],
+      "srctype-f": [
+        "b",
+        1409,
+        "d",
+        4366,
+        "j",
+        5553604
+      ],
+      "lang-f": [
+        "afr",
+        112,
+        "alb",
+        1,
+        "ara",
+        544
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

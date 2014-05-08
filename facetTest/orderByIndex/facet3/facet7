@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 984,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:world",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 3369175,
+    "start": 0,
+    "maxScore": 1.8416283,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1843",
+        1,
+        "1850",
+        1,
+        "1851",
+        2
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        2,
+        "1 %ANON",
+        1,
+        "1 ANON",
+        774
+      ],
+      "subjabbr-f": [
+        "3001",
+        445,
+        "3212",
+        4,
+        "AGRI",
+        377547
+      ],
+      "subtype-f": [
+        "ab",
+        82,
+        "ar",
+        2225806,
+        "bk",
+        2353
+      ],
+      "exactsrctitle-f": [
+        "\"2008 26th International Conference on Microelectronics, Proceedings, MIEL 2008\"",
+        3,
+        "\"Dens sapiens\"",
+        1,
+        "\"Of the hut I builded': the archaeology of Australia's history",
+        1
+      ],
+      "exactkeyword-f": [
+        " * BEAST",
+        2,
+        " *3 H",
+        1,
+        " - antitrypsin deficiency",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        13,
+        "100307117",
+        2,
+        "100307118",
+        18
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        220,
+        "Afghanistan",
+        242,
+        "Albania",
+        353
+      ],
+      "srctype-f": [
+        "b",
+        12264,
+        "d",
+        101681,
+        "j",
+        2766555
+      ],
+      "lang-f": [
+        "afr",
+        264,
+        "alb",
+        1,
+        "ara",
+        610
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

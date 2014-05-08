@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 29,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:kohler",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 30138,
+    "start": 0,
+    "maxScore": 3.648422,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1858",
+        1,
+        "1863",
+        1,
+        "1864",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        5,
+        "10038790900 V. Riollet",
+        1,
+        "10038841600 S. Schorr",
+        1
+      ],
+      "subjabbr-f": [
+        "3001",
+        2,
+        "AGRI",
+        2511,
+        "ARTS",
+        680
+      ],
+      "subtype-f": [
+        "ab",
+        1,
+        "ar",
+        22500,
+        "bk",
+        8
+      ],
+      "exactsrctitle-f": [
+        "\"Proceedings of the 33rd ITA-AITES World Tunnel Congress - Underground Space - The 4th Dimension of Metropolises\"",
+        2,
+        "(Yugoslavia",
+        1,
+        "10AIChE - 2010 AIChE Annual Meeting, Conference Proceedings",
+        2
+      ],
+      "exactkeyword-f": [
+        " 1 H MAS NMR",
+        1,
+        " 1 H-NMR spectroscopy",
+        2,
+        " 13 C MAS NMR",
+        1
+      ],
+      "afid-f": [
+        "100307125",
+        1,
+        "100307176",
+        4,
+        "100310103",
+        1
+      ],
+      "affilctry-f": [
+        "Albania",
+        1,
+        "Algeria",
+        5,
+        "Argentina",
+        69
+      ],
+      "srctype-f": [
+        "b",
+        78,
+        "d",
+        382,
+        "j",
+        27180
+      ],
+      "lang-f": [
+        "afr",
+        3,
+        "chi",
+        29,
+        "cze",
+        35
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

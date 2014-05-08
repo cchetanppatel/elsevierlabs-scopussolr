@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 91,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:keith",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 18840,
+    "start": 0,
+    "maxScore": 3.862968,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1833",
+        1,
+        "1852",
+        1,
+        "1857",
+        4
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        5,
+        "10039233200 J. Zhao",
+        1,
+        "10039740500 E. Taran",
+        1
+      ],
+      "subjabbr-f": [
+        "AGRI",
+        949,
+        "ARTS",
+        1012,
+        "BIOC",
+        1561
+      ],
+      "subtype-f": [
+        "ab",
+        1,
+        "ar",
+        10233,
+        "bk",
+        31
+      ],
+      "exactsrctitle-f": [
+        "( Bibliography of Geography, part 3; regional geography: Germany, Europe, U.S.S.R.",
+        1,
+        "( Bibliography of town planning (international sources), town renewal, town restoration, town building, commentary, social planning, modernization, conservation, regional studies).",
+        1,
+        "( Geography of the seas: oceans and coasts, volume 1",
+        1
+      ],
+      "exactkeyword-f": [
+        " 10 Be",
+        1,
+        " 11 C",
+        1,
+        " 125 I",
+        1
+      ],
+      "afid-f": [
+        "100307125",
+        2,
+        "100307147",
+        1,
+        "100310117",
+        1
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        3,
+        "Algeria",
+        6,
+        "Argentina",
+        22
+      ],
+      "srctype-f": [
+        "b",
+        371,
+        "d",
+        527,
+        "j",
+        13673
+      ],
+      "lang-f": [
+        "chi",
+        23,
+        "cze",
+        9,
+        "dan",
+        3
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 15,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:fulford",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1145,
+    "start": 0,
+    "maxScore": 4.419742,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1892",
+        1,
+        "1893",
+        1,
+        "1897",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        2,
+        "10041423100 J.M. Fisher",
+        1,
+        "10139137800 A. Martins",
+        1
+      ],
+      "subjabbr-f": [
+        "AGRI",
+        82,
+        "ARTS",
+        115,
+        "BIOC",
+        144
+      ],
+      "subtype-f": [
+        "ar",
+        723,
+        "bk",
+        2,
+        "cp",
+        133
+      ],
+      "exactsrctitle-f": [
+        "18th World IMACS Congress and MODSIM09 International Congress on Modelling and Simulation: Interfacing Modelling and Simulation with Mathematical and Computational Sciences, Proceedings",
+        1,
+        "19th International Congress on Sound and Vibration 2012, ICSV 2012",
+        1,
+        "2007 Power Systems Conference: Advance Metering, Protection, Control, Communication, and Distributed Resources, PSC 2007",
+        1
+      ],
+      "exactkeyword-f": [
+        " 31 P magnetic resonance spectroscopy exercise-induced muscle damage",
+        1,
+        " 31 P-MRS",
+        1,
+        " 31 Phosphorus magnetic resonance spectroscopy",
+        1
+      ],
+      "afid-f": [
+        "100311827",
+        1,
+        "100311839",
+        3,
+        "100315058",
+        1
+      ],
+      "affilctry-f": [
+        "Argentina",
+        1,
+        "Australia",
+        42,
+        "Austria",
+        2
+      ],
+      "srctype-f": [
+        "b",
+        6,
+        "d",
+        7,
+        "j",
+        1019
+      ],
+      "lang-f": [
+        "chi",
+        1,
+        "cze",
+        2,
+        "eng",
+        1110
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 117,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:ohio",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 265839,
+    "start": 0,
+    "maxScore": 2.3918982,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1830",
+        1,
+        "1835",
+        1,
+        "1839",
+        1
+      ],
+      "prefnameauid-f": [
+        " et al",
+        1,
+        "1 ANON",
+        57,
+        "1 Anon",
+        331
+      ],
+      "subjabbr-f": [
+        "3001",
+        7,
+        "AGRI",
+        28876,
+        "ARTS",
+        5486
+      ],
+      "subtype-f": [
+        "ab",
+        6,
+        "ar",
+        193261,
+        "bk",
+        55
+      ],
+      "exactsrctitle-f": [
+        "\"Proceedings - 15th IFHTSE - International Federation for Heat Treatment and Surface Engineering Congress 2006\"",
+        2,
+        ",",
+        1,
+        "10AIChE - 2010 AIChE Annual Meeting, Conference Proceedings",
+        36
+      ],
+      "exactkeyword-f": [
+        " 1 H",
+        2,
+        " 1 H NMR",
+        4,
+        " 1 H Nuclear magnetic resonance",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        2,
+        "100307118",
+        2,
+        "100307125",
+        74
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        4,
+        "Afghanistan",
+        5,
+        "Albania",
+        4
+      ],
+      "srctype-f": [
+        "b",
+        545,
+        "d",
+        2357,
+        "j",
+        235978
+      ],
+      "lang-f": [
+        "afr",
+        1,
+        "ara",
+        4,
+        "aze",
+        1
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

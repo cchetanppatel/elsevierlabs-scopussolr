@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 805,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:human",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 2158400,
+    "start": 0,
+    "maxScore": 2.0792675,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1840",
+        1,
+        "1843",
+        2,
+        "1844",
+        1
+      ],
+      "prefnameauid-f": [
+        "1  Anonyme",
+        1,
+        "1 ANON",
+        23,
+        "1 Anon",
+        630
+      ],
+      "subjabbr-f": [
+        "100",
+        2,
+        "3001",
+        149,
+        "3212",
+        1
+      ],
+      "subtype-f": [
+        "ab",
+        39,
+        "ar",
+        1679650,
+        "bk",
+        745
+      ],
+      "exactsrctitle-f": [
+        "\"Proceedings - 15th IFHTSE - International Federation for Heat Treatment and Surface Engineering Congress 2006\"",
+        2,
+        "\"Proceedings of the 33rd ITA-AITES World Tunnel Congress - Underground Space - The 4th Dimension of Metropolises\"",
+        2,
+        "( Administrative action: public works and their financing, urban progress and agricultural potential, Colombia).",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 -Adrenoceptor",
+        1,
+        " 1 -Antitrypsin",
+        1,
+        " 1 -acid glycoprotein",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        355,
+        "100307117",
+        1,
+        "100307118",
+        3
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        43,
+        "Afghanistan",
+        25,
+        "Albania",
+        97
+      ],
+      "srctype-f": [
+        "b",
+        3610,
+        "d",
+        9315,
+        "j",
+        1981299
+      ],
+      "lang-f": [
+        "afr",
+        112,
+        "ara",
+        161,
+        "aze",
+        8
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

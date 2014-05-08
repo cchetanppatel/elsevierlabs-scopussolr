@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 655,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:lung",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1669447,
+    "start": 0,
+    "maxScore": 2.2073112,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1829",
+        1,
+        "1830",
+        3,
+        "1831",
+        1
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        1,
+        "1 ANON",
+        3,
+        "1 Anon",
+        42
+      ],
+      "subjabbr-f": [
+        "3001",
+        235,
+        "AGRI",
+        49462,
+        "ARTS",
+        1880
+      ],
+      "subtype-f": [
+        "ab",
+        1,
+        "ar",
+        1232972,
+        "bk",
+        233
+      ],
+      "exactsrctitle-f": [
+        "\"Laboratorio;\" análisis clínicos, bacteriología, inmunología, parasitología, hematología, anatomía patológica, química clínica",
+        4,
+        "- FIZIOL.ZH.",
+        7,
+        "10th IEEE International Conference on Bioinformatics and Bioengineering 2010, BIBE 2010",
+        5
+      ],
+      "exactkeyword-f": [
+        " +  ATP channels",
+        1,
+        " + T lymphocyte",
+        1,
+        " - antitrypsin deficiency",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        2,
+        "100307116",
+        94,
+        "100307119",
+        11
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        60,
+        "Afghanistan",
+        22,
+        "Albania",
+        42
+      ],
+      "srctype-f": [
+        "b",
+        290,
+        "d",
+        995,
+        "j",
+        1644188
+      ],
+      "lang-f": [
+        "afr",
+        53,
+        "alb",
+        1,
+        "ara",
+        133
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

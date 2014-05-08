@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 650,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:brain OR abs:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 1597391,
+    "start": 0,
+    "maxScore": 1.9473579,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1836",
+        1,
+        "1837",
+        4,
+        "1838",
+        3
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        2,
+        "1 ANON",
+        2,
+        "1 Anon",
+        90
+      ],
+      "subjabbr-f": [
+        "100",
+        2,
+        "3001",
+        183,
+        "AGRI",
+        52255
+      ],
+      "subtype-f": [
+        "ab",
+        4,
+        "ar",
+        1245127,
+        "bk",
+        274
+      ],
+      "exactsrctitle-f": [
+        "10th ACIS Conference on Software Engineering, Artificial Intelligence, Networking and Parallel/Distributed Computing, SNPD 2009, In conjunction with IWEA 2009 and WEACR 2009",
+        1,
+        "10th IEEE International Conference on Bioinformatics and Bioengineering 2010, BIBE 2010",
+        8,
+        "10th IEEE International Multitopic Conference 2006, INMIC",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 -Adrenoceptors",
+        1,
+        " 1 4C",
+        1,
+        " 1 H",
+        11
+      ],
+      "afid-f": [
+        "100307115",
+        3,
+        "100307116",
+        87,
+        "100307119",
+        9
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        19,
+        "Afghanistan",
+        8,
+        "Albania",
+        20
+      ],
+      "srctype-f": [
+        "b",
+        592,
+        "d",
+        1968,
+        "j",
+        1548207
+      ],
+      "lang-f": [
+        "afr",
+        26,
+        "ara",
+        184,
+        "aze",
+        40
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

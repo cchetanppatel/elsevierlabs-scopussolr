@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 38,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:daniel",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 57698,
+    "start": 0,
+    "maxScore": 3.3651874,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1827",
+        2,
+        "1830",
+        1,
+        "1834",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 ANON",
+        1,
+        "1 Anon",
+        13,
+        "10038936300 D.J. Bodony",
+        6
+      ],
+      "subjabbr-f": [
+        "3001",
+        4,
+        "AGRI",
+        2987,
+        "ARTS",
+        5774
+      ],
+      "subtype-f": [
+        "ab",
+        2,
+        "ar",
+        33867,
+        "bk",
+        50
+      ],
+      "exactsrctitle-f": [
+        "10AIChE - 2010 AIChE Annual Meeting, Conference Proceedings",
+        2,
+        "10th AIAA Aviation Technology, Integration and Operations Conference 2010, ATIO 2010",
+        3,
+        "10th AIAA/ASME Joint Thermophysics and Heat Transfer Conference",
+        3
+      ],
+      "exactkeyword-f": [
+        " 100 Nb",
+        1,
+        " 108,110,112 Ru",
+        1,
+        " 114m In/ 114 In",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        1,
+        "100307125",
+        2,
+        "100307147",
+        1
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        1,
+        "Albania",
+        3,
+        "Algeria",
+        9
+      ],
+      "srctype-f": [
+        "b",
+        119,
+        "d",
+        1164,
+        "j",
+        43546
+      ],
+      "lang-f": [
+        "afr",
+        11,
+        "bul",
+        3,
+        "cat",
+        5
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

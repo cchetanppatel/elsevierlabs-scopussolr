@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 29,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:gregory",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 32902,
+    "start": 0,
+    "maxScore": 3.610656,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1825",
+        1,
+        "1828",
+        1,
+        "1831",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        3,
+        "1 Anonymous",
+        1,
+        "10038811700 I.J. Burfield",
+        4
+      ],
+      "subjabbr-f": [
+        "3001",
+        1,
+        "AGRI",
+        3060,
+        "ARTS",
+        3489
+      ],
+      "subtype-f": [
+        "ab",
+        1,
+        "ar",
+        20675,
+        "bk",
+        24
+      ],
+      "exactsrctitle-f": [
+        "10AIChE - 2010 AIChE Annual Meeting, Conference Proceedings",
+        2,
+        "11th Conference on Mesoscale Processes and the 32nd Conference on Radar Meteorology",
+        2,
+        "12th Conference on Cloud Physics, and 12th Conference on Atmospheric Radiation",
+        3
+      ],
+      "exactkeyword-f": [
+        " 1 H nuclear magnetic resonance",
+        1,
+        " 13 C",
+        1,
+        " 13 C isotope",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        4,
+        "100307124",
+        1,
+        "100310144",
+        1
+      ],
+      "affilctry-f": [
+        "Algeria",
+        4,
+        "Angola",
+        3,
+        "Argentina",
+        53
+      ],
+      "srctype-f": [
+        "b",
+        182,
+        "d",
+        472,
+        "j",
+        26312
+      ],
+      "lang-f": [
+        "afr",
+        1,
+        "bos",
+        1,
+        "bul",
+        4
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

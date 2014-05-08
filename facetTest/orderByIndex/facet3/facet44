@@ -1,0 +1,127 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 15,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:corkum",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 569,
+    "start": 0,
+    "maxScore": 3.0950146,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1963",
+        1,
+        "1966",
+        1,
+        "1969",
+        1
+      ],
+      "prefnameauid-f": [
+        "11440166100 C. Ventalon",
+        1,
+        "11540806600 H.C. Bandulet",
+        8,
+        "11840380600 D.V. Voronine",
+        1
+      ],
+      "subjabbr-f": [
+        "AGRI",
+        79,
+        "ARTS",
+        6,
+        "BIOC",
+        15
+      ],
+      "subtype-f": [
+        "ar",
+        393,
+        "bk",
+        1,
+        "cp",
+        103
+      ],
+      "exactsrctitle-f": [
+        "2005 Conference on Lasers and Electro-Optics, CLEO",
+        2,
+        "2009 Conference on Lasers and Electro-Optics and 2009 Conference on Quantum Electronics and Laser Science Conference, CLEO/QELS 2009",
+        2,
+        "2011 Conference on Lasers and Electro-Optics Europe and 12th European Quantum Electronics Conference, CLEO EUROPE/EQEC 2011",
+        3
+      ],
+      "exactkeyword-f": [
+        "11 oxoetiocholanolone",
+        1,
+        "11 oxotestosterone",
+        1,
+        "11-Oxo-etiocholanolone",
+        1
+      ],
+      "afid-f": [
+        "100324751",
+        1,
+        "100376838",
+        2,
+        "100378050",
+        1
+      ],
+      "affilctry-f": [
+        "Australia",
+        1,
+        "Austria",
+        10,
+        "Canada",
+        457
+      ],
+      "srctype-f": [
+        "b",
+        1,
+        "d",
+        8,
+        "j",
+        451
+      ],
+      "lang-f": [
+        "eng",
+        559
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

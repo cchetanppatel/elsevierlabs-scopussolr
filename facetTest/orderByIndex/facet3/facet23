@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 251,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:heart",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 617433,
+    "start": 0,
+    "maxScore": 1.8696792,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1836",
+        1,
+        "1837",
+        1,
+        "1838",
+        1
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        1,
+        "1 ANON",
+        16,
+        "1 Anon",
+        203
+      ],
+      "subjabbr-f": [
+        "100",
+        2,
+        "3001",
+        40,
+        "3212",
+        1
+      ],
+      "subtype-f": [
+        "ab",
+        3,
+        "ar",
+        490504,
+        "bk",
+        68
+      ],
+      "exactsrctitle-f": [
+        "'European' citizenship in practice. Building institutions of a non-state",
+        1,
+        "(Paris, history of a city: Hachette Atlases",
+        1,
+        "(The economy of the Benelux countries).",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 -Adrenoceptor",
+        1,
+        " 1 H MR Spectroscopy",
+        1,
+        " 1 H NMR",
+        6
+      ],
+      "afid-f": [
+        "100307115",
+        2,
+        "100307116",
+        24,
+        "100307118",
+        1
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        24,
+        "Afghanistan",
+        5,
+        "Albania",
+        31
+      ],
+      "srctype-f": [
+        "b",
+        318,
+        "d",
+        1885,
+        "j",
+        594760
+      ],
+      "lang-f": [
+        "afr",
+        36,
+        "ara",
+        86,
+        "aze",
+        28
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 409,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:cancer",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 941388,
+    "start": 0,
+    "maxScore": 1.8701429,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1837",
+        3,
+        "1843",
+        1,
+        "1844",
+        1
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        2,
+        "1 ANON",
+        1,
+        "1 Anon",
+        52
+      ],
+      "subjabbr-f": [
+        "100",
+        1,
+        "3001",
+        160,
+        "AGRI",
+        26545
+      ],
+      "subtype-f": [
+        "ab",
+        2,
+        "ar",
+        720778,
+        "bk",
+        131
+      ],
+      "exactsrctitle-f": [
+        "10th IEEE International Conference on Bioinformatics and Bioengineering 2010, BIBE 2010",
+        7,
+        "10th Int. Conference on Bioinformatics - 1st ISCB Asia Joint Conference 2011, InCoB 2011/ISCB-Asia 2011: Computational Biology - Proceedings from Asia Pacific Bioinformatics Network (APBioNet)",
+        3,
+        "10th International Conference on Bioinformatics - 1st ISCB Asia Joint Conference 2011, InCoB 2011/ISCB-Asia 2011: Bioinformatics - Proceedings from Asia Pacific Bioinformatics Network (APBioNet)",
+        2
+      ],
+      "exactkeyword-f": [
+        " 1 4C",
+        1,
+        " 1 H",
+        1,
+        " 1 H 2-D NMR",
+        1
+      ],
+      "afid-f": [
+        "100307115",
+        2,
+        "100307116",
+        21,
+        "100307119",
+        4
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        14,
+        "Afghanistan",
+        6,
+        "Albania",
+        11
+      ],
+      "srctype-f": [
+        "b",
+        370,
+        "d",
+        1239,
+        "j",
+        919822
+      ],
+      "lang-f": [
+        "afr",
+        11,
+        "ara",
+        106,
+        "aze",
+        23
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

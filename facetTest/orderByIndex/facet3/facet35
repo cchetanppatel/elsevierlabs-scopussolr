@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 257,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:rat",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 610729,
+    "start": 0,
+    "maxScore": 1.6939547,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1900",
+        1,
+        "1908",
+        1,
+        "1910",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 Anon",
+        5,
+        "10038761800 A. Şener",
+        2,
+        "10038773400 O. Gonzalez-Perez",
+        3
+      ],
+      "subjabbr-f": [
+        "3001",
+        27,
+        "AGRI",
+        26535,
+        "ARTS",
+        276
+      ],
+      "subtype-f": [
+        "ar",
+        562244,
+        "bk",
+        14,
+        "bz",
+        1
+      ],
+      "exactsrctitle-f": [
+        "10th IEEE International Conference on Bioinformatics and Bioengineering 2010, BIBE 2010",
+        1,
+        "10th Int. Conference on Bioinformatics - 1st ISCB Asia Joint Conference 2011, InCoB 2011/ISCB-Asia 2011: Computational Biology - Proceedings from Asia Pacific Bioinformatics Network (APBioNet)",
+        1,
+        "11th International Conference on Fracture 2005, ICF11",
+        1
+      ],
+      "exactkeyword-f": [
+        " * I-A-85380",
+        1,
+        " 1 -Adrenoceptor",
+        1,
+        " 1 -Adrenoceptors",
+        2
+      ],
+      "afid-f": [
+        "100307116",
+        60,
+        "100307119",
+        5,
+        "100307121",
+        1
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        2,
+        "Algeria",
+        83,
+        "American Samoa",
+        2
+      ],
+      "srctype-f": [
+        "b",
+        125,
+        "d",
+        88,
+        "j",
+        604227
+      ],
+      "lang-f": [
+        "afr",
+        1,
+        "ara",
+        67,
+        "aze",
+        4
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

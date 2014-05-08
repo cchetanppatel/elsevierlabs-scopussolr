@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 31,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:marques",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 33658,
+    "start": 0,
+    "maxScore": 3.1582508,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1852",
+        1,
+        "1863",
+        1,
+        "1898",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 ANON",
+        2,
+        "1 Anon",
+        3,
+        "10038794100 C. Maiolino",
+        2
+      ],
+      "subjabbr-f": [
+        "3001",
+        1,
+        "3212",
+        1,
+        "AGRI",
+        3683
+      ],
+      "subtype-f": [
+        "ab",
+        5,
+        "ar",
+        24838,
+        "bk",
+        3
+      ],
+      "exactsrctitle-f": [
+        "(Contribution to the knowledge of mineral resources of the Republic of Mozambique",
+        1,
+        "(Explanatory note on a contour map of the Isle of Santiago, Republic of Cape Verde",
+        1,
+        "10AIChE - 2010 AIChE Spring Meeting and 6th Global Congress on Process Safety",
+        1
+      ],
+      "exactkeyword-f": [
+        " 1 H NMR",
+        1,
+        " 1 H and 13 C NMR",
+        1,
+        " 109 Cd-based X-ray fluorescence",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        1,
+        "100307182",
+        1,
+        "100310430",
+        1
+      ],
+      "affilctry-f": [
+        "Afghanistan",
+        1,
+        "Albania",
+        1,
+        "Algeria",
+        13
+      ],
+      "srctype-f": [
+        "b",
+        28,
+        "d",
+        202,
+        "j",
+        30235
+      ],
+      "lang-f": [
+        "bos",
+        1,
+        "cat",
+        12,
+        "chi",
+        6
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,129 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 16,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:kravetz",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 429,
+    "start": 0,
+    "maxScore": 3.4988713,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1936",
+        1,
+        "1938",
+        1,
+        "1950",
+        1
+      ],
+      "prefnameauid-f": [
+        "10139676200 N. Vilchinsky",
+        1,
+        "11239748700 R.M. Petersen",
+        1,
+        "11639065200 B.J. Powers",
+        1
+      ],
+      "subjabbr-f": [
+        "AGRI",
+        29,
+        "ARTS",
+        9,
+        "BIOC",
+        35
+      ],
+      "subtype-f": [
+        "ar",
+        325,
+        "bk",
+        3,
+        "cp",
+        12
+      ],
+      "exactsrctitle-f": [
+        "2004 SME Annual Meeting Preprints",
+        1,
+        "54th International Astronautical Congress of the International Astronautical Federation (IAF), the International Academy of Astronautics and the International Institute of Space Law",
+        1,
+        "AORN Journal",
+        1
+      ],
+      "exactkeyword-f": [
+        "17 oxosteroid",
+        1,
+        "17-KETOSTEROIDS/in urine",
+        1,
+        "17-Ketosteroids",
+        1
+      ],
+      "afid-f": [
+        "100315655",
+        1,
+        "100323090",
+        3,
+        "100324600",
+        1
+      ],
+      "affilctry-f": [
+        "Argentina",
+        33,
+        "Australia",
+        1,
+        "Brazil",
+        2
+      ],
+      "srctype-f": [
+        "j",
+        422,
+        "p",
+        7
+      ],
+      "lang-f": [
+        "eng",
+        393,
+        "fre",
+        5,
+        "ger",
+        1
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 192,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:lung",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 436213,
+    "start": 0,
+    "maxScore": 2.0371747,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1838",
+        4,
+        "1843",
+        2,
+        "1846",
+        1
+      ],
+      "prefnameauid-f": [
+        "1  Anon",
+        1,
+        "1 ANON",
+        3,
+        "1 Anon",
+        41
+      ],
+      "subjabbr-f": [
+        "3001",
+        36,
+        "AGRI",
+        13324,
+        "ARTS",
+        195
+      ],
+      "subtype-f": [
+        "ab",
+        1,
+        "ar",
+        358187,
+        "bk",
+        22
+      ],
+      "exactsrctitle-f": [
+        "- FIZIOL.ZH.",
+        2,
+        "10th IEEE International Multitopic Conference 2006, INMIC",
+        1,
+        "10th Int. Conference on Bioinformatics - 1st ISCB Asia Joint Conference 2011, InCoB 2011/ISCB-Asia 2011: Computational Biology - Proceedings from Asia Pacific Bioinformatics Network (APBioNet)",
+        1
+      ],
+      "exactkeyword-f": [
+        " - antitrypsin deficiency",
+        1,
+        " 1 -antitrypsin deficiency",
+        1,
+        " 1 4C",
+        1
+      ],
+      "afid-f": [
+        "100307116",
+        49,
+        "100307119",
+        7,
+        "100307121",
+        2
+      ],
+      "affilctry-f": [
+        "\tKyrgyzstan",
+        15,
+        "Afghanistan",
+        4,
+        "Albania",
+        11
+      ],
+      "srctype-f": [
+        "b",
+        160,
+        "d",
+        371,
+        "j",
+        429084
+      ],
+      "lang-f": [
+        "afr",
+        17,
+        "ara",
+        29,
+        "aze",
+        12
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

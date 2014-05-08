@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 16,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "all:soutar",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 786,
+    "start": 0,
+    "maxScore": 3.9369926,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1915",
+        1,
+        "1920",
+        1,
+        "1938",
+        1
+      ],
+      "prefnameauid-f": [
+        "11043439500 P.M.S. Monk",
+        1,
+        "11938862600 D. Vaughan",
+        2,
+        "12039036900 M. Ansarin",
+        1
+      ],
+      "subjabbr-f": [
+        "AGRI",
+        24,
+        "ARTS",
+        10,
+        "BIOC",
+        119
+      ],
+      "subtype-f": [
+        "ar",
+        597,
+        "cp",
+        37,
+        "ed",
+        8
+      ],
+      "exactsrctitle-f": [
+        "18th International Corrosion Congress 2011",
+        1,
+        "A.M.A. archives of industrial health",
+        1,
+        "ACS Symposium Series",
+        2
+      ],
+      "exactkeyword-f": [
+        "\"Who said what?\" paradigm",
+        1,
+        "1,2 cyclohexanedione",
+        1,
+        "1,2-cyclohexanedione",
+        1
+      ],
+      "afid-f": [
+        "100311788",
+        1,
+        "100313070",
+        1,
+        "100316235",
+        1
+      ],
+      "affilctry-f": [
+        "Argentina",
+        1,
+        "Australia",
+        67,
+        "Austria",
+        1
+      ],
+      "srctype-f": [
+        "b",
+        5,
+        "d",
+        2,
+        "j",
+        753
+      ],
+      "lang-f": [
+        "chi",
+        1,
+        "eng",
+        759,
+        "fre",
+        1
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}

@@ -51,7 +51,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < pubyrLength; f++) {
                 if (pubyrArray[f] !== file200Json.facet_counts.facet_fields['pubyr-f'][f]) {
                     console.log('pubyr [' + f + '] is not the same');
-                    console.log(pubyrArray[f]);
+                    console.log(pubyrArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['pubyr-f'][f]);
                     file200Json.facet_counts.facet_fields['pubyr-f'][f]
                 }   
             }
@@ -62,7 +62,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < prefnameauidLength; f++) {
                 if (prefnameauidArray[f] !== file200Json.facet_counts.facet_fields['prefnameauid-f'][f]) {
                     console.log('prefnameauid [' + f + '] is not the same');
-                    console.log(prefnameauid[f]);
+                    console.log(prefnameauidArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['prefnameauid-f'][f]);
                     file200Json.facet_counts.facet_fields['prefnameauid-f'][f]
                 }   
             }
@@ -73,7 +73,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < subjabbrLength; f++) {
                 if (subjabbrArray[f] !== file200Json.facet_counts.facet_fields['subjabbr-f'][f]) {
                     console.log('subjabbr [' + f + '] is not the same');
-                    console.log(subjabbr[f]);
+                    console.log(subjabbrArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['subjabbr-f'][f]);
                     file200Json.facet_counts.facet_fields['subjabbr-f'][f]
                 }   
             }
@@ -84,7 +84,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < subtypeLength; f++) {
                 if (subtypeArray[f] !== file200Json.facet_counts.facet_fields['subtype-f'][f]) {
                     console.log('subtype [' + f + '] is not the same');
-                    console.log(subtype[f]);
+                    console.log(subtypeArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['subtype-f'][f]);
                     file200Json.facet_counts.facet_fields['subtype-f'][f]
                 }   
             }
@@ -95,7 +95,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < exactsrctitleLength; f++) {
                 if (exactsrctitleArray[f] !== file200Json.facet_counts.facet_fields['exactsrctitle-f'][f]) {
                     console.log('exactsrctitle [' + f + '] is not the same');
-                    console.log(exactsrctitle[f]);
+                    console.log(exactsrctitleArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['exactsrctitle-f'][f]);
                     file200Json.facet_counts.facet_fields['exactsrctitle-f'][f]
                 }   
             }
@@ -106,7 +106,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < exactkeywordLength; f++) {
                 if (exactkeywordArray[f] !== file200Json.facet_counts.facet_fields['exactkeyword-f'][f]) {
                     console.log('exactkeyword [' + f + '] is not the same');
-                    console.log(exactkeyword[f]);
+                    console.log(exactkeywordArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['exactkeyword-f'][f]);
                     file200Json.facet_counts.facet_fields['exactkeyword-f'][f]
                 }   
             }
@@ -117,7 +117,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < afidLength; f++) {
                 if (afidArray[f] !== file200Json.facet_counts.facet_fields['afid-f'][f]) {
                     console.log('afid [' + f + '] is not the same');
-                    console.log(afid[f]);
+                    console.log(afidArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['afid-f'][f]);
                     file200Json.facet_counts.facet_fields['afid-f'][f]
                 }   
             }
@@ -128,7 +128,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < affilctryLength; f++) {
                 if (affilctryArray[f] !== file200Json.facet_counts.facet_fields['affilctry-f'][f]) {
                     console.log('affilctry [' + f + '] is not the same');
-                    console.log(affilctry[f]);
+                    console.log(affilctryArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['affilctry-f'][f]);
                     file200Json.facet_counts.facet_fields['affilctry-f'][f]
                 }   
             }
@@ -139,7 +139,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < srctypeLength; f++) {
                 if (srctypeArray[f] !== file200Json.facet_counts.facet_fields['srctype-f'][f]) {
                     console.log('srctype [' + f + '] is not the same');
-                    console.log(srctype[f]);
+                    console.log(srctypeArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['srctype-f'][f]);
                     file200Json.facet_counts.facet_fields['srctype-f'][f]
                 }   
             }
@@ -150,7 +150,7 @@ var walk = function (dir, done) {
             for (var f = 0; f < langLength; f++) {
                 if (langArray[f] !== file200Json.facet_counts.facet_fields['lang-f'][f]) {
                     console.log('lang [' + f + '] is not the same');
-                    console.log(lang[f]);
+                    console.log(langArray[f] + ' vs ' + file200Json.facet_counts.facet_fields['lang-f'][f]);
                     file200Json.facet_counts.facet_fields['lang-f'][f]
                 }   
             }
@@ -166,7 +166,7 @@ console.log('-------------------------------------------------------------');
 console.log('processing...');
 console.log('-------------------------------------------------------------');
  
-walk('/Users/mcbeathd/github/scopusSolr/facetTest/facet20', function(error) {
+walk('/Users/mcbeathd/Desktop/facetTest/facet20', function(error) {
     if (error) {
         throw error;
     } else {

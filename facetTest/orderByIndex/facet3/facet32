@@ -1,0 +1,131 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "QTime": 96,
+    "params": {
+      "facet": "true",
+      "indent": "true",
+      "facet.mincount": "1",
+      "f.lang-f.facet.limit": "3",
+      "f.affilctry-f.facet.limit": "3",
+      "f.subjabbr-f.facet.limit": "3",
+      "f.pubyr-f.facet.limit": "3",
+      "wt": "json",
+      "rows": "0",
+      "f.exactsrctitle-f.facet.limit": "3",
+      "f.srctype-f.facet.limit": "3",
+      "facet.sort": "index",
+      "f.exactkeyword-f.facet.limit": "3",
+      "f.afid-f.facet.limit": "3",
+      "q": "abs:chicago",
+      "f.prefnameauid-f.facet.limit": "3",
+      "f.subtype-f.facet.limit": "3",
+      "facet.field": [
+        "pubyr-f",
+        "prefnameauid-f",
+        "subjabbr-f",
+        "subtype-f",
+        "exactsrctitle-f",
+        "exactkeyword-f",
+        "afid-f",
+        "affilctry-f",
+        "srctype-f",
+        "lang-f"
+      ]
+    }
+  },
+  "response": {
+    "numFound": 23676,
+    "start": 0,
+    "maxScore": 3.8386178,
+    "docs": []
+  },
+  "facet_counts": {
+    "facet_queries": {},
+    "facet_fields": {
+      "pubyr-f": [
+        "1895",
+        1,
+        "1901",
+        1,
+        "1904",
+        1
+      ],
+      "prefnameauid-f": [
+        "1 ANON",
+        41,
+        "1 Anon",
+        224,
+        "10038918300 S. Sun",
+        2
+      ],
+      "subjabbr-f": [
+        "AGRI",
+        3656,
+        "ARTS",
+        904,
+        "BIOC",
+        1428
+      ],
+      "subtype-f": [
+        "ab",
+        1,
+        "ar",
+        17173,
+        "bk",
+        10
+      ],
+      "exactsrctitle-f": [
+        "\"Proceedings of the 33rd ITA-AITES World Tunnel Congress - Underground Space - The 4th Dimension of Metropolises\"",
+        1,
+        "(What is geography?",
+        1,
+        "10th AIAA Aviation Technology, Integration and Operations Conference 2010, ATIO 2010",
+        1
+      ],
+      "exactkeyword-f": [
+        " 153 Sm-EDTMP therapy",
+        1,
+        "\"Carnivore-collecting hypothesis\"",
+        1,
+        "\"Chicago School\"",
+        1
+      ],
+      "afid-f": [
+        "100307128",
+        2,
+        "100307147",
+        8,
+        "100307152",
+        2
+      ],
+      "affilctry-f": [
+        "Algeria",
+        2,
+        "Argentina",
+        53,
+        "Armenia",
+        1
+      ],
+      "srctype-f": [
+        "b",
+        93,
+        "d",
+        1863,
+        "j",
+        19605
+      ],
+      "lang-f": [
+        "bul",
+        2,
+        "chi",
+        13,
+        "cze",
+        10
+      ]
+    },
+    "facet_dates": {},
+    "facet_ranges": {}
+  },
+  "query": "core_z_1"
+}
