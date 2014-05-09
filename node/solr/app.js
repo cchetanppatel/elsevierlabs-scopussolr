@@ -14,6 +14,7 @@ var express = require('express')
   , cfg = require('./helpers/config')
   , loadTest = require('./routes/loadTest')
   , facetTest = require('./routes/facetTest')   
+  , ctoTest = require('./routes/ctoTest') 
   , http = require('http')
   , path = require('path');
 
@@ -83,6 +84,12 @@ app.post('/loadTest', loadTest.submit);
 app.get('/facetTest', facetTest.form);
 app.get('/facetTest/form', facetTest.form);
 app.post('/facetTest', facetTest.submit);
+
+
+// cto test
+app.get('/ctoTest', ctoTest.form);
+app.get('/ctoTest/form', ctoTest.form);
+app.post('/ctoTest', ctoTest.submit);
 
 /**
  *  Create the server and listen on the specified port.

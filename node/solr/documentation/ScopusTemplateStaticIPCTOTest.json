@@ -1,0 +1,359 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  
+  "Description" : "Start an EC2 Instance in the Eastern region for the Hothouse project (for load testing Scopus).",
+  
+  "Parameters" : {
+      
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "Default" : "ats",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },    
+    
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "m1.large",
+      "AllowedValues" : [ "t1.micro", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "c1.medium", "c1.xlarge", "cc1.4xlarge", "cc2.8xlarge" ],
+      "ConstraintDescription" : "must be a valid EC2 instance type."
+    },
+    
+    "nginxconf" : {
+      "Description" : "Signed URL for the scopus solr nginx.conf file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/nginx/nginx.conf?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420453893&Signature=vXlOVNCaojCtaXXHNPnfVC/SBwk%3D"
+    },
+    
+    "hothouse" : {
+      "Description" : "Signed URL for the scopus solr app file in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/app/scopusSolrCto.zip?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1435566892&Signature=U8NYqlaM3RSjPaEpYYllAk8J14M%3D"
+    },
+    
+    "logstashconf" : {
+      "Description" : "Signed URL for the scopus solr logstash conf in S3",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/conf/logstash-solr.conf?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1428734832&Signature=sUpJQ5V4VUgEK9x2NV5OiYScr3w%3D"
+     },
+
+    "kibanalogfile" : {
+      "Description" : "Kibana log file location on the ec2 instance.  NOTE: Slashes ('/')  must be escape!!",
+      "Type" : "String",
+      "Default" : "\\/hothouse\\/out.log"
+     },
+
+    "kibanalogtype" : {
+      "Description" : "Kibana log type on the ec2 instance",
+      "Type" : "String",
+      "Default" : "s-core",
+      "AllowedValues" : ["s-auth","s-aff","s-core"]
+     },
+
+    "kibanahost" : {
+      "Description" : "Kibana host",
+      "Type" : "String",
+      "Default" : " 10.93.23.108"
+     },
+
+    "affilafidkeyset" : {
+      "Description" : "affilafidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/affiliationAfidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400194914&Signature=wMPnCFi0sJuQXd6uDZ7/WLGuLV8%3D"
+     },
+     
+    "affiluserkeyset" : {
+      "Description" : "affiluserkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/affiliationUserLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400195039&Signature=tbmBNEKgGfX6VplfH8Ksi/Sn8bo%3D"
+     },     
+     
+    "authauidkeyset" : {
+      "Description" : "authauidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/authorAuidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400195770&Signature=V%2BySWq/fwZJULbOseYGzVrPjO/E%3D"
+     },
+
+    "authauidafidkeyset" : {
+      "Description" : "authauidafidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/authorAuidafidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400450104&Signature=9pIRAiCAq2zYlhCcgfY3Dt%2Bv30E%3D"
+     },
+     
+    "authuserkeyset" : {
+      "Description" : "authuserkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/authorUserLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400195818&Signature=qmGV9yFvRx0zmMLLh6wcxZjvE6A%3D"
+     },
+
+    "coredoikeyset" : {
+      "Description" : "coredoikeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreDoiLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210540&Signature=YztHTMioDkCL2XRGTFfRzvg9b70%3D"
+     },
+     
+    "coreeidkeyset" : {
+      "Description" : "coreeidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreEidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210569&Signature=96OuyAM3v104GNXjSUun%2BtcYMfc%3D"
+     },
+
+    "coresdeidkeyset" : {
+      "Description" : "coresdeidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreSdeidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210590&Signature=vhNl4u6IHt7yGgJNAeNHP4Mqol0%3D"
+     },
+
+    "corerefeidkeyset" : {
+      "Description" : "corerefeidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreRefeidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210629&Signature=2fO%2BF0aU1xR0aggg/O0JqTLH0mc%3D"
+     },
+
+    "coreauidkeyset" : {
+      "Description" : "coreauidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreAuidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210654&Signature=%2Bn3xcsuTg8roxK1jPl%2BSUxNcofA%3D"
+     },
+
+    "coreafidkeyset" : {
+      "Description" : "coreafidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreAfidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210675&Signature=rQJXuLt7mqWA9p8NIS2WJ%2Bxni1c%3D"
+     },
+
+    "coreissnisbnkeyset" : {
+      "Description" : "coreissnisbnkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreIssnisbnLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210699&Signature=rTYFrUR4H3SqXJMS2dm8d9IG%2B00%3D"
+     },
+
+    "corecollecidkeyset" : {
+      "Description" : "corecollecidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreCollecidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210723&Signature=OejFqUDvNqNELUzSVWfq5a1dT48%3D"
+     },
+
+    "corerefeidneidkeyset" : {
+      "Description" : "corerefeidneidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreRefeidneidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210741&Signature=yh6ja2iXsRkg/eiZz0tafhPEX7k%3D"
+     },
+
+    "coresrcidkeyset" : {
+      "Description" : "coresrcidkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreSrcidLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210761&Signature=3FCyx0cxdgjFqVzwUNroGNYpkKI%3D"
+     },
+
+    "corescopoutkeyset" : {
+      "Description" : "corescopoutkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreScopoutLoadQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1430552406&Signature=raMyArMuWkq39RZBCseQ27Rg0bo%3D"
+     },
+     
+    "coreuserkeyset" : {
+      "Description" : "coreuserkeyset",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/loadTestKeySets/coreUserQueryKeys.gz?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1400210780&Signature=XtT1Sg2VnBF/NCIVlvDgxirBz7w%3D"
+     },
+     
+     "loadtestscript" : {
+      "Description" : "loadtestscript",
+      "Type" : "String",
+      "Default" : "https://els-ats.s3.amazonaws.com/scopusSolr/node/app/loadTest.sh?AWSAccessKeyId=AKIAIQ2VDFJYKESDOTUQ&Expires=1420957576&Signature=viueapdvPmSdAoVMHc764Ds2MQ4%3D"
+     }        
+
+  },
+  
+"Mappings" : {
+
+    "AWSInstanceType2AMI" : {
+      "t1.micro" : { "AMI" : "ami-100c6b79"},
+      "m1.small" : { "AMI" : "ami-100c6b79"},
+      "m1.medium" : { "AMI" : "ami-100c6b79"},
+      "m1.large" : { "AMI" : "ami-100c6b79"},
+      "m1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "c1.medium" : { "AMI" : "ami-100c6b79"},
+      "c1.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.2xlarge" : { "AMI" : "ami-100c6b79"},
+      "m2.4xlarge" : { "AMI" : "ami-100c6b79"},
+      "cc1.4xlarge" : { "AMI" : "ami-100c6b79"},
+      "cc2.8xlarge" : { "AMI" : "ami-100c6b79"}
+    }
+    
+  },
+
+ "Resources": {
+         
+       "IPAssoc" : {
+            "Type" : "AWS::EC2::EIPAssociation",
+            "Properties" : {
+                "InstanceId" : { "Ref" : "Ec2Instance" },
+                "EIP" : "54.225.95.152"
+            }
+        },
+        
+        "Ec2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "AvailabilityZone" : "us-east-1b",
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "AWSInstanceType2AMI",
+                        {   
+                            "Ref" : "InstanceType"
+                        },
+                        "AMI"
+                    ]
+                },
+                "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+                "KeyName" : { "Ref" : "KeyName" },     
+                "InstanceType" : { "Ref" : "InstanceType" },
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
+                "#!/bin/bash -ex","\n",
+                "yum -y update", "\n",
+                "rm /etc/localtime", "\n",
+                "ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime", "\n",
+                "yum -y install nginx", "\n",
+                "cd /etc/nginx", "\n",
+                "curl -o nginx.conf '", { "Ref" : "nginxconf"}, "'", "\n",
+                "echo 'sdfe:$apr1$3pSLufl2$2JETcJ4rJsscAg5iUbcY51' >> /etc/nginx/htpasswd","\n",
+                "service nginx start", "\n", 
+				"mkdir /hothouse","\n",
+				"cd /hothouse","\n",  
+                "curl -o /hothouse/logstash-1.1.13-flatjar.jar 'https://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar'","\n",
+                "curl -o /hothouse/logstash.conf '", { "Ref" : "logstashconf" }, "'", "\n",
+		        "sed -i -e 's/<KIBANA_LOGFILE>/", { "Ref" : "kibanalogfile"}, "/' /hothouse/logstash.conf", "\n",
+		        "sed -i -e 's/<KIBANA_LOGTYPE>/", { "Ref" : "kibanalogtype"}, "/' /hothouse/logstash.conf", "\n",
+		        "sed -i -e 's/<KIBANA_HOST>/", { "Ref" : "kibanahost"}, "/' /hothouse/logstash.conf", "\n",
+                "nohup java -jar /hothouse/logstash-1.1.13-flatjar.jar agent -f /hothouse/logstash.conf &", "\n",
+				"curl -o node-v0.10.3-linux-x64.tar.gz http://nodejs.org/dist/v0.10.3/node-v0.10.3-linux-x64.tar.gz","\n",
+				"cd /usr/local","\n",
+				"tar -xzvf /hothouse/node-v0.10.3-linux-x64.tar.gz --strip=1","\n", 
+				"cd /hothouse","\n",
+				"curl -o hothouse.zip '", { "Ref" : "hothouse"}, "'", "\n",
+				"unzip hothouse.zip","\n",
+                "/usr/local/bin/npm install --production","\n",
+                "/usr/local/bin/npm install forever -g","\n",
+                "cd /usr/local/bin","\n",
+                "rm -f forever", "\n",
+                "echo '#!/usr/bin/env /usr/local/bin/node' >> forever","\n",
+                "echo $'require(\"../lib/node_modules/forever\").cli.start();' >> forever","\n",
+                "chmod 755 forever","\n",
+                "NODE_ENV=production ./forever -o /hothouse/out.log -e /hothouse/err.log start /hothouse/app.js","\n",
+                "cd /hothouse","\n",
+                "mkdir set","\n",
+                "cd set", "\n",
+                "curl -o affilAfidKeys.gz '", { "Ref" : "affilafidkeyset"}, "'", "\n",
+                "gunzip affilAfidKeys.gz","\n",
+                "curl -o affilUserKeys.gz '", { "Ref" : "affiluserkeyset"}, "'", "\n",
+                "gunzip affilUserKeys.gz","\n",                
+                "curl -o authAuidKeys.gz '", { "Ref" : "authauidkeyset"}, "'", "\n",
+                "gunzip authAuidKeys.gz","\n",
+                "curl -o authAuidafidKeys.gz '", { "Ref" : "authauidafidkeyset"}, "'", "\n",
+                "gunzip authAuidafidKeys.gz","\n",                
+                "curl -o authUserKeys.gz '", { "Ref" : "authuserkeyset"}, "'", "\n",
+                "gunzip authUserKeys.gz","\n",            
+                "curl -o coreDoiKeys.gz '", { "Ref" : "coredoikeyset"}, "'", "\n",
+                "gunzip coreDoiKeys.gz","\n",  
+                "curl -o coreEidKeys.gz '", { "Ref" : "coreeidkeyset"}, "'", "\n",
+                "gunzip coreEidKeys.gz","\n",                 
+                "curl -o coreSdeidKeys.gz '", { "Ref" : "coresdeidkeyset"}, "'", "\n",
+                "gunzip coreSdeidKeys.gz","\n",                  
+                "curl -o coreRefeidKeys.gz '", { "Ref" : "corerefeidkeyset"}, "'", "\n",
+                "gunzip coreRefeidKeys.gz","\n",                
+                "curl -o coreAuidKeys.gz '", { "Ref" : "coreauidkeyset"}, "'", "\n",
+                "gunzip coreAuidKeys.gz","\n", 
+                "curl -o coreAfidKeys.gz '", { "Ref" : "coreafidkeyset"}, "'", "\n",
+                "gunzip coreAfidKeys.gz","\n",   
+                "curl -o coreIssnisbnKeys.gz '", { "Ref" : "coreissnisbnkeyset"}, "'", "\n",
+                "gunzip coreIssnisbnKeys.gz","\n",                  
+                "curl -o coreCollecidKeys.gz '", { "Ref" : "corecollecidkeyset"}, "'", "\n",
+                "gunzip coreCollecidKeys.gz","\n",                
+                "curl -o coreRefeidneidKeys.gz '", { "Ref" : "corerefeidneidkeyset"}, "'", "\n",
+                "gunzip coreRefeidneidKeys.gz","\n",                 
+                "curl -o coreSrcidKeys.gz '", { "Ref" : "coresrcidkeyset"}, "'", "\n",
+                "gunzip coreSrcidKeys.gz","\n", 
+                "curl -o coreScopoutKeys.gz '", { "Ref" : "corescopoutkeyset"}, "'", "\n",
+                "gunzip coreScopoutKeys.gz","\n",                            
+                "curl -o coreUserKeys.gz '", { "Ref" : "coreuserkeyset"}, "'", "\n",
+                "gunzip coreUserKeys.gz","\n", 
+                "cd /hothouse","\n",
+                "curl -o loadTest.sh '", { "Ref" : "loadtestscript"}, "'", "\n",
+                "chmod 777 loadTest.sh","\n"
+                ]]}}   
+            }
+        },
+        
+        "InstanceSecurityGroup" : {
+	       "Type" : "AWS::EC2::SecurityGroup",
+	       "Properties" : {
+	         "GroupDescription" : "Enable SSH/HTTP access on the inbound port",
+             "SecurityGroupIngress" : [{
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.18.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "198.185.25.0/24"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "145.36.0.0/16"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "24.123.6.131/32"
+                },
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "22",
+                    "ToPort" : "22",
+                    "CidrIp" : "24.209.101.86/32"
+                },                
+                {
+                    "IpProtocol" : "tcp",
+                    "FromPort" : "80",
+                    "ToPort" : "80",
+                    "CidrIp" : "0.0.0.0/0"
+                }]
+           }
+        }
+        
+  },
+
+
+  "Outputs" : {
+  
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance" }
+    },
+    
+    "AZ" : {
+      "Description" : "Availability Zone of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "AvailabilityZone" ] }
+    },
+    
+    "PublicIP" : {
+      "Description" : "Public IP address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicIp" ] }
+    }
+    
+  }
+  
+}
