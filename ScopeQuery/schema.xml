@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="example" version="1.5">
+ <fields>
+    <field name="id" type="string" indexed="true" stored="true" />
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+    <field name="text" type="string" indexed="true" stored="false" multiValued="true"/>
+    <field name="name" type="string" indexed="true" stored="true" />
+    <field name="city" type="string" indexed="true" stored="true" /> 
+    <field name="type" type="string" indexed="true" stored="true" />
+    <field name="state" type="string" indexed="true" stored="true"/>
+    <field name="tags" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="price" type="double" indexed="true" stored="true" />
+    <field name="issn" type="removehyphen" indexed="true" stored="true" />
+    <field name="author" type="authorScope" indexed="true" stored="true" />
+    <field name="affiliation" type="affiliationScope" indexed="true" stored="true" />
+ </fields>
+ <uniqueKey>id</uniqueKey>
+  <types>
+    
+    <fieldType name="authorScope" class="solr.TextField">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-uppertolowercase.txt"/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/? *[a-zA-Z]*:?(bold|sup|inf|hsp|vsp) *>" replacement=""/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?authors *>" replacement=" BAUTHORS "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?authors *>" replacement=" EAUTHORS ESAUTHORS "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?author *>" replacement=" BAUTHOR "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?author *>" replacement=" EAUTHOR SAUTHOR "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?surname *>" replacement=" BLNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?surname *>" replacement=" ELNAME SLNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?given-name *>" replacement=" BFNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?given-name *>" replacement=" EFNAME SFNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?email *>" replacement=" BEMAIL "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?email *>" replacement=" EEMAIL SEMAIL "/>
+        <charFilter class="solr.HTMLStripCharFilterFactory"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.ClassicFilterFactory"/>
+        <filter class="solr.ASCIIFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    
+    <fieldType name="affiliationScope" class="solr.TextField">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-uppertolowercase.txt"/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/? *[a-zA-Z]*:?(bold|sup|inf|hsp|vsp) *>" replacement=""/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?affiliations *>" replacement=" BAFFILIATIONS "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?affiliations *>" replacement=" EAFFILIATIONS SAFFILIATIONS "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?affiliation *>" replacement=" BAFFILIATION "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?affiliation *>" replacement=" EAFFILIATION SAFFILIATION "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?city *>" replacement=" BCITY "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?city *>" replacement=" ECITY SCITY "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?country *>" replacement=" BCOUNTRY "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?country *>" replacement=" ECOUNTRY SCOUNTRY "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?organization *>" replacement=" BORGANIZATION "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?organization *>" replacement=" EORGANIZATION SORGANIZATION "/>
+        <charFilter class="solr.HTMLStripCharFilterFactory"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.ClassicFilterFactory"/>
+        <filter class="solr.ASCIIFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="referenceScope" class="solr.TextField">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-uppertolowercase.txt"/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/? *[a-zA-Z]*:?(bold|sup|inf|hsp|vsp) *>" replacement=""/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?references *>" replacement=" BREFERENCES "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?references *>" replacement=" EREFERENCES "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?reference *>" replacement=" BREFERENCE "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?reference *>" replacement=" EREFERENCE "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?eid *>" replacement=" BEID "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?eid *>" replacement=" EEID "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?ref-authors *>" replacement=" BAUTHORS "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?ref-authors *>" replacement=" EAUTHORS "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?author *>" replacement=" BAUTHOR "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?author *>" replacement=" EAUTHOR "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?surname *>" replacement=" BLNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?surname *>" replacement=" ELNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?given-name *>" replacement=" BFNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?given-name *>" replacement=" EFNAME "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?titletext *>" replacement=" BTITLE "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?titletext *>" replacement=" ETITLE "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?lang *>" replacement=" BLANG "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?lang *>" replacement=" ELANG "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?srctitle *>" replacement=" BSRCTITLE "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?srctitle *>" replacement=" ESRCTITLE "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?pubyr *>" replacement=" BPUBYR "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?pubyr *>" replacement=" EPUBYR "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?pubyrtxt *>" replacement=" BPUBYRTXT "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?pubyrtxt *>" replacement=" EPUBYRTXT "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?pg *>" replacement=" BPG "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?pg *>" replacement=" EPG "/>        
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?pgfirst *>" replacement=" BPGFIRST "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?pgfirst *>" replacement=" EPGFIRST "/>       
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?artnum *>" replacement=" BARTNUM "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?artnum *>" replacement=" EARTNUM "/> 
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?scp *>" replacement=" BSCP "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?scp *>" replacement=" ESCP "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?authid *>" replacement=" BAUTHID "/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?authid *>" replacement=" EAUTHID "/> 
+        <charFilter class="solr.HTMLStripCharFilterFactory"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.ClassicFilterFactory"/>
+        <filter class="solr.ASCIIFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    
+    <fieldType name="removehyphen" class="solr.TextField">
+      <analyzer type="query"> 
+        <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="-" replacement=""/>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.TrimFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0"/>	
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+   </types>
+</schema>
+
+
+
+
