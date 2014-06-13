@@ -1,0 +1,11 @@
+This is a sample Client App to read a Kinesis stream.
+
+You must use a minimum Java 1.7.
+
+lib -> Libraries used.
+resources -> config file for the Kinesis App
+src -> code (including the Kinesis Client Library)
+
+This should not be considered 'production' code.  This was merely
+used to prove that we could read records from a Kinesis shard(s)
+and get them into a RedShift table.
