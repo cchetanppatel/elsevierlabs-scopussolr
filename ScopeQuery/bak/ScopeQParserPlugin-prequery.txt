@@ -1,0 +1,796 @@
+package com.elsevier.solr.queryparser;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.WildcardQuery;
+import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
+import org.apache.lucene.search.spans.SpanNearQuery;
+import org.apache.lucene.search.spans.SpanNotQuery;
+import org.apache.lucene.search.spans.SpanOrQuery;
+import org.apache.lucene.search.spans.SpanQuery;
+import org.apache.lucene.search.spans.SpanTermQuery;
+import org.apache.solr.common.params.SolrParams;
+import org.apache.solr.common.util.NamedList;
+import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.schema.FieldType;
+import org.apache.solr.schema.SchemaField;
+import org.apache.solr.search.QParser;
+import org.apache.solr.search.QParserPlugin;
+import org.apache.solr.search.QueryParsing;
+
+
+/**
+ * Create a scope query.
+ * 
+ * <br>Example: <code>{!scope field='author' author='AND(sir)' fname='AND(darin,william)' lname='OR(mcbeath,mcbeth),NOT(fulford)'}</code> 
+ * 
+ * An implicit AND is applied across the specified fields in a query.
+ * 
+ * In reality, we would like something like the following for a syntax:
+ * 
+ * author:(AND(fname:(AND(darin,william)),lname:(OR(mcbeath,mcbeth))))
+ * 
+ * Syntax is:
+ *   fn:(connector(values))
+ *   
+ *   where values can be a token or values can be another fn:(connector(values))
+ *   will likely want to generate a parser to accomplish the task.  Needs to be a deep parser.
+ *   Pattern is the syntax above.
+ *   Should investigate Javacc (at least as a starting point).
+ *   
+ *   Need to think about when to apply order and when not
+ *    within a field, the tokens are unordered
+ *    whenever you 'close' a field the tokens (beg, innerspan(s), end) with NOT on the separator must be ordered
+ * 
+ */
+public class ScopeQParserPlugin extends QParserPlugin{
+
+	  // Name for the Plugin
+	  public static final String NAME = "scope";
+	  
+	  // Types of clauses allowed in the value for a specific field 
+	  private static final String AND_CLAUSE = "AND(";
+	  private static final String OR_CLAUSE = "OR(";
+	  private static final String NOT_CLAUSE = "NOT(";
+	  
+	  // Identifies the field for scoping
+	  private static final String SCOPE_FIELD = "field";
+	  	  
+	  // Possible values for the field to scope
+	  private static final String AUTHOR_SCOPE_FIELD = "authscope";
+	  private static final String AFFILIATION_SCOPE_FIELD = "affscope";
+	  private static final String REFERENCE_SCOPE_FIELD = "refscope";
+
+	  // Author Scope Fields (specified in the query)
+	  private static final String AUTHOR_FIELD = "author";
+	  private static final String AUTHOR_FIRST_NAME_FIELD = "fname";
+	  private static final String AUTHOR_LAST_NAME_FIELD = "lname";
+	  private static final String AUTHOR_EMAIL_FIELD = "email";
+	  
+	  // Author tokens inserted into content when indexing (begin tag, end tag, and separator tag).
+	  private static final HashMap<String, String> AUTHOR_BEGIN_TAG = new HashMap<String, String>(){
+	        {
+	            put(AUTHOR_FIELD, "BAUTHOR");
+	            put(AUTHOR_FIRST_NAME_FIELD, "BFNAME");
+	            put(AUTHOR_LAST_NAME_FIELD, "BLNAME");
+	            put(AUTHOR_EMAIL_FIELD, "BEMAIL");
+	        }
+	  };
+	  private static final HashMap<String, String> AUTHOR_END_TAG = new HashMap<String, String>(){
+	        {
+	            put(AUTHOR_FIELD, "EAUTHOR");
+	            put(AUTHOR_FIRST_NAME_FIELD, "EFNAME");
+	            put(AUTHOR_LAST_NAME_FIELD, "ELNAME");
+	            put(AUTHOR_EMAIL_FIELD, "EEMAIL");
+	        }
+	  };	
+	  private static final HashMap<String, String> AUTHOR_SEP_TAG = new HashMap<String, String>(){
+	        {
+	            put(AUTHOR_FIELD, "SAUTHOR");
+	            put(AUTHOR_FIRST_NAME_FIELD, "SFNAME");
+	            put(AUTHOR_LAST_NAME_FIELD, "SLNAME");
+	            put(AUTHOR_EMAIL_FIELD, "SEMAIL");
+	        }
+	  };
+	  
+	  // Affiliation Scope Fields (specified in the query)
+	  private static final String AFFILIATION_FIELD = "affil";
+	  private static final String AFFILIATION_CITY_FIELD = "city";
+	  private static final String AFFILIATION_COUNTRY_FIELD = "ctry";
+	  private static final String AFFILIATION_ORGANIZATION_FIELD = "org";
+	  
+	  // Affiliation tokens inserted into content when indexing (begin tag, end tag, and separator tag).
+	  private static final HashMap<String, String> AFFILIATION_BEGIN_TAG = new HashMap<String, String>(){
+	        {
+	            put(AFFILIATION_FIELD, "BAFFILIATION");
+	            put(AFFILIATION_CITY_FIELD, "BCITY");
+	            put(AFFILIATION_COUNTRY_FIELD, "BCOUNTRY");
+	            put(AFFILIATION_ORGANIZATION_FIELD, "BORGANIZATION");
+	        }
+	  };
+	  private static final HashMap<String, String> AFFILIATION_END_TAG = new HashMap<String, String>(){
+	        {
+	            put(AFFILIATION_FIELD, "EAFFILIATION");
+	            put(AFFILIATION_CITY_FIELD, "ECITY");
+	            put(AFFILIATION_COUNTRY_FIELD, "ECOUNTRY");
+	            put(AFFILIATION_ORGANIZATION_FIELD, "EORGANIZATION");
+	        }
+	  };	  
+	  private static final HashMap<String, String> AFFILIATION_SEP_TAG = new HashMap<String, String>(){
+	        {
+	            put(AFFILIATION_FIELD, "SAFFILIATION");
+	            put(AFFILIATION_CITY_FIELD, "SCITY");
+	            put(AFFILIATION_COUNTRY_FIELD, "SCOUNTRY");
+	            put(AFFILIATION_ORGANIZATION_FIELD, "SORGANIZATION");
+	        }
+	  };
+
+	  // Reference Scope Fields (specified in the query)
+	  private static final String REFERENCE_FIELD = "reference";
+	  private static final String REFERENCE_EID_FIELD = "eid";
+	  private static final String REFERENCE_AUTHOR_FIELD = "author";
+	  private static final String REFERENCE_AUTHOR_FIRST_NAME_FIELD = "fname";
+	  private static final String REFERENCE_AUTHOR_LAST_NAME_FIELD = "lname";
+	  private static final String REFERENCE_TITLE_FIELD = "title";
+	  private static final String REFERENCE_LANGUAGE_FIELD = "lang";
+	  private static final String REFERENCE_SOURCE_TITLE_FIELD = "srctitle";
+	  private static final String REFERENCE_PUB_YEAR_FIELD = "pubyr";
+	  private static final String REFERENCE_PUB_YEAR_TEXT_FIELD = "pubyrtxt";
+	  private static final String REFERENCE_PAGE_FIELD = "pg";
+	  private static final String REFERENCE_PAGE_FIRST_FIELD = "pgfirst";
+	  private static final String REFERENCE_ARTILCE_NUMBER_FIELD = "artnum";
+	  private static final String REFERENCE_SCOPUS_ID_FIELD = "scp";
+	  private static final String REFERENCE_AUTHOR_ID_FIELD = "authid";
+	  
+	  // Reference tokens inserted into content when indexing (begin tag, end tag, and separator tag).
+	  private static final HashMap<String, String> REFERENCE_BEGIN_TAG = new HashMap<String, String>(){
+	        {
+	            put(REFERENCE_FIELD, "BREFERENCE");
+	            put(REFERENCE_EID_FIELD, "BEID");
+	            put(REFERENCE_AUTHOR_FIELD, "BAUTHOR");
+	            put(REFERENCE_AUTHOR_FIRST_NAME_FIELD, "BFNAME");
+	            put(REFERENCE_AUTHOR_LAST_NAME_FIELD, "BLNAME");
+	            put(REFERENCE_TITLE_FIELD, "BTITLE");
+	            put(REFERENCE_LANGUAGE_FIELD, "BLANG");
+	            put(REFERENCE_SOURCE_TITLE_FIELD, "BSRCTITLE");
+	            put(REFERENCE_PUB_YEAR_FIELD, "BPUBYR");
+	            put(REFERENCE_PUB_YEAR_TEXT_FIELD, "BPUBYRTXT");
+	            put(REFERENCE_PAGE_FIELD, "BPG");
+	            put(REFERENCE_PAGE_FIRST_FIELD, "BPGFIRST");
+	            put(REFERENCE_ARTILCE_NUMBER_FIELD, "BARTNUM");
+	            put(REFERENCE_SCOPUS_ID_FIELD, "BSCP");
+	            put(REFERENCE_AUTHOR_ID_FIELD, "BAUTHID");
+	        }
+	  };
+	  private static final HashMap<String, String> REFERENCE_END_TAG = new HashMap<String, String>(){
+	        {
+	            put(REFERENCE_FIELD, "EREFERENCE");
+	            put(REFERENCE_EID_FIELD, "EEID");
+	            put(REFERENCE_AUTHOR_FIELD, "EAUTHOR");
+	            put(REFERENCE_AUTHOR_FIRST_NAME_FIELD, "EFNAME");
+	            put(REFERENCE_AUTHOR_LAST_NAME_FIELD, "ELNAME");
+	            put(REFERENCE_TITLE_FIELD, "ETITLE");
+	            put(REFERENCE_LANGUAGE_FIELD, "ELANG");
+	            put(REFERENCE_SOURCE_TITLE_FIELD, "ESRCTITLE");
+	            put(REFERENCE_PUB_YEAR_FIELD, "EPUBYR");
+	            put(REFERENCE_PUB_YEAR_TEXT_FIELD, "EPUBYRTXT");
+	            put(REFERENCE_PAGE_FIELD, "EPG");
+	            put(REFERENCE_PAGE_FIRST_FIELD, "EPGFIRST");
+	            put(REFERENCE_ARTILCE_NUMBER_FIELD, "EARTNUM");
+	            put(REFERENCE_SCOPUS_ID_FIELD, "ESCP");
+	            put(REFERENCE_AUTHOR_ID_FIELD, "EAUTHID");
+	        }
+	  };
+	  private static final HashMap<String, String> REFERENCE_SEP_TAG = new HashMap<String, String>(){
+	        {
+	            put(REFERENCE_FIELD, "SREFERENCE");
+	            put(REFERENCE_EID_FIELD, "SEID");
+	            put(REFERENCE_AUTHOR_FIELD, "SAUTHOR");
+	            put(REFERENCE_AUTHOR_FIRST_NAME_FIELD, "SFNAME");
+	            put(REFERENCE_AUTHOR_LAST_NAME_FIELD, "SLNAME");
+	            put(REFERENCE_TITLE_FIELD, "STITLE");
+	            put(REFERENCE_LANGUAGE_FIELD, "SLANG");
+	            put(REFERENCE_SOURCE_TITLE_FIELD, "SSRCTITLE");
+	            put(REFERENCE_PUB_YEAR_FIELD, "SPUBYR");
+	            put(REFERENCE_PUB_YEAR_TEXT_FIELD, "SPUBYRTXT");
+	            put(REFERENCE_PAGE_FIELD, "SPG");
+	            put(REFERENCE_PAGE_FIRST_FIELD, "SPGFIRST");
+	            put(REFERENCE_ARTILCE_NUMBER_FIELD, "SARTNUM");
+	            put(REFERENCE_SCOPUS_ID_FIELD, "SSCP");
+	            put(REFERENCE_AUTHOR_ID_FIELD, "SAUTHID");
+	        }
+	  };
+
+	  
+	  @Override
+	  public void init(NamedList args) {
+	  }
+
+	  @Override
+	  public QParser createParser(String qstr, SolrParams localParams, SolrParams params, SolrQueryRequest req) {
+	    return new QParser(qstr, localParams, params, req) {
+	      @Override
+	      public Query parse() {
+	    	  
+	    	  String field = localParams.get(SCOPE_FIELD);
+	    	  
+	    	  System.out.println("*** " + SCOPE_FIELD + " is '" + field + "'.");
+
+	    	  if (field.compareTo(AUTHOR_SCOPE_FIELD) == 0) {    	   
+	    		  
+	    		  return authorScope(localParams, req);
+	        
+	    	  } else if (field.compareTo(AFFILIATION_SCOPE_FIELD) == 0) {
+	    		  	    		  
+	    		  return affiliationScope(localParams, req);
+	    	   
+	    	  } else if (field.compareTo(REFERENCE_SCOPE_FIELD) == 0) {
+	    		      		  
+	    		  return referenceScope(localParams, req);
+	    	   
+	    	  } else {
+	    	   // Problem, but should not happen
+	    	   System.out.println("Invalid scope field '" + field + "' found.");
+	    	   return null;
+	    	  }		
+	    	 
+	      }
+	    };
+	  }
+	  
+	  
+	  /**
+	   * Construct an scope query for the author field.
+	   * 
+	   * @param localParams
+	   * @param req
+	   * @return SpanQuery
+	   */
+	  private Query authorScope(SolrParams localParams, SolrQueryRequest req) {
+
+		  // Get the analyzer
+		  Analyzer analyzer = req.getSchema().getQueryAnalyzer();
+		  
+		  // Container for all of the inner spans
+		  ArrayList<SpanQuery> spans = new ArrayList<SpanQuery>();
+		  
+		  // Get the values for for all possible fields that can be specified for an author scope query
+		  String authField = localParams.get(AUTHOR_FIELD);
+		  String authFirstnameField = localParams.get(AUTHOR_FIRST_NAME_FIELD);
+		  String authLastnameField = localParams.get(AUTHOR_LAST_NAME_FIELD);
+		  String authEmailField = localParams.get(AUTHOR_EMAIL_FIELD);
+		
+		  System.out.println("*** " + AUTHOR_FIELD + " is '" + authField + "'.");
+		  System.out.println("*** " + AUTHOR_FIRST_NAME_FIELD + " is '" + authFirstnameField + "'.");
+		  System.out.println("*** " + AUTHOR_LAST_NAME_FIELD + " is '" + authLastnameField + "'.");
+		  System.out.println("*** " + AUTHOR_EMAIL_FIELD + " is '" + authEmailField + "'.");
+		  
+		  // Construct a scope query for the author first name field
+		  SpanQuery authFirstnameSpanQuery = getSpanQuery(AUTHOR_SCOPE_FIELD, authFirstnameField, analyzer, AUTHOR_BEGIN_TAG.get(AUTHOR_FIRST_NAME_FIELD), AUTHOR_END_TAG.get(AUTHOR_FIRST_NAME_FIELD), AUTHOR_SEP_TAG.get(AUTHOR_FIRST_NAME_FIELD));
+		  if (authFirstnameSpanQuery != null) {			  
+			  spans.add(authFirstnameSpanQuery);
+		  }
+		  
+		  // Construct a scope query for the author last name field
+		  SpanQuery authLastnameSpanQuery = getSpanQuery(AUTHOR_SCOPE_FIELD, authLastnameField, analyzer, AUTHOR_BEGIN_TAG.get(AUTHOR_LAST_NAME_FIELD), AUTHOR_END_TAG.get(AUTHOR_LAST_NAME_FIELD), AUTHOR_SEP_TAG.get(AUTHOR_LAST_NAME_FIELD));
+		  if (authLastnameSpanQuery != null) {
+			  spans.add(authLastnameSpanQuery);
+		  }
+		  
+		  // Construct a scope query for the author email field
+		  SpanQuery authEmailSpanQuery = getSpanQuery(AUTHOR_SCOPE_FIELD, authEmailField, analyzer, AUTHOR_BEGIN_TAG.get(AUTHOR_EMAIL_FIELD), AUTHOR_END_TAG.get(AUTHOR_EMAIL_FIELD), AUTHOR_SEP_TAG.get(AUTHOR_EMAIL_FIELD));
+		  if (authEmailSpanQuery != null) {
+			  spans.add(authEmailSpanQuery);
+		  }
+		  
+		  // Construct the resultant author scope query (including terms specified in the author field of the query)
+		  return getSpanQuery(AUTHOR_SCOPE_FIELD, authField, analyzer, spans, AUTHOR_BEGIN_TAG.get(AUTHOR_FIELD), AUTHOR_END_TAG.get(AUTHOR_FIELD), AUTHOR_SEP_TAG.get(AUTHOR_FIELD));
+		  
+	  }
+
+	  
+	  /**
+	   * Construct an scope query for the affiliation field.
+	   * 
+	   * @param localParams
+	   * @param req
+	   * @return SpanQuery
+	   */	  
+	  private Query affiliationScope(SolrParams localParams, SolrQueryRequest req) {
+
+		  // Get the analyzer
+		  Analyzer analyzer = req.getSchema().getQueryAnalyzer();
+		  
+		  // Container for all of the inner spans
+		  ArrayList<SpanQuery> spans = new ArrayList<SpanQuery>();
+		  
+		  // Get the values for for all possible fields that can be specified for an affiliation scope query
+		  String affilField = localParams.get(AFFILIATION_FIELD);
+		  String affilCityField = localParams.get(AFFILIATION_CITY_FIELD);
+		  String affilCtryField = localParams.get(AFFILIATION_COUNTRY_FIELD);
+		  String affilOrgField = localParams.get(AFFILIATION_ORGANIZATION_FIELD);
+		  
+		  System.out.println("*** " + AFFILIATION_FIELD + " is '" + affilField + "'.");
+		  System.out.println("*** " + AFFILIATION_CITY_FIELD + " is '" + affilCityField + "'.");
+		  System.out.println("*** " + AFFILIATION_COUNTRY_FIELD + " is '" + affilCtryField + "'.");
+		  System.out.println("*** " + AFFILIATION_ORGANIZATION_FIELD + " is '" + affilOrgField + "'.");
+		  
+		  // Construct a scope query for the affiliation city field
+		  SpanQuery affilCitySpanQuery = getSpanQuery(AFFILIATION_SCOPE_FIELD, affilCityField, analyzer, AFFILIATION_BEGIN_TAG.get(AFFILIATION_CITY_FIELD), AFFILIATION_END_TAG.get(AFFILIATION_CITY_FIELD), AFFILIATION_SEP_TAG.get(AFFILIATION_CITY_FIELD));
+		  if (affilCitySpanQuery != null) {			  
+			  spans.add(affilCitySpanQuery);
+		  }
+		  
+		  // Construct a scope query for the affiliation country field
+		  SpanQuery affilCtrySpanQuery = getSpanQuery(AFFILIATION_SCOPE_FIELD, affilCtryField, analyzer, AFFILIATION_BEGIN_TAG.get(AFFILIATION_COUNTRY_FIELD), AFFILIATION_END_TAG.get(AFFILIATION_COUNTRY_FIELD), AFFILIATION_SEP_TAG.get(AFFILIATION_COUNTRY_FIELD));
+		  if (affilCtrySpanQuery != null) {
+			  spans.add(affilCtrySpanQuery);
+		  }
+		  
+		  // Construct a scope query for the affiliation organization field
+		  SpanQuery affilOrgSpanQuery = getSpanQuery(AFFILIATION_SCOPE_FIELD, affilOrgField, analyzer, AFFILIATION_BEGIN_TAG.get(AFFILIATION_ORGANIZATION_FIELD), AFFILIATION_END_TAG.get(AFFILIATION_ORGANIZATION_FIELD), AFFILIATION_SEP_TAG.get(AFFILIATION_ORGANIZATION_FIELD));
+		  if (affilOrgSpanQuery != null) {
+			  spans.add(affilOrgSpanQuery);
+		  }
+		  
+		  // Construct the resultant affiliation scope query (including terms specified in the affiliation field of the query)
+		  return getSpanQuery(AFFILIATION_SCOPE_FIELD, affilField, analyzer, spans, AFFILIATION_BEGIN_TAG.get(AFFILIATION_FIELD), AFFILIATION_END_TAG.get(AFFILIATION_FIELD), AFFILIATION_SEP_TAG.get(AFFILIATION_FIELD));
+		  
+	  }
+
+	  
+	  /**
+	   * Construct an scope query for the reference field.
+	   * 
+	   * @param localParams
+	   * @param req
+	   * @return SpanQuery
+	   */	
+	  private Query referenceScope(SolrParams localParams, SolrQueryRequest req) {
+
+		  // Get the analyzer
+		  Analyzer analyzer = req.getSchema().getQueryAnalyzer();
+		  
+		  // Container for all of the inner spans
+		  ArrayList<SpanQuery> spans = new ArrayList<SpanQuery>();
+		  
+		  // Container for author inner spans
+		  ArrayList<SpanQuery> authorSpans = new ArrayList<SpanQuery>();
+		  
+		  // Get the values for for all possible fields that can be specified for a reference scope query
+		  String refField = localParams.get(REFERENCE_FIELD);
+		  String refEidField = localParams.get(REFERENCE_EID_FIELD);
+		  String refAuthorField = localParams.get(REFERENCE_AUTHOR_FIELD);
+		  String refAuthorFNameField = localParams.get(REFERENCE_AUTHOR_FIRST_NAME_FIELD);
+		  String refAuthorLNameField = localParams.get(REFERENCE_AUTHOR_LAST_NAME_FIELD);
+		  String refTitleField = localParams.get(REFERENCE_TITLE_FIELD);
+		  String refLangField = localParams.get(REFERENCE_LANGUAGE_FIELD);
+		  String refSrcTitleField = localParams.get(REFERENCE_SOURCE_TITLE_FIELD);
+		  String refPubYearField = localParams.get(REFERENCE_PUB_YEAR_FIELD);
+		  String refPubYearTxtField = localParams.get(REFERENCE_PUB_YEAR_TEXT_FIELD);
+		  String refPgField = localParams.get(REFERENCE_PAGE_FIELD);
+		  String refPgFirstField = localParams.get(REFERENCE_PAGE_FIRST_FIELD);
+		  String refArtNumberField = localParams.get(REFERENCE_ARTILCE_NUMBER_FIELD);
+		  String refScopusIdField = localParams.get(REFERENCE_SCOPUS_ID_FIELD);
+		  String refAuthIdField = localParams.get(REFERENCE_AUTHOR_ID_FIELD);
+		  	  
+		  System.out.println("*** " + REFERENCE_FIELD + " is '" + refField + "'.");
+		  System.out.println("*** " + REFERENCE_EID_FIELD + " is '" + refEidField + "'.");
+		  System.out.println("*** " + REFERENCE_AUTHOR_FIELD + " is '" + refAuthorField + "'.");
+		  System.out.println("*** " + REFERENCE_AUTHOR_FIRST_NAME_FIELD + " is '" + refAuthorFNameField + "'.");
+		  System.out.println("*** " + REFERENCE_AUTHOR_LAST_NAME_FIELD + " is '" + refAuthorLNameField + "'.");
+		  System.out.println("*** " + REFERENCE_TITLE_FIELD + " is '" + refTitleField + "'.");
+		  System.out.println("*** " + REFERENCE_LANGUAGE_FIELD + " is '" + refLangField + "'.");
+		  System.out.println("*** " + REFERENCE_SOURCE_TITLE_FIELD + " is '" + refSrcTitleField + "'.");
+		  System.out.println("*** " + REFERENCE_PUB_YEAR_FIELD + " is '" + refPubYearField + "'.");
+		  System.out.println("*** " + REFERENCE_PUB_YEAR_TEXT_FIELD + " is '" + refPubYearTxtField + "'.");
+		  System.out.println("*** " + REFERENCE_PAGE_FIELD + " is '" + refPgField + "'.");
+		  System.out.println("*** " + REFERENCE_PAGE_FIRST_FIELD + " is '" + refPgFirstField + "'.");
+		  System.out.println("*** " + REFERENCE_ARTILCE_NUMBER_FIELD + " is '" + refArtNumberField + "'.");
+		  System.out.println("*** " + REFERENCE_SCOPUS_ID_FIELD + " is '" + refScopusIdField + "'.");
+		  System.out.println("*** " + REFERENCE_AUTHOR_ID_FIELD + " is '" + refAuthIdField + "'.");
+		  
+		  // Construct a scope query for the reference eid field
+		  SpanQuery refEidSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refEidField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_EID_FIELD), REFERENCE_END_TAG.get(REFERENCE_EID_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_EID_FIELD));
+		  if (refEidSpanQuery != null) {			  
+			  spans.add(refEidSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference author first name field
+		  SpanQuery refAuthorFNameSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refAuthorFNameField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_AUTHOR_FIRST_NAME_FIELD), REFERENCE_END_TAG.get(REFERENCE_AUTHOR_FIRST_NAME_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_AUTHOR_FIRST_NAME_FIELD));
+		  if (refAuthorFNameSpanQuery != null) {			  
+			  authorSpans.add(refAuthorFNameSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference author last name field
+		  SpanQuery refAuthorLNameSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refAuthorLNameField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_AUTHOR_LAST_NAME_FIELD), REFERENCE_END_TAG.get(REFERENCE_AUTHOR_LAST_NAME_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_AUTHOR_LAST_NAME_FIELD));
+		  if (refAuthorLNameSpanQuery != null) {			  
+			  authorSpans.add(refAuthorLNameSpanQuery);
+		  }
+		  
+		  // Construct the resultant reference author scope query (including terms specified in the author first name and last name)
+		  SpanQuery refAuthorSpanQuery =  getSpanQuery(REFERENCE_SCOPE_FIELD, refAuthorField, analyzer, spans, REFERENCE_BEGIN_TAG.get(REFERENCE_AUTHOR_FIELD), REFERENCE_END_TAG.get(REFERENCE_AUTHOR_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_AUTHOR_FIELD));
+		  if (refAuthorSpanQuery != null) {			  
+			  spans.add(refAuthorSpanQuery);
+		  }
+		  
+		  // Construct a scope query for the reference title field
+		  SpanQuery refTitleSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refTitleField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_TITLE_FIELD), REFERENCE_END_TAG.get(REFERENCE_TITLE_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_TITLE_FIELD));
+		  if (refTitleSpanQuery != null) {			  
+			  spans.add(refTitleSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference language field
+		  SpanQuery refLangSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refLangField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_LANGUAGE_FIELD), REFERENCE_END_TAG.get(REFERENCE_LANGUAGE_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_LANGUAGE_FIELD));
+		  if (refLangSpanQuery != null) {			  
+			  spans.add(refLangSpanQuery);
+		  }
+		  
+		  // Construct a scope query for the reference source title field
+		  SpanQuery refSrcTitleSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refSrcTitleField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_SOURCE_TITLE_FIELD), REFERENCE_END_TAG.get(REFERENCE_SOURCE_TITLE_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_SOURCE_TITLE_FIELD));
+		  if (refSrcTitleSpanQuery != null) {			  
+			  spans.add(refSrcTitleSpanQuery);
+		  }
+		  
+		  // Construct a scope query for the reference pub year field
+		  SpanQuery refPubYearSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refPubYearField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_PUB_YEAR_FIELD), REFERENCE_END_TAG.get(REFERENCE_PUB_YEAR_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_PUB_YEAR_FIELD));
+		  if (refPubYearSpanQuery != null) {			  
+			  spans.add(refPubYearSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference pub year text field
+		  SpanQuery refPubYearTxtSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refPubYearTxtField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_PUB_YEAR_TEXT_FIELD), REFERENCE_END_TAG.get(REFERENCE_PUB_YEAR_TEXT_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_PUB_YEAR_TEXT_FIELD));
+		  if (refPubYearTxtSpanQuery != null) {			  
+			  spans.add(refPubYearTxtSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference page field
+		  SpanQuery refPgSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refPgField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_PAGE_FIELD), REFERENCE_END_TAG.get(REFERENCE_PAGE_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_PAGE_FIELD));
+		  if (refPgSpanQuery != null) {			  
+			  spans.add(refPgSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference page first field
+		  SpanQuery refPgFirstSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refPgFirstField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_PAGE_FIRST_FIELD), REFERENCE_END_TAG.get(REFERENCE_PAGE_FIRST_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_PAGE_FIRST_FIELD));
+		  if (refPgFirstSpanQuery != null) {			  
+			  spans.add(refPgFirstSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference article number field
+		  SpanQuery refArtNumberSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refArtNumberField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_ARTILCE_NUMBER_FIELD), REFERENCE_END_TAG.get(REFERENCE_ARTILCE_NUMBER_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_ARTILCE_NUMBER_FIELD));
+		  if (refArtNumberSpanQuery != null) {			  
+			  spans.add(refArtNumberSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference scopus id field
+		  SpanQuery refScopusIdSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refScopusIdField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_SCOPUS_ID_FIELD), REFERENCE_END_TAG.get(REFERENCE_SCOPUS_ID_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_SCOPUS_ID_FIELD));
+		  if (refScopusIdSpanQuery != null) {			  
+			  spans.add(refScopusIdSpanQuery);
+		  }
+
+		  // Construct a scope query for the reference author id field
+		  SpanQuery refAuthIdSpanQuery = getSpanQuery(REFERENCE_SCOPE_FIELD, refAuthIdField, analyzer, REFERENCE_BEGIN_TAG.get(REFERENCE_AUTHOR_ID_FIELD), REFERENCE_END_TAG.get(REFERENCE_AUTHOR_ID_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_AUTHOR_ID_FIELD));
+		  if (refAuthIdSpanQuery != null) {			  
+			  spans.add(refAuthIdSpanQuery);
+		  }
+		  
+		  // Construct the resultant reference scope query (including terms specified in the reference field of the query)
+		  return getSpanQuery(REFERENCE_SCOPE_FIELD, refField, analyzer, spans, REFERENCE_BEGIN_TAG.get(REFERENCE_FIELD), REFERENCE_END_TAG.get(REFERENCE_FIELD), REFERENCE_SEP_TAG.get(REFERENCE_FIELD));
+
+		  
+	  }
+
+	  
+	  /**
+	   * Construct a span query for the specified scope.
+	   * 
+	   * @param field (author, affiliation, or reference)
+	   * @param query Terms that should be applied to the specified scope
+	   * @param analyzer
+	   * @param begMarker starting token for the scope
+	   * @param endMarker ending token for the scope
+	   * @param sepMarker separator token for the scope
+	   * @return SpanQuery
+	   */
+	  private SpanQuery getSpanQuery(String field, String query, Analyzer analyzer, String begMarker, String endMarker, String sepMarker) {
+		  
+		  	if (query == null) {
+		  		return null;
+		  	}
+		  	
+		  	// Get the AND,OR,NOT sub queries from the query for the scope  	
+		  	SpanQuery andQuery = getAndQuery(field, query, analyzer);
+		  	SpanQuery orQuery = getOrQuery(field, query, analyzer);
+		  	SpanOrQuery notQuery = getNotQuery(field, query, analyzer);
+
+		  	ArrayList<SpanQuery> innerSpans = new ArrayList<SpanQuery>();
+		  	if (andQuery != null) {
+		  		innerSpans.add(andQuery);
+		  	}
+		  	if (orQuery != null) {
+		  		innerSpans.add(orQuery);
+		  	}
+		  	
+		    // We don't care about the order for the inner query(s)
+		  	SpanQuery innerQuery = new SpanNearQuery(innerSpans.toArray(new SpanQuery[innerSpans.size()]), Integer.MAX_VALUE,false);
+		  	
+		  	// Create the 'outer' span.  Here we are applying the 'begin token' for the field and the
+		  	// 'end token' for the field, so we now need to enforce a specific order.
+		  	ArrayList<SpanQuery> outerSpanQuery = new ArrayList<SpanQuery>();
+		  	outerSpanQuery.add(new SpanTermQuery(new Term(field, begMarker)));
+		  	outerSpanQuery.add(innerQuery);
+		  	outerSpanQuery.add(new SpanTermQuery(new Term(field, endMarker)));
+			SpanNearQuery nq = new SpanNearQuery(outerSpanQuery.toArray(new SpanQuery[outerSpanQuery.size()]), Integer.MAX_VALUE, true);
+			
+			// Add the sep marker to the not clause
+			notQuery.addClause(new SpanTermQuery(new Term(field, sepMarker)));
+			return new SpanNotQuery(nq,notQuery);	
+
+	  }
+
+	  
+	  /**
+	   * Construct a span query with the specified sub-scopes.  Think of this as the outer wrapper that might contain
+	   * lower level fields that need to be scoped.  For example, 'author' would be an outer wrapper (and there can
+	   * be queries specified at this level.  Within 'author', a user can further scope a query based on 'fname' and
+	   * 'lname'.  The 'fname' and 'lname' would be considered sub-scopes.
+	   * 
+	   * @param field (author, affiliation, or reference)
+	   * @param query Additional search terms that should be applied at the highest level (author, affiliation, or reference)
+	   * @param analyzer
+	   * @param spans Nested spans that should be included within this scope (think of these as sub scopes)
+	   * @param begMarker starting token for the scope
+	   * @param endMarker ending token for the scope
+	   * @param sepMarker separator token for the scope
+	   * @return SpanQuery
+	   */
+	  private SpanQuery getSpanQuery(String field, String query, Analyzer analyzer, ArrayList<SpanQuery> spans, String begMarker, String endMarker, String sepMarker) {
+		  
+		    ArrayList<SpanQuery> innerSpans = new ArrayList<SpanQuery>();
+		    
+		  	// Get the AND,OR,NOT sub queries from the query for the scope  	
+		  	SpanQuery andQuery = getAndQuery(field, query, analyzer);
+		  	SpanQuery orQuery = getOrQuery(field, query, analyzer);
+		  	SpanOrQuery notQuery = getNotQuery(field, query, analyzer);
+		  	
+		  	if (andQuery != null) {
+		  		innerSpans.add(andQuery);
+		  	}
+		  	if (orQuery != null) {
+		  		innerSpans.add(orQuery);
+		  	}
+		  	
+		  	// Add the sub-scope spans
+		  	innerSpans.addAll(spans);
+		  	
+		    // We don't care about the order for the inner query(s)
+		  	SpanQuery innerQuery = new SpanNearQuery(innerSpans.toArray(new SpanQuery[innerSpans.size()]), Integer.MAX_VALUE,false);
+		  
+		  	// Create the 'outer' span.  Here we are applying the 'begin token' for the field and the
+		  	// 'end token' for the field, so we now need to enforce a specific order.
+		  	ArrayList<SpanQuery> outerSpanQuery = new ArrayList<SpanQuery>();
+		  	outerSpanQuery.add(new SpanTermQuery(new Term(field, begMarker)));
+		  	outerSpanQuery.add(innerQuery);
+		  	outerSpanQuery.add(new SpanTermQuery(new Term(field, endMarker)));
+			SpanNearQuery nq = new SpanNearQuery(outerSpanQuery.toArray(new SpanQuery[outerSpanQuery.size()]), Integer.MAX_VALUE, true);
+			
+			// Add the sep marker to the not clause
+			notQuery.addClause(new SpanTermQuery(new Term(field, sepMarker)));
+			return new SpanNotQuery(nq,notQuery);	
+
+	  }
+	  
+	  
+	  /**
+	   * Get the AND clause specified in the field specific query.  For example,
+	   * a query for an author field  might be something like AND(darin),OR(mcbeath,mcbeth),NOT(william).
+	   * The value returned for the AND clause would be 'darin'.
+	   * 
+	   * @param field (author, affiliation, or reference)
+	   * @param fieldValue query for a given field
+	   * @param analyzer
+	   * @return SpanQuery
+	   */
+	  private SpanQuery getAndQuery(String field, String fieldValue, Analyzer analyzer) {
+		    
+		  	String query = getClause(AND_CLAUSE,  fieldValue);
+		  	
+		  	if (query == null) {
+		  		return null;
+		  	}
+		  	
+		  	String[] terms = query.split(",");
+		  	ArrayList<SpanQuery> andSpanQuery = new ArrayList<SpanQuery>();
+		  	
+		  	for (int i=0; i < terms.length; i++) {
+		  		
+		  		andSpanQuery.add(buildTermQuery(terms[i], field, analyzer));
+
+		  	}
+		  	
+		  	// We don't care about the order for the AND query
+		  	return new SpanNearQuery(andSpanQuery.toArray(new SpanQuery[andSpanQuery.size()]), Integer.MAX_VALUE, false);
+		  	
+	  }
+
+	  
+	  /**
+	   * Get the OR clause specified in the field specific query.  For example,
+	   * a query for an author field  might be something like AND(darin),OR(mcbeath,mcbeth),NOT(william).
+	   * The value returned for the OR clause would be 'mcbeath,mcbeth'.
+	   * 
+	   * @param field (author, affiliation, or reference)
+	   * @param fieldValue query for a given field
+	   * @param analyzer
+	   * @return SpanQuery
+	   */	  
+	  private SpanQuery getOrQuery(String field, String fieldValue, Analyzer analyzer) {
+		  
+		    String query = getClause(OR_CLAUSE,  fieldValue);
+		    
+		  	if (query == null) {
+		  		return null;
+		  	}
+		  	
+		  	String[] terms = query.split(",");
+		  	SpanOrQuery sqor = new SpanOrQuery();
+		  	
+		  	for (int i=0; i < terms.length; i++) {
+		  		
+		  		sqor.addClause(buildTermQuery(terms[i], field, analyzer));
+
+		  	}
+		  	
+		    // We don't care about the order for the OR query
+		  	return new SpanNearQuery(new SpanQuery[] {sqor}, Integer.MAX_VALUE, false);
+		  	
+	  }
+	  
+
+	  /**
+	   * Get the NOT clause specified in the field specific query.  For example,
+	   * a query for an author field  might be something like AND(darin),OR(mcbeath,mcbeth),NOT(william).
+	   * The value returned for the NOT clause would be 'william'.
+	   * 
+	   * @param field (author, affiliation, or reference)
+	   * @param fieldValue query for a given field
+	   * @param analyzer
+	   * @return SpanOrQuery
+	   */
+	  private SpanOrQuery getNotQuery(String field, String fieldValue, Analyzer analyzer) {
+
+		    String query = getClause(NOT_CLAUSE,  fieldValue);		  
+		    SpanOrQuery sqnot = new SpanOrQuery();
+		    
+		  	if (query == null) {
+		  		return sqnot;
+		  	}
+		  	
+		  	String[] terms = query.split(",");
+		  	
+		  	for (int i=0; i < terms.length; i++) {
+		  		
+		  		sqnot.addClause(buildTermQuery(terms[i], field, analyzer));
+
+		  	}
+		  	
+		  	return sqnot;
+		  	
+	  }
+	  
+	  
+	  /**
+	   * Get the AND, OR, or NOT clause specified in the field specific query.  For example,
+	   * a query for an author field  might be something like AND(darin),OR(mcbeath,mcbeth),NOT(william).
+	   * This is a 'helper' method used by getAndQuery, getOrQuery, and getNotQuery.
+	   * 
+	   * @param clause type of clause to extract (AND,OR,NOT)
+	   * @param query field specific queries
+	   * @return query for the specified clause
+	   */
+	  private String getClause(String clause, String query) {
+		  
+		  String str = null;
+		  
+		  if (query != null) {
+			  int spos = query.indexOf(clause);
+			  if (spos > -1) {
+				  int epos = query.indexOf(")", spos);
+				  str = (String)query.subSequence(spos + clause.length(), epos);
+			  } 
+		  }
+		  
+		  return str;
+		  
+	  }	  
+	  
+	  
+	  /**
+	   * Analyze (Tokenize) the string
+	   * 
+	   * @param analyzer Analyzer 
+	   * @param field Field to use for the analysis
+	   * @param string Query piece to analyze
+	   * @return
+	   */
+	  private static List<String> tokenizeString(Analyzer analyzer, String field, String string) {
+		  
+		    List<String> result = new ArrayList<String>();
+		    
+		    try {
+		    	
+		      TokenStream stream  = analyzer.tokenStream(field, new StringReader(string));
+		      stream.reset();
+		      while (stream.incrementToken()) {
+		        result.add(stream.getAttribute(CharTermAttribute.class).toString());
+		      }
+		      stream.close();
+		      
+		    } catch (IOException e) {
+		    	
+		      // not thrown b/c we're using a string reader...
+		      throw new RuntimeException(e);
+		      
+		    }
+		    
+		    return result;
+		    
+	  }
+	  
+	  
+	  /**
+	   * For now, we are assuming there will always be at least one token after analysis.
+	   * We may want to revisit this assumption.
+	   * 
+	   * @param term
+	   * @param field
+	   * @param analyzer
+	   * @return
+	   */
+	  private SpanQuery buildTermQuery(String term, String field, Analyzer analyzer) {
+		  
+	  		// Analyze the term
+	  		List<String> tokens = tokenizeString(analyzer, field, term);
+	  		
+	  		if (tokens.size() > 1) {
+	  			
+	  			ArrayList<SpanQuery> phraseSpanQuery = new ArrayList<SpanQuery>();
+	  			
+		  		for (Iterator<String> iter = tokens.iterator(); iter.hasNext(); ) {
+		  		    String token = iter.next();
+		  		    System.out.println("***multi-token*** '" + token + "'");
+			  		if (token.contains("?") || token.contains("*")) {
+			  			WildcardQuery wildcard = new WildcardQuery(new Term(field, token));
+			  			phraseSpanQuery.add(new SpanMultiTermQueryWrapper<WildcardQuery>(wildcard));  			
+			  		} else {
+			  			phraseSpanQuery.add(new SpanTermQuery(new Term(field, token)));;
+			  		}	  		    
+		  		}	  
+		  		// Should we add some buffer for the distance (in case it crosses an token boundary)?
+		  		return new SpanNearQuery(phraseSpanQuery.toArray(new SpanQuery[phraseSpanQuery.size()]),tokens.size(),true);
+	  			
+	  		} else {
+	  			
+	  			System.out.println("***single-token*** '" + tokens.get(0));
+		  		if (tokens.get(0).contains("?") || tokens.get(0).contains("*")) {
+		  			WildcardQuery wildcard = new WildcardQuery(new Term(field, tokens.get(0)));
+		  			return new SpanMultiTermQueryWrapper<WildcardQuery>(wildcard);  			
+		  		} else {
+		  			return new SpanTermQuery(new Term(field, tokens.get(0)));
+		  		}	
+		  		
+	  		}
+		  
+	  }
+	  
+}
