@@ -48,7 +48,7 @@ public class DumpSpansBetween {
 		"one two three four five four three two one",
 		"one two three four now only odds they are one three five seven nine",
 		"bauthors  bauthor blname  mcbeath elname slname  bfname  darin william efname sfname  eauthor sauthor  bauthor blname  fulford elname slname  bfname  darby efname sfname  eauthor sauthor  bauthor blname  mcbeath elname slname  bfname  darby efname sfname  eauthor sauthor  eauthors sauthors",
-		"bauthors  bauthor blname  mcbeath elname slname  bfname  darin efname sfname  eauthor sauthor  bauthor blname fulford elname slname bfname darin efname sfname eauthor sauthor  eauthors sauthors",
+		"bauthors  bauthor blname  mcbeath elname slname  bfname  darin efname sfname  eauthor sauthor  bauthor blname fulford elname slname bfname annie efname sfname eauthor sauthor  eauthors sauthors",
 	};
 
 	static IndexSearcher searcher;
@@ -78,6 +78,28 @@ public class DumpSpansBetween {
 		iReaderContext = searcher.getTopReaderContext();
 		atomicIndexReaderWrapper = SlowCompositeReaderWrapper.wrap(reader);
 
+		
+		SpanQuery[] span1 = new SpanQuery[3];
+		span1[0] = new SpanTermQuery(new Term("content","bfname"));
+		span1[1] = new SpanTermQuery(new Term("content","efname"));
+		span1[2] = new SpanTermQuery(new Term("content","darin"));
+		SpanQuery spanQuery1 = new SpanBetweenQuery(span1);		
+		
+		SpanQuery[] span2 = new SpanQuery[3];
+		span2[0] = new SpanTermQuery(new Term("content","bfname"));
+		span2[1] = new SpanTermQuery(new Term("content","efname"));
+		span2[2] = new SpanTermQuery(new Term("content","darby"));
+		SpanQuery spanQuery2 = new SpanBetweenQuery(span2);			
+
+		SpanQuery[] span3 = new SpanQuery[3];
+		span3[0] = new SpanTermQuery(new Term("content","bfname"));
+		span3[1] = new SpanTermQuery(new Term("content","efname"));
+		span3[2] = new SpanTermQuery(new Term("content","annie"));
+		SpanQuery spanQuery3 = new SpanBetweenQuery(span3);	
+		
+		SpanAndQuery spanAnd = new SpanAndQuery(new SpanQuery[]{spanQuery1, spanQuery2, spanQuery3});
+		doSpanQuery(spanAnd, searcher, "fname:darin AND fname:darby and fname:annie");
+		
 		
 		/** Query for fname:darin 		
 

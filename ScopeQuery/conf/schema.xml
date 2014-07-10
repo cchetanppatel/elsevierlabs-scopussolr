@@ -17,11 +17,15 @@
     <field name="lname" type="text" indexed="true" stored="false" />
     <field name="email" type="text" indexed="true" stored="false" />
     <field name="affscope" type="affiliationScope" indexed="true" stored="true" />
-    <field name="affil" type="text" indexed="true" stored="false" />
+    <field name="affiliation" type="text" indexed="true" stored="false" />
     <field name="city" type="text" indexed="true" stored="false" />
     <field name="ctry" type="text" indexed="true" stored="false" />
     <field name="org" type="text" indexed="true" stored="false" />
-    <field name="scope" type="text" indexed="false" stored="false" />
+    <field name="refscope" type="referenceScope" indexed="true" stored="true" />
+    <field name="pubyr" type="text" indexed="true" stored="false" />
+    <field name="title" type="text" indexed="true" stored="false" />
+    <field name="srctitle" type="text" indexed="true" stored="false" />
+   <field name="scope" type="text" indexed="false" stored="false" />
  </fields>
  <uniqueKey>id</uniqueKey>
   <types>

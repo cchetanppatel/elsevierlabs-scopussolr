@@ -18,6 +18,8 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
 import org.apache.lucene.search.spans.SpanNearQuery;
+import org.apache.lucene.search.spans.SpanNotQuery;
+import org.apache.lucene.search.spans.SpanOrQuery;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.search.spans.SpanTermQuery;
 import org.apache.lucene.util.Version;
@@ -34,12 +36,94 @@ import com.searchtechnologies.solr.queryoperators.SpanBetweenQuery;
 /**
  * Create a scope query.
  * 
- * <br>Example: <code>{!scope field='authscope' query='fname:Darin AND lname:McBeath'}</code> 
+ * Assume the following 'author' documents have been loaded:
+ *  <ce:authors><ce:author><ce:surname>jones</ce:surname><ce:given-name>jeff</ce:given-name></ce:author>jeff</ce:authors>
+ *  <ce:authors><ce:author><ce:surname>jeff</ce:surname><ce:given-name>jones</ce:given-name></ce:author>jones</ce:authors>
+ *  <ce:authors><ce:author><ce:surname>McBeath</ce:surname><ce:given-name>Darin William</ce:given-name></ce:author><ce:author><ce:surname>Fulford</ce:surname><ce:given-name>Darby</ce:given-name></ce:author><ce:author><ce:surname>McBeath</ce:surname><ce:given-name>Darby</ce:given-name></ce:author></ce:authors>
+ *  <ce:authors><ce:author><ce:surname>McBeath</ce:surname><ce:given-name>Darin</ce:given-name></ce:author><ce:author><ce:surname>Fulford</ce:surname><ce:given-name>Darin</ce:given-name></ce:author></ce:authors>
+ *  <ce:authors><ce:author><ce:surname>Johnson-Smith</ce:surname><ce:given-name>Joe</ce:given-name>Ohio</ce:author></ce:authors>
+ *
+ * And these 'author' documents were transformed with:     
+ *  <fieldType name="authorScope" class="solr.TextField">
+ *     <analyzer>
+ *       <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-uppertolowercase.txt"/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/? *[a-zA-Z]*:?(bold|sup|inf|hsp|vsp) *>" replacement=""/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?authors *>" replacement=" BAUTHORS "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?authors *>" replacement=" EAUTHORS "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?author *>" replacement=" BAUTHOR "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?author *>" replacement=" EAUTHOR "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?surname *>" replacement=" BLNAME "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?surname *>" replacement=" ELNAME "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?given-name *>" replacement=" BFNAME "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?given-name *>" replacement=" EFNAME "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?email *>" replacement=" BEMAIL "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?email *>" replacement=" EEMAIL "/>
+ *       <charFilter class="solr.HTMLStripCharFilterFactory"/>
+ *       <tokenizer class="solr.ClassicTokenizerFactory"/>
+ *       <filter class="solr.ClassicFilterFactory"/>
+ *       <filter class="solr.ASCIIFoldingFilterFactory"/>
+ *     </analyzer>
+ *   </fieldType>
+ *   
+ * Assume the following 'affiliation' documents were loaded:
+ *  <ce:affiliiations><ce:affiliation><ce:city>columbus, ohio</ce:city><ce:country>united states</ce:country><ce:organization>ohio state university</ce:organization></ce:affiliation></ce:affiliiations>
+ *  <ce:affiliiations><ce:affiliation><ce:city>columbus</ce:city><ce:country>mexico</ce:country><ce:organization>ohio state university</ce:organization></ce:affiliation></ce:affiliiations>
  * 
+ * And these 'affiliation' documents were transformed with:
+ *  <fieldType name="affiliationScope" class="solr.TextField">
+ *     <analyzer>
+ *       <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-uppertolowercase.txt"/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/? *[a-zA-Z]*:?(bold|sup|inf|hsp|vsp) *>" replacement=""/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?affiliations *>" replacement=" BAFFILIATIONS "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?affiliations *>" replacement=" EAFFILIATIONS "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?affiliation *>" replacement=" BAFFILIATION "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?affiliation *>" replacement=" EAFFILIATION "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?city *>" replacement=" BCITY "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?city *>" replacement=" ECITY "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?country *>" replacement=" BCOUNTRY "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?country *>" replacement=" ECOUNTRY "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt; *[a-zA-Z]*:?organization *>" replacement=" BORGANIZATION "/>
+ *       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="&lt;/ *[a-zA-Z]*:?organization *>" replacement=" EORGANIZATION "/>
+ *       <charFilter class="solr.HTMLStripCharFilterFactory"/>
+ *       <tokenizer class="solr.ClassicTokenizerFactory"/>
+ *       <filter class="solr.ClassicFilterFactory"/>
+ *       <filter class="solr.ASCIIFoldingFilterFactory"/>
+ *     </analyzer>
+ *   </fieldType>
+ * 
+ * Examples:
+ * 
+ * Not matching a specific author: 
+ * 	 Works as expected {!scope field='authscope' query='fname:Darin AND lname:McBeath'}
+ * 	 Fails with 500RC  {!scope field='authscope' query='fname:Darin AND fname:Darby AND fname:jeff'}
+ * 	 Works as expected {!scope field='authscope' query='(fname:Darin AND fname:Darby) AND fname:jeff'}
+ *	 Works as expected {!scope field='authscope' query='fname:Darin AND fname:Darby AND fname:junk'}
+ *   Works as expected {!scope field='authscope' query='fname:(Darin AND Darby)'}
+ *   Works as expected {!scope field='authscope' query='fname:(Darin Darby)'}
+ * 
+ * Matching a specific author:
+ *   Works as expected {!scope field='authscope' query='scope:author(fname:(Darin AND Darby) AND lname:mcbeath)'} 
+ *   Works as expected {!scope field='authscope' query='scope:author(fname:(Darin OR Darby) AND lname:mcbeath)'}
+ *   Works as expected {!scope field='authscope' query='scope:author(fname:"darin william" AND lname:mcbeath)'}
+ *   Works as expected {!scope field='authscope' query='scope:author(fname:da?in AND lname:fulford)'}
+ *   Works as expected {!scope field='authscope' query='scope:author(fname:dar* AND lname:mcbeath)'}
+ *   
+ * More complex author queries:  
+ *   Works as expected {!scope field='authscope' query='scope:author(fname:dar* AND lname:mcbeath) OR jones'}
+ *   Fails with 500RC  {!scope field='authscope' query='scope:author(fname:dar* AND lname:mcbeath) AND jones'}
+ *   
+ * Not matching a specific affiliation:   
+ *   Works as expected {!scope field='affscope' query='city:ohio'}
+ *   Works as expected {!scope field='affscope' query='ohio'}
+ *   Works as expected {!scope field='affscope' query='org:state OR ctry:mexico'}
+ *   Works as expected {!scope field='affscope' query='org:state AND ctry:mexico'}
+ *   
+ * Matching a specific affiliation:
+ *   
  * Default operator is AND
  * Leading, Embedded, and Trailing wildcards are supported
  * TODO Wildcards in phrases are not supported
- * TODO NOT operator is currently not supported
+ * TODO NOT operator is implemented but does not appear to work correctly
  * 
  * 
  */
@@ -56,6 +140,9 @@ public class ScopeQParserPlugin extends QParserPlugin{
 	  private static final String AUTHOR_SCOPE_FIELD = "authscope";
 	  private static final String AFFILIATION_SCOPE_FIELD = "affscope";
 	  private static final String REFERENCE_SCOPE_FIELD = "refscope";
+	  
+	  // Subscope field name
+	  private static final String SUBSCOPE_FIELD = "scope";
 
 	  // Default fields
 	  private static final HashMap<String, String> DEFAULT_FIELD = new HashMap<String, String>(){
@@ -72,7 +159,7 @@ public class ScopeQParserPlugin extends QParserPlugin{
 	  private static final String AUTHOR_LAST_NAME_FIELD = "lname";
 	  private static final String AUTHOR_EMAIL_FIELD = "email";
 	  
-	  // Author tokens inserted into content when indexing (begin tag, end tag, and separator tag).
+	  // Author tokens inserted into content when indexing (begin tag and end tag).
 	  private static final HashMap<String, String> AUTHOR_BEGIN_TAG = new HashMap<String, String>(){
 	        {
 	            put(AUTHOR_FIELD, "BAUTHOR");
@@ -92,12 +179,12 @@ public class ScopeQParserPlugin extends QParserPlugin{
 	  
 	  
 	  // Affiliation Scope Fields (specified in the query)
-	  private static final String AFFILIATION_FIELD = "affil";
+	  private static final String AFFILIATION_FIELD = "affiliation";
 	  private static final String AFFILIATION_CITY_FIELD = "city";
 	  private static final String AFFILIATION_COUNTRY_FIELD = "ctry";
 	  private static final String AFFILIATION_ORGANIZATION_FIELD = "org";
 	  
-	  // Affiliation tokens inserted into content when indexing (begin tag, end tag, and separator tag).
+	  // Affiliation tokens inserted into content when indexing (begin tag and end tag).
 	  private static final HashMap<String, String> AFFILIATION_BEGIN_TAG = new HashMap<String, String>(){
 	        {
 	            put(AFFILIATION_FIELD, "BAFFILIATION");
@@ -133,7 +220,7 @@ public class ScopeQParserPlugin extends QParserPlugin{
 	  private static final String REFERENCE_SCOPUS_ID_FIELD = "scp";
 	  private static final String REFERENCE_AUTHOR_ID_FIELD = "authid";
 	  
-	  // Reference tokens inserted into content when indexing (begin tag, end tag, and separator tag).
+	  // Reference tokens inserted into content when indexing (begin tag and end tag).
 	  private static final HashMap<String, String> REFERENCE_BEGIN_TAG = new HashMap<String, String>(){
 	        {
 	            put(REFERENCE_FIELD, "BREFERENCE");
@@ -182,7 +269,7 @@ public class ScopeQParserPlugin extends QParserPlugin{
 	  private static CharSequence multiCs = "*";
 	  
 	  /**
-	   * Get the begin, end, or separator tag for the specified scope, field, and type.
+	   * Get the begin or end tag for the specified scope, field, and type.
 	   * 
 	   * @param scope
 	   * @param field
@@ -255,20 +342,24 @@ public class ScopeQParserPlugin extends QParserPlugin{
 				Query q = parser.parse(query);
 				spanQuery = buildQuery(scope, q);
 			  } catch (ParseException e) {
-				// TODO Auto-generated catch block
+				// Auto-generated catch block
 				e.printStackTrace();
 			  }
 	
 			  return spanQuery;
+			  
 	      }
 	    };
 	  }
 	  
 	  
 	  /**
+	   * Construct the query (using spans).  If there are 'boolean' clauses contained in the Query, the
+	   * recursive buildQuery_recursive method will be leveraged.
 	   * 
-	   * @param q
-	   * @return
+	   * @param scope Author, affiliation, or Reference
+	   * @param q Query
+	   * @return SpanQuery
 	   */
 	  private SpanQuery buildQuery(String scope, Query q) {
 		  
@@ -277,8 +368,8 @@ public class ScopeQParserPlugin extends QParserPlugin{
 		  
 		  if( q.getClass() == BooleanQuery.class ){
 			  
-			  System.out.println("BooleanQuery");
-			  spanQuery = buildQuery_recursive(q, scope, 0, new ArrayList<SpanQuery>());
+			  System.out.println("BooleanQuery clause found.");			  
+			  spanQuery = buildQuery_recursive(q, scope, 0, new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>());
 			  
 		  } else if (q.getClass() == TermQuery.class) {
 			  
@@ -303,12 +394,7 @@ public class ScopeQParserPlugin extends QParserPlugin{
 		  
 		  if (spanQuery != null) {
 			  
-			  // Wrap the query with the outer begin/end field for either author, affiliation, or reference
-			  ArrayList<SpanQuery> outerSpanQuery = new ArrayList<SpanQuery>();
-			  outerSpanQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, DEFAULT_FIELD.get(scope), TAG_TYPE.BEG_TAG))));
-			  outerSpanQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, DEFAULT_FIELD.get(scope), TAG_TYPE.END_TAG))));
-			  outerSpanQuery.add(spanQuery);
-			  return new SpanBetweenQuery(outerSpanQuery.toArray(new SpanQuery[outerSpanQuery.size()]));
+			  return spanQuery;
 			  
 		  } else {
 			  
@@ -320,10 +406,21 @@ public class ScopeQParserPlugin extends QParserPlugin{
 	  }
 
 	  
-	  // level is for indentation
-	  private SpanQuery buildQuery_recursive(Query q, String scope, int level, ArrayList<SpanQuery> spans) {
+	  /**
+	   * Construct the query (using spans).  This method will be called recursively.
+	   * 
+	   * @param q Query
+	   * @param scope Author, affiliation, or Reference
+	   * @param level Used only for formatting (indentation) the level of recursion
+	   * @param andSpans ArrayList of Spans that should be 'and'
+	   * @param orSpans ArrayList of Spans that should be 'or'
+	   * @param notSpans ArrayList of Spans that should be 'not'
+	   * @return SpanQuery
+	   */
+	  private SpanQuery buildQuery_recursive(Query q, String scope, int level, ArrayList<SpanQuery> andSpans, ArrayList<SpanQuery> orSpans, ArrayList<SpanQuery> notSpans) {
 
 		  BooleanQuery castQuery = (BooleanQuery)q;
+		  String subscope = null;		  
 		  
 		  for(BooleanClause clause : castQuery.getClauses() ){
 			  
@@ -333,23 +430,172 @@ public class ScopeQParserPlugin extends QParserPlugin{
 
 			  if(queryclazz == BooleanQuery.class) {
 				  
-				  spans.add(buildQuery_recursive(clause.getQuery(), scope, level+1, new ArrayList<SpanQuery>()));
+				  System.out.println("Number of Clauses is " + castQuery.clauses().size());
+				  System.out.println("Minimum Number to Match is " + castQuery.getMinimumNumberShouldMatch());
+				  
+				  if (subscope == null) {
+					  
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(buildQuery_recursive(clause.getQuery(), scope, level+1, new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(buildQuery_recursive(clause.getQuery(), scope, level+1, new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(buildQuery_recursive(clause.getQuery(), scope, level+1, new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>()));
+					  }
+					  
+				  } else {
+					  
+					  ArrayList<SpanQuery> subscopeQuery = new ArrayList<SpanQuery>();
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.BEG_TAG))));
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.END_TAG))));
+					  subscopeQuery.add(buildQuery_recursive(clause.getQuery(), scope, level+1, new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>(), new ArrayList<SpanQuery>()));
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  }
+					  
+				  }
 				  
 			  } else if (queryclazz == TermQuery.class) {
 				  
-				  spans.add(buildTermQuery(scope, clause.getQuery()));
+				  TermQuery tq = (TermQuery)clause.getQuery();
+				  
+				  if (tq.getTerm().field().compareTo(SUBSCOPE_FIELD) == 0) {
+					  
+					  // Set the subscope
+					  subscope = tq.getTerm().text();
+					  
+					  // Need to add a term here (otherwise we have problems)
+					  WildcardQuery wildcard = new WildcardQuery(new Term(scope, "*"));
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(new SpanMultiTermQueryWrapper<WildcardQuery>(wildcard));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(new SpanMultiTermQueryWrapper<WildcardQuery>(wildcard));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  notSpans.add(new SpanMultiTermQueryWrapper<WildcardQuery>(wildcard));
+					  }
+					  
+				  } else if (subscope == null) {
+					  
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(buildTermQuery(scope, tq));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(buildTermQuery(scope, tq));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  notSpans.add(buildTermQuery(scope, tq));
+					  }
+					  
+				  } else {
+					  
+					  ArrayList<SpanQuery> subscopeQuery = new ArrayList<SpanQuery>();
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.BEG_TAG))));
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.END_TAG))));
+					  subscopeQuery.add(buildTermQuery(scope, tq));
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  }
+					  
+				  }
 				  
 			  } else if (queryclazz == WildcardQuery.class) {
 				  
-				  spans.add(buildWildcardQuery(scope, clause.getQuery()));
+				  if (subscope == null) {
+
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(buildWildcardQuery(scope, clause.getQuery()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(buildWildcardQuery(scope, clause.getQuery()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(buildWildcardQuery(scope, clause.getQuery()));
+					  }
+					  
+				  } else {
+
+					  ArrayList<SpanQuery> subscopeQuery = new ArrayList<SpanQuery>();
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.BEG_TAG))));
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.END_TAG))));
+					  subscopeQuery.add(buildWildcardQuery(scope, clause.getQuery()));
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  }
+					  
+				  }
 				  
 			  } else if (queryclazz == PrefixQuery.class) {
 				  
-				  spans.add(buildPrefixQuery(scope, clause.getQuery()));
+				  if (subscope == null) {
+					  
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(buildPrefixQuery(scope, clause.getQuery()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(buildPrefixQuery(scope, clause.getQuery()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(buildPrefixQuery(scope, clause.getQuery()));
+					  }
+					  
+				  } else {
+					  
+					  ArrayList<SpanQuery> subscopeQuery = new ArrayList<SpanQuery>();
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.BEG_TAG))));
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.END_TAG))));
+					  subscopeQuery.add(buildPrefixQuery(scope, clause.getQuery()));
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  }
+					  
+				  }
 				  
 			  } else if (queryclazz == PhraseQuery.class) {
 				  
-				  spans.add(buildPhraseQuery(scope, clause.getQuery()));
+				  if (subscope == null) {
+					  
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(buildPhraseQuery(scope, clause.getQuery()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(buildPhraseQuery(scope, clause.getQuery()));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(buildPhraseQuery(scope, clause.getQuery()));
+					  }
+					  
+				  } else {
+
+					  ArrayList<SpanQuery> subscopeQuery = new ArrayList<SpanQuery>();
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.BEG_TAG))));
+					  subscopeQuery.add(new SpanTermQuery(new Term(scope, getTag(scope, subscope, TAG_TYPE.END_TAG))));
+					  subscopeQuery.add(buildPhraseQuery(scope, clause.getQuery()));
+					  if (clause.getOccur() == BooleanClause.Occur.MUST) {
+						  andSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.SHOULD) {
+						  orSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  } else if (clause.getOccur() == BooleanClause.Occur.MUST_NOT) {
+						  //FIX
+						  notSpans.add(new SpanBetweenQuery(subscopeQuery.toArray(new SpanQuery[subscopeQuery.size()])));
+					  }
+					  
+				  }
 				  
 			  } else {
 
@@ -359,7 +605,45 @@ public class ScopeQParserPlugin extends QParserPlugin{
 			  	  
 		  }
 		  
-		  return new SpanAndQuery(spans.toArray(new SpanQuery[spans.size()]));
+		  ArrayList<SpanQuery> includeSpans = new ArrayList<SpanQuery>();;
+		  
+		  // Add the 'and' queries to the includeSpans (if there were any)
+		  if (!andSpans.isEmpty()) {
+			  if (andSpans.size() > 1) {
+				  includeSpans.add(new SpanAndQuery(andSpans.toArray(new SpanQuery[andSpans.size()])));
+			  } else {
+				  includeSpans.add(andSpans.get(0));
+			  }
+		  }
+		  
+		  // Add the 'or' queries to the includeSpans (if there were any)
+		  if (!orSpans.isEmpty()) {
+			  includeSpans.add(new SpanOrQuery(orSpans.toArray(new SpanQuery[orSpans.size()])));
+		  }
+		  
+		  // Exclude the 'not' queries from the includeSpans (if there were any) 
+		  if (!notSpans.isEmpty()) {
+			  if (includeSpans.size() > 1) {
+				  if (notSpans.size() > 1) {
+					  return new SpanNotQuery(new SpanAndQuery(includeSpans.toArray(new SpanQuery[includeSpans.size()])), new SpanAndQuery(notSpans.toArray(new SpanQuery[notSpans.size()])));
+				  } else {
+					  return new SpanNotQuery(new SpanAndQuery(includeSpans.toArray(new SpanQuery[includeSpans.size()])), notSpans.get(0));
+				  }	  
+			  } else {
+				  if (notSpans.size() > 1) {
+					  return new SpanNotQuery(includeSpans.get(0), new SpanAndQuery(notSpans.toArray(new SpanQuery[notSpans.size()])));
+				  } else {
+					  return new SpanNotQuery(includeSpans.get(0), notSpans.get(0));
+				  }				  
+			  }
+		  } else {
+			  if (includeSpans.size() > 1) {
+				  return new SpanAndQuery(includeSpans.toArray(new SpanQuery[includeSpans.size()]));
+			  } else {
+				  return includeSpans.get(0);
+			  }
+		  }
+		  
 	        
 	  }
 
