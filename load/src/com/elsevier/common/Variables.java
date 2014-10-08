@@ -120,10 +120,10 @@ public class Variables {
 	public static final Integer SQS_DELAY =  Integer.valueOf(prop.getProperty("SQS_DELAY","30"));
 	
 	// AWS access key
-	public static final String AWS_ACCESS_KEY = prop.getProperty("AWS_ACCESS_KEY","AKIAJC674WSBSYUQYJLQ");
+	public static final String AWS_ACCESS_KEY = prop.getProperty("AWS_ACCESS_KEY","XXXXXXXXXXXXX");
 	
 	// AWS secret key
-	public static final String AWS_SECRET_KEY = prop.getProperty("AWS_SECRET_KEY","AuFLTmVjlu11TkikRa87ZoA4zOF75Q0hYG1T/wIe");
+	public static final String AWS_SECRET_KEY = prop.getProperty("AWS_SECRET_KEY","XXXXXXXXXXXXXXX");
 		
 	// AWS Client Connection Timeout (default 50000 or 50 seconds)
 	public static final int CONNECTION_TIMEOUT = Integer.parseInt(prop.getProperty("CONNECTION_TIMEOUT","300000")); // 5 minutes
