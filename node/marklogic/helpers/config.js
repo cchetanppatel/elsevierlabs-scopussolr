@@ -13,8 +13,8 @@ exports.init = function(environment) {
         // Development settings
         exports.INIT_PARMS = {
 
-                                'aws-access-key-id' : 'AKIAJC674WSBSYUQYJLQ',
-                                'aws-secret-access-key' : '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',
+                                'aws-access-key-id' : 'XXXXXXXXXXXXX',
+                                'aws-secret-access-key' : 'XXXXXXXXXXXX',
                                 'aws-account-id' : '5459-5720-4479',
   
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',
@@ -41,8 +41,8 @@ exports.init = function(environment) {
         exports.INIT_PARMS = {
 
         
-                                'aws-access-key-id' : 'AKIAJC674WSBSYUQYJLQ',
-                                'aws-secret-access-key' : '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',
+                                'aws-access-key-id' : 'XXXXXXXXXXXXXXX',
+                                'aws-secret-access-key' : 'XXXXXXXXXXXXXXX',
                                 'aws-account-id' : '5459-5720-4479',
                                 
                                 'sns-topic' : 'arn:aws:sns:us-east-1:545957204479:scopus-search',                          

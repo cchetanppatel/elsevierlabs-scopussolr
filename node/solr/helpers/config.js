@@ -13,8 +13,8 @@ exports.init = function(environment) {
         // Development settings
         exports.INIT_PARMS = {
         
-                                'aws-access-key-id' : 'AKIAJC674WSBSYUQYJLQ',
-                                'aws-secret-access-key' : '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',
+                                'aws-access-key-id' : 'XXXXXXXXXXX',
+                                'aws-secret-access-key' : 'XXXXXXXXX',
                                 'aws-account-id' : '5459-5720-4479',
 
                                 'ddb-endpoint' : 'https://dynamodb.us-east-1.amazonaws.com',
@@ -74,8 +74,8 @@ exports.init = function(environment) {
         exports.INIT_PARMS = {
 
         
-                                'aws-access-key-id' : 'AKIAJC674WSBSYUQYJLQ',
-                                'aws-secret-access-key' : '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',
+                                'aws-access-key-id' : 'XXXXXXXXXXXXX',
+                                'aws-secret-access-key' : 'XXXXXX',
                                 'aws-account-id' : '5459-5720-4479',
 
                                 'ddb-endpoint' : 'https://dynamodb.us-east-1.amazonaws.com',
