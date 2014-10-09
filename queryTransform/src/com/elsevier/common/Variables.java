@@ -23,10 +23,10 @@ public class Variables {
 	//public static final String  DYNAMO_SCOPUS_QUERY_TABLE_NAME = "scopus-solr-load-institution-query";
 	
 	// AWS access key
-	public static final String AWS_ACCESS_KEY = "AKIAJC674WSBSYUQYJLQ";
+	public static final String AWS_ACCESS_KEY = "";
 	
 	// AWS secret key
-	public static final String AWS_SECRET_KEY = "AuFLTmVjlu11TkikRa87ZoA4zOF75Q0hYG1T/wIe";
+	public static final String AWS_SECRET_KEY = "";
 		
 	// AWS Client Connection Timeout (default 50000 or 50 seconds)
 	public static final int CONNECTION_TIMEOUT = Integer.parseInt("300000"); // 5 minutes
