@@ -105,18 +105,18 @@ create table corecbcnt2(
 ################################
 
 # authors (set 1 and set 2)
-copy corestoauthors1 from 's3://els-ats/scopuscnts/pc/author/set1/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
-copy corestoauthors2 from 's3://els-ats/scopuscnts/pc/author/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+copy corestoauthors1 from 's3://els-ats/scopuscnts/pc/author/set1/' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|';
+copy corestoauthors2 from 's3://els-ats/scopuscnts/pc/author/set2/' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|';
 
 
 # affiliations (set 1 and set 2)
-copy corestoaffiliations1 from 's3://els-ats/scopuscnts/pc/affiliation/set1/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
-copy corestoaffiliations2 from 's3://els-ats/scopuscnts/pc/affiliation/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|';
+copy corestoaffiliations1 from 's3://els-ats/scopuscnts/pc/affiliation/set1/' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|';
+copy corestoaffiliations2 from 's3://els-ats/scopuscnts/pc/affiliation/set2/' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|';
 
 
 # references (set 1 and set 2).  Took 22m to load set1 (759,190,044 records)
-copy corestoreferences1 from 's3://els-ats/scopuscnts/cbc/core/set1/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
-copy corestoreferences2 from 's3://els-ats/scopuscnts/cbc/core/set2/' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+copy corestoreferences1 from 's3://els-ats/scopuscnts/cbc/core/set1/' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
+copy corestoreferences2 from 's3://els-ats/scopuscnts/cbc/core/set2/' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 
 ###################################
@@ -131,39 +131,39 @@ copy corestoreferences2 from 's3://els-ats/scopuscnts/cbc/core/set2/' CREDENTIAL
 unload ('SELECT auid, COUNT(*) AS "pubcnt"
 FROM corestoauthors1
 GROUP BY auid
-ORDER BY auid') to  's3://els-ats/scopuscnts/pc/author/results/set1/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY auid') to  's3://els-ats/scopuscnts/pc/author/results/set1/auth-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 # authors (set 2 ... Push the publication counts to S3)
 unload ('SELECT auid, COUNT(*) AS "pubcnt"
 FROM corestoauthors2
 GROUP BY auid
-ORDER BY auid') to  's3://els-ats/scopuscnts/pc/author/results/set2/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY auid') to  's3://els-ats/scopuscnts/pc/author/results/set2/auth-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 
 # affiliations (set 1 ... Push the publication counts to S3)
 unload ('SELECT afid, COUNT(*) AS "pubcnt"
 FROM corestoaffiliations1
 GROUP BY afid
-ORDER BY afid') to  's3://els-ats/scopuscnts/pc/affiliation/results/set1/afil-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY afid') to  's3://els-ats/scopuscnts/pc/affiliation/results/set1/afil-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 # affiliations (set 2 ... Push the publication counts to S3)
 unload ('SELECT afid, COUNT(*) AS "pubcnt"
 FROM corestoaffiliations2
 GROUP BY afid
-ORDER BY afid') to  's3://els-ats/scopuscnts/pc/affiliation/results/set2/afil-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY afid') to  's3://els-ats/scopuscnts/pc/affiliation/results/set2/afil-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 
 # cores (set 1 ... Push the cited by counts to S3)
 unload ('SELECT refid, COUNT(*) AS "cbcnt"
 FROM corestoreferences1
 GROUP BY refid
-ORDER BY refid') to  's3://els-ats/scopuscnts/cbc/core/results/set1/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY refid') to  's3://els-ats/scopuscnts/cbc/core/results/set1/core-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 # cores (set 2 ... Push the cited by counts to S3)
 unload ('SELECT refid, COUNT(*) AS "cbcnt"
 FROM corestoreferences2
 GROUP BY refid
-ORDER BY refid') to  's3://els-ats/scopuscnts/cbc/core/results/set2/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+ORDER BY refid') to  's3://els-ats/scopuscnts/cbc/core/results/set2/core-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 
 # authors (Populate the publication counts into a table)
@@ -226,21 +226,21 @@ ORDER BY refid;
 unload ('
 select * from authorpubcnt2
 minus
-select * from authorpubcnt1') to  's3://els-ats/scopuscnts/pc/author/results/diff/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+select * from authorpubcnt1') to  's3://els-ats/scopuscnts/pc/author/results/diff/auth-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 # affiliations (Push to S3 only those records that are unique in affiliationpubcnt2 ...the 'new' table) 
 # assume 'affiliationpubcnt2' is the 'current' table and 'affiliationpubcnt1' is the 'current-1'.
 unload ('
 select * from affiliationpubcnt2
 minus
-select * from affiliationpubcnt1') to  's3://els-ats/scopuscnts/pc/affiliation/results/diff/aff-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+select * from affiliationpubcnt1') to  's3://els-ats/scopuscnts/pc/affiliation/results/diff/aff-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 # cores (Push to S3 only those records that are unique in corecbcnt2 ...the 'new' table) 
 # assume 'corecbcnt2' is the 'current' table and 'corecbcnt1' is the 'current-1'.
 unload ('
 select * from corecbcnt2
 minus
-select * from corecbcnt1') to  's3://els-ats/scopuscnts/cbc/core/results/diff/core-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+select * from corecbcnt1') to  's3://els-ats/scopuscnts/cbc/core/results/diff/core-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 
 ######################
@@ -289,7 +289,7 @@ ORDER BY refid);
 
 # Output the publication counts 
 unload ('SELECT authid, pubcnt
-FROM authorspubcnt') to  's3://darin-core-auths-results/auth-' CREDENTIALS 'aws_access_key_id=AKIAJC674WSBSYUQYJLQ;aws_secret_access_key=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' delimiter '|' GZIP;
+FROM authorspubcnt') to  's3://darin-core-auths-results/auth-' CREDENTIALS 'aws_access_key_id=;aws_secret_access_key=' delimiter '|' GZIP;
 
 # concatenating multiple files
 cat 'file'* > 'newfile'
